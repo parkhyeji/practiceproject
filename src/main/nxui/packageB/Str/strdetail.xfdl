@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="strdetail" classname="strdetail" left="0" top="0" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Button id="btn_report" taborder="0" text="보고" left="64.55%" top="27" right="25.49%" height="28"/>
+        <Button id="btn_except" taborder="1" text="제외" left="76.56%" top="25" right="14.36%" height="30"/>
+        <Grid id="Grid00" taborder="2" useinputpanel="false" left="3.13%" top="72" right="9.57%" height="107" binddataset="ds_stralert">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="102"/>
+                <Column size="106"/>
+                <Column size="100"/>
+                <Column size="106"/>
+                <Column size="132"/>
+                <Column size="97"/>
+                <Column size="240"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="발생일자"/>
+                <Cell col="1" text="STR그룹번호"/>
+                <Cell col="2" text="고객명"/>
+                <Cell col="3" text="실명번호"/>
+                <Cell col="4" text="RA최종등급"/>
+                <Cell col="5" text="Rule건수"/>
+                <Cell col="6" text="주소"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:stndrdDate"/>
+                <Cell col="1" text="bind:alertGroupNo"/>
+                <Cell col="2" text="bind:empName"/>
+                <Cell col="3" text="bind:realNameNo"/>
+                <Cell col="4" text="bind:raRankCode"/>
+                <Cell col="5" text="bind:relRuleCount"/>
+                <Cell col="6" text="bind:addr"/>
+              </Band>
+            </Format>
+            <Format id="format_copy"/>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_stralert">
+        <ColumnInfo>
+          <Column id="stndrdDate" type="STRING" size="256"/>
+          <Column id="alertGroupNo" type="STRING" size="256"/>
+          <Column id="empName" type="STRING" size="256"/>
+          <Column id="realNameNo" type="STRING" size="256"/>
+          <Column id="raRankCode" type="STRING" size="256"/>
+          <Column id="relRuleCount" type="STRING" size="256"/>
+          <Column id="addr" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

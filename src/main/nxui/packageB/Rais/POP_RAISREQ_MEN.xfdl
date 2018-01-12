@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="POP_RAISREQ_MEN" classname="POP_RAISREQ_MEN" left="0" top="0" width="480" height="455" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" text="소제기 의뢰자 조회" onclick="img_titlebg_onclick" left="8" top="8" right="8" height="50" style="background:cornflowerblue;color:white;align:left middle;font:bold 12 굴림;"/>
+        <Static id="sta_01" taborder="1" left="8" top="63" right="8" height="29" style="background:lightgrey;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_12" taborder="2" text="소제기 의뢰자 (소송담당자) 목록" onclick="sta_12_onclick" left="8" top="109" width="170" height="13" style="color:black;align:left top;font:굴림,9,bold;"/>
+        <Grid id="grd_person" taborder="3" binddataset="ds_mgr" useinputpanel="false" autofittype="col" nodatatext="의뢰자가 조회되지 않았습니다" oncellclick="grd_person_oncellclick" oncelldblclick="grd_person_oncelldblclick" left="8" top="126" right="8" height="266">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="121"/>
+                <Column size="123"/>
+                <Column size="180"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="No."/>
+                <Cell col="1" text="사번"/>
+                <Cell col="2" text="이름"/>
+                <Cell col="3" text="이메일"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="bind:rownum"/>
+                <Cell col="1" text="bind:insaSabun"/>
+                <Cell col="2" text="bind:insaName"/>
+                <Cell col="3" text="bind:insaEmail"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Combo id="cmb_mgr_com" taborder="4" text="전체" innerdataset="ds_mgrno" codecolumn="id" datacolumn="value" index="0" onitemchanged="cmb_mgr_com_onitemchanged" left="84" top="67" width="17.92%" height="19" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;font:굴림,9;"/>
+        <Edit id="edt_mgr_tx" taborder="5" maxlength="100" onkeydown="edt_mgr_tx_onkeydown" enable="false" left="35.21%" top="67" width="35.83%" height="19" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Button id="btn_mgr_search" taborder="8" text="검색" onclick="btn_mgr_search_onclick" left="73.33%" top="67" width="52" height="21" style="background:lightskyblue;color:#ffffffff;align:center middle;font:bold 9 Dotum;gradation:linear 0,0 #6168ffff 0,100 #131efeff;" class="btn_WFSA_Search"/>
+        <Div id="div_page" taborder="9" text="Div00" left="-1" top="401" width="483" height="18">
+          <Layouts>
+            <Layout>
+              <Static id="stc_Prev" taborder="25" text="이전" onclick="div_page_stc_Prev_onclick" visible="false" left="24" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_Next" taborder="26" text="다음" onclick="div_page_stc_Next_onclick" visible="false" left="432" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No0" taborder="27" text="1" onclick="div_page_stc_No_onclick" visible="false" left="72" top="-3" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No1" taborder="28" text="2" onclick="div_page_stc_No_onclick" visible="false" left="109" top="-3" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No2" taborder="29" text="3" onclick="div_page_stc_No_onclick" visible="false" left="149" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No3" taborder="30" text="4" onclick="div_page_stc_No_onclick" visible="false" left="184" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No4" taborder="31" text="5" onclick="div_page_stc_No_onclick" visible="false" left="216" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No5" taborder="32" text="6" onclick="div_page_stc_No_onclick" visible="false" left="250" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No6" taborder="33" text="7" onclick="div_page_stc_No_onclick" visible="false" left="287" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No7" taborder="34" text="8" onclick="div_page_stc_No_onclick" visible="false" left="322" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No8" taborder="35" text="9" onclick="div_page_stc_No_onclick" visible="false" left="352" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No9" taborder="36" text="10" onclick="div_page_stc_No_onclick" visible="false" left="392" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_close" taborder="10" text="닫기" onclick="btn_close_onclick" left="87.5%" top="421" width="52" height="21" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;align:center middle;font:bold 9 Dotum;gradation:linear 0,0 #6168ffff 0,100 #131efeff;" class="btn_WFSA_Search"/>
+        <Button id="btn_check" taborder="11" text="확인" onclick="btn_check_onclick" left="74.17%" top="421" width="52" height="21" style="background:lightskyblue;color:#ffffffff;align:center middle;font:bold 9 Dotum;gradation:linear 0,0 #6168ffff 0,100 #131efeff;" class="btn_WFSA_Search"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item9" compid="cmb_mgr_com" propid="value" datasetid="ds_instance" columnid="instAdmCortCode"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_mgr" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="insaSabun" type="STRING" size="256"/>
+          <Column id="insaName" type="STRING" size="256"/>
+          <Column id="insaEmail" type="STRING" size="256"/>
+          <Column id="rownum" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dept" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_mgrno" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="id" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="value">전체</Col>
+            <Col id="id">-1</Col>
+          </Row>
+          <Row>
+            <Col id="value">사번</Col>
+            <Col id="id">0</Col>
+          </Row>
+          <Row>
+            <Col id="value">이름</Col>
+            <Col id="id">1</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+this.fv_iStartPageNo    = 0;   // 전체 페이지 순서
+this.fv_iUnitSelRowNo   = 100; // 한번 Server호출시 가져올 row갯수
+this.fv_iStartSelRowNo  = 1;   // Server호출시 시작할 row no
+this.fv_iMaxPageNum     = 10;  // 화면에 보여줄 최대 Page번호 갯수
+this.fv_iServerRowCount = 0;   // 서버에서 넘어온 Row갯수(100건이 안될 수 있음)
+
+var raiscode="";
+
+this.LAWSUIT_CHAR_onload=function(obj:Form, e:LoadEventInfo)
+{
+    this.edt_mgr_tx.setFocus();
+    this.btn_check.set_enable(false);
+    this.getList();
+}
+
+//셀 클릭
+this.grd_person_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	this.btn_check.set_enable(true);
+}
+
+// 셀 더블클릭
+this.grd_person_oncelldblclick=function(obj:Grid, e:GridClickEventInfo)
+{
+    // close(grd_person.getCellValue(e.row,0)+grd_person.getCellValue(e.row,1));
+    this.btn_check.set_enable(true);
+    this.btn_check_onclick();
+	
+}
+
+this.getList=function(){
+   
+    var strSvcid="getRaisMenList";
+    var strController="rais/getRaisMenList.do";
+    var strParam="";
+   
+    //var strParam = "insaSabun='" + gfn_Trim(cmb_mgr_com.value) + "'";
+    //    strParam += " insaName='" + gfn_Trim(edt_mgr_tx.value) + "'";
+    if(this.cmb_mgr_com.value < 0){      
+        strParam = "insaName=" + "\""+this.edt_mgr_tx.text+"\"";
+    }else if(this.cmb_mgr_com.value == "0"){
+        strParam = "insaSabun=" + "\""+this.edt_mgr_tx.text+"\"";
+    }else if(this.cmb_mgr_com.value == "1"){
+        strParam = "insaName=" + "\""+this.edt_mgr_tx.text+"\"";
+    }   
+   
+    //trace(strParam);       
+   
+    this.gfn_transaction(this,
+                    strSvcid,
+                    strController,
+                    "",
+                    "ds_mgr=ds_output",
+                    strParam,
+                    "fnCallBack");
+}
+
+this.fnCallBack=function(svcid, errcd, errmsg)
+{
+    switch(svcid)
+    {
+        case "getRaisMenList":        
+            //trace(ds_mgr.saveXML());
+            //데이터 조회 에러 발생시
+            if(errcd != "0"){   
+				alert("데이터가 정상적으로 조회되지 않았습니다.\n"
+					+ "소송관리조회 에러내용: "+ errmsg);
+				return false;
+            }
+            else{
+                trace("this.fv_iStartPageNo = "+this.fv_iStartPageNo);
+				trace("this.fv_iUnitSelRowNo = "+this.fv_iUnitSelRowNo);
+				var iLastRow = this.fv_iStartPageNo * this.fv_iUnitSelRowNo;
+				trace("iLastRow = "+iLastRow);
+				trace("rownum >= "+(iLastRow + this.fv_iStartSelRowNo));
+				trace("rownum <= "+(iLastRow + this.fv_iUnitSelRowNo));
+				this.ds_mgr.filter("rownum >= "+(iLastRow + this.fv_iStartSelRowNo)+" && rownum <= "+(iLastRow + this.fv_iUnitSelRowNo));
+				trace("this.ds_mgr.getRowCount() = "+this.ds_mgr.getRowCount());
+
+				if(this.ds_mgr.getRowCount() == 0){
+					alert("해당 검색조건의 결과가 없습니다.");
+					this.ds_mgr.filter("");
+					return;
+				}else{
+					this.fv_iServerRowCount = this.ds_mgr.getRowCount();
+					this.fn_SetStyle();
+					this.fn_SetPageNo();
+					this.div_page.stc_No0.style.set_color("gray");
+					this.div_page_stc_No_onclick(this.div_page.stc_No0,"");
+					
+					trace(this.fv_iStartPageNo +" : "+this.fv_iServerRowCount);
+				}
+            }
+            break;
+    }
+}
+
+this.btn_mgr_search_onclick=function(obj:Button,  e:ClickEventInfo)
+{
+    //scmoon_update(사번, 이름이 널값일때 alert창 띄움)
+    if(this.cmb_mgr_com.value == "0"){
+		if(this.edt_mgr_tx.value == null){
+			alert("사번을 입력해 주시기 바랍니다.");
+		}else{
+		 this.getList();
+		}
+    }else if(this.cmb_mgr_com.value == "1"){
+    		if(this.edt_mgr_tx.value == null){
+				alert("이름을 입력해 주시기 바랍니다.");
+			}else{
+				this.getList();
+			}
+	}else{
+		this.getList();
+	}
+    
+   
+}
+
+this.btn_close_onclick=function(obj:Button,  e:ClickEventInfo)
+{
+    this.close();
+}
+
+/*function edt_mgr_tx_onkeydown(obj:Edit, e:KeyEventInfo)
+{
+    if(e.keycode == 13){
+        btn_mgr_search_onclick();
+    }
+}*/
+
+this.cmb_mgr_com_onitemchanged=function(obj:Combo, e:ItemChangeEventInfo)
+{
+    if(this.cmb_mgr_com.value == -1){
+        this.edt_mgr_tx.set_value("");
+        this.edt_mgr_tx.set_enable(false);
+    }else{
+        this.edt_mgr_tx.set_enable(true);
+    }
+}
+
+/*    function grd_person_onheadclick(obj:Grid, e:GridClickEventInfo)
+{
+    gfn_GridSort(grd_person,grd_lawsuit_no,nCell,10);
+}    */
+
+// Grid Row Select
+this.btn_check_onclick=function(obj:Button,  e:ClickEventInfo)
+{
+    /*	var id = ds_mgr.getColumn(ds_mgr.rowposition, "insaSabun");
+    var name = ds_mgr.getColumn(ds_mgr.rowposition, "insaName");
+  
+    parent.mgrId.text = id;
+    ds_mgr.addRow();
+
+    close(id+"&"+name);	*/
+   
+    /*var v_RtnVal = new Array();	//배열생성
+
+	v_RtnVal[0] = this.ds_mgr.getColumn(this.ds_mgr.rowposition,  "insaSabun");
+	v_RtnVal[1] = this.ds_mgr.getColumn(this.ds_mgr.rowposition,  "insaName");	*/
+	v_RtnVal = this.ds_mgr.getColumn(this.ds_mgr.rowposition,  "insaSabun");
+	v_RtnVal +="&"+this.ds_mgr.getColumn(this.ds_mgr.rowposition,  "insaName");
+	
+	
+	this.close(v_RtnVal);
+}
+
+//-------------------------------------------------------------------------------------------------
+// 인덱스 클릭
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_No_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+	var iNo = new Number(obj.text);
+	trace("obj.text ="+obj.text);
+	var iFirstNum = (iNo-1) * this.fv_iMaxPageNum + 1;
+	trace("(iNo-1) * this.fv_iMaxPageNum + 1; =" + (iNo-1) * this.fv_iMaxPageNum + 1);
+	var iLastNum = iFirstNum + this.fv_iMaxPageNum;
+	trace("iFirstNum + this.fv_iMaxPageNum; =" + iFirstNum + this.fv_iMaxPageNum);
+	this.fn_SetStyle();
+	obj.style.set_color("gray");
+	this.ds_mgr.filter("");
+	trace("rownum >= " + iFirstNum);
+	trace("rownum < " + iLastNum);
+	this.ds_mgr.filter("rownum >= " + iFirstNum+" && rownum < " + iLastNum);
+}
+
+//-------------------------------------------------------------------------------------------------
+// 이전 버튼
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_Prev_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo - 1;
+	// Transaction()코딩 할 부분
+	this.fnCallback("getRaisreqList", 0, "succ");
+}
+
+//-------------------------------------------------------------------------------------------------
+// 다음버튼
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_Next_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo + 1;
+	// Transaction()코딩 할 부분
+	this.fnCallback("getRaisreqList", 0, "succ");
+}
+
+//-------------------------------------------------------------------------------------------------
+// Page번호 Setting
+//-------------------------------------------------------------------------------------------------
+this.fn_SetPageNo = function()
+{
+	var sPage = this.fv_iStartPageNo * this.fv_iMaxPageNum;
+	
+	// 이전버튼 처리
+	if (this.fv_iStartPageNo < 1)
+	{
+		this.div_page.stc_Prev.set_visible(false);
+	} 
+	else 
+	{
+		this.div_page.stc_Prev.set_visible(true);
+	}
+
+	// 마지막 버튼 처리
+	if (this.fv_iServerRowCount < this.fv_iUnitSelRowNo)
+	{
+		this.div_page.stc_Next.set_visible(false);
+	}
+	else
+	{
+		this.div_page.stc_Next.set_visible(true);
+	}
+
+	// 인덱스 번호 처리
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].set_visible(true);
+		this.div_page.components["stc_No"+i].set_text(sPage+i+1);
+
+		if (this.fv_iServerRowCount < (i * this.fv_iMaxPageNum))
+		{
+			this.div_page.components["stc_No"+i].set_visible(false);			
+		} 
+		else 
+		{
+			this.div_page.components["stc_No"+i].set_visible(true);			
+		}
+	}	
+}
+//-------------------------------------------------------------------------------------------------
+// Style조정
+//-------------------------------------------------------------------------------------------------
+this.fn_SetStyle = function()
+{
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].style.set_color("black");			
+	}	
+}
+
+
+
+]]></Script>
+  </Form>
+</FDL>

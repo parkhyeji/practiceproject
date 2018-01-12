@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="hyeji" classname="hyeji" left="0" top="0" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Button id="Button00" taborder="0" text="Button00" left="6.45%" top="54" right="90.04%" height="21" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="1" text="원의 넓이" left="3.91%" top="96" right="82.52%" height="21" onclick="Button01_onclick"/>
+        <Button id="Button02" taborder="2" text="2진수변환" left="3.52%" top="202" right="83.2%" height="83" onclick="Button02_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.0"><![CDATA[// 2이상 12이하 숫자중 소수인지 아닌지 판별
+this.hyeji_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	// n이 소수인지?	 
+	var num;
+	num = 12;
+	//2이상 n이하 숫자중 소수
+	for(var j = 2;  j<= num; j++){
+		var count = 0;
+		// n이 소수인지
+		
+		for(var i = 1; i <= j; i++){
+		//약수의갯수가 2개이면 소수입니다.
+		// 		12 % 1  = 0 약수다.
+		// 		12 % 2  = 0 약수다.
+		// 		12 % 3  = 0 약수다.
+		// 		12 % 4  = 0 약수다.
+		// 		12 % 5  =  
+		// 		12 % 6  = 0 약수다.
+		// 		12 % 7
+		// 		12 % 8
+		// 		12 % 9
+		// 		12 % 10
+		// 		12 % 11 	 
+		// 		1과 자기 자신만 같는수 = 약수가 2개인수
+			//약수인지를 판별
+			if(j % i == 0){
+				count++;
+			// trace(i +"는 " + num + "의 약수");
+			}
+		}
+		
+		trace(count);
+		if(count == 2){
+			trace(j + "은 소수입니다.");
+		}
+	}
+}
+
+
+this.Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{	
+	//배열두개 
+	//[] 10 개 
+	//[] 10개
+	var arr1 = new Array(10); 
+	var arr2 = new Array(10); 
+	var arr3 = new Array(10); 
+	
+	//숫자 10개 랜덤
+	//trace("num = "+num*10);
+	//trace(Math.ceil(num*10));      
+	
+	// 자바 연산순서 괄호 > 오른쪽에서 왼쪽으로 연산에서 변수에 넣어줌
+	for (var i=0; i<10 ;i++){
+		var num = Math.random();		
+		arr1[i] = Math.floor(num*10);  
+	}	
+	for (var j=0; j<10 ;j++){
+		var num = Math.random();		
+		arr2[j] = Math.floor(num*10);  
+	}	
+	trace("arr1= "+arr1);  
+	trace("arr2= "+arr2);  
+
+	//배열의 위아래를 비교 
+	//arr1에 숫자를 가지고 arr2에 몇개 있는지?
+	//arr1= 8,8,2,3,10,8,3,4,9,6
+	//arr2= 8,4,4,3, 9,7,9,3,1,7
+	//      1 1 0 2  0 1 2 2 2 0
+	
+	//for문 어떤반복일떄 순차적인 반족일떄 사용한다.
+	//문제 해결을하고 그것을 코딩으로 옮기려고 해야함.
+	//반복? arr1[i]
+	//arr2[j]
+	//for문안에서의 변수의 생명력! 위치문제!	
+	for (var i=0; i<10 ;i++){	    //arr1[i] 0~ 10	
+		var count=0;
+		for (var j=0; j<10 ;j++){	//arr2[j] 0~ 10	
+			if(arr1[i] == arr2[j]){  
+			//trace("arr1[0]= "+arr1[0]); 
+				count++;
+			}
+		}
+		arr3[i] = count;
+		//trace("count= "+count);  // arr3[i] = count	
+	}	
+	trace("arr3= "+arr3);
+}
+
+
+
+
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	
+	
+	//변수초기화세미콜론
+	//원의 방정식 x^2 +y^2 <= 1
+	//원의 넓이 유사치 구하기
+	//넓이가 1
+
+	// 만약에 4분원이 들어있는 정사각형 (단, 반지름의 길이와 정사각형의 한 변의 길이는 1)
+	// 에 점을 400개 찍어서 300개가 4분원 안에 들어갔다고 하면
+	// 넓이 300: 400 = x : 1
+	// 따라서 x = 0.75, x가 4분원의 넓이
+	// x*4 = 원의 넓이 = 3
+	var num=400000;
+	var count=0;
+	for(var i=0; i<num ;i++){
+		var x = Math.random();	
+		var y = Math.random();	
+		//trace( (x*x)+(y*y) <= 1);
+		//trace((x*x)+(y*y));		
+		//점이 들어갔다
+		if( (x*x)+(y*y) <= 1){			
+			count++;		
+		}
+	}	
+	trace(count);		
+	//300/400*100 퍼센트
+	//300/400*1
+	trace((count/num)*4);	
+}
+
+// for 문 2중포문 주의사항
+// 변수의 시작위치, 끝났을떄 위치 (변수의 생명력,실행시점)
+// int i =0; var i = 0;
+// 줄정리 중괄화 라인 들여쓰기
+// 안쪽에있는것부터 하나씩
+
+// 1.확장포문 -> 객체:객체
+// 간단하다. 실수가 적다 
+// 2.일반포문 ->
+// out of bount 성능좋다.
+
+//10진수를 2진수로 변환
+this.Button02_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+ 	// 57%2 = 28...1
+ 	// 28%2 = 14...0
+ 	// 14%2 = 7...0
+ 	//  7%2 = 3...1
+ 	//  3%2 = 1...1
+ 	// 57 => 111001
+	 
+	var num = 57;
+	var arr3 = "";
+	//몫과 나머지
+	// while 의 조건은 끝나는 시점의 반대!	
+ 	while(num != 1){
+ 	
+		arr3 = (num%2).toString() + arr3;				
+		trace(num);
+		num=(num/2);
+		num = Math.floor(num); 
+		trace(num);	
+		//arr3 = num2;
+		//trace(arr3);
+	}
+	arr3 = "1" + arr3;
+	trace(arr3);
+	
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script type="xscript5.0"><![CDATA[include "Lib::commFrame.xjs";
+include "Lib::commScript.xjs";
+include "Lib::commDate.xjs";
+
+this.Comm_transactionCallback= function(oSvc,errorcode,errormsg)
+{
+    new Iject.Controll.callback().transaction(oSvc,errorcode,errormsg);
+}]]></Script>

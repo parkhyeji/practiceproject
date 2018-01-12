@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GlobalVariables>
+  <Variable id="gv_host" initval="http://localhost/"/>
+  <Variable id="gv_userAuth" initval="admin"/>
+  <Variable id="gv_openOnlyOne" initval="true"/>
+  <Variable id="gv_loadCnt" initval="0"/>
+  <Dataset id="gds_menu">
+    <ColumnInfo>
+      <Column id="MENU_NAME" type="string" size="32" prop=""/>
+      <Column id="MENU_SEQ" type="int" size="4" prop=""/>
+      <Column id="MENU_OPTP" type="string" size="32" prop=""/>
+      <Column id="PAGE_URL" type="string" size="32" prop=""/>
+      <Column id="MENU_TOP" type="string" size="32" prop=""/>
+      <Column id="MENU_ID" type="string" size="32" prop=""/>
+      <Column id="MENU_GRP" type="string" size="32" prop=""/>
+      <Column id="CREATE_DT" type="string" size="32" prop=""/>
+      <Column id="MENU_LEVEL" type="int" size="4" prop=""/>
+      <Column id="PAGE_ID" type="string" size="32" prop=""/>
+      <Column id="PAGE_NAME" type="string" size="32" prop=""/>
+      <Column id="MENU_ARGS" type="string" size="32" prop=""/>
+      <Column id="MENU_STAT" type="string" size="32" prop=""/>
+      <Column id="CREATE_USER" type="string" size="32" prop=""/>
+      <Column id="UPDATE_DT" type="string" size="32" prop=""/>
+      <Column id="UPDATE_USER" type="string" size="32" prop=""/>
+      <Column id="MENU_DESC" type="string" size="32" prop=""/>
+      <Column id="MENU_AUTH" type="STRING" size="256"/>
+    </ColumnInfo>
+    <Rows>
+      <Row>
+        <Col id="MENU_NAME">시스템관리</Col>
+        <Col id="MENU_SEQ">0</Col>
+        <Col id="MENU_OPTP">MAIN</Col>
+        <Col id="PAGE_URL"/>
+        <Col id="MENU_TOP"/>
+        <Col id="MENU_ID">1000</Col>
+        <Col id="MENU_GRP">1000</Col>
+        <Col id="CREATE_DT">20171211000000000</Col>
+        <Col id="MENU_LEVEL">0</Col>
+        <Col id="PAGE_ID"/>
+        <Col id="PAGE_NAME">시스템관리</Col>
+        <Col id="MENU_ARGS">admin</Col>
+        <Col id="MENU_STAT">VIEW</Col>
+        <Col id="CREATE_USER">admin</Col>
+        <Col id="UPDATE_DT">20171211000000000</Col>
+        <Col id="UPDATE_USER">admin</Col>
+        <Col id="MENU_DESC"/>
+        <Col id="MENU_AUTH"/>
+      </Row>
+      <Row>
+        <Col id="MENU_NAME">권한관리</Col>
+        <Col id="MENU_SEQ">1</Col>
+        <Col id="MENU_OPTP">MAIN</Col>
+        <Col id="MENU_ID">1001</Col>
+        <Col id="MENU_GRP">1000</Col>
+        <Col id="CREATE_DT">20171218000000000</Col>
+        <Col id="MENU_LEVEL">1</Col>
+        <Col id="MENU_ARGS">admin</Col>
+        <Col id="MENU_STAT">VIEW</Col>
+        <Col id="CREATE_USER">admin</Col>
+        <Col id="UPDATE_DT">20171218000000000</Col>
+        <Col id="UPDATE_USER">admin</Col>
+        <Col id="MENU_DESC"/>
+        <Col id="MENU_AUTH"/>
+        <Col id="MENU_TOP">1000</Col>
+        <Col id="PAGE_NAME">권한관리</Col>
+        <Col id="PAGE_ID">AthManagement.xfdl</Col>
+        <Col id="PAGE_URL">Sys::AthManagement.xfdl</Col>
+      </Row>
+      <Row>
+        <Col id="MENU_NAME">공통코드</Col>
+        <Col id="MENU_SEQ">1</Col>
+        <Col id="MENU_OPTP">MAIN</Col>
+        <Col id="PAGE_URL">Sys::Commoncodemaster.xfdl</Col>
+        <Col id="MENU_TOP">1000</Col>
+        <Col id="MENU_ID">1002</Col>
+        <Col id="MENU_GRP">1000</Col>
+        <Col id="CREATE_DT">20171218000000000</Col>
+        <Col id="MENU_LEVEL">1</Col>
+        <Col id="PAGE_ID">Commoncodemaster.xfdl</Col>
+        <Col id="PAGE_NAME">공통코드</Col>
+        <Col id="MENU_ARGS">admin</Col>
+        <Col id="MENU_STAT">VIEW</Col>
+        <Col id="CREATE_USER">admin</Col>
+        <Col id="UPDATE_DT">20171218000000000</Col>
+        <Col id="UPDATE_USER">admin</Col>
+        <Col id="MENU_DESC"/>
+        <Col id="MENU_AUTH"/>
+      </Row>
+      <Row>
+        <Col id="MENU_SEQ">1</Col>
+        <Col id="MENU_NAME">공통코드상세</Col>
+        <Col id="MENU_OPTP">MAIN</Col>
+        <Col id="MENU_TOP">1000</Col>
+        <Col id="MENU_ID">1003</Col>
+        <Col id="MENU_GRP">1000</Col>
+        <Col id="CREATE_DT">20171218000000000</Col>
+        <Col id="MENU_LEVEL">1</Col>
+        <Col id="MENU_ARGS">admin</Col>
+        <Col id="MENU_STAT">VIEW</Col>
+        <Col id="CREATE_USER">admin</Col>
+        <Col id="UPDATE_DT">20171218000000000</Col>
+        <Col id="UPDATE_USER">admin</Col>
+        <Col id="MENU_DESC"/>
+        <Col id="MENU_AUTH"/>
+        <Col id="PAGE_NAME">공통코드상세</Col>
+        <Col id="PAGE_URL">Sys::Commoncodedetail.xfdl</Col>
+        <Col id="PAGE_ID">Commoncodedetail.xfdl</Col>
+      </Row>
+      <Row>
+        <Col id="MENU_NAME">업무내역</Col>
+        <Col id="MENU_SEQ">0</Col>
+        <Col id="MENU_OPTP">MAIN</Col>
+        <Col id="PAGE_NAME">업무내역</Col>
+        <Col id="MENU_ID">1010</Col>
+        <Col id="MENU_LEVEL">0</Col>
+        <Col id="MENU_GRP">1000</Col>
+        <Col id="CREATE_DT">20171211000000000</Col>
+        <Col id="UPDATE_DT">20171211000000000</Col>
+        <Col id="UPDATE_USER">admin</Col>
+        <Col id="CREATE_USER">admin</Col>
+        <Col id="MENU_STAT">VIEW</Col>
+        <Col id="MENU_ARGS">admin</Col>
+      </Row>
+      <Row>
+        <Col id="MENU_NAME">직원정보</Col>
+        <Col id="MENU_SEQ">1</Col>
+        <Col id="MENU_OPTP">MAIN</Col>
+        <Col id="PAGE_URL">adm::empInfo.xfdl</Col>
+        <Col id="PAGE_ID">empInfo.xfdl</Col>
+        <Col id="PAGE_NAME">업무내역</Col>
+        <Col id="MENU_TOP">1010</Col>
+        <Col id="MENU_ID">1011</Col>
+        <Col id="MENU_LEVEL">1</Col>
+        <Col id="MENU_GRP">1000</Col>
+        <Col id="CREATE_DT">20171211000000000</Col>
+        <Col id="UPDATE_DT">20171211000000000</Col>
+        <Col id="UPDATE_USER">admin</Col>
+        <Col id="CREATE_USER">admin</Col>
+        <Col id="MENU_STAT">VIEW</Col>
+        <Col id="MENU_ARGS">admin</Col>
+      </Row>
+      <Row>
+        <Col id="MENU_NAME">고객조회</Col>
+        <Col id="MENU_SEQ">1</Col>
+        <Col id="MENU_OPTP">MAIN</Col>
+        <Col id="PAGE_NAME">고객조회</Col>
+        <Col id="PAGE_URL">adm::custinfo.xfdl</Col>
+        <Col id="MENU_TOP">1010</Col>
+        <Col id="MENU_ID">1012</Col>
+        <Col id="PAGE_ID">CustInfo.xfdl</Col>
+        <Col id="MENU_LEVEL">1</Col>
+        <Col id="MENU_GRP">1000</Col>
+        <Col id="CREATE_DT">20171211000000000</Col>
+        <Col id="UPDATE_DT">20171211000000000</Col>
+        <Col id="UPDATE_USER">admin</Col>
+        <Col id="CREATE_USER">admin</Col>
+        <Col id="MENU_STAT">VIEW</Col>
+        <Col id="MENU_ARGS">admin</Col>
+      </Row>
+      <Row>
+        <Col id="MENU_NAME">의심거래유형정보</Col>
+        <Col id="MENU_SEQ">1</Col>
+        <Col id="MENU_OPTP">MAIN</Col>
+        <Col id="PAGE_URL">Str::SuspInfo.xfdl</Col>
+        <Col id="MENU_TOP">1010</Col>
+        <Col id="MENU_ID">1021</Col>
+        <Col id="MENU_GRP">1000</Col>
+        <Col id="CREATE_DT">20171218000000000</Col>
+        <Col id="MENU_LEVEL">1</Col>
+        <Col id="PAGE_ID">SuspInfo.xfdl</Col>
+        <Col id="PAGE_NAME">의심거래유형정보</Col>
+        <Col id="MENU_ARGS">admin</Col>
+        <Col id="MENU_STAT">VIEW</Col>
+        <Col id="UPDATE_DT">20171218000000000</Col>
+        <Col id="CREATE_USER">admin</Col>
+        <Col id="UPDATE_USER">admin</Col>
+      </Row>
+      <Row>
+        <Col id="MENU_NAME">STR</Col>
+        <Col id="MENU_SEQ">0</Col>
+        <Col id="MENU_OPTP">MAIN</Col>
+        <Col id="CREATE_DT">20171211000000000</Col>
+        <Col id="UPDATE_DT">20171211000000000</Col>
+        <Col id="UPDATE_USER">admin</Col>
+        <Col id="CREATE_USER">admin</Col>
+        <Col id="MENU_STAT">VIEW</Col>
+        <Col id="MENU_ARGS">admin</Col>
+        <Col id="MENU_GRP">1000</Col>
+        <Col id="MENU_LEVEL">0</Col>
+        <Col id="PAGE_NAME">STR</Col>
+        <Col id="MENU_ID">1030</Col>
+        <Col id="MENU_TOP"/>
+        <Col id="PAGE_URL"/>
+      </Row>
+      <Row>
+        <Col id="MENU_NAME">STR 현황</Col>
+        <Col id="MENU_SEQ">1</Col>
+        <Col id="MENU_OPTP">MAIN</Col>
+        <Col id="CREATE_DT">20171211000000000</Col>
+        <Col id="UPDATE_DT">20171211000000000</Col>
+        <Col id="UPDATE_USER">admin</Col>
+        <Col id="CREATE_USER">admin</Col>
+        <Col id="MENU_STAT">VIEW</Col>
+        <Col id="MENU_ARGS">admin</Col>
+        <Col id="MENU_GRP">1000</Col>
+        <Col id="PAGE_URL">Str::straml.xfdl</Col>
+        <Col id="MENU_LEVEL">1</Col>
+        <Col id="PAGE_NAME">STR</Col>
+        <Col id="MENU_ID">1031</Col>
+        <Col id="MENU_TOP">1030</Col>
+        <Col id="PAGE_ID">straml.xfdl</Col>
+      </Row>
+      <Row>
+        <Col id="MENU_NAME">보고서 목록</Col>
+        <Col id="MENU_SEQ">1</Col>
+        <Col id="MENU_OPTP">MAIN</Col>
+        <Col id="MENU_TOP">1030</Col>
+        <Col id="MENU_ID">1040</Col>
+        <Col id="MENU_GRP">1000</Col>
+        <Col id="CREATE_DT">20171218000000000</Col>
+        <Col id="MENU_LEVEL">1</Col>
+        <Col id="PAGE_NAME">STR</Col>
+        <Col id="MENU_STAT">VIEW</Col>
+        <Col id="MENU_ARGS">admin</Col>
+        <Col id="CREATE_USER">admin</Col>
+        <Col id="UPDATE_DT">20171218000000000</Col>
+        <Col id="UPDATE_USER">admin</Col>
+        <Col id="PAGE_URL">Str::ManageList.xfdl</Col>
+        <Col id="PAGE_ID">ManageList.xfdl</Col>
+      </Row>
+      <Row>
+        <Col id="MENU_SEQ">1</Col>
+        <Col id="MENU_NAME">룰 현황 작성</Col>
+        <Col id="MENU_OPTP">MAIN</Col>
+        <Col id="PAGE_URL">Str::ruleAlertInfo.xfdl</Col>
+        <Col id="MENU_TOP">1030</Col>
+        <Col id="MENU_ID">1034</Col>
+        <Col id="MENU_GRP">1000</Col>
+        <Col id="CREATE_DT">20171211000000000</Col>
+        <Col id="MENU_LEVEL">1</Col>
+        <Col id="PAGE_ID">ruleAlertInfo.xfdl</Col>
+        <Col id="PAGE_NAME">STR</Col>
+        <Col id="MENU_ARGS">admin</Col>
+        <Col id="MENU_STAT">VIEW</Col>
+        <Col id="CREATE_USER">admin</Col>
+        <Col id="UPDATE_DT">20171211000000000</Col>
+        <Col id="UPDATE_USER">admin</Col>
+        <Col id="MENU_DESC">[Undefined]</Col>
+        <Col id="MENU_AUTH">[Undefined]</Col>
+      </Row>
+    </Rows>
+  </Dataset>
+  <Dataset id="gds_openMenu">
+    <ColumnInfo>
+      <Column id="WIN_ID" type="STRING" size="256"/>
+      <Column id="MENU_ID" type="STRING" size="256"/>
+      <Column id="TITLE" type="STRING" size="256"/>
+      <Column id="Desc_Url" type="STRING" size="256"/>
+      <Column id="Desc_Url_ko" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_userInfo">
+    <ColumnInfo>
+      <Column id="sabun" type="STRING" size="256"/>
+      <Column id="name" type="STRING" size="256"/>
+      <Column id="id" type="STRING" size="256"/>
+      <Column id="insaDeptCode" type="STRING" size="256"/>
+      <Column id="insaDeptName" type="STRING" size="256"/>
+      <Column id="USER_NM" type="STRING" size="256"/>
+      <Column id="USER_ID" type="STRING" size="256"/>
+    </ColumnInfo>
+    <Rows>
+      <Row/>
+    </Rows>
+  </Dataset>
+  <Dataset id="gdsTransInfo">
+    <ColumnInfo>
+      <Column id="strSvcID" type="STRING" size="256"/>
+      <Column id="strURL" type="STRING" size="256"/>
+      <Column id="strInDatasets" type="STRING" size="256"/>
+      <Column id="strOutDatasets" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_message">
+    <ColumnInfo>
+      <Column id="MSG_CD" type="string" size="32"/>
+      <Column id="MSG_TYPE" type="string" size="32"/>
+      <Column id="MSG_NM" type="string" size="32"/>
+      <Column id="MSG_NOTE" type="string" size="32"/>
+    </ColumnInfo>
+    <Rows>
+      <Row>
+        <Col id="MSG_CD">fail.common.msg</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">error ocurred!</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">fail.common.sql</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">sql error ocurred! error code: {0}, error msg: {1}</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">info.nodata.msg</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">no data found.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">image.errorBg</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">error_en</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">errors.required</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">{0} is required.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">accounting.hgr_store_credit.amount.error</Col>
+        <Col id="MSG_TYPE">AC</Col>
+        <Col id="MSG_NM">HGR Store Credit does not have to remove.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">success.insert</Col>
+        <Col id="MSG_TYPE">PU</Col>
+        <Col id="MSG_NM">Transaction has been completed successfully.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">success.update</Col>
+        <Col id="MSG_TYPE">PU</Col>
+        <Col id="MSG_NM">Transaction has been completed successfully.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">success.delete</Col>
+        <Col id="MSG_TYPE">PU</Col>
+        <Col id="MSG_NM">Transaction has been completed successfully.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">success.select</Col>
+        <Col id="MSG_TYPE">PU</Col>
+        <Col id="MSG_NM">Transaction has been completed successfully.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">transaction.complete</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Transaction has been completed successfully.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">comm.select.message</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Please select {0}</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">comm.list.select.message</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Please select from the list.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">success.complete</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">{0} has been completed successfully.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">comm.select.not.found</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">There is no data.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">comm.input.message</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Please enter {0}</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">comm.validation.message</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">{0} is invalid.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">comm.print.barcode</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Want to print bar codes?</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">main.title</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">:: HGR Industrial Surplus - We Buy  Everything! ::</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">main.negotiation</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Looks back on 30 minutes after</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">error.incorrect</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">{0} is incorrect</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">comm.button.message</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Please click the {0} button.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">comm.data.check_status</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">The status of data has changed.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">comm.success.complete</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">{0} has been completed successfully.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">comm.register</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Please save {0} information.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">comm.already.registered</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">{0} already exists.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">comm.register.fail</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Failed to register. Please try again.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">common.date.input</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Please enter date.</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">success.inspection.complete</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Inspection has been completed</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">success.bid.complete</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Bid has been completed</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">success.createoffer.complete</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Create Offer has been completed</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">success.po.complete</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">PO has been completed</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">success.revised.complete</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Revised Offer has been completed</Col>
+      </Row>
+      <Row>
+        <Col id="MSG_CD">success.exception.complete</Col>
+        <Col id="MSG_TYPE">CO</Col>
+        <Col id="MSG_NM">Exception has been completed</Col>
+      </Row>
+    </Rows>
+  </Dataset>
+  <Dataset id="gds_Params">
+    <ColumnInfo>
+      <Column id="PARAM_ID" type="STRING" size="256"/>
+      <Column id="PARAM_VAL" type="STRING" size="2000"/>
+      <Column id="MENU_ID" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gbs_openmenu">
+    <ColumnInfo>
+      <Column id="WIN_ID" type="STRING" size="256"/>
+      <Column id="MENU_ID" type="STRING" size="256"/>
+      <Column id="TITLE" type="STRING" size="256"/>
+      <Column id="Desc_Url" type="STRING" size="256"/>
+      <Column id="Desc_Url_ko" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_empInfo">
+    <ColumnInfo>
+      <Column id="empNo" type="STRING" size="20"/>
+      <Column id="empName" type="STRING" size="20"/>
+      <Column id="pwd" type="STRING" size="20"/>
+    </ColumnInfo>
+    <Rows>
+      <Row/>
+    </Rows>
+  </Dataset>
+</GlobalVariables>

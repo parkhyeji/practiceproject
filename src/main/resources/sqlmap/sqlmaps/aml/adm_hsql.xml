@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="rais">
+
+<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+
+	<!-- aml_emp_info의 id, pw -->
+	<select id="aml.AmlAdmDAO.login" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT EMP_NO
+			 , EMP_NAME
+			 , PWD
+		  FROM AML_EMP_INFO
+		 WHERE EMP_NO=#id# AND PWD=#pw#
+	</select>
+	
+	<!-- 존재하는 아이디인지 조회 -->
+ 	<select id="aml.AmlAdmDAO.selectId" parameterClass="java.util.HashMap" resultClass="egovMap">
+		<!-- empNo가 있으면 보여주고 존재하지 않으면 NONE로 표시 -->
+		<!-- SELECT NVL(MAX(EMP_NO), 'NONE')
+		    AS id
+		  FROM AML_EMP_INFO
+		 WHERE EMP_NO=#id# -->
+		SELECT EMP_NO AS id
+		  FROM AML_EMP_INFO
+		 WHERE EMP_NO=#id#
+	</select>
+
+ 	<!-- 회원가입 -->
+ 	<insert id="aml.AmlAdmDAO.insert" parameterClass="java.util.HashMap">
+		INSERT INTO AML_EMP_INFO(
+		  EMP_NO
+		, PWD
+		, CEL_NO
+		, EMP_NAME
+		, EMAIL
+		, USE_YN
+
+		) VALUES (
+		  #empNo#
+		, #pwd#
+		, #celNo#
+		, #empName#
+		, #email#
+		, 'N'
+		)
+ 	</insert>
+
+ 	<!-- <select id="aml.AmlAdmDAO.insert" parameterClass="java.util.HashMap" resultClass="egovMap">
+ 		<![CDATA[
+ 		SELECT DECODE(SUBSTR(MAX(EMP_NO),1,10)
+ 				,TO_CHAR(SYSDATE, 'YYYYMMDD'), MAX(EMP_NO) + 1
+ 				,TO_CHAR(SYSDATE, 'YYYYMMDD') || '01') EMP_NO
+		FROM AML_EMP_INFO
+            WHERE EMP_NO < TO_CHAR(SYSDATE,'YYYYMMDD') || '99'
+            AND ROWNUM = 1
+		]]>
+		    
+		<![CDATA[	
+		INSERT INTO AML_EMP_INFO
+		(
+		  EMP_NO
+		, PWD
+		, CEL_NO
+		, EMP_NAME
+		, EMAIL
+		
+		, RESI_NO
+		, JOIN_DATE
+		, TEL_NO
+		, ADDR
+		, REGI_DT
+		, REGI_ID
+		, MODI_DT
+		, MODI_ID
+		, USE_YN
+		, RETIRE_DATE
+		, REPORT_CHGED_YN
+		, POSI_NAME
+		, ZIP_CODE
+		, AUTH_NO
+		
+		) VALUES (		
+		  #empNo#
+		, #pwd#
+		, #celNo#
+		, #empName#
+		, #email#
+		, 1
+		, 1	
+		, 1
+		, 1
+		, 1
+		, 1
+		, 1
+		, 1
+		, 1
+		, 1
+		, 1
+		, 1
+		, 1
+		, 1
+		)	
+		]]>				
+ 	</select> -->
+ 	
+ 	<!-- 	
+ 		, #resiNo#
+		, #joinDate#
+		, #telNo#
+		, #addr#
+		, #regiDt#
+		, #regiId#
+		, #modiDt#
+		, #modiId#
+		, #useYn#
+		, #retireDate#
+		, #reportChgedYn#
+		, #posiName#
+		, #zipCode#
+		, #authNo# 	 	
+ 	  --> 	
+</sqlMap>

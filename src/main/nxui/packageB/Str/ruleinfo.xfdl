@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="ruleinfo" classname="ruleinfo" left="0" top="0" width="780" height="290" titletext="New Form" onload="ruleinfo_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" left="0" top="0" width="780" height="48" style="background:cornflowerblue;" onclick="img_titlebg_onclick"/>
+        <Static id="Static00" taborder="1" text="룰정보" left="40" top="0" width="200" height="45" style="color:white;font:bold 17 돋움;" onclick="Static00_onclick"/>
+        <Static id="Static02" taborder="2" height="223" style="background:cornsilk;border:1 solid darkgray ;" width="756" left="12" top="55"/>
+        <TextArea id="TextArea00" taborder="3" left="144" top="142" height="80" readonly="true" style="background:white;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" width="620"/>
+        <Static id="st_c1" taborder="4" text="룰ID" left="16" top="59" width="125" height="28" style="background:azure;border:1 solid black ;align:center middle;" onclick="st_c1_onclick"/>
+        <Static id="st_c4" taborder="5" text="룰명" left="16" top="85" width="125" height="56" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Static id="st_c7" taborder="6" text="룰설명" left="16" top="140" width="125" height="84" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Static id="st_c8" taborder="7" text="등록일" left="16" top="223" width="125" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Edit id="edt_custName" taborder="9" maxlength="10" onchar="edt_custName_onchar" onchanged="edt_custName_onchanged" left="144" top="60" width="621" height="24" readonly="true" style="background:white;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;"/>
+        <Edit id="edt_custName01" taborder="10" maxlength="10" onchar="edt_custName_onchar" onchanged="edt_custName_onchanged" top="225" width="620" height="24" readonly="true" style="background:white;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" left="144"/>
+        <TextArea id="TextArea02" taborder="12" readonly="true" left="144" top="87" height="52" width="620" style="background:white;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;"/>
+        <Button id="btn_deal_write" taborder="13" text="확인" top="253" right="16" width="92" height="20" style="background:lightskyblue;color:white;" onclick="btn_deal_write_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_list">
+        <ColumnInfo>
+          <Column id="ruleId" type="STRING" size="256"/>
+          <Column id="ruleName" type="STRING" size="256"/>
+          <Column id="workTypeCode" type="STRING" size="256"/>
+          <Column id="ruleDetail" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+          <Column id="regiDt" type="STRING" size="256"/>
+          <Column id="regiId" type="STRING" size="256"/>
+          <Column id="modiDt" type="STRING" size="256"/>
+          <Column id="modiId" type="STRING" size="256"/>
+          <Column id="ruleApplyPeeriod" type="STRING" size="256"/>
+          <Column id="remark" type="STRING" size="256"/>
+          <Column id="custTypeCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_ruleidout">
+        <ColumnInfo>
+          <Column id="ruleId" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edt_custName" propid="value" datasetid="ds_list" columnid="ruleId"/>
+      <BindItem id="item2" compid="TextArea00" propid="value" datasetid="ds_list" columnid="ruleDetail"/>
+      <BindItem id="item3" compid="edt_custName01" propid="value" datasetid="ds_list" columnid="regiDt"/>
+      <BindItem id="item4" compid="TextArea02" propid="value" datasetid="ds_list" columnid="ruleName"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+// Onload function  
+this.ruleinfo_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	
+	var ruleId  = this.parent.ri;
+	//alert(ruleId);	
+	var a = this.ds_ruleidout.setColumn(0,"ruleId",ruleId);
+	//alert(a);
+	
+	this.gfn_transaction(this
+				   , "searchRule"
+				   , "straml/searchRule.do"
+				   , "ds_ruleidout=ds_ruleidout"    //보내는곳
+				   , "ds_list=ds_list"  //받아오는곳
+				   , ""
+				   , "fnCallback");	
+}
+
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+			case "commonCode":
+			break;
+			case "searchCust":
+			break;
+			case "saveList":
+				this.btn_search_onclick();
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+this.Static00_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+	
+}
+
+
+this.btn_deal_write_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="newmember" classname="newmember" left="0" top="0" width="452" height="344" titletext="sta_title" style="border:0 none #808080ff ;color:#ffffffff;" onload="newmember_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="0" left="26.11%" top="18" right="143" bottom="238" style="color:whitesmoke;font:bold 12 굴림;"/>
+        <ImageViewer id="img_titlebg" taborder="7" text="   회원가입" left="7" top="8" right="6" height="50" style="background:gainsboro;color:black;align:left middle;font:bold 12 굴림;"/>
+        <Div id="Div00" taborder="6" left="1.11%" top="64" right="1.33%" height="276" style="background:whitesmoke;border:1 solid transparent ;color:#333333ff;">
+          <Layouts>
+            <Layout width="441" height="276">
+              <Static id="Static00" taborder="0" text="개인정보입력" left="2.05%" top="-1" right="70.62%" height="31" style="font:bold 9 arial;"/>
+              <Static id="Static01" taborder="2" text="아     이    디" left="15.49%" top="25" right="57.18%" height="39" style="font:bold 9 arial;"/>
+              <Static id="Static02" taborder="3" text="이            름" left="16.17%" top="148" right="67.43%" height="39" style="font:bold 9 arial;"/>
+              <Static id="Static04" taborder="4" text="이     메    일" left="15.72%" top="179" right="56.95%" height="39" style="font:bold 9 arial;"/>
+              <Static id="Static09" taborder="8" text="비밀번호확인" left="14.58%" top="86" right="58.09%" height="39" style="font:bold 9 arial;"/>
+              <Static id="Static11" taborder="9" text="비  밀  번  호" left="15.03%" top="55" right="57.63%" height="39" style="font:bold 9 arial;"/>
+              <Edit id="edit_id" taborder="1" left="33.94%" top="35" right="34.62%" height="19" style="padding:0 5 0 5;align:left middle;" onchanged="edit_id_onchanged" canchange="edit_id_canchange"/>
+              <Edit id="edit_name" taborder="5" left="33.94%" top="158" right="34.62%" height="19" style="padding:0 5 0 5;align:left middle;"/>
+              <Edit id="edit_email" taborder="6" left="33.94%" top="189" right="34.62%" height="19" style="padding:0 5 0 5;align:left middle;" canchange="edit_email_canchange"/>
+              <Button id="button_join" taborder="7" text="가입" left="61.5%" top="226" right="21.87%" height="30" style="background:rosybrown;border:1 solid rosybrown ;color:whitesmoke;" onclick="Div00_Button01_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static08" taborder="1" text="핸 드 폰 번 호" left="15.49%" top="183" right="57.3%" height="39" style="font:bold 9 arial;"/>
+        <Edit id="edit_pw" taborder="2" left="34.29%" top="130" right="35.18%" height="19" style="color:black;padding:0 5 0 5;align:left middle;" password="true"/>
+        <Edit id="edit_pw_confirm" taborder="3" left="34.29%" top="161" right="35.18%" height="19" style="color:black;padding:0 5 0 5;align:left middle;" password="true" onchanged="edit_pw_confirm_onchanged"/>
+        <Edit id="edit_phone" taborder="4" left="34.29%" top="193" right="35.18%" height="19" style="color:black;padding:0 5 0 5;align:left middle;" displaynulltext="'-' 제외, 숫자만 입력"/>
+        <Button id="button_cancel" taborder="5" text="취소" left="78.1%" top="291" right="5.31%" height="30" style="background:silver;border:1 solid silver ;" onclick="Button01_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_check">
+        <ColumnInfo>
+          <Column id="id" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="join">
+        <ColumnInfo>
+          <Column id="empNo" type="STRING" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="resultid">
+        <ColumnInfo>
+          <Column id="empNo" type="STRING" size="20"/>
+          <Column id="pwd" type="STRING" size="20"/>
+          <Column id="celNo" type="STRING" size="20"/>
+          <Column id="empName" type="STRING" size="20"/>
+          <Column id="email" type="STRING" size="100"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item1" compid="Div00.edit_id" propid="value" datasetid="resultid" columnid="empNo"/>
+      <BindItem id="item2" compid="edit_pw" propid="value" datasetid="resultid" columnid="pwd"/>
+      <BindItem id="item4" compid="edit_phone" propid="value" datasetid="resultid" columnid="celNo"/>
+      <BindItem id="item5" compid="Div00.edit_name" propid="value" datasetid="resultid" columnid="empName"/>
+      <BindItem id="item6" compid="Div00.edit_email" propid="value" datasetid="resultid" columnid="email"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+/******************************************************************************************
+ * 함  수  명	:	gfn_transaction(strId, strModel,inDs,outDs,strParam,sCall,bSync,strDomain)
+ * 입      력	:	objFrm		- 호출한 Frame
+					svcid		- transaction을 구분하기 위한 ID
+ *					strModel	- XUP 모델명
+ *					inputDs		- transaction을 요청할 때 입력값으로 보낼 Dataset 의 ID 리스트
+ *					outputDs	- transaction을 처리 결과를 받을 Dataset의 ID 리스트
+ *					params	- transaction을 요청할 때 입력값으로 보낼 변수
+ *					callbackFnc	- transaction callback 함수
+ * 반      환	:	없음
+ * 기      능	:	transaction함수
+ *****************************************************************************************/
+
+// 폼 로딩
+this.newmember_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+	this.alert("반갑습니다 회원가입 해주세요 ^^");
+}
+
+/*
+ Edit 컴포넌트에서 enter / focusout 동작시 value값이 기존과 다르면 발생하는 이벤트입니다. 
+ canchange(obj:Edit,e:nexacro.ChangeEventInfo);
+ return 타입 
+ Boolean
+	false 값을 반환하면 이전에 설정되어 있던 값(pretext)으로 변경합니다.
+	Default : true
+*/
+
+// 아이디 검사
+this.edit_id_onchanged = function(obj:Edit, e:nexacro.ChangeEventInfo){
+	var varCol = obj.value;									// edit 오브젝트에 입력한 텍스트 값
+	var bSucc = this.ds_check.setColumn(0,"id",varCol);		// ds_check 데이터셋에 셋팅
+
+	//trace(bSucc);
+	//var idValue = this.edit_id_canchange.value;
+	//var strParam = "empNo=" + idValue;
+	//var idValue = this
+
+	this.gfn_transaction(this,
+						"idChecker",
+						"aml/selectId.do",
+						"ds_check=ds_check",
+						"join=join",
+						"",							// strParam,
+						"transaction_callback"
+						);
+}
+
+// 트랜잭션 콜백
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		this.alert(sSvcId + " : " + sErrorMsg);
+		this.alert("회원가입 실패입니다. 다시 가입해주세요");
+		return;
+	}else{
+		switch(sSvcId){
+			// id 중복체크
+			case "idChecker":
+			// var check = this.join.getColumn(this.join.rowposition, "id");
+
+			if(this.join.getColumn(0,"id") != this.ds_check.getColumn(0,"id")){ // aml_emp_info의 emp_no와 입력한 값이 같지 않을때
+				this.alert("사용이 가능한 아이디입니다.");
+				
+				//this.edit_id.setFocus;
+				//this.edit_id.value;
+				//trace("id : "+  application.gds_empInfo.getColumn(0, "id"));
+			}else{
+				this.alert("이미 사용중인 아이디입니다.");
+				
+				this.resultid.reset();
+								
+				
+				//this.edit_id.set_value("");				
+				//this.edit_id.set_text("");
+				//this.edit_email.setFocus();
+			}
+			break;
+
+
+
+			// 가입
+			case "insert":
+				alert("회원가입이 완료되었습니다.");
+				this.close();
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+
+
+// 저장(가입)
+this.Div00_Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){		
+	
+	// 입력값 체크
+	if(this.edit_pw.value == null){
+		this.alert("비밀번호를 입력해주세요.");
+		this.edit_pw.setFocus();
+		return;
+	}else if(this.edit_phone.value == null){
+		this.alert("핸드폰번호를 입력하세요.");
+		this.edit_phone.setFocus();
+		return;		
+	}	
+
+
+	// 저장(가입, insert)
+	this.gfn_transaction(this
+					   , "insert"
+					   , "aml/join.do"
+					   , "resultid=resultid:I"
+					   , ""
+					   , ""
+					   , "transaction_callback");
+}
+
+// 비밀번호 확인
+this.edit_pw_confirm_onchanged = function(obj:Edit, e:nexacro.ChangeEventInfo){
+	if(this.edit_pw.value != this.edit_pw_confirm.value){
+		this.alert("비밀번호가 일치하지 않습니다.");
+		this.edit_pw_confirm.set_value("");
+	}
+}
+
+
+// 이메일 정규식확인
+this.edit_email_canchange = function(obj:Edit,  e:nexacro.ChangeEventInfo){
+	var strEmail = obj.value;
+	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	
+	if(strEmail.match(regExp) != null){
+		var isGood = true;
+	}else{
+		var isGood = false;
+	}
+
+	if(isGood){
+
+	}else{
+		this.alert("이메일 형식을 맞춰주세요");
+		this.edit_email.set_text("");
+		this.edit_email.setFocus();
+	}
+}
+
+// 닫기
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+	this.close();
+}
+
+
+
+
+
+
+
+
+
+
+/*
+//우편번호
+this.Div00_Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+
+	var cf = new ChildFrame;
+	cf.init("post", "absolute", 0, 0, 557, 449);
+	cf.set_formurl("adm::post.xfdl");
+	var ret = system.showModalWindow(cf, "post", this.getOwnerFrame(), {a:'aaa', b:'bbb'}, this); 
+	//application.open("post", "adm::post.xfdl","", {a:'ccc', b:'ddd'}, "showtitlebar=false showstatusbar=false", 0, 0, 544, 211, this);
+	trace("ret:"+ret);
+	var addressArray = ret.split("&");
+	trace(addressArray[0]);
+	trace(addressArray[1]);
+	this.Div00.Edit05.set_value(addressArray[0]);
+	this.Div00.Edit06.set_value(addressArray[1]);
+	this.Edit04.set_enable("true");
+	this.Edit04.setFocus();
+	//application.ds_post.clearData();
+}
+*/
+
+
+]]></Script>
+  </Form>
+</FDL>

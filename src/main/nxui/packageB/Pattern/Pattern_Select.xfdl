@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Pattern_Select" classname="Pattern_Select" left="0" top="0" width="1024" height="768" titletext="New Form" onload="Pattern_Select_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="Grid00" taborder="0" useinputpanel="false" left="0.98%" top="50" right="45.41%" height="192" binddataset="ds_list">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="67"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="title"/>
+                <Cell col="1" text="regId"/>
+                <Cell col="2" text="postId"/>
+                <Cell col="3" text="contents"/>
+                <Cell col="4" text="communityId"/>
+                <Cell col="5" text="regDate"/>
+                <Cell col="6" text="hitCount"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:title"/>
+                <Cell col="1" text="bind:regId"/>
+                <Cell col="2" text="bind:postId"/>
+                <Cell col="3" text="bind:contents"/>
+                <Cell col="4" text="bind:communityId"/>
+                <Cell col="5" text="bind:regDate"/>
+                <Cell col="6" text="bind:hitCount"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_list">
+        <ColumnInfo>
+          <Column id="title" type="STRING" size="256"/>
+          <Column id="regId" type="STRING" size="256"/>
+          <Column id="postId" type="STRING" size="256"/>
+          <Column id="contents" type="STRING" size="256"/>
+          <Column id="communityId" type="STRING" size="256"/>
+          <Column id="regDate" type="DATE" size="256"/>
+          <Column id="hitCount" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************************************
+* SYSTEM      : 넥사크로플랫폼 PackageB
+* BUSINESS    : 넥사크로플랫폼 PackageB
+* FILE NAME   : Pattern_select
+* PROGRAMMER  : 
+* DATE        : 
+* DESCRIPTION : MultiDetail
+*------------------------------------------------------------------
+* MODIFY DATE   PROGRAMMER			DESCRIPTION
+*------------------------------------------------------------------
+* 
+*------------------------------------------------------------------
+***********************************************************************************/
+
+/***********************************************************************************
+* Common Library
+***********************************************************************************/
+include "Lib::Comm.xjs";
+
+
+this.fn_search = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	  // 조회조건(Condition)
+	//this.ds_search.setColumn(0, "searchCondition", this.div_search.cmb_searchCondition.value);
+	//this.ds_search.setColumn(0, "searchKeyword", this.div_search.edt_searchKeyword.value);
+   trace("111111111111");
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "sampleSelectVO.do",			 
+			  inds :[""],
+			  outds :[
+				 "ds_list=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+	trace("222222222222222");
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		if(this.errorcode < 0)
+		{
+			trace("eeeeeeeeeeee");
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      
+	       var pThis = this.fobj;   //form object
+	       	   pThis.fn_search_post();  //조회후 처리 
+	    
+	});
+}
+
+
+
+this.Pattern_Select_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+trace("start");
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);
+    this.fn_search();
+}
+]]></Script>
+  </Form>
+</FDL>

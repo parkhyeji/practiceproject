@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="suspaml" classname="suspaml" left="0" top="0" width="1024" height="768" titletext="New Form" onload="suspaml_onload">
+    <Layouts>
+      <Layout>
+        <Button id="Button00" taborder="0" text="조사완료" left="3.61%" top="24" right="88.28%" height="32"/>
+        <Button id="Button01" taborder="1" text="저장" left="86.72%" top="24" right="5.18%" height="32"/>
+        <Div id="Div00" taborder="2" text="고객정보" left="4%" top="63" right="5.27%" height="34" style="border:1 solid black ;">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+        <Grid id="Grid00" taborder="3" useinputpanel="false" left="4.1%" top="100" right="5.27%" height="74" binddataset="ds_custInfo">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="109"/>
+                <Column size="129"/>
+                <Column size="212"/>
+                <Column size="221"/>
+                <Column size="253"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="고객구분"/>
+                <Cell col="1" text="고객명"/>
+                <Cell col="2" text="실명번호"/>
+                <Cell col="3" text="직업"/>
+                <Cell col="4" text="최종등급"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:custTypeCode"/>
+                <Cell col="1" text="bind:empName"/>
+                <Cell col="2" text="bind:realNameNo"/>
+                <Cell col="3" text="bind:jobName"/>
+                <Cell col="4" text="bind:raRankCode"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div01" taborder="4" text="룰정보" left="4.49%" top="178" right="5.27%" height="34" style="border:1 solid black ;"/>
+        <Static id="Static00" taborder="5" text="룰코드" left="5.18%" top="221" right="88.28%" height="19" style="align:center;"/>
+        <Edit id="Edit00" taborder="6" left="12.5%" top="217" right="77.93%" height="33" enable="false"/>
+        <Static id="Static01" taborder="7" text="고객구분" left="26.27%" top="221" right="67.19%" height="19" style="align:center;"/>
+        <Edit id="Edit01" taborder="8" left="33.59%" top="217" right="56.84%" height="33" enable="false"/>
+        <Static id="Static02" taborder="9" text="업무구분" left="52.83%" top="221" right="40.63%" height="19" style="align:center;"/>
+        <Edit id="Edit02" taborder="10" left="60.16%" top="217" right="30.27%" height="33" enable="false"/>
+        <Static id="Static03" taborder="11" text="집계주기" left="78.61%" top="221" right="14.84%" height="19" style="align:center;"/>
+        <Edit id="Edit03" taborder="12" left="86.52%" top="217" right="5.86%" height="33" enable="false"/>
+        <Static id="Static04" taborder="13" text="룰명칭" left="5.18%" top="261" right="88.28%" height="19" style="align:center;"/>
+        <Edit id="Edit04" taborder="14" left="12.5%" top="257" right="5.86%" height="33" enable="false"/>
+        <Static id="Static05" taborder="15" text="롤명세" left="5.18%" top="301" right="88.28%" height="19" style="align:center;"/>
+        <Edit id="Edit05" taborder="16" left="12.5%" top="297" right="5.86%" height="33" enable="false"/>
+        <Div id="Div02" taborder="17" text="고객정보" left="4.59%" top="341" right="4.59%" height="27" style="border:1 solid black ;"/>
+        <Grid id="Grid01" taborder="18" useinputpanel="false" left="4.59%" top="372" right="4.59%" height="164" binddataset="ds_ruleAlertDealDetail">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="43"/>
+                <Column size="118"/>
+                <Column size="113"/>
+                <Column size="102"/>
+                <Column size="97"/>
+                <Column size="111"/>
+                <Column size="103"/>
+                <Column size="118"/>
+                <Column size="116"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="거래일시"/>
+                <Cell col="2" text="계좌번호"/>
+                <Cell col="3" text="업무구분"/>
+                <Cell col="4" text="지점"/>
+                <Cell col="5" text="담당자"/>
+                <Cell col="6" text="상품"/>
+                <Cell col="7" text="입출금구분"/>
+                <Cell col="8" text="거래금액"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="(currow+1)"/>
+                <Cell col="1" text="bind:dealDate"/>
+                <Cell col="2" text="bind:accNo"/>
+                <Cell col="3" text="bind:workTypeCode"/>
+                <Cell col="4" text="bind:dealOfficeCode"/>
+                <Cell col="5" text="bind:dealChgedId"/>
+                <Cell col="6" text="bind:dealGoods"/>
+                <Cell col="7" text="bind:dewiTypeCode"/>
+                <Cell col="8" text="bind:dealMount"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_custInfo">
+        <ColumnInfo>
+          <Column id="empName" type="STRING" size="20"/>
+          <Column id="realNameNo" type="STRING" size="25"/>
+          <Column id="custTypeCode" type="STRING" size="4"/>
+          <Column id="jobName" type="STRING" size="50"/>
+          <Column id="raRankCode" type="STRING" size="4"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_ruleInfo">
+        <ColumnInfo>
+          <Column id="ruleId" type="STRING" size="20"/>
+          <Column id="custTypeCode" type="STRING" size="4"/>
+          <Column id="workTypeCode" type="STRING" size="4"/>
+          <Column id="ruleApplyPeeriod" type="STRING" size="4"/>
+          <Column id="ruleName" type="STRING" size="1000"/>
+          <Column id="ruleDetail" type="STRING" size="1000"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_ruleAlertDealDetail">
+        <ColumnInfo>
+          <Column id="dealDate" type="STRING" size="8"/>
+          <Column id="accNo" type="STRING" size="25"/>
+          <Column id="workTypeCode" type="STRING" size="4"/>
+          <Column id="dealOfficeCode" type="STRING" size="4"/>
+          <Column id="dealChgedId" type="STRING" size="20"/>
+          <Column id="dealGoods" type="STRING" size="4"/>
+          <Column id="dewiTypeCode" type="STRING" size="4"/>
+          <Column id="dealMount" type="INT" size="18"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item7" compid="Edit00" propid="value" datasetid="ds_ruleInfo" columnid="ruleId"/>
+      <BindItem id="item0" compid="Edit01" propid="value" datasetid="ds_ruleInfo" columnid="custTypeCode"/>
+      <BindItem id="item1" compid="Edit02" propid="value" datasetid="ds_ruleInfo" columnid="workTypeCode"/>
+      <BindItem id="item2" compid="Edit03" propid="value" datasetid="ds_ruleInfo" columnid="ruleApplyPeeriod"/>
+      <BindItem id="item3" compid="Edit04" propid="value" datasetid="ds_ruleInfo" columnid="ruleName"/>
+      <BindItem id="item4" compid="Edit05" propid="value" datasetid="ds_ruleInfo" columnid="ruleDetail"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+//고객정보 룰정보 온로드
+this.suspaml_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var loadPage = "";
+		loadPage += "ds_custInfo=ds_custInfo";
+	    loadPage += " ds_ruleInfo=ds_ruleInfo";
+	    loadPage += " ds_ruleAlertDealDetail=ds_ruleAlertDealDetail";
+	this.gfn_transaction(this
+					   , "suspPageLoad"
+					   , "suspPageLoad/suspPageLoad.do"
+					   , ""
+					   , loadPage
+					   , ""
+					   , "fnCallback");            
+}
+
+this.fnCallback = function(sScvid, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		this.alert("통신에 실패하였습니다." + sScvid + " : " + sErrorMsg);
+		return;
+	}else {
+		switch(sScvid){
+			case "suspPageLoad" :
+			break;
+			default :
+			break;
+		}
+	}
+}]]></Script>
+  </Form>
+</FDL>

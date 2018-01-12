@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="CodeSelect" classname="CodeSelect" left="0" top="0" width="1024" height="768" titletext="New Form" onload="CodeSelect_onload">
+    <Layouts>
+      <Layout>
+        <Div id="Div00" taborder="0" text="Div00" left="2.05%" top="14" right="32.03%" height="242" style="background:azure;">
+          <Layouts>
+            <Layout>
+              <Combo id="Combo00" taborder="0" left="10.67%" top="43" right="70.52%" height="21" innerdataset="@ds_list" codecolumn="codeNo" datacolumn="codeName"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_list">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeName2" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+          <Column id="sortSeq" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div00.Combo00" propid="value" datasetid="ds_list" columnid="codeNo"/>
+      <BindItem id="item1" compid="Div00.Combo00" propid="text" datasetid="ds_list" columnid="codeName"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[
+this.CodeSelect_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var oDatas =  {
+			  svcid : "search",
+			  //sController : "cmmCodeDetailSelectVO.do?classCode=F02",			 			  
+			  sController : "cmmCodeDetailSelectVO.do?classCode=F02",			 			  
+			  inds :[""],
+			  outds :[
+				 "ds_list=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+	trace("222222222222222");
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		if(this.errorcode < 0)
+		{
+			trace("eeeeeeeeeeee");
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      trace("eeeeeeeeeee23e");
+	       var pThis = this.fobj;   //form object
+	       	   pThis.fn_search_post();  //조회후 처리 
+	    
+	});
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	
+	<select id="aml.AthManagementDAO.load" parameterClass="java.util.HashMap" resultClass="egovMap">
+	       SELECT E.EMP_NAME AS EMP_NAME
+                , E.EMP_NO
+                , C.CODE_NAME AS DEPART_NAME
+                , A.AUTH_NO AS AUTH_NO
+                , I.AUTH_NAME AS AUTH_NAME
+                , (DECODE(I.AUTH_NO, '0001', '1', '0')) AS ADMIN_CH
+                , (DECODE(I.AUTH_NO, '0002', '1', '0')) AS LOGIN_CH
+                , (DECODE(I.AUTH_NO, '0003', '1', '0')) AS APP_CH
+                , '0' AS CH 
+             FROM AML_EMP_INFO E
+                , AML_COMMON_CODE_DETAIL C
+                , AML_EMP_DEPART_DETAIL D
+                , AML_EMP_AUTH_DETAIL A
+                , AML_AUTH_INFO I
+            WHERE E.EMP_NO     = D.EMP_NO
+              AND D.CLASS_CODE = C.CLASS_CODE
+              AND D.CODE_NO    = C.CODE_NO
+              AND E.EMP_NO     = A.EMP_NO 
+              AND I.AUTH_NO    = A.AUTH_NO
+	
+	</select>
+		
+	<select id="aml.AthManagementDAO.loadUp" parameterClass="java.util.HashMap" resultClass="egovMap">
+           SELECT MAX(E.EMP_NAME) AS EMP_NAME
+                , E.EMP_NO
+                , MAX(C.CODE_NAME) AS DEPART_NAME
+                , MAX((DECODE(A.AUTH_NO, '0002', '1', '0'))) AS LOGIN_CH
+                , MAX((DECODE(A.AUTH_NO, '0003', '1', '0'))) AS APP_CH
+                , MAX((DECODE(A.AUTH_NO, '0004', '1', '0'))) AS READ_CH
+                , MAX((DECODE(A.AUTH_NO, '0005', '1', '0'))) AS WRITE_CH
+                , MAX((DECODE(A.AUTH_NO, '0006', '1', '0'))) AS ROLWRITE_CH
+                , MAX((DECODE(A.AUTH_NO, '0007', '1', '0'))) AS ROLDEL_CH
+                , MAX(A.REGI_ID) AS REGI_ID
+                , 'S' AS FLAG 
+             FROM AML_EMP_INFO E
+                , AML_EMP_AUTH_DETAIL A
+                , AML_COMMON_CODE_DETAIL C
+                , AML_EMP_DEPART_DETAIL D
+            WHERE E.EMP_NO     = A.EMP_NO(+) 
+              AND E.EMP_NO     = D.EMP_NO
+              AND D.CLASS_CODE = C.CLASS_CODE
+              AND D.CODE_NO    = C.CODE_NO
+            GROUP BY E.EMP_NO
+    </select>
+	
+	<select id="aml.AthManagementDAO.searchAth" parameterClass="java.util.HashMap" resultClass="egovMap">
+          SELECT MAX(E.EMP_NAME) AS EMP_NAME
+                , E.EMP_NO
+                , MAX(C.CODE_NAME) AS DEPART_NAME
+                , MAX((DECODE(A.AUTH_NO, '0002', '1', '0'))) AS LOGIN_CH
+                , MAX((DECODE(A.AUTH_NO, '0003', '1', '0'))) AS APP_CH
+                , MAX((DECODE(A.AUTH_NO, '0004', '1', '0'))) AS READ_CH
+                , MAX((DECODE(A.AUTH_NO, '0005', '1', '0'))) AS WRITE_CH
+                , MAX((DECODE(A.AUTH_NO, '0006', '1', '0'))) AS ROLWRITE_CH
+                , MAX((DECODE(A.AUTH_NO, '0007', '1', '0'))) AS ROLDEL_CH
+                , MAX(A.REGI_ID) AS REGI_ID
+                , 'S' AS FLAG 
+             FROM AML_EMP_INFO E
+                , AML_EMP_AUTH_DETAIL A
+                , AML_COMMON_CODE_DETAIL C
+                , AML_EMP_DEPART_DETAIL D
+            WHERE E.EMP_NO     = A.EMP_NO(+) 
+              AND E.EMP_NO     = D.EMP_NO
+              AND D.CLASS_CODE = C.CLASS_CODE
+              AND D.CODE_NO    = C.CODE_NO
+              <isNotEqual property="type" compareValue="ALL">
+              AND $type$ LIKE '%' || #keyword# || '%'
+              </isNotEqual>
+            GROUP BY E.EMP_NO
+    </select>
+    
+    <delete id="aml.AthManagementDAO.delete" parameterClass="java.util.HashMap">
+        DELETE FROM AML_EMP_AUTH_DETAIL
+              WHERE EMP_NO = #empNo#
+                    AUTH_NO= #authNo#
+    
+    </delete>
+    
+    <delete id="aml.AthManagementDAO.empDelete" parameterClass="java.util.HashMap">
+        DELETE FROM AML_EMP_AUTH_DETAIL
+              WHERE EMP_NO = #empNo#
+    
+    </delete>
+    
+    <insert id="aml.AthManagementDAO.insert" parameterClass="java.util.HashMap" >
+       INSERT INTO AML_EMP_AUTH_DETAIL (
+       			   EMP_NO
+       			 , AUTH_NO
+       			 , USE_YN
+       			 , REGI_DT
+       			 , REGI_ID
+       			 , MODI_DT
+       			 , MODI_ID)
+            VALUES (
+           		   #empNo#
+                 , #authNo#
+                 , 'Y'
+                 , (SELECT TO_CHAR(SYSDATE, 'YYYYMMDD')
+ 		              FROM DUAL)
+                 , #regiId#
+                 , (SELECT TO_CHAR(SYSDATE, 'YYYYMMDD')
+ 		              FROM DUAL)
+                 , 'ADMIN'
+                 )
+      
+    </insert>
+    
+    
+	
+
+
+	
+</sqlMap>

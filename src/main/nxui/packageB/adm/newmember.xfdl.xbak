@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.4">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="member002" classname="member002" inheritanceid="" position="absolute 0 0 452 310" titletext="New Form" onload="member002_onload">
+    <Layouts>
+      <Layout>
+        <Shape id="Shape00" type="rectangle" position2="absolute l:8 w:439 t:66 h:239" positiontype="position2" style="background:lavenderblush;border:0 solid #808080ff ;"/>
+        <Static id="Static00" text="개인정보입력" position="absolute 16 66 96 85"/>
+        <Static id="Static02" text="이            름" position2="absolute l:16 w:79 t:111 h:29" positiontype="position2"/>
+        <Static id="Static03" text="주민등록번호" onclick="Static03_onclick" position2="absolute l:16 w:79 t:135 h:29" positiontype="position2"/>
+        <Static id="Static05" text="이     메    일" position2="absolute l:16 w:79 t:160 h:29" positiontype="position2"/>
+        <Static id="Static06" text="주            소" onclick="Static06_onclick" position2="absolute l:16 w:79 t:210 h:29" positiontype="position2"/>
+        <Static id="Static07" text="상   세  주  소" onclick="Static07_onclick" position2="absolute l:16 w:79 t:231 h:29" positiontype="position2"/>
+        <Static id="Static08" text="비밀번호" position2="absolute l:233 w:79 t:87 h:29" positiontype="position2"/>
+        <Static id="Static09" text="영문이름" onclick="Static09_onclick" position2="absolute l:233 w:79 t:111 h:29" positiontype="position2"/>
+        <Static id="Static10" text="입사구분" onclick="Static10_onclick" position2="absolute l:233 w:79 t:135 h:29" positiontype="position2"/>
+        <Static id="Static11" text="핸드폰번호" position2="absolute l:233 w:79 t:159 h:29" positiontype="position2"/>
+        <Button id="Button00" taborder="1" text="가입" onclick="Button00_onclick" position2="absolute l:261 w:74 t:268 h:27" positiontype="position2"/>
+        <Button id="Button01" taborder="1" text="취소" onclick="Button01_onclick" position2="absolute l:343 w:74 t:268 h:27" positiontype="position2"/>
+        <ImageViewer id="img_titlebg" taborder="1" position2="absolute l:8 w:440 t:8 h:50" positiontype="position2" style="background:cornflowerblue;"/>
+        <Static id="sta_title" text="회원가입" position2="absolute l:26 w:118 t:18 h:29" positiontype="position2" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <Static id="Static19" text="성            별" onclick="Static19_onclick" position2="absolute l:16 w:149 t:186 h:27" positiontype="position2"/>
+        <Edit id="Edit14" taborder="1" position2="absolute l:95 w:132 t:189 h:18" positiontype="position2"/>
+        <Static id="Static01" text="아     이    디" position2="absolute l:17 w:79 t:87 h:29" positiontype="position2"/>
+        <Button id="Button02" taborder="1" text="우편번호검색" position2="absolute l:350 w:76 t:215 h:16" positiontype="position2"/>
+        <Combo id="Combo00" taborder="1" value="j" text="정직원" codecolumn="codecolumn" datacolumn="datacolumn" index="0" onitemchanged="Combo00_onitemchanged" position2="absolute l:294 w:131 t:139 h:19" positiontype="position2" innerdataset="@innerdataset"/>
+        <Edit id="Edit00" taborder="1" position2="absolute l:95 w:241 t:213 h:18" positiontype="position2"/>
+        <Edit id="Edit01" taborder="1" position2="absolute l:95 w:241 t:237 h:18" positiontype="position2"/>
+        <Edit id="Edit02" taborder="1" position2="absolute l:95 w:132 t:165 h:18" positiontype="position2"/>
+        <Edit id="Edit03" taborder="1" position2="absolute l:95 w:132 t:141 h:18" positiontype="position2"/>
+        <Edit id="Edit04" taborder="1" position2="absolute l:95 w:132 t:117 h:18" positiontype="position2"/>
+        <Edit id="Edit05" taborder="1" position2="absolute l:95 w:132 t:93 h:18" positiontype="position2"/>
+        <Edit id="Edit06" taborder="1" position2="absolute l:294 w:132 t:93 h:18" positiontype="position2"/>
+        <Edit id="Edit07" taborder="1" position2="absolute l:294 w:132 t:117 h:18" positiontype="position2"/>
+        <Edit id="Edit08" taborder="1" position2="absolute l:294 w:132 t:165 h:18" positiontype="position2"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="innerdataset">
+        <ColumnInfo>
+          <Column id="codecolumn" size="256"/>
+          <Column id="datacolumn" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="codecolumn">j</Col>
+            <Col id="datacolumn">정직원</Col>
+          </Row>
+          <Row>
+            <Col id="codecolumn">in</Col>
+            <Col id="datacolumn">인턴</Col>
+          </Row>
+          <Row>
+            <Col id="codecolumn">g</Col>
+            <Col id="datacolumn">계약</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_insa" firefirstcount="0" firenextcount="0" useclientlayout="true" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="id" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+          <Column id="engname" type="STRING" size="256"/>
+          <Column id="psw" type="STRING" size="256"/>
+          <Column id="barth" type="STRING" size="256"/>
+          <Column id="join" type="STRING" size="256"/>
+          <Column id="hp" type="STRING" size="256"/>
+          <Column id="email" type="STRING" size="256"/>
+          <Column id="address1" type="STRING" size="256"/>
+          <Column id="address2" type="STRING" size="256"/>
+          <Column id="sex" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item7" compid="Edit14" propid="value" datasetid="ds_insa" columnid="sex"/>
+      <BindItem id="item10" compid="Combo00" propid="value" datasetid="innerdataset"/>
+      <BindItem id="item11" compid="Combo00" propid="value" datasetid="ds_insa" columnid="join"/>
+      <BindItem id="item0" compid="Edit00" propid="value" datasetid="ds_insa" columnid="address1"/>
+      <BindItem id="item1" compid="Edit01" propid="value" datasetid="ds_insa" columnid="address2"/>
+      <BindItem id="item2" compid="Edit02" propid="value" datasetid="ds_insa" columnid="email"/>
+      <BindItem id="item3" compid="Edit03" propid="value" datasetid="ds_insa" columnid="barth"/>
+      <BindItem id="item4" compid="Edit04" propid="value" datasetid="ds_insa" columnid="name"/>
+      <BindItem id="item5" compid="Edit05" propid="value" datasetid="ds_insa" columnid="id"/>
+      <BindItem id="item6" compid="Edit06" propid="value" datasetid="ds_insa" columnid="psw"/>
+      <BindItem id="item8" compid="Edit07" propid="value" datasetid="ds_insa" columnid="engname"/>
+      <BindItem id="item9" compid="Edit08" propid="value" datasetid="ds_insa" columnid="hp"/>
+    </Bind>
+    <Script type="xscript4.0"><![CDATA[
+include "script::common.xjs";
+
+
+
+function member002_onload(obj:Form, e:LoadEventInfo)
+{
+
+	var row = ds_insa.addRow();
+}
+
+function Button00_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+
+	var strSvcid 		= "insertinsa";
+	var strController 	= "administrator/insertAdm.do";
+	var strParam =  "";
+	
+	
+	
+	// 트랜젝션 공통함수 호출
+	gfn_transaction(this,
+					strSvcid,
+					strController, 
+					"ds_input=ds_insa:U", 
+					"",
+					strParam, 
+					"fn_callback"
+					);
+					
+	
+}
+
+function Button01_onclick(obj:Button,  e:ClickEventInfo)
+{
+	close();
+}
+]]></Script>
+  </Form>
+</FDL>

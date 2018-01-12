@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" />
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	
+	
+	<!-- 소제기의뢰 검색 -->
+	<select id="rais.raisDAO.getRaisreqList" resultClass="egovMap"
+		parameterClass="java.util.HashMap">
+		<![CDATA[
+			SELECT 
+				rownum, main.*
+			FROM 	
+				(SELECT  
+					T1.LAW_RAISREQ_NO
+					,T2.INSA_NAME||'('||T1.LAW_RAISREQ_REQ_ID||')' AS LAW_RAISREQ_REQ_ID
+					,T1.LAW_RAISREQ_CLAS_CODE||'('||T3.CODE_NAME||')' AS LAW_RAISREQ_CLAS_CODE
+					,T1.LAW_RAISREQ_REA
+					,T1.LAW_RAISREQ_ETC_POIN
+					,T1.LAW_RAISREQ_REQ_DATE
+					,UPPER(T1.LAW_RAISREQ_REP_WTR) AS LAW_RAISREQ_REP_WTR
+					,UPPER(T1.LAW_RAISREQ_WTR) AS LAW_RAISREQ_WTR
+					,T1.LAW_RAISREQ_DALW_CONT
+					,T1.LAW_RAISREQ_EXPT_DATE	
+					,T1.LAW_RAISREQ_REP_CONT
+					,T1.LAW_RAISREQ_ETCREQ_POIN
+					,T1.LAW_RAISREQ_REP_DATE
+					,T1.LAW_RAISREQ_ISSU_POIN
+					,rownum
+				FROM 
+					TAB_LAW_RAISREQ T1
+					,TAB_INSA T2
+					,CMM_CODE_DETAIL T3					
+				WHERE 
+					T1.LAW_RAISREQ_REQ_ID = T2.INSA_SABUN
+					AND
+					T3.CLASS_CODE LIKE 'D01'
+					AND
+					T3.CODE_NO = T1.LAW_RAISREQ_CLAS_CODE		
+		]]>
+			<!-- 의뢰번호 -->
+			<isNotEmpty property="lawRaisreqNo" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_NO LIKE #lawRaisreqNo# || '%'
+				]]>
+			</isNotEmpty>
+			<!-- 소송제기분류 -->
+			<isNotEmpty property="lawRaisreqClasCode" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_CLAS_CODE LIKE #lawRaisreqClasCode# || '%'
+				]]>
+			</isNotEmpty>
+			<!-- 의뢰기간 -->
+			<isNotEmpty property="lawRaisreqReqDate1" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_REQ_DATE >= #lawRaisreqReqDate1#
+				]]>
+			</isNotEmpty>
+			<isNotEmpty property="lawRaisreqReqDate2" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_REQ_DATE <= #lawRaisreqReqDate2#
+				]]>
+			</isNotEmpty>
+			<!-- 회신여부 -->
+			<isNotEmpty property="lawRaisreqRepWtr" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_REP_WTR LIKE #lawRaisreqRepWtr# || '%'
+				]]>
+			</isNotEmpty>
+				ORDER BY 
+					T1.LAW_RAISREQ_REQ_DATE DESC, T1.LAW_RAISREQ_NO DESC
+				) main	
+	</select>
+	
+	
+</sqlMap>

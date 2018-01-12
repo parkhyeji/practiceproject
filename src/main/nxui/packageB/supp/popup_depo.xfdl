@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="pop_depo_no" classname="pop_depo_no" left="0" top="0" width="700" height="467" titletext="공탁관리번호 조회" onload="pop_depo_no_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" left="9" top="8" height="50" width="682" style="background:cornflowerblue;color:#333333ff;"/>
+        <Static id="sta_title" taborder="4" text="공탁관리번호 조회" left="26" top="18" height="29" width="168" style="color:#ffffffff;font:bold 12 굴림;"/>
+        <ImageViewer id="ImageViewer00" taborder="5" left="10" top="63" height="35" width="681" style="background:lavenderblush;"/>
+        <Static id="sta_no" taborder="6" left="16" top="68" height="25" width="669" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;"/>
+        <Edit id="search_depo" taborder="2" left="282" top="71" height="21" maxlength="10" width="206" style="selectcolor:#333333ff;selectbackground:#ffffffff;color:#333333ff;padding:0 5 0 5;"/>
+        <Button id="btn_depo_search" taborder="1" text="검색" left="493" top="70" height="21" width="52" style="background:lightskyblue stretch 9,9 left top;border:1 solid #808080ff ;color:#ffffffff;font:bold 9 Dotum;opacity:100;" onclick="btn_depo_search_onclick"/>
+        <Static id="sta_03" taborder="7" text="공탁관리번호 목록" left="21" top="117" height="19" width="197" style="color:black;font:bold 9 Dotum;"/>
+        <Grid id="grd_depo" taborder="8" useinputpanel="false" left="10" top="137" height="269" scrollbars="fixedvert" nodatatext="데이터가 없습니다." binddataset="ds_depo" width="681" style="border:2 solid #808080ff,0 none #808080ff,0 none #808080ff,0 none #808080ff;" oncelldblclick="grd_depo_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="107"/>
+                <Column size="152"/>
+                <Column size="172"/>
+                <Column size="99"/>
+                <Column size="129"/>
+              </Columns>
+              <Rows>
+                <Row size="25" band="head"/>
+                <Row size="20"/>
+              </Rows>
+              <Band id="head">
+                <Cell style="align:center middle;font:bold 9 dotum;" text="공탁관리번호" combodisplayrowcount="5"/>
+                <Cell col="1" style="align:center middle;font:bold 9 dotum;" text="공탁자명" combodisplayrowcount="5"/>
+                <Cell col="2" style="align:center middle;font:bold 9 dotum;" text="피공탁자명" combodisplayrowcount="5"/>
+                <Cell col="3" style="align:center middle;font:bold 9 dotum;" text="공탁일자" editlimit="5" combodisplayrowcount="5"/>
+                <Cell col="4" style="align:center middle;font:bold 9 dotum;" text="공탁금액" combodisplayrowcount="5"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="text" style="align:center middle;font:9 dotum;" text="bind:depositDepoAdmNo" combodisplayrowcount="5"/>
+                <Cell col="1" displaytype="text" style="align:center middle;font:9 dotum;" text="bind:depositDepoName" combodisplayrowcount="5"/>
+                <Cell col="2" displaytype="text" style="align:center middle;font:9 dotum;" text="bind:depositOthDepoName" combodisplayrowcount="5"/>
+                <Cell col="3" displaytype="text" style="align:center middle;font:9 dotum;" text="bind:depositDepoDate" mask="####-##-##" combodisplayrowcount="5"/>
+                <Cell col="4" displaytype="number" style="align:center middle;font:0 dotum;" text="bind:depositDepoChg" mask="999,999,999원" combodisplayrowcount="5"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_select" taborder="9" text="확인" left="603" top="424" height="24" width="39" style="background:lightskyblue stretch 9 9;border:0 none #808080ff ;color:#ffffffff;font:bold 9 Dotum;" onclick="btn_select_onclick"/>
+        <Button id="btn_Close" taborder="10" text="닫기" left="646" top="424" height="24" width="39" style="background:lightskyblue stretch 9 9;border:0 none #808080ff ;color:#ffffffff;font:bold 9 Dotum;" onclick="btn_Close_onclick"/>
+        <Combo id="Combo00" taborder="11" codecolumn="codecolumn" datacolumn="datacolumn" index="0" left="150" top="70" width="127" height="21" value="adm_no" text="공탁관리번호">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">adm_no</Col>
+                <Col id="datacolumn">공탁관리번호</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">forc_exec_seq</Col>
+                <Col id="datacolumn">강제집행일련번호</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">depo_name</Col>
+                <Col id="datacolumn">공탁자명</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Div id="div_page" taborder="12" text="Div00" left="-5" top="431" width="573" height="18">
+          <Layouts>
+            <Layout>
+              <Static id="stc_Prev" taborder="25" text="이전" onclick="div_page_stc_Prev_onclick" visible="false" left="98" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_Next" taborder="26" text="다음" onclick="div_page_stc_Next_onclick" visible="false" left="468" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No0" taborder="27" text="1" onclick="div_page_stc_No_onclick" visible="false" left="138" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No1" taborder="28" text="2" onclick="div_page_stc_No_onclick" visible="false" left="170" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No2" taborder="29" text="3" onclick="div_page_stc_No_onclick" visible="false" left="202" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No3" taborder="30" text="4" onclick="div_page_stc_No_onclick" visible="false" left="234" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No4" taborder="31" text="5" onclick="div_page_stc_No_onclick" visible="false" left="266" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No5" taborder="32" text="6" onclick="div_page_stc_No_onclick" visible="false" left="298" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No6" taborder="33" text="7" onclick="div_page_stc_No_onclick" visible="false" left="330" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No7" taborder="34" text="8" onclick="div_page_stc_No_onclick" visible="false" left="362" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No8" taborder="35" text="9" onclick="div_page_stc_No_onclick" visible="false" left="394" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No9" taborder="36" text="10" onclick="div_page_stc_No_onclick" visible="false" left="426" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_depo">
+        <ColumnInfo>
+          <Column id="rownum" type="INT" size="256"/>
+          <Column id="depositDepoAdmNo" type="STRING" size="256"/>
+          <Column id="depositJuriCortCode" type="STRING" size="256"/>
+          <Column id="depositJuriCortName" type="STRING" size="256"/>
+          <Column id="depositForcExecSeq" type="STRING" size="256"/>
+          <Column id="depositOthDepoName" type="STRING" size="256"/>
+          <Column id="depositDepoName " type="STRING" size="256"/>
+          <Column id="depositDepoDate" type="STRING" size="256"/>
+          <Column id="depositDepuName" type="STRING" size="256"/>
+          <Column id="depositDepoChg" type="STRING" size="256"/>
+          <Column id="depositKeepDeptCode" type="STRING" size="256"/>
+          <Column id="depositKeepDeptName" type="STRING" size="256"/>
+          <Column id="depositDepoReleDate" type="STRING" size="256"/>
+          <Column id="depositDepchgCollDate" type="STRING" size="256"/>
+          <Column id="depositDepoCollChg" type="STRING" size="256"/>
+          <Column id="depositDepoCollRea" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="100"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+include "Lib::common.xjs";
+
+// 닫기 버튼
+this.btn_Close_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+// 모달창 오픈 시 모든 데이터 자동 검색
+this.pop_depo_no_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.btn_depo_search_onclick();
+}
+
+// 검색 버튼 (transaction 처리)
+this.btn_depo_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	
+		//소송관리번호조회 버튼 클릭시 페이징 초기화 
+		this.fv_iStartPageNo    = 0;   // 전체 페이지 순서
+		this.fv_iUnitSelRowNo   = 100; // 한번 Server호출시 가져올 row갯수
+		this.fv_iStartSelRowNo  = 1;   // Server호출시 시작할 row no
+		this.fv_iMaxPageNum     = 10;  // 화면에 보여줄 최대 Page번호 갯수
+		this.fv_iServerRowCount = 0;   // 서버에서 넘어온 Row갯수(100건이 안될 수 있음)
+
+
+		this.ds_search.clearData();
+		var rowIdx = this.ds_search.addRow();
+		
+		var searchCondition = this.Combo00.value;
+		var searchKeyword = this.search_depo.value;
+		
+		this.ds_search.setColumn(0, "searchCondition", searchCondition);
+		this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+		
+			// 트랜젝션 공통함수 호출
+		this.gfn_transaction(this,
+						"selectDepoList",
+						"depo/Depo/selectDepoList.do", 
+						"ds_search=ds_search", 
+						"ds_depo=ds_output",
+						"", 
+						"transaction_callback"
+						);
+	
+
+}
+
+// 공탁관리번호 선택
+this.btn_select_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+
+	var v_RtnVal = this.ds_depo.getColumn(this.ds_depo.rowposition,  "depositDepoAdmNo");
+	
+	this.close(v_RtnVal);
+	
+}
+
+// 더블클릭 시 데이터 전송
+this.grd_depo_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	this.btn_select_onclick();
+}
+
+// 트랜잭션 콜백
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+	
+		var iLastRow = this.fv_iStartPageNo * this.fv_iUnitSelRowNo;
+		this.ds_depo.filter("rownum >= "+(iLastRow + this.fv_iStartSelRowNo)+" && rownum <= "+(iLastRow + this.fv_iUnitSelRowNo));
+		
+		if (this.ds_depo.getRowCount() == 0)
+		{
+			this.div_page.set_visible("false");
+			this.ds_depo.filter("");
+			this.alert("조회할 자료가 없습니다.");
+			return;
+				}
+		else
+		{
+			this.div_page.set_visible("true");
+			this.fv_iServerRowCount = this.ds_depo.getRowCount();
+			this.fn_SetStyle();
+			this.fn_SetPageNo();
+			this.div_page.stc_No0.style.set_color("gray");
+			this.div_page_stc_No_onclick(this.div_page.stc_No0,"");
+		}
+		
+	}
+}
+
+
+
+
+
+
+
+//////////////////// 페이징 처리
+
+//-------------------------------------------------------------------------------------------------
+// 인덱스 클릭
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_No_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+	var iNo = new Number(obj.text);
+	var iFirstNum = (iNo-1) * this.fv_iMaxPageNum + 1;
+	var iLastNum = iFirstNum + this.fv_iMaxPageNum;
+	this.fn_SetStyle();
+	obj.style.set_color("gray");
+	this.ds_depo.filter("");
+	this.ds_depo.filter("rownum >= " + iFirstNum+" && rownum < " + iLastNum);
+}
+
+//-------------------------------------------------------------------------------------------------
+// 이전 버튼
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_Prev_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo - 1;
+	// Transaction()코딩 할 부분
+	this.transaction_callback("selectDepoList", 0, "succ");
+}
+
+//-------------------------------------------------------------------------------------------------
+// 다음버튼
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_Next_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo + 1;
+	// Transaction()코딩 할 부분
+	this.transaction_callback("selectDepoList", 0, "succ");
+}
+
+//-------------------------------------------------------------------------------------------------
+// Page번호 Setting
+//-------------------------------------------------------------------------------------------------
+this.fn_SetPageNo = function()
+{
+	var sPage = this.fv_iStartPageNo * this.fv_iMaxPageNum;
+	
+	// 이전버튼 처리
+	if (this.fv_iStartPageNo < 1)
+	{
+		this.div_page.stc_Prev.set_visible(false);
+	} 
+	else 
+	{
+		this.div_page.stc_Prev.set_visible(true);
+	}
+
+	// 마지막 버튼 처리
+	if (this.fv_iServerRowCount < this.fv_iUnitSelRowNo)
+	{
+		this.div_page.stc_Next.set_visible(false);
+	}
+	else
+	{
+		this.div_page.stc_Next.set_visible(true);
+	}
+
+	// 인덱스 번호 처리
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].set_visible(true);
+		this.div_page.components["stc_No"+i].set_text(sPage+i+1);
+
+		if (this.fv_iServerRowCount < (i * this.fv_iMaxPageNum))
+		{
+			this.div_page.components["stc_No"+i].set_visible(false);			
+		} 
+		else 
+		{
+			this.div_page.components["stc_No"+i].set_visible(true);			
+		}
+	}	
+}
+//-------------------------------------------------------------------------------------------------
+// Style조정
+//-------------------------------------------------------------------------------------------------
+this.fn_SetStyle = function()
+{
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].style.set_color("black");			
+	}	
+}
+]]></Script>
+  </Form>
+</FDL>

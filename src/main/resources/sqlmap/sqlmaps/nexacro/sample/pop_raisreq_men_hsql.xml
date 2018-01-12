@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" />
+	<!-- 공탁담당자 사원 조회 -->
+	
+	<select id="rais.raisDAO.getRaisMenList" resultClass="egovMap" parameterClass="java.util.HashMap">
+	<![CDATA[
+		SELECT 
+			ROWNUM, main.*
+		FROM
+			(SELECT DISTINCT
+			 	INSA_SABUN
+			 	,INSA_NAME
+			 	,INSA_EMAIL 
+		 	FROM 
+	        	TAB_INSA
+	    		, TAB_LAW_RAISREQ
+	       	Where 
+	        	1=1 
+	        		AND
+	        	INSA_SABUN = LAW_RAISREQ_REQ_ID
+		]]>
+		<isNotEmpty property="insaSabun" prepend="AND">
+			<![CDATA[
+				INSA_SABUN LIKE '%'||#insaSabun#||'%'
+			]]>
+		</isNotEmpty>
+		<isNotEmpty property="insaName" prepend="AND"> 
+			<![CDATA[
+				INSA_NAME LIKE '%'||#insaName#||'%'
+			]]>
+		</isNotEmpty>
+		<![CDATA[
+			ORDER BY 
+				INSA_NAME ASC
+			) main	
+		]]>
+   	</select> 
+</sqlMap>

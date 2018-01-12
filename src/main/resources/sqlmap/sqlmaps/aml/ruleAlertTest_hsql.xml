@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+	<typeAlias alias="egovMap"
+		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+
+	<select id="aml.RuleAlertDAO.loadCustCodes" resultClass="egovMap">
+		SELECT CUST_NO AS CODE
+		     , EMP_NAME AS VALUE
+		FROM AML_CUST_INFO
+	</select>
+	
+	<select id="aml.RuleAlertDAO.loadClassCode" resultClass="egovMap">
+		SELECT CODE_NO   AS CODE
+		     , CODE_NAME AS VALUE
+		  FROM AML_COMMON_CODE_DETAIL
+		 WHERE CLASS_CODE = #classCode#
+	</select>
+
+	<select id="aml.RuleAlertDAO.loadGroupCode" resultClass="egovMap">
+		SELECT ALERT_GROUP_NO AS CODE
+		FROM AML_RULE_ALERT_RESULT
+	</select>
+	
+	<select id="aml.RuleAlertDAO.loadDealGroupCode" resultClass="egovMap">
+		SELECT ALERT_GROUP_NO AS CODE
+		FROM AML_RULE_ALERT_DETAIL
+	</select>
+	
+	<select id="aml.RuleAlertDAO.loadDealGroupCodeRuleId" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT ALERT_GROUP_NO
+			 , RULE_ID
+		FROM AML_RULE_ALERT_DETAIL
+		WHERE ALERT_GROUP_NO = #code#
+	</select>
+	
+	<select id="aml.RuleAlertDAO.loadRuleId" resultClass="egovMap">
+		SELECT RULE_ID AS CODE
+		FROM AML_RULE_INFO
+	</select>
+	
+	<select id="aml.RuleAlertDAO.loadOfficeCode" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT CODE_NO AS CODE
+		     , CODE_NAME AS VALUE
+		FROM AML_COMMON_CODE_DETAIL
+		WHERE CLASS_CODE = #classCode#
+	</select>
+
+	<select id="aml.RuleAlertDAO.loadChgedId" resultClass="egovMap">
+		SELECT EMP_NO AS CODE
+		     , EMP_NAME AS VALUE
+		FROM AML_EMP_INFO
+	</select>
+
+	<select id="aml.RuleAlertDAO.loadstCode" parameterClass="java.util.HashMap"
+		resultClass="egovMap">
+		SELECT CODE_NO AS CODE
+		, CODE_NAME AS VALUE
+		FROM AML_COMMON_CODE_DETAIL
+		WHERE CLASS_CODE = #classCode#
+	</select>
+
+	<select id="aml.RuleAlertDAO.searchResult" resultClass="egovMap">
+		SELECT CUST_NO
+		, MODI_ID
+		, REL_RULE_COUNT
+		, STR_REPORT_ST_CODE
+		, REPORT_EXCEPT_TYPE_CODE
+		, REPORT_EXCEPT_REASON
+		, ALERT_GROUP_NO
+		FROM AML_RULE_ALERT_RESULT
+	</select>
+
+	<insert id="aml.RuleAlertDAO.resultInsert" parameterClass="java.util.HashMap">
+		INSERT INTO AML_RULE_ALERT_RESULT (
+		ALERT_GROUP_NO
+		, STNDRD_DATE
+		, REL_RULE_COUNT
+		, STR_REPORT_ST_CODE
+		, MODI_ID
+		, MODI_DT
+		, CUST_NO
+		, REPORT_EXCEPT_TYPE_CODE
+		, REPORT_EXCEPT_REASON
+		)VALUES(
+		#maxPk#
+		, TO_CHAR(SYSDATE,'YYYYMMDD')
+		, 1
+		, #strReportStCode#
+		, 'ADMIN'
+		, TO_CHAR(SYSDATE,'YYYYMMDD')
+		, #custNo#
+		, #reportExceptTypeCode#
+		, #reportExceptReason#
+		)
+	</insert>
+
+	<select id="aml.RuleAlertDAO.searchMaxPk" resultClass="java.lang.String">
+		SELECT
+		TO_CHAR(NVL(
+		(
+		SELECT MAX(ALERT_GROUP_NO) + 1
+		FROM AML_RULE_ALERT_RESULT
+		WHERE ALERT_GROUP_NO LIKE TO_CHAR(SYSDATE, 'YYYYMMDD') || '%'
+		GROUP BY SUBSTR(ALERT_GROUP_NO, 1, 8)
+		),
+		TO_CHAR(SYSDATE, 'YYYYMMDD') || '0000' + 1)
+		)
+		FROM DUAL
+	</select>
+
+	<select id="aml.RuleAlertDAO.searchDetail" resultClass="egovMap">
+		SELECT *
+		FROM AML_RULE_ALERT_DETAIL
+	</select>
+
+	<insert id="aml.RuleAlertDAO.detailInsert" parameterClass="java.util.HashMap">
+		INSERT INTO AML_RULE_ALERT_DETAIL(
+		ALERT_GROUP_NO
+		, RULE_ID
+		, TOTAL_DEAL_MOUNT
+		, MODI_DT
+		, MODI_ID
+		, DIST_OFFICE_CODE
+		, DIST_CHGED_ID
+		, DEALER_REL_MARK
+		, OPPI
+		, SUSP_SCORE
+		, SUSP_DEAL_INVE_ST_CODE
+		) VALUES(
+		  #alertGroupNo#
+		, #ruleId#
+		, #totalDealMount#
+		, TO_CHAR(SYSDATE, 'YYYYMMDD')
+		, 'ADMIN'
+		, #distOfficeCode#
+		, #distChgedId#
+		, #dealerRelMark#
+		, #oppi#
+		, #suspScore#
+		, #suspDealInveStCode#
+		)
+
+	</insert>
+	
+	<select id="aml.RuleAlertDAO.searchDealDetail" resultClass="egovMap">
+		SELECT *
+		FROM AML_RULE_ALERT_DEAL_DETAIL
+	</select>
+	
+	<select id="aml.RuleAlertDAO.loadWorkTypeCode" resultClass="egovMap">
+		SELECT CODE_NO AS CODE
+		     , CODE_NAME AS VALUE
+		FROM AML_COMMON_CODE_DETAIL
+		WHERE CLASS_CODE = #classCode#
+	</select>
+	
+	<select id="aml.RuleAlertDAO.loadDealGoods" resultClass="egovMap">
+		SELECT CODE_NO AS CODE
+		     , CODE_NAME AS VALUE
+		FROM AML_COMMON_CODE_DETAIL
+		WHERE CLASS_CODE = #classCode#
+	</select>
+	
+	<select id="aml.RuleAlertDAO.loadDewiTypeCode" resultClass="egovMap">
+		SELECT CODE_NO AS CODE
+		     , CODE_NAME AS VALUE
+		FROM AML_COMMON_CODE_DETAIL
+		WHERE CLASS_CODE = #classCode#
+	</select>
+	
+	<insert id="aml.RuleAlertDAO.detailDealInsert" parameterClass="java.util.HashMap">
+	INSERT INTO AML_RULE_ALERT_DEAL_DETAIL(
+	  ALERT_GROUP_NO
+	, RULE_ID
+	, DEAL_SERIAL_NO
+	, ACC_NO
+	, DEAL_DATE
+	, DEAL_MOUNT
+	, DEAL_OFFICE_CODE
+	, DEAL_CHGED_ID
+	, MODI_DT
+	, MODI_ID
+	, DEAL_GOODS
+	, DEWI_TYPE_CODE
+	, WORK_TYPE_CODE
+	) VALUES(
+	  #alertGroupNo#
+	, #ruleId#
+	, (SELECT TO_CHAR (
+          NVL (
+             (  SELECT MAX(DEAL_SERIAL_NO) + 1
+                  FROM AML_RULE_ALERT_DEAL_DETAIL
+                 WHERE DEAL_SERIAL_NO LIKE TO_CHAR (SYSDATE, 'YYYYMMDD') || '%'
+              GROUP BY SUBSTR (DEAL_SERIAL_NO, 1, 8)),
+             TO_CHAR (SYSDATE, 'YYYYMMDD') || '0001'))
+  	  FROM DUAL)
+	, #accNo#
+	, #dealDate#
+	, #dealMount#
+	, #dealOfficeCode#
+	, #dealChgedId#
+	, TO_CHAR(SYSDATE, 'YYYYMMDD')
+	, 'ADMIN'
+	, #dealGoods#
+	, #dewiTypeCode#
+	, #workTypeCode#
+	)
+
+	</insert>
+	
+	<delete id="aml.RuleAlertDAO.deleteDealDetail" parameterClass="java.util.HashMap">
+	DELETE FROM AML_RULE_ALERT_DEAL_DETAIL
+	 WHERE ALERT_GROUP_NO = #alertGroupNo#
+	   AND DEAL_SERIAL_NO = #dealSerialNo# 
+	</delete>
+</sqlMap>

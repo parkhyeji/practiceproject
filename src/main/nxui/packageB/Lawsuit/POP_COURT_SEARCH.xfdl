@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="POP_COURT_SEARCH" classname="POP_COURT_SEARCH" left="0" top="0" width="284" height="96" titletext="New Form" style="color:#333333ff;" onload="POP_COURT_SEARCH_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" text="법원조회" onclick="img_titlebg_onclick" left="8" top="8" width="268" height="50" style="background:cornflowerblue;color:white;align:center middle;font:bold 12 굴림;" stretch="fit"/>
+        <Combo id="cmb_search_court" taborder="1" left="8" top="63" height="21" innerdataset="@ds_court" codecolumn="codeno" datacolumn="codenm" width="214" index="-1" style="itemheight:22;itemcolor:#333333ff;itemborder:1 solid transparent ;itempadding:0 3 0 6;background:#ffffffff;color:#333333ff;font:9 굴림;"/>
+        <Button id="btn_court_input" taborder="2" text="조회" left="224" top="63" height="21" width="52" style="background:lightskyblue;border:0 none #999999ff ;color:white;font:bold 9 굴림;" onclick="btn_court_input_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_court" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeno" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************************************
+* SYSTEM      : 넥사크로플랫폼 PackageB
+* BUSINESS    : 넥사크로플랫폼 PackageB
+* FILE NAME   : POP_COURT_SEARCH
+* PROGRAMMER  : BOK BADA
+* DATE        : 2017/10/25 ~ 2017/11/03
+* DESCRIPTION : SingleDetail
+*------------------------------------------------------------------
+* MODIFY DATE   PROGRAMMER			DESCRIPTION
+*------------------------------------------------------------------
+* 
+*------------------------------------------------------------------
+***********************************************************************************/
+
+/***********************************************************************************
+* Common Library
+***********************************************************************************/
+include "Lib::common.xjs";
+
+/***********************************************************************************
+* Global/Local Variable
+***********************************************************************************/
+
+
+/***********************************************************************************
+* Form Event
+***********************************************************************************/
+this.POP_COURT_SEARCH_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//this.code_select();
+	//var str=0;
+	
+	this.ds_court.clearData();
+	this.gf_codeComListLoad("searchCourt",  "ds_court",  "Y", "000", "선택", "transaction_callback", "A01"); //법원공통코드
+}
+
+
+/********************************************************************************
+ * Desc		: callback함수
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	
+	if(nErrorCode < 0)
+	{
+		alert(sSvcId + " : " + sErrorMsg);
+		return false;
+	}
+	switch(sSvcId){
+		case "searchCourt":
+			this.cmb_search_court.set_index(0);
+			break;
+		default:
+			break;
+	}
+}
+
+
+/********************************************************************************
+ * Desc		: 법원 조회 검색버튼 ONCLICK EVENT
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.btn_court_input_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	//var flag="true";
+	if(this.cmb_search_court.value==null){
+		flag="false";
+		alert("해당 법원을 선택하세요");
+	}else{
+		var v_RtnVal = this.cmb_search_court.value;
+		
+	}
+	/*
+	if(flag){
+		// 소송 관리 신청 법원
+		if(divCommonData==1){
+			alert("Test:"+this.cmb_search_court.Value);
+			this.parent.cmb_search_court.Value=this.cmb_search_court.Value;
+		// 심급 관리 신청 법원
+		}else if(divCommonData==2){
+			this.parent.cmb_court_exe.Value=this.cmb_search_court.Value;
+		}
+	}
+	*/
+	//this.divCommonData="";
+	this.close(v_RtnVal);
+	//trace(v_RtnVal);
+}]]></Script>
+  </Form>
+</FDL>

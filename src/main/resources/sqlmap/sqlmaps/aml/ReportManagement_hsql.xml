@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+	<typeAlias alias="egovMap"
+		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+
+	<!-- 공통코드 -->
+	<select id="aml.reportManagementDAO.loadCommonCodes"
+		parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT CODE_NO AS CODE
+		, CODE_NAME AS VALUE
+		FROM AML_COMMON_CODE_DETAIL
+		WHERE CLASS_CODE = #classCode#
+	</select>
+	
+	 <!-- 보고대상자 및 거래 조회 -->
+	 <select id="aml.reportManagementDAO.loadreportdeal" parameterClass="java.util.HashMap" resultClass="egovMap">
+	 SELECT    DD.ACC_NO
+            ,  DD.DEAL_DATE
+            ,  DD.DEAL_MOUNT
+            ,  CS.CUST_NO
+            ,  CS.EMP_NAME
+            ,  CS.REAL_NAME_NO
+            ,  DT.ALERT_GROUP_NO
+            ,  DD.DEAL_SERIAL_NO
+            ,  '' AS DEAL_CHAN_CODE
+            ,  '' AS OCCUR_TYPE_CODE
+            ,  '' AS DEAL_METHOD_CODE
+            ,  '' AS DEAL_TYPE_CODE
+            ,  '' AS DS_BANK_CODE
+            ,  '' AS DS_GOODS_CODE
+            ,  '' AS HEAD_SUSP_SCORE
+            ,  '' AS BRANCH_SUSP_SCORE
+            ,  DD.DEAL_DATE AS DEAL_STD
+            ,  DD.DEAL_DATE AS DEAL_EDD
+            ,  DECODE(DD.DEWI_TYPE_CODE,'0001','1','0') AS DEPO_COUNT
+            ,  DECODE(DD.DEWI_TYPE_CODE,'0001','0','1') AS WITH_COUNT
+            ,  '1' AS DEAL_COUNT
+            ,  '' AS HEAD_SUSP_SCORE
+            ,  '' AS BRANCH_SUSP_SCORE
+     FROM      AML_RULE_ALERT_DETAIL DT
+     		 , AML_RULE_ALERT_DEAL_DETAIL DD
+             , AML_RULE_ALERT_RESULT AR
+     		 , AML_CUST_INFO CS
+    WHERE      CS.CUST_NO = DT.CUST_NO
+      AND      DT.ALERT_GROUP_NO = AR.ALERT_GROUP_NO
+      AND      DT.ALERT_GROUP_NO = DD.ALERT_GROUP_NO
+      AND      DD.ALERT_GROUP_NO = #alertGroupNo#
+    
+	</select> 
+	
+	<!-- 객관적 질의 조회 -->
+	<select id="aml.reportManagementDAO.loadQuery" parameterClass="java.util.HashMap" resultClass="egovMap">
+	 SELECT '' AS ALERT_GROUP_NO
+	 	 , T2.UPPER_CODE 
+	 	 , T2.DETAIL_CODE
+         , T2.DETAIL_NAME
+         , DECODE (T3.DETAIL_CODE, NULL, '0', '1') CH
+      FROM (SELECT B.UPPER_CODE
+                 , B.DETAIL_CODE
+                 , B.DETAIL_NAME
+              FROM AML_SUSP_DEAL_TYPE_UPPER_INFO A
+                 , AML_SUSP_DEAL_DETAIL B
+             WHERE A.UPPER_CODE = B.UPPER_CODE) T2 
+         , (SELECT UPPER_CODE
+                  ,DETAIL_CODE
+            FROM AML_STR_REPORT_OBJECT_MAP 
+            WHERE ALERT_GROUP_NO = #alertGroupNo# ) T3
+     WHERE T2.UPPER_CODE = T3.UPPER_CODE(+)
+       AND T2.DETAIL_CODE = T3.DETAIL_CODE(+)
+	</select>
+
+	<!-- 보고대상 입력 -->
+	<insert id="aml.reportManagementDAO.insertCust" parameterClass="java.util.HashMap">
+
+		INSERT INTO
+			AML_STR_REPORT_MST(
+								 DEAL_STD			         <!-- 거래시작일 -->
+								,DEAL_EDD 			         <!-- 거래 종료일 -->
+								,DEPO_COUNT			         <!-- 입금횟수 -->
+								,WITH_COUNT			         <!-- 출금횟수 -->
+								,DEAL_COUNT			         <!-- 거래건수 -->
+								,BRANCH_SUSP_SCORE	         <!-- 영업점 의심 점수 -->
+								,HEAD_SUSP_SCORE	         <!-- 본점 의심 점수 -->
+								,OPPI
+								,ALERT_GROUP_NO
+								
+		)VALUES(
+								 #dealStd#
+								,#dealEdd#
+								,#depoCount#
+								,#withCount#
+								,#dealCount# 
+								,#branchSuspScore#
+								,#headSuspScore#
+								,#oppi#
+								,#alertGroupNo#
+		)
+	</insert>
+
+	<!-- 보고서대상거래 입력 -->
+	<insert id="aml.reportManagementDAO.insertCust1" parameterClass="java.util.HashMap">
+			INSERT INTO 
+			AML_STR_REPORT_DEAL(
+                         ALERT_GROUP_NO
+                       , DEAL_SERIAL_NO
+                       , OCCUR_TYPE_CODE
+                       , DEAL_METHOD_CODE
+                       , DEAL_CHAN_CODE
+                       , DEAL_TYPE_CODE
+                       , INSTI_CODE
+                       , DEAL_GOODS_CODE
+      
+			)VALUES(
+                         #alertGroupNo#
+                       , #dealSerialNo# 
+                       , #occurTypeCode#
+                       , #dealMethodCode#
+                       , #dealChanCode#
+                       , #dealTypeCode#
+                       , #dsBankCode#
+                       , #dsGoodsCode#                        
+			)
+	</insert>
+
+	<!-- 객관적 질의 입력 -->
+	<insert id="aml.reportManagementDAO.insertQuery" parameterClass="java.util.HashMap">
+		INSERT INTO 
+		       AML_STR_REPORT_OBJECT_MAP(
+		       		 UPPER_CODE
+		       		,DETAIL_CODE
+		       		,ALERT_GROUP_NO
+		    )VALUES(		
+			      	 #upperCode#
+			        ,#detailCode#
+			        ,#alertGroupNo#
+			     )
+	</insert>
+	<delete id="aml.reportManagementDAO.deleteQuery" parameterClass="java.util.HashMap">
+		DELETE 
+	      FROM      AML_STR_REPORT_OBJECT_MAP
+	     WHERE	    ALERT_GROUP_NO = #alertGroupNo#
+	
+	</delete>
+	
+	<!-- 객관적 질의 수정 -->
+	<update id="aml.reportManagementDAO.updateQuery" parameterClass="java.util.HashMap">
+	
+	INSERT INTO 
+		       AML_STR_REPORT_OBJECT_MAP(
+		       		 UPPER_CODE
+		       		,DETAIL_CODE
+		       		,ALERT_GROUP_NO
+		    )VALUES(		
+			      	 #upperCode#
+			        ,#detailCode#
+			        ,#alertGroupNo#
+			     )
+	
+	</update>
+
+</sqlMap>

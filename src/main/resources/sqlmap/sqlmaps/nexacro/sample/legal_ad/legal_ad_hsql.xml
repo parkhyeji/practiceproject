@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="legal_ad">
+
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="LegalAdListVo" type="nexacro.sample.vo.legal_adv.LegalAdListVo" />
+	
+	<select id="legalAd.LegalAdDAO.selectLegalAdDetail" resultClass="egovMap"
+		parameterClass="java.util.HashMap">
+		<![CDATA[
+			SELECT	
+				rownum,T3.*
+			FROM	
+				(SELECT	
+					T1.LEGALADV_LAW_ADV_REQ_NO    
+		            ,T1.LEGALADV_OPEN_WTR    
+		            ,T1.LEGALADV_REQ_DEPT_CODE    
+		            ,T1.LEGALADV_REQ_MGR_CODE    
+		            ,T1.LEGALADV_REQ_DATE    
+		            ,T1.LEGALADV_ADV_TIT    
+		            ,T1.LEGALADV_FACT_RELA    
+		            ,T1.LEGALADV_QUES_ISSU    
+		            ,T1.LEGALADV_ETC    
+		            ,T1.LEGALADV_LAW_ADV_CODE    
+		            ,T1.LEGALADV_OUT_REQ_WTR    
+		            ,T1.LEGALADV_REVI_DAY    
+		            ,T1.LEGALADV_REP_DEPT_CODE    
+		            ,T1.LEGALADV_REP_MGR_CODE    
+		            ,T1.LEGALADV_REP_DATE    
+		            ,T1.LEGALADV_REP_CONT    
+		            ,T1.LEGALADV_REP_TIT    
+		            ,T1.LEGALADV_REP_WTR    
+		            ,T1.LEGALADV_ETC_REP_POIN    
+		            ,T1.LEGALADV_OUT_REQ_TIT    
+		            ,T1.LEGALADV_OUT_REQ_LYRID    
+		            ,T1.LEGALADV_OUT_REQ_REPDATE    
+		            ,T1.LEGALADV_OUT_REQ_DATE    
+		            ,T1.LEGALADV_OUT_REQ_FACT    
+		            ,T1.LEGALADV_OUT_REQ_QUES    
+		            ,T1.LEGALADV_OUT_REQ_REQ
+		            ,T2.ADV_TIT
+		            ,(
+		             	SELECT	LEGAL_OFFICIALINFO_LYR_NAME 
+		                  FROM	TAB_LEGAL_OFFICIALINFO
+		              	 WHERE	LEGAL_OFFICIALINFO_RELA_NO = T1.LEGALADV_OUT_REQ_LYRID
+		             ) LEGAL_OFFICIALINFO_LYR_NAME
+		            ,(
+		            	SELECT	INSA_NAME 
+		                  FROM	TAB_INSA
+		              	 WHERE	INSA_SABUN = T1.LEGALADV_REQ_MGR_CODE
+		             ) REQ_MGR   
+		            ,(
+		            	SELECT	INSA_NAME 
+		                  FROM	TAB_INSA
+		              	 WHERE	INSA_SABUN = T1.LEGALADV_REP_MGR_CODE
+		             ) REP_MGR
+		             , LEGALADV_OUT_REP_DATE
+		             , LEGALADV_OUT_REP_CONT
+		             , LEGALADV_OUT_REP_TIT
+		             , LEGALADV_OUT_REP_WTR
+		             , LEGALADV_OUT_ETC_REP_POIN
+			 	FROM (
+				 		SELECT	LEGALADV_LAW_ADV_REQ_NO
+				 				,LEGALADV_ADV_TIT ADV_TIT
+					   	  FROM	TAB_LEGALADV
+					     WHERE	LEGALADV_OUT_REQ_WTR  = 'N' 
+					   	UNION ALL
+					   	SELECT	LEGALADV_LAW_ADV_REQ_NO
+					   			,LEGALADV_OUT_REQ_TIT       
+					      FROM	TAB_LEGALADV
+					     WHERE	LEGALADV_OUT_REQ_WTR = 'Y'
+					  ) T2
+					  ,TAB_LEGALADV T1
+				WHERE 1=1
+				AND T2.LEGALADV_LAW_ADV_REQ_NO = T1.LEGALADV_LAW_ADV_REQ_NO
+			
+			]]>
+			
+			<isNotNull property="legaladvLawAdvReqNo">
+					<isNotEmpty property="legaladvLawAdvReqNo" prepend="AND"> <!--prepend(이음) 조건 -->
+						<![CDATA[
+							T1.LEGALADV_LAW_ADV_REQ_NO Like #legaladvLawAdvReqNo# || '%'
+						]]>
+					</isNotEmpty>
+			</isNotNull>
+			
+			<isNotNull property="legaladvReqDeptCode">
+					<isNotEmpty property="legaladvReqDeptCode" prepend="AND"> <!--prepend(이음) 조건 -->
+						<![CDATA[
+							T1.LEGALADV_REQ_DEPT_CODE = #legaladvReqDeptCode#
+						]]>
+					</isNotEmpty>
+			</isNotNull>
+			
+			<isNotNull property="legaladvReqDate1">
+					<isNotEmpty property="legaladvReqDate1" prepend="AND"> <!--prepend(이음) 조건 -->
+						<![CDATA[
+							T1.LEGALADV_REQ_DATE >= #legaladvReqDate1#
+						]]>
+					</isNotEmpty>
+			</isNotNull>			
+			<isNotNull property="legaladvReqDate2">
+					<isNotEmpty property="legaladvReqDate2" prepend="AND"> <!--prepend(이음) 조건 -->
+						<![CDATA[
+							T1.LEGALADV_REQ_DATE <= #legaladvReqDate2#
+						]]>
+					</isNotEmpty>
+			</isNotNull>
+			<isNotNull property="legaladvRepWtr">
+					<isNotEmpty property="legaladvRepWtr" prepend="AND"> <!--prepend(이음) 조건 -->
+						<![CDATA[
+							T1.LEGALADV_REP_WTR = #legaladvRepWtr#
+						]]>
+					</isNotEmpty>
+			</isNotNull>
+			<isNotNull property="legaladvLawAdvCode">
+					<isNotEmpty property="legaladvLawAdvCode" prepend="AND"> <!--prepend(이음) 조건 -->
+						<![CDATA[
+							T1.LEGALADV_LAW_ADV_CODE = #legaladvLawAdvCode#
+						]]>
+					</isNotEmpty>
+			</isNotNull>
+			<isNotNull property="legaladvOutReqWtr">
+					<isNotEmpty property="legaladvOutReqWtr" prepend="AND"> <!--prepend(이음) 조건 -->
+						<![CDATA[
+							T1.LEGALADV_OUT_REQ_WTR = #legaladvOutReqWtr#
+						]]>
+					</isNotEmpty>
+			</isNotNull>
+									
+			<![CDATA[
+				ORDER BY	T1.LEGALADV_LAW_ADV_REQ_NO DESC ) T3
+			]]>
+			
+	</select>
+	
+	<select id="legalAd.LegalAdDAO.checkMgrAvailable" parameterClass="string"
+		resultClass="int">
+		select count(*) from tab_insa where insa_name=#mgr#
+	</select>
+		
+	<insert id="legalAd.LegalAdDAO.insertLegalAdReq" parameterClass="LegalAdListVo">
+		<selectKey keyProperty="legaladvLawAdvReqNo" resultClass="string">
+			<![CDATA[
+	            SELECT /*+ INDEX_DESC(LEGALADV_LAW_ADV_REQ_NO) */ 
+	                    DECODE(SUBSTR(MAX(LEGALADV_LAW_ADV_REQ_NO),1,8) 
+	               	   ,TO_CHAR(SYSDATE ,'YYYYMMDD'), MAX(LEGALADV_LAW_ADV_REQ_NO) + 1
+	                   ,TO_CHAR(SYSDATE,'YYYYMMDD') || '01') LEGALADV_LAW_ADV_REQ_NO            
+	            FROM TAB_LEGALADV
+	            WHERE LEGALADV_LAW_ADV_REQ_NO < TO_CHAR(SYSDATE,'YYYYMMDD') || '99'
+	            AND ROWNUM = 1
+		    ]]>
+			
+		</selectKey>
+		<![CDATA[
+			INSERT	INTO  TAB_LEGALADV (
+					LEGALADV_LAW_ADV_REQ_NO															
+					,LEGALADV_REQ_DEPT_CODE														
+					,LEGALADV_OPEN_WTR															
+					,LEGALADV_LAW_ADV_CODE													
+					,LEGALADV_REQ_MGR_CODE														
+					,LEGALADV_REQ_DATE															
+					,LEGALADV_ADV_TIT																
+					,LEGALADV_FACT_RELA															
+					,LEGALADV_QUES_ISSU															
+					,LEGALADV_ETC																	
+					,LEGALADV_REP_WTR													
+					,LEGALADV_OUT_REQ_WTR														
+			) VALUES (
+			    	#legaladvLawAdvReqNo,jdbcType=VARCHAR#	
+					,#legaladvReqDeptCode,jdbcType=VARCHAR#		         							  
+					,#legaladvOpenWtr,jdbcType=VARCHAR#                  						      
+					,#legaladvLawAdvCode,jdbcType=VARCHAR#               						 
+					,(select insa_sabun 
+					  from tab_insa
+					  where insa_name=#reqMgr,jdbcType=VARCHAR#)               							     
+					,TO_CHAR(SYSDATE, 'YYYYMMDD')		                 							          
+					,#legaladvAdvTit,jdbcType=VARCHAR#                   							       
+					,#legaladvFactRela,jdbcType=VARCHAR#                 							      
+					,#legaladvQuesIssu,jdbcType=VARCHAR#                 							       
+					,#legaladvEtc,jdbcType=VARCHAR#                      							        
+					,'N'								                 							         
+					,'N'									                   
+		    ) 
+			]]>
+	</insert>
+		
+	<update id="legalAd.LegalAdDAO.updateLegalAdReq" parameterClass="LegalAdListVo">
+	<![CDATA[			
+			UPDATE	 TAB_LEGALADV
+			   SET	LEGALADV_REQ_DEPT_CODE		= #legaladvReqDeptCode,jdbcType=VARCHAR#			
+					,LEGALADV_OPEN_WTR			= #legaladvOpenWtr,jdbcType=VARCHAR#				
+					,LEGALADV_LAW_ADV_CODE 		= #legaladvLawAdvCode,jdbcType=VARCHAR#				
+					,LEGALADV_REQ_MGR_CODE 		= #legaladvReqMgrCode,jdbcType=VARCHAR#				
+					,LEGALADV_REQ_DATE 			= #legaladvReqDate,jdbcType=VARCHAR#				
+					,LEGALADV_ADV_TIT 			= #legaladvAdvTit,jdbcType=VARCHAR#		
+					,LEGALADV_FACT_RELA			= #legaladvFactRela,jdbcType=VARCHAR#	
+					,LEGALADV_QUES_ISSU			= #legaladvQuesIssu,jdbcType=VARCHAR#	
+					,LEGALADV_ETC 				= #legaladvEtc,jdbcType=VARCHAR#						   
+			 WHERE	LEGALADV_LAW_ADV_REQ_NO	 	= #legaladvLawAdvReqNo,jdbcType=VARCHAR#				
+		]]>
+	</update>
+	
+	<delete id="legalAd.LegalAdDAO.deleteLegalAdList" parameterClass="LegalAdListVo">
+	<![CDATA[
+		DELETE
+		FROM	TAB_LEGALADV
+		WHERE	LEGALADV_LAW_ADV_REQ_NO	 	= #legaladvLawAdvReqNo,jdbcType=VARCHAR#	
+		]]>
+	</delete>
+	
+	<delete id="legalAd.LegalAdDAO.deleteLegalAdCostList" parameterClass="LegalAdListVo">
+	<![CDATA[
+		DELETE
+		FROM	TAB_LEGALADV_COST
+		WHERE	LEGALADV_COST_LAWADV_REQNO	 	= #legaladvLawAdvReqNo,jdbcType=VARCHAR#	
+		]]>
+	</delete>
+	
+	<update id="legalAd.LegalAdDAO.updateLegalAdMandateReq" parameterClass="LegalAdListVo">	
+		<![CDATA[			
+			UPDATE	 TAB_LEGALADV
+			   SET	 LEGALADV_OUT_REQ_REPDATE 	= #legaladvOutReqRepdate,jdbcType=VARCHAR# 	  
+					,LEGALADV_OUT_REQ_LYRID 	= #legaladvOutReqLyrid,jdbcType=VARCHAR#
+					,LEGALADV_OUT_REQ_TIT 		= #legaladvOutReqTit,jdbcType=VARCHAR#	
+					,LEGALADV_OUT_REQ_FACT 		= #legaladvOutReqFact,jdbcType=VARCHAR#	
+					,LEGALADV_OUT_REQ_QUES 		= #legaladvOutReqQues,jdbcType=VARCHAR#		 				
+					,LEGALADV_OUT_REQ_REQ 		= #legaladvOutReqReq,jdbcType=VARCHAR#
+					,LEGALADV_OUT_REQ_DATE 		= TO_CHAR(SYSDATE, 'YYYYMMDD')
+					,LEGALADV_OUT_REQ_WTR 		= 'Y'
+					,LEGALADV_OUT_REP_WTR 		= 'N'		   
+			 WHERE	LEGALADV_LAW_ADV_REQ_NO	 	= #legaladvLawAdvReqNo,jdbcType=VARCHAR#			
+		]]>
+	</update>
+	
+	<select id="legalAd.LegalAdDAO.selectCost" resultClass="egovMap"
+		parameterClass="java.util.HashMap">
+		<![CDATA[
+			SELECT 	LEGALADV_COST_LAWADV_REQNO	
+					,LEGALADV_COST_LAWADV_SEQ	
+					,LEGALADV_COST_REQ_COST	
+					,LEGALADV_COST_STAX	
+					,LEGALADV_COST_CLAMSUM_CHG	
+					,LEGALADV_COST_REP_CONT	
+		      FROM	TAB_LEGALADV_COST
+		      WHERE 1=1	
+		      ]]>
+			  <isNotNull property="legaladvCostLawadvReqno">
+			  	 <isNotEmpty property="legaladvCostLawadvReqno" prepend="AND"> 
+					LEGALADV_COST_LAWADV_REQNO = #legaladvCostLawadvReqno#
+			  	 </isNotEmpty>
+			  </isNotNull>
+			<![CDATA[
+			  ORDER BY	LEGALADV_COST_LAWADV_SEQ
+			]]>
+	</select>
+	
+	<update id="legalAd.LegalAdDAO.updateLegalAdRep" parameterClass="LegalAdListVo">	
+		<!-- <![CDATA[ -->			
+			UPDATE	TAB_LEGALADV
+			   SET	LEGALADV_REVI_DAY 			= TO_CHAR(SYSDATE, 'YYYYMMDD')			   			
+					,LEGALADV_REP_DEPT_CODE		= #legaladvRepDeptCode,jdbcType=VARCHAR#			
+					,LEGALADV_REP_MGR_CODE 		= (select insa_sabun 
+												   from tab_insa
+												   where insa_name=#repMgr,jdbcType=VARCHAR#)				
+					
+					<isEqual property="legaladvOutReqWtr" compareValue="N">
+					,LEGALADV_REP_DATE 			= TO_CHAR(SYSDATE, 'YYYYMMDD')						
+					,LEGALADV_REP_WTR 			= 'Y'												
+					,LEGALADV_REP_TIT 			= #legaladvRepTit,jdbcType=VARCHAR#					
+					,LEGALADV_REP_CONT 			= #legaladvRepCont,jdbcType=VARCHAR#				
+					,LEGALADV_ETC_REP_POIN		= #legaladvEtcRepPoin,jdbcType=VARCHAR#
+					</isEqual>
+					<isEqual property="legaladvOutReqWtr" compareValue="Y">
+					,LEGALADV_REP_DATE 			= TO_CHAR(SYSDATE, 'YYYYMMDD')						
+					,LEGALADV_REP_WTR 			= 'Y'												
+					,LEGALADV_REP_TIT 			= '==외부자문으로 회신되었습니다=='
+					,LEGALADV_REP_CONT 			= '==외부자문으로 회신되었습니다=='				
+					,LEGALADV_ETC_REP_POIN		= ''
+					,LEGALADV_OUT_REP_DATE 		= TO_CHAR(SYSDATE, 'YYYYMMDD')						
+					,LEGALADV_OUT_REP_WTR 		= 'Y'												
+					,LEGALADV_OUT_REP_TIT 		= #legaladvRepTit,jdbcType=VARCHAR#					
+					,LEGALADV_OUT_REP_CONT 		= #legaladvRepCont,jdbcType=VARCHAR#				
+					,LEGALADV_OUT_ETC_REP_POIN	= #legaladvEtcRepPoin,jdbcType=VARCHAR#
+					</isEqual>			
+			 WHERE	LEGALADV_LAW_ADV_REQ_NO	 	= #legaladvLawAdvReqNo,jdbcType=VARCHAR#				
+		<!-- ]]> -->
+	</update>
+	
+	<insert id="legalAd.LegalAdDAO.insertCost" parameterClass="LegalAdListVo">
+		<selectKey keyProperty="legaladvCostLawadvSeq" resultClass="string">
+			<![CDATA[
+	            SELECT /*+ INDEX_DESC(LEGALADV_COST_LAWADV_SEQ) */ 
+	                    DECODE(SUBSTR(MAX(LEGALADV_COST_LAWADV_SEQ),1,8) 
+	               	   ,TO_CHAR(SYSDATE ,'YYYYMMDD'), MAX(LEGALADV_COST_LAWADV_SEQ) + 1
+	                   ,TO_CHAR(SYSDATE,'YYYYMMDD') || '01') LEGALADV_COST_LAWADV_SEQ            
+	            FROM TAB_LEGALADV_COST
+	            WHERE LEGALADV_COST_LAWADV_SEQ < TO_CHAR(SYSDATE,'YYYYMMDD') || '99'
+	            AND ROWNUM = 1
+		    ]]>
+			
+		</selectKey>
+		<![CDATA[
+			INSERT	INTO  TAB_LEGALADV_COST (
+				 	LEGALADV_COST_LAWADV_REQNO  
+				 	,LEGALADV_COST_LAWADV_SEQ
+					,LEGALADV_COST_REQ_COST
+					,LEGALADV_COST_STAX
+					,LEGALADV_COST_CLAMSUM_CHG
+					,LEGALADV_COST_REP_CONT
+			) VALUES (
+				 	#legaladvCostLawadvReqno#
+				  	,#legaladvCostLawadvSeq#
+					,#legaladvCostReqCost#
+					,#legaladvCostStax#
+					,#legaladvCostReqCost# + #legaladvCostStax#
+					,#legaladvCostRepCont#
+			)  
+			]]>
+	</insert>
+		
+	<update id="legalAd.LegalAdDAO.updateCost" parameterClass="LegalAdListVo">	
+		<![CDATA[			
+			UPDATE	TAB_LEGALADV_COST
+			   SET	LEGALADV_COST_REQ_COST		= #legaladvCostReqCost#
+				   	,LEGALADV_COST_STAX			= #legaladvCostStax#	
+				   	,LEGALADV_COST_CLAMSUM_CHG	= #legaladvCostClamsumChg#	
+				   	,LEGALADV_COST_REP_CONT		= #legaladvCostRepCont#		
+			 WHERE	LEGALADV_COST_LAWADV_REQNO	= #legaladvCostLawadvReqno# 
+			  	AND	LEGALADV_COST_LAWADV_SEQ	= #legaladvCostLawadvSeq#		
+		]]>
+	</update>
+	
+	<delete id="legalAd.LegalAdDAO.deleteCost" parameterClass="LegalAdListVo">
+	<![CDATA[
+			DELETE	
+			  FROM TAB_LEGALADV_COST
+			 WHERE	1=1
+		]]>
+		<isNotNull property="legaladvCostLawadvReqno">
+			<isNotEmpty property="legaladvCostLawadvReqno" prepend="AND">
+				LEGALADV_COST_LAWADV_REQNO = #legaladvCostLawadvReqno,jdbcType=VARCHAR#		
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="legaladvCostLawadvSeq">
+			<isNotEmpty property="legaladvCostLawadvSeq" prepend="AND">
+				LEGALADV_COST_LAWADV_SEQ = #legaladvCostLawadvSeq,jdbcType=VARCHAR#		
+			</isNotEmpty>
+		</isNotNull>
+	</delete>
+
+</sqlMap>

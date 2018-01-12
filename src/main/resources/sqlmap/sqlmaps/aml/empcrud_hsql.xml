@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	
+	<select id="aml.EmpCrudDAO.searchCust" resultClass="egovMap">
+		  SELECT EMP_NO           
+		       , EMP_NAME         
+		       , RESI_NO          
+		       , JOIN_DATE        
+		       , TEL_NO           
+		       , CEL_NO           
+		       , EMAIL            
+		       , ADDR             
+		       , REGI_DT          
+		       , REGI_ID          
+		       , MODI_DT          
+		       , MODI_ID          
+		       , USE_YN           
+		       , RETIRE_DATE      
+		       , REPORT_CHGED_YN  
+		       , POSI_NAME        
+		       , ZIP_CODE         
+		       , PWD
+		  FROM AML_EMP_INFO
+		 ORDER BY EMP_NO		 
+	</select>
+	
+	<insert id="aml.EmpCrudDAO.insertCust" parameterClass="java.util.HashMap">
+		INSERT INTO AML_EMP_INFO(
+		        EMP_NO           
+              , EMP_NAME         
+              , RESI_NO                
+              , TEL_NO           
+              , CEL_NO           
+              , EMAIL            
+              , ADDR             
+              , REGI_DT          
+              , REGI_ID                   
+              , USE_YN           
+              , RETIRE_DATE      
+              , REPORT_CHGED_YN  
+              , POSI_NAME                 
+              , PWD
+		)VALUES(
+		  (
+		   SELECT TO_CHAR(SYSDATE, 'YYYYMMDD')||
+		   		  LPAD((SELECT COUNT(*)+1
+		                  FROM AML_EMP_INFO
+		                 WHERE EMP_NO LIKE TO_CHAR(SYSDATE, 'YYYYMMDD') || '%')
+             			, 5, '0')
+ 		     FROM DUAL
+ 		  )
+              , #empName#
+              , #resiNo#
+              , #telNo#
+              , #celNo#
+              , #email#
+              , #addr#
+              , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+	          , 'ADMIN'
+              , 'Y'
+	          , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+	          , 'N'
+              , #posiName#
+              , '1234'
+               )
+	</insert>
+	
+	<update id="aml.EmpCrudDAO.updateCust" parameterClass="java.util.HashMap">
+		UPDATE AML_EMP_INFO
+		   SET EMP_NAME               = #empName#
+             , JOIN_DATE              = #joinDate#
+             , TEL_NO                 = #telNo#
+             , CEL_NO                 = #celNo#
+             , EMAIL                  = #email#
+             , ADDR                   = #addr#
+             , REGI_DT                = #regiDt#
+             , RETIRE_DATE            = #retireDate#
+             , POSI_NAME              = #posiName#
+             , RESI_NO                = #resiNo#
+		 WHERE EMP_NO				  = #empNo#
+	</update>
+	
+	<delete id="aml.EmpCrudDAO.deleteCust" parameterClass="java.util.HashMap">
+		DELETE FROM AML_EMP_INFO
+		 WHERE EMP_NO = #custNo#
+	</delete>
+	
+</sqlMap>

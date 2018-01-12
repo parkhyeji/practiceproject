@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="LawsuitNotiNo">
+
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    <typeAlias  alias="LawsuitNotiNoVO" type="nexacro.sample.service.lawsuit.vo.LawsuitNotiNoVO"/>
+
+    <!-- Sample resultObject -->
+    <resultMap id="lawsuitNotiNo" class="LawsuitNotiNoVO">
+        <result property="lawsuitNotiAdmNo" column="LAWSUIT_NOTI_ADM_NO" />
+        <result property="lawsuitNotiDate" column="LAWSUIT_NOTI_DATE" />
+        <result property="lawsuitNotiInstSepcode" column="LAWSUIT_NOTI_INST_SEPCODE" />
+        <result property="lawsuitNotiCortCode" column="LAWSUIT_NOTI_CORT_CODE" />
+        <result property="lawsuitNotiCaseNo" column="LAWSUIT_NOTI_CASE_NO" />
+        <result property="lawsuitNotiDfsDeg" column="LAWSUIT_NOTI_DFS_DEG" />
+        <result property="lawsuitNotiDfsDate" column="LAWSUIT_NOTI_DFS_DATE" />
+        <result property="lawsuitNotiPlaName" column="LAWSUIT_NOTI_PLA_NAME" />
+        <result property="lawsuitNotiPlaEtcNo" column="LAWSUIT_NOTI_PLA_ETC_NO" />
+        <result property="lawsuitNotiDefName" column="LAWSUIT_NOTI_DEF_NAME" />
+        <result property="lawsuitNotiDefEtcNo" column="LAWSUIT_NOTI_DEF_ETC_NO" />
+        <result property="lawsuitNotiCont" column="LAWSUIT_NOTI_CONT" />
+        
+    </resultMap>
+    
+     
+   
+ 	<select id="lawsuitNotiNoDAO.selectLawsuitNotiNoVOList" parameterClass="LawsuitNotiNoVO" resultMap="lawsuitNotiNo">
+            SELECT
+                A.LAWSUIT_NOTI_ADM_NO AS LAWSUIT_NOTI_ADM_NO, 
+                A.LAWSUIT_NOTI_DATE AS LAWSUIT_NOTI_DATE, 
+                A.LAWSUIT_NOTI_INST_SEPCODE AS LAWSUIT_NOTI_INST_SEPCODE, 
+                A.LAWSUIT_NOTI_CORT_CODE AS LAWSUIT_NOTI_CORT_CODE, 
+                A.LAWSUIT_NOTI_CASE_NO AS LAWSUIT_NOTI_CASE_NO, 
+                A.LAWSUIT_NOTI_DFS_DEG AS LAWSUIT_NOTI_DFS_DEG,
+                A.LAWSUIT_NOTI_DFS_DATE AS LAWSUIT_NOTI_DFS_DATE,
+                A.LAWSUIT_NOTI_PLA_NAME AS LAWSUIT_NOTI_PLA_NAME,
+                A.LAWSUIT_NOTI_PLA_ETC_NO AS LAWSUIT_NOTI_PLA_ETC_NO,
+                A.LAWSUIT_NOTI_DEF_NAME AS LAWSUIT_NOTI_DEF_NAME,
+                A.LAWSUIT_NOTI_DEF_ETC_NO AS LAWSUIT_NOTI_DEF_ETC_NO,
+                A.LAWSUIT_NOTI_CONT AS LAWSUIT_NOTI_CONT
+            FROM TAB_LAWSUIT_NOTI A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="searchKeyword">
+                    
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="1">
+                        LAWSUIT_NOTI_ADM_NO LIKE '%' || #searchKeyword# || '%'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="2">
+                        LAWSUIT_NOTI_CASE_NO LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="3">
+                        LAWSUIT_NOTI_PLA_NAME LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="4">
+                        LAWSUIT_NOTI_DEF_NAME LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="0">
+                        LAWSUIT_NOTI_ADM_NO LIKE '%' || #searchKeyword# || '%' 
+                        OR
+                        LAWSUIT_NOTI_CASE_NO LIKE '%' || #searchKeyword# || '%'
+                        OR
+                        LAWSUIT_NOTI_PLA_NAME LIKE '%' || #searchKeyword# || '%' 
+                        OR
+                        LAWSUIT_NOTI_DEF_NAME LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                </isNotNull>
+            </dynamic>
+    </select>
+     
+    
+</sqlMap>

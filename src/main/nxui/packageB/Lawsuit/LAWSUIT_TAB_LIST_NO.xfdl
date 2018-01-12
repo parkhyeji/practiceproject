@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="LAWSUIT_TAB_LIST_NO" classname="Work" inheritanceid="" position="absolute" titletext="New Form" left="0" width="344" top="0" height="186" onload="LAWSUIT_TAB_LIST_NO_onload" style="color:#333333ff;">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" text="소송담당자 등록" left="8" top="8" right="8" height="50" visible="true" style="background:cornflowerblue;color:white;align:center middle;font:bold 12 굴림;"/>
+        <Static id="Static00" taborder="7" left="8" top="60" right="8" height="88" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:#333333ff;align:center middle;"/>
+        <Static id="sta_01" taborder="8" left="14" top="65" right="14" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_04" taborder="9" text="소송담당자" left="14" top="65" width="31.98%" height="25" style="background:lavenderblush;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_02" taborder="10" left="14" top="89" right="14" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_05" taborder="11" left="14" top="113" right="14" height="28" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;" onclick="sta_05_onclick"/>
+        <Static id="sta_00" taborder="12" text="담당자부서" left="14" top="89" width="31.98%" height="25" style="background:lavenderblush;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_03" taborder="13" text="배정일자" left="14" top="113" width="31.98%" height="25" style="background:lavenderblush;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Button id="btn_mgr" taborder="2" text="검색" onclick="btn_mgr_onclick" cssclass="btn_WFSA_Search" left="77.91%" top="67" width="52" height="21" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 굴림;opacity:100;shadow:outer 0,0 0 gray;"/>
+        <Combo id="cmb_dept" taborder="3" innerdataset="@ds_dept" codecolumn="code" datacolumn="data" left="36.92%" top="92" width="39.83%" height="19" style="itemheight:22;itemcolor:#333333ff;itemborder:1 solid transparent ;itempadding:0 3 0 6;buttonsize:18;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;color:#333333ff;font:9 굴림;" onitemchanged="cmb_dept_onitemchanged"/>
+        <Button id="btn_insert" taborder="4" text="저장" onclick="btn_insert_onclick" cssclass="btn_WFSA_Search" right="63" bottom="11" width="52" height="21" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 굴림;opacity:100;shadow:outer 0,0 0 gray;"/>
+        <Button id="btn_close" taborder="6" text="닫기" onclick="btn_close_onclick" cssclass="btn_WFSA_Search" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 굴림;opacity:100;shadow:outer 0,0 0 gray;" width="52" right="8" bottom="11" height="21"/>
+        <Edit id="Edit00" taborder="15" left="36.92%" top="67" right="23.55%" height="21" style="font:9 굴림;"/>
+        <Calendar id="Calendar00" taborder="16" left="36.92%" top="117" right="23.84%" height="21" style="font:9 굴림;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_mgr2" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="lawsuitAdmNo" type="STRING" size="256"/>
+          <Column id="lawsuitMgrSeq" type="STRING" size="256"/>
+          <Column id="lawsuitMgrId" type="STRING" size="256"/>
+          <Column id="lawsuitMgrName" type="STRING" size="256"/>
+          <Column id="lawsuitMgrDeptCode" type="STRING" size="256"/>
+          <Column id="lawsuitMgrAsigDate" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dept" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_mgr" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="lawsuitAdmNo" type="STRING" size="256"/>
+          <Column id="lawsuitMgrSeq" type="STRING" size="256"/>
+          <Column id="lawsuitMgrId" type="STRING" size="256"/>
+          <Column id="lawsuitMgrName" type="STRING" size="256"/>
+          <Column id="lawsuitMgrDeptCode" type="STRING" size="256"/>
+          <Column id="lawsuitMgrAsigDate" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="cmb_dept" propid="value" datasetid="ds_mgr" columnid="lawsuitMgrDeptCode"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+
+var lawsuitTabListNo = this.getOwnerFrame().lawsuitTabListNo;
+
+/********************************************************************************
+ * Desc		: ON LOAD
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.LAWSUIT_TAB_LIST_NO_onload = function (obj:Form, e:LoadEventInfo)
+{
+	//trace("lawsuitAdmNo : "+lawsuitAdmNo);
+	this.ds_dept.clearData();
+
+	//this.gf_codeComListLoad("ds_dept",  "ds_dept",  "Y", "000", "선택", "fnCallback", "B01"); //담당자부서공통코드
+
+	this.Calendar00.set_value(this.gfn_Today());
+}
+
+
+/********************************************************************************
+ * Desc		: 검색버튼 클릭
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.btn_mgr_onclick = function (obj:Button,  e:ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	//B. 컴포넌트의 클라이언트 기준 X 좌표값을 스크린 기준 X 좌표값으로 바꾸는 메소드
+
+        	 var nTop = system.clientToScreenY(this, 10);
+        	
+        	 
+        	 var newChild = new ChildFrame;
+        	
+        	 newChild.init("LAWSUIT_CHAR"
+        					, "absolute", nLeft, nTop, null, null, null, null
+        					, "Lawsuit::LAWSUIT_CHAR.xfdl");
+        	
+        	newChild.set_openalign("center middle");
+        	
+        	newChild.set_dragmovetype("all");
+        	
+        	
+        	
+        	var variant = system.showModalWindow(newChild, "LAWSUIT_CHAR", this);//팝업 띄어줌
+        	//trace(variant);
+        	
+        	//var idx = variant.indexOf("&"); 
+
+            //var a = variant.substring(0, idx);
+  
+            //var b = variant.substring(idx+1);
+            
+            var idx = variant.split("&");
+            var date = idx[0];
+            var name = idx[1];
+            
+            //trace("name:"+name);
+            //trace("date:"+date);
+          	
+          	//this.ds_mgr.setColumn(0,"lawsuitMgrId",a);
+        	//this.ds_mgr.setColumn(0,"lawsuitMgrName",b);
+			
+			//trace(this.ds_mgr.getColumn(0,"lawsuitMgrId"));
+			//trace(this.ds_mgr.getColumn(0,"lawsuitMgrName"));
+			this.Edit00.set_value(name);
+			this.Calendar00.set_value(date);
+        	//this.cal_mgrdate.set_value(a);
+        	//trace(this.edt_mgrName.value);
+        	//trace(this.cal_mgrdate.value);
+
+}
+
+//this.modal_callback = function(sSvcId, variant){
+
+//}
+
+this.btn_insert_onclick = function (obj:Button,  e:ClickEventInfo)
+{
+	if(this.Edit00.text==""){
+		alert("소송담당자를 입력해주세요.");
+		return;
+	}
+	if(this.cmb_dept.value=="000"){
+		alert("담당자부서를 선택해주세요.");
+		this.cmb_dept.dropdown();
+		this.cmb_dept.setFocus();
+		return;
+	}
+	if(this.gfn_IsNull(this.Calendar00.value)==true){
+		alert("배정일자를 선택해주세요.");
+		this.cal_mgrdate.dropdown();
+		this.cal_mgrdate.setFocus();
+		return;
+	}
+	//trace(ds_mgr.saveXML());
+	var strSvcid="lawsuittablistnoModifyVO";
+	var strController="/lawsuit/lawsuittablistnoModifyVO.do";
+	var strParam="";
+	//trace(strParam);
+	this.gfn_transaction(this,strSvcid,strController,"ds_input=ds_mgr","ds_mgr=ds_mgr",strParam,"fnCallback");
+}
+
+this.btn_close_onclick = function (obj:Button,  e:ClickEventInfo)
+{
+	this.close();
+}
+
+this.fn_MgrSelect = function ()
+{
+	var strSvcid="LawsuitTabListNoSelectVO";
+	var strController="/lawsuit/LawsuitTabListNoSelectVO.do";
+	var strParam="lawsuitTabListNo="+nexacro.wrapQuote(lawsuitTabListNo);//소송관리번호
+	//trace(strParam);	
+   //select인 경우 받아옴
+	this.gfn_transaction(this,strSvcid,strController,"ds_mgr=ds_mgr","ds_mgr=ds_output",strParam,"fnCallback");
+}
+
+this.fnCallback = function (svcid, errcd, errmsg)
+{
+	switch(svcid)
+	{
+		case "lawsuittablistnoModifyVO" :
+			if(errcd==0){
+				alert("소송담당자가 등록되었습니다.");
+			}else{
+				alert(errmsg);
+			}
+			this.close();
+		break;
+		case "LawsuitTabListNoSelectVO" :
+			var mgrNo = this.ds_mgr.rowcount;
+			if(mgrNo == 0){//소송담당자 없을시
+				this.ds_mgr.copyData(this.ds_mgr2);
+				this.ds_mgr.addRow();
+				this.ds_mgr.setColumn(this.ds_mgr.rowposition,"lawsuitTabListNo", lawsuitTabListNo);
+				this.cmb_dept.index=0;
+			}
+		break;
+		case "ds_dept" :
+			//trace(ds_dept.saveXML());
+			//ds_dept.deleteRow(0);
+			this.cmb_dept.index=0;
+			//trace(ds_dept.saveXML());
+			if(lawsuitTabListNo==null)
+			{
+				alert("소송관리번호를 선택하세요.");
+				this.close();
+			}
+			else
+			{
+				this.fn_MgrSelect();
+			}
+		break;
+	}
+}
+this.cmb_dept_onitemchanged = function (obj:Combo, e:ItemChangeEventInfo)
+{
+this.ds_mgr.setColumn(0,"lawsuitMgrDeptCode",e.postvalue);
+}
+
+]]></Script>
+  </Form>
+</FDL>

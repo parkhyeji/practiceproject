@@ -1,0 +1,669 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="report" classname="report" left="0" top="0" width="1024" height="862" titletext="New Form" style="border:1 solid #808080ff ;" onload="report_onload">
+    <Layouts>
+      <Layout>
+        <Button id="aml_search" taborder="0" text="조회" left="64.16%" top="64" right="25.78%" height="30" onclick="btn_search_onclick"/>
+        <Button id="aml_save" taborder="1" text="저장" left="74.9%" top="64" right="15.04%" height="30" onclick="btn_save_onclick"/>
+        <Div id="Div00" taborder="2" text="STR 기본 정보" left="4.39%" top="98" right="14.75%" height="31" style="border:1 solid #808080ff ;">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+        <Div id="Div01" taborder="3" text="보고기관에 관한 정보" left="4.39%" top="127" right="14.75%" height="35" style="border:1 solid black ;"/>
+        <ImageViewer id="ImageViewer00" taborder="5" text="STR 보고서 작성" left="4.3%" top="20" right="15.04%" height="36" onclick="ImageViewer00_onclick" style="background:aquamarine;color:black;align:left;"/>
+        <Edit id="Edit00" taborder="6" left="13.77%" top="171" right="45.41%" height="29" oneditclick="Edit00_oneditclick"/>
+        <Edit id="Edit01" taborder="7" left="13.87%" top="204" right="70.8%" height="30"/>
+        <Edit id="Edit03" taborder="9" left="69.43%" top="204" right="14.84%" height="28"/>
+        <Edit id="Edit04" taborder="10" left="69.34%" top="171" right="14.94%" height="29"/>
+        <Edit id="Edit02" taborder="16" left="39.55%" top="204" right="45.51%" height="30"/>
+        <Static id="Static00" taborder="17" text="문서번호" left="4.69%" top="171" right="86.43%" height="28" style="border:1 solid #808080ff ;align:center middle;" onclick="Static00_onclick"/>
+        <Static id="Static01" taborder="18" text="보고책임자명" left="4.69%" top="205" right="86.43%" height="28" style="border:1 solid #808080ff ;align:center middle;"/>
+        <Static id="Static02" taborder="19" text="보고담당자명" left="29.69%" top="205" right="60.64%" height="29" style="border:1 solid #808080ff ;align:center middle;"/>
+        <Static id="Static03" taborder="20" text="보고기관명" left="55.37%" top="172" right="30.96%" height="28" style="border:1 solid #808080ff ;align:center middle;" onclick="Static03_onclick"/>
+        <Static id="Static04" taborder="21" text="보고담당자전화번호" left="55.27%" top="205" right="30.76%" height="28" style="border:1 solid #808080ff ;align:center middle;"/>
+        <Tab id="Tab00" taborder="23" left="4.2%" top="259" right="14.75%" height="564" tabindex="0" scrollbars="autoboth" style="background:#c0c0c0ff;">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="보고대상자">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" useinputpanel="false" left="1.21%" top="11" right="1.33%" height="106" binddataset="ds_list">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="140"/>
+                          <Column size="127"/>
+                          <Column size="152"/>
+                          <Column size="160"/>
+                          <Column size="79"/>
+                          <Column size="134"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="고객명"/>
+                          <Cell col="1" text="고객구분"/>
+                          <Cell col="2" text="생년월일"/>
+                          <Cell col="3" text="국적코드"/>
+                          <Cell col="4" text="성별"/>
+                          <Cell col="5" text="실명번호구분"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:empName"/>
+                          <Cell col="1" text="bind:custTypeCode"/>
+                          <Cell col="2" text="bind:birth"/>
+                          <Cell col="3" text="bind:nationCode"/>
+                          <Cell col="4" displaytype="normal" text="bind:genderTypeCode"/>
+                          <Cell col="5" displaytype="normal" text="bind:realNameCode"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Static id="Static00" taborder="1" left="1.6%" top="125" right="1.1%" height="437" style="background:navajowhite;"/>
+                  <Static id="Static01" taborder="2" text="*고객번호" left="2.45%" top="131" right="84.42%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static02" taborder="3" text="*성별" left="2.45%" top="166" right="84.42%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static03" taborder="4" text="*실명번호 구분" left="2.45%" top="201" right="84.42%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static04" taborder="5" text="여권번호" left="2.45%" top="234" right="84.42%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static05" taborder="6" text="전화번호" left="2.45%" top="267" right="84.42%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static06" taborder="7" text="직장명" left="2.45%" top="300" right="84.42%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static07" taborder="8" text="전화번호(직장)" left="2.45%" top="334" right="84.42%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static08" taborder="9" text="*우변번호(자택)" left="2.45%" top="368" right="84.42%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static09" taborder="10" text="우편번호(직장)" left="2.45%" top="403" right="84.42%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static10" taborder="11" text="*고객명" left="34.36%" top="131" right="52.52%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static11" taborder="12" text="*국적코드" left="34.36%" top="166" right="52.52%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static12" taborder="13" text="*실명번호" left="34.36%" top="201" right="52.52%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static13" taborder="14" text="고액자산가여부" left="34.36%" top="234" right="52.52%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static14" taborder="15" text="핸드폰번호" left="34.36%" top="267" right="52.52%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static15" taborder="16" text="부서명" left="34.36%" top="300" right="52.52%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static17" taborder="18" text="*주소(자택)" left="34.36%" top="370" right="52.52%" height="30" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static18" taborder="19" text="상세주소(저택)" left="34.36%" top="404" right="52.52%" height="30" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static19" taborder="20" text="*생년월일" left="65.22%" top="131" right="21.62%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static20" taborder="21" text="*직업구분" left="65.22%" top="166" right="21.62%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static21" taborder="22" text="실명조합번호" left="65.22%" top="201" right="21.62%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static23" taborder="24" text="대표자명" left="65.28%" top="237" right="21.6%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static24" taborder="25" text="직위" left="65.28%" top="270" right="21.6%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static25" taborder="26" text="사업자등록번호" left="34.48%" top="335" right="52.39%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static26" taborder="27" text="주소(직장)" left="34.23%" top="438" right="52.52%" height="30" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static27" taborder="28" text="상세주소(직장)" left="34.23%" top="469" right="52.52%" height="30" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Edit id="edt_custNum" taborder="29" left="16.43%" top="132" right="66.55%" height="30"/>
+                  <Edit id="edt_birth" taborder="53" left="79.23%" top="132" right="3.02%" height="29"/>
+                  <Edit id="edt_chargeName" taborder="56" left="79.26%" top="238" right="3.07%" height="29"/>
+                  <Edit id="edt_position" taborder="57" left="79.39%" top="272" right="2.94%" height="29"/>
+                  <Edit id="edt_corRegNum" taborder="58" left="47.98%" top="336" right="35.34%" height="29"/>
+                  <Combo id="com_jobcode" taborder="59" left="79.35%" top="169" right="3.14%" height="27" codecolumn="code" datacolumn="value" innerdataset="@ds_jobcode"/>
+                  <Combo id="com_realnamenum" taborder="60" left="79.47%" top="204" right="3.02%" height="27" codecolumn="code" datacolumn="value" innerdataset="@ds_realnamenum"/>
+                  <Edit id="edt_ppNum" taborder="61" left="16.43%" top="235" right="66.55%" height="30"/>
+                  <Edit id="edt_telNo" taborder="62" left="16.43%" top="267" right="66.55%" height="30"/>
+                  <Edit id="edt_jobName" taborder="63" left="16.43%" top="300" right="66.55%" height="30"/>
+                  <Edit id="edt_telCompany" taborder="64" left="16.43%" top="335" right="66.55%" height="30"/>
+                  <Edit id="edt_zipCode" taborder="65" left="16.3%" top="368" right="66.67%" height="30"/>
+                  <Edit id="edt_zipCodeCompany" taborder="66" left="16.3%" top="403" right="66.67%" height="30"/>
+                  <Combo id="com_realname" taborder="68" left="16.43%" top="201" right="66.55%" height="30" codecolumn="code" datacolumn="value" innerdataset="@ds_realNameNoTypeCode"/>
+                  <Edit id="edt_empName" taborder="69" left="47.83%" top="132" right="35.14%" height="30"/>
+                  <Edit id="edt_realNameNo" taborder="70" left="47.85%" top="203" right="35.09%" height="30"/>
+                  <Edit id="edt_celNo" taborder="71" left="47.83%" top="268" right="35.14%" height="30"/>
+                  <Edit id="edt_partName" taborder="72" left="47.83%" top="301" right="35.14%" height="30"/>
+                  <Combo id="com_nation" taborder="74" left="48.07%" top="168" right="35.14%" height="28" codecolumn="code" datacolumn="value" innerdataset="@ds_nation"/>
+                  <Edit id="edt_addr" taborder="76" left="48.1%" top="371" right="3.07%" height="28"/>
+                  <Edit id="edt_addrDetailHome" taborder="77" left="48.1%" top="406" right="3.07%" height="28"/>
+                  <Edit id="edit_addrCompany" taborder="78" left="48.22%" top="439" right="2.94%" height="28"/>
+                  <Edit id="edt_addrDetailCompany" taborder="79" left="48.34%" top="471" right="2.82%" height="28"/>
+                  <Combo id="com_rich" taborder="80" left="47.83%" top="236" right="35.39%" height="28" codecolumn="code" datacolumn="value" innerdataset="@ds_rich"/>
+                  <Static id="Static16" taborder="81" text="-" left="104.91%" top="316" right="-18.04%" height="31" style="border:1 solid black ;align:center middle;"/>
+                  <Combo id="com_gender" taborder="82" innerdataset="ds_gender" codecolumn="code" datacolumn="value" left="16.44%" top="167" right="66.75%" height="28"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="보고대상거래">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" useinputpanel="false" left="1.21%" top="9" right="1.21%" height="86" binddataset="ds_deal">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="78"/>
+                          <Column size="85"/>
+                          <Column size="86"/>
+                          <Column size="99"/>
+                          <Column size="119"/>
+                          <Column size="81"/>
+                          <Column size="83"/>
+                          <Column size="76"/>
+                          <Column size="98"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="거래일시"/>
+                          <Cell col="1" text="계좌번호"/>
+                          <Cell col="2" text="거래영업점"/>
+                          <Cell col="3" text="거래종류"/>
+                          <Cell col="4" text="거래상품"/>
+                          <Cell col="5" text="거래수단"/>
+                          <Cell col="6" text="거래채널"/>
+                          <Cell col="7" text="통화코드"/>
+                          <Cell col="8" text="거래금액"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:dealDate"/>
+                          <Cell col="1" text="bind:accNo"/>
+                          <Cell col="2" text="bind:branchName"/>
+                          <Cell col="3" displaytype="combo" text="bind:dealTypeCode" combodataset="ds_dealType" combocodecol="code" combodatacol="value"/>
+                          <Cell col="4" text="bind:dealGoodsName"/>
+                          <Cell col="5" displaytype="combo" text="bind:dealMethodCode" combodataset="ds_dealMethod" combocodecol="code" combodatacol="value"/>
+                          <Cell col="6" text="bind:dealChanName"/>
+                          <Cell col="7" displaytype="combo" text="bind:occurTypeCode" combodataset="ds_occurType" combocodecol="code" combodatacol="value"/>
+                          <Cell col="8" text="bind:wonDealMount"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Static id="Static00" taborder="24" left="0.97%" top="107" right="1.93%" height="357" style="background:navajowhite;"/>
+                  <Static id="Static01" taborder="25" text="계좌번호" left="2.05%" top="122" right="84.78%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static02" taborder="26" text="통화종류코드" left="2.05%" top="157" right="84.78%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static03" taborder="27" text="원화거래금액" left="2.05%" top="192" right="84.78%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static04" taborder="28" text="거래목적" left="2.05%" top="225" right="84.78%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Edit id="Edit00" taborder="29" left="16.06%" top="123" right="66.91%" height="30"/>
+                  <Combo id="Combo02" taborder="30" left="16.06%" top="157" right="66.91%" height="30" codecolumn="code" datacolumn="value" innerdataset="@ds_occurType"/>
+                  <Edit id="Edit01" taborder="32" left="33.94%" top="227" right="52.9%" height="30"/>
+                  <Static id="Static10" taborder="33" text="거래종류" left="34.06%" top="122" right="52.9%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static11" taborder="34" text="거래수단" left="34.06%" top="157" right="52.9%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static12" taborder="35" text="외국환거래금액" left="34.06%" top="192" right="52.9%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Combo id="Combo04" taborder="38" left="47.71%" top="159" right="35.51%" height="28" codecolumn="code" datacolumn="value" innerdataset="@ds_dealMethod"/>
+                  <Edit id="Edit08" taborder="39" left="47.46%" top="194" right="35.51%" height="30"/>
+                  <Combo id="Combo05" taborder="40" left="16.18%" top="225" right="67.03%" height="31" innerdataset="@ds_dealPurp" codecolumn="code" datacolumn="value"/>
+                  <Static id="Static19" taborder="41" text="거래상품" left="64.86%" top="122" right="21.98%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static20" taborder="42" text="거래채널" left="64.86%" top="157" right="21.98%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static21" taborder="43" text="달러화 환산금액" left="64.86%" top="192" right="21.98%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Static id="Static22" taborder="44" text="외환거래목적" left="47.95%" top="227" right="35.75%" height="31" style="background:yellow;border:1 solid black ;align:center middle;"/>
+                  <Edit id="Edit24" taborder="45" left="78.86%" top="123" right="3.38%" height="29"/>
+                  <Combo id="Combo00" taborder="46" left="78.99%" top="160" right="3.5%" height="27" codecolumn="code" datacolumn="value" innerdataset="@ds_dealChan"/>
+                  <Combo id="Combo06" taborder="48" left="65.1%" top="229" right="21.74%" height="27" codecolumn="code" datacolumn="value" innerdataset="@ds_fdealPurp"/>
+                  <Edit id="Edit02" taborder="49" left="78.99%" top="228" right="3.26%" height="29"/>
+                  <Combo id="Combo07" taborder="51" left="47.71%" top="124" right="35.51%" height="28" codecolumn="code" datacolumn="value" innerdataset="@ds_dealType"/>
+                  <Edit id="Edit03" taborder="52" left="15.94%" top="192" right="67.03%" height="30"/>
+                  <Edit id="Edit04" taborder="53" left="79.11%" top="193" right="3.86%" height="30"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage3" text="객관적질의">
+              <Layouts>
+                <Layout width="828" height="434">
+                  <Grid id="Grid00" taborder="2" useinputpanel="false" left="1.09%" top="124" right="0.36%" height="400" binddataset="ds_query">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="723"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="선택"/>
+                          <Cell col="1" text="항목"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="checkbox" text="bind:upperCode"/>
+                          <Cell col="1" text="bind:detailCode"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Combo id="Combo00" taborder="3" left="2.42%" top="27" right="20.77%" height="29" codecolumn="upperCode" datacolumn="upperName" innerdataset="@ds_queryList"/>
+                  <Button id="Button00" taborder="4" text="조회" left="82.37%" top="30" right="2.05%" height="26" onclick="btn_search_onclick1"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage4" text="주관적질의">
+              <Layouts>
+                <Layout>
+                  <Static id="Static00" taborder="0" left="0.86%" top="14" right="0.61%" height="460" style="background:bisque;"/>
+                  <Edit id="Edit00" taborder="1" left="35.27%" top="51" right="4.11%" height="34"/>
+                  <Static id="Static01" taborder="2" text="의심스러운 거래자 관련(WHO)" left="3.14%" top="54" right="70.53%" height="37"/>
+                  <Static id="Static02" taborder="3" text="항목" left="3.14%" top="22" right="70.53%" height="29" style="align:center middle;"/>
+                  <Static id="Static03" taborder="4" text="입력" left="32.37%" top="25" right="5.07%" height="23" style="align:center middle;"/>
+                  <Static id="Static04" taborder="5" text="거래 발생일자 관련(WHEN)" left="3.5%" top="94" right="70.29%" height="37"/>
+                  <Static id="Static05" taborder="6" text="거래 발생 장소 관련(WHERE)" left="3.38%" top="137" right="70.29%" height="37"/>
+                  <Static id="Static06" taborder="7" text="금융거래 수단(상품) 관련(WHAT)" left="3.38%" top="180" right="68.36%" height="37"/>
+                  <Static id="Static07" taborder="8" text="금융 거래 방법(특이거래)(HOW)" left="3.38%" top="220" right="70.29%" height="37"/>
+                  <Static id="Static08" taborder="9" text="혐의거래로 판단한 사유(WHY)" left="3.99%" top="265" right="69.69%" height="37"/>
+                  <Edit id="Edit01" taborder="10" left="35.27%" top="96" right="4.11%" height="34"/>
+                  <Edit id="Edit02" taborder="11" left="35.27%" top="136" right="4.11%" height="34"/>
+                  <Edit id="Edit03" taborder="12" left="35.27%" top="177" right="4.11%" height="34"/>
+                  <Edit id="Edit04" taborder="13" left="35.27%" top="218" right="4.11%" height="34"/>
+                  <Edit id="Edit05" taborder="14" left="35.39%" top="265" right="3.99%" height="34"/>
+                  <Static id="Static09" taborder="15" text="종합의견" left="4.35%" top="315" right="69.32%" height="37"/>
+                  <Edit id="Edit06" taborder="16" left="35.51%" top="318" right="3.86%" height="68"/>
+                  <Static id="Static10" taborder="17" text="의심스러운 정도" left="4.71%" top="399" right="68.96%" height="37"/>
+                  <CheckBox id="CheckBox00" taborder="18" text="1점" left="24.76%" top="408" right="66.18%" height="27"/>
+                  <CheckBox id="CheckBox01" taborder="19" text="2점" left="31.52%" top="408" right="59.42%" height="27"/>
+                  <CheckBox id="CheckBox02" taborder="20" text="3점" left="38.29%" top="408" right="52.66%" height="27"/>
+                  <CheckBox id="CheckBox03" taborder="21" text="4점" left="44.08%" top="408" right="49.03%" height="27"/>
+                  <CheckBox id="CheckBox04" taborder="22" text="5점" left="49.88%" top="408" right="43.24%" height="27"/>
+                  <CheckBox id="CheckBox05" taborder="23" text="1점" left="64.61%" top="406" right="26.33%" height="27"/>
+                  <CheckBox id="CheckBox06" taborder="24" text="2점" left="71.38%" top="406" right="19.57%" height="27"/>
+                  <CheckBox id="CheckBox07" taborder="25" text="3점" left="78.14%" top="406" right="12.8%" height="27"/>
+                  <CheckBox id="CheckBox08" taborder="26" text="4점" left="83.94%" top="406" right="9.18%" height="27"/>
+                  <CheckBox id="CheckBox09" taborder="27" text="5점" left="89.73%" top="406" right="3.38%" height="27"/>
+                  <Static id="Static11" taborder="28" text="(본점)" left="58.21%" top="402" right="32.13%" height="37"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_list">
+        <ColumnInfo>
+          <Column id="custNo" type="STRING" size="20"/>
+          <Column id="empName" type="STRING" size="20"/>
+          <Column id="birth" type="STRING" size="8"/>
+          <Column id="realNameNo" type="STRING" size="4"/>
+          <Column id="passportNumber" type="STRING" size="20"/>
+          <Column id="chargeName" type="STRING" size="20"/>
+          <Column id="telNo" type="STRING" size="10"/>
+          <Column id="celNo" type="STRING" size="10"/>
+          <Column id="position" type="STRING" size="10"/>
+          <Column id="jobName" type="STRING" size="10"/>
+          <Column id="partName" type="STRING" size="20"/>
+          <Column id="telCompanyNum" type="STRING" size="20"/>
+          <Column id="corRegNum" type="STRING" size="20"/>
+          <Column id="zipCode" type="STRING" size="10"/>
+          <Column id="addr" type="STRING" size="20"/>
+          <Column id="zipCodeCompany" type="STRING" size="10"/>
+          <Column id="addrDetailHome" type="STRING" size="50"/>
+          <Column id="addrCompany" type="STRING" size="20"/>
+          <Column id="addrDetailCompany" type="STRING" size="50"/>
+          <Column id="genderTypeCode" type="STRING" size="4"/>
+          <Column id="nationCode" type="STRING" size="4"/>
+          <Column id="JobCode" type="STRING" size="4"/>
+          <Column id="realNameNoTypeCode" type="STRING" size="4"/>
+          <Column id="realCombineCode" type="STRING" size="4"/>
+          <Column id="richCode" type="STRING" size="4"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_gender">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="10"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">0001</Col>
+            <Col id="value">남</Col>
+          </Row>
+          <Row>
+            <Col id="code">0002</Col>
+            <Col id="value">여</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_nation">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">001</Col>
+            <Col id="value">한국</Col>
+          </Row>
+          <Row>
+            <Col id="code">002</Col>
+            <Col id="value">미국</Col>
+          </Row>
+          <Row>
+            <Col id="code">003</Col>
+            <Col id="value">중국</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_jobcode">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="8"/>
+          <Column id="value" type="STRING" size="30"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">001</Col>
+            <Col id="value">IT</Col>
+          </Row>
+          <Row>
+            <Col id="code">002</Col>
+            <Col id="value">건설</Col>
+          </Row>
+          <Row>
+            <Col id="code">003</Col>
+            <Col id="value">공무원</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_realNameNoTypeCode">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="30"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">0001</Col>
+            <Col id="value">개똥이</Col>
+          </Row>
+          <Row>
+            <Col id="code">0002</Col>
+            <Col id="value">홍길동</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_realnamenum">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="10"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">0001</Col>
+            <Col id="value">홍길동</Col>
+          </Row>
+          <Row>
+            <Col id="code">0002</Col>
+            <Col id="value">임꺽정</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_rich">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="30"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">001</Col>
+            <Col id="value">Y</Col>
+          </Row>
+          <Row>
+            <Col id="code">002</Col>
+            <Col id="value">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_deal">
+        <ColumnInfo>
+          <Column id="alertGroupNo" type="STRING" size="10"/>
+          <Column id="accNo" type="STRING" size="30"/>
+          <Column id="dealDate" type="STRING" size="20"/>
+          <Column id="dealChanCode" type="STRING" size="8"/>
+          <Column id="dealChanName" type="STRING" size="30"/>
+          <Column id="dealMethodCode" type="STRING" size="8"/>
+          <Column id="dealMethodName" type="STRING" size="20"/>
+          <Column id="dealTypeCode" type="STRING" size="10"/>
+          <Column id="dealTypeName" type="STRING" size="30"/>
+          <Column id="dealGoodsName" type="STRING" size="30"/>
+          <Column id="occurTypeCode" type="STRING" size="8"/>
+          <Column id="wonDealMount" type="STRING" size="40"/>
+          <Column id="focuurDealMount" type="STRING" size="40"/>
+          <Column id="dollarExchMount" type="STRING" size="40"/>
+          <Column id="branchName" type="STRING" size="40"/>
+          <Column id="dealPurp" type="STRING" size="50"/>
+          <Column id="dealPurpCode" type="STRING" size="8"/>
+          <Column id="fdealPurp" type="STRING" size="50"/>
+          <Column id="fdealPurbCode" type="STRING" size="8"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dealType">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="2"/>
+          <Column id="value" type="STRING" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="value">일반거래</Col>
+          </Row>
+          <Row>
+            <Col id="code">2</Col>
+            <Col id="value">좋은거래</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_occurType">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="value">달러</Col>
+          </Row>
+          <Row>
+            <Col id="code">2</Col>
+            <Col id="value">엔화</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_dealMethod">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="value">온라인</Col>
+          </Row>
+          <Row>
+            <Col id="code">2</Col>
+            <Col id="value">오프라인</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_dealChan">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">0001</Col>
+            <Col id="value">사람</Col>
+          </Row>
+          <Row>
+            <Col id="code">0002</Col>
+            <Col id="value">은행</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_dealPurp">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">0001</Col>
+            <Col id="value">노후대비</Col>
+          </Row>
+          <Row>
+            <Col id="code">0002</Col>
+            <Col id="value">대출</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_fdealPurp">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">0001</Col>
+            <Col id="value">투자</Col>
+          </Row>
+          <Row>
+            <Col id="code">0002</Col>
+            <Col id="value">투기</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_queryList">
+        <ColumnInfo>
+          <Column id="upperCode" type="STRING" size="4"/>
+          <Column id="upperName" type="STRING" size="30"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="upperCode">1</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_query">
+        <ColumnInfo>
+          <Column id="upperCode" type="STRING" size="30"/>
+          <Column id="detailCode" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Tab00.tabpage1.edt_custNum" propid="value" datasetid="ds_list" columnid="custNo"/>
+      <BindItem id="item1" compid="Tab00.tabpage1.edt_empName" propid="value" datasetid="ds_list" columnid="empName"/>
+      <BindItem id="item2" compid="Tab00.tabpage1.edt_birth" propid="value" datasetid="ds_list" columnid="birth"/>
+      <BindItem id="item3" compid="Tab00.tabpage1.edt_realNameNo" propid="value" datasetid="ds_list" columnid="realNameNo"/>
+      <BindItem id="item4" compid="Tab00.tabpage1.edt_ppNum" propid="value" datasetid="ds_list" columnid="passportNumber"/>
+      <BindItem id="item5" compid="Tab00.tabpage1.edt_chargeName" propid="value" datasetid="ds_list" columnid="chargeName"/>
+      <BindItem id="item6" compid="Tab00.tabpage1.edt_telNo" propid="value" datasetid="ds_list" columnid="telNo"/>
+      <BindItem id="item7" compid="Tab00.tabpage1.edt_celNo" propid="value" datasetid="ds_list" columnid="celNo"/>
+      <BindItem id="item8" compid="Tab00.tabpage1.edt_position" propid="value" datasetid="ds_list" columnid="position"/>
+      <BindItem id="item9" compid="Tab00.tabpage1.edt_jobName" propid="value" datasetid="ds_list" columnid="jobName"/>
+      <BindItem id="item10" compid="Tab00.tabpage1.edt_partName" propid="value" datasetid="ds_list" columnid="partName"/>
+      <BindItem id="item11" compid="Tab00.tabpage1.edt_telCompany" propid="value" datasetid="ds_list" columnid="telCompanyNum"/>
+      <BindItem id="item12" compid="Tab00.tabpage1.edt_corRegNum" propid="value" datasetid="ds_list" columnid="corRegNum"/>
+      <BindItem id="item13" compid="Tab00.tabpage1.edt_zipCode" propid="value" datasetid="ds_list" columnid="zipCode"/>
+      <BindItem id="item14" compid="Tab00.tabpage1.edt_addr" propid="value" datasetid="ds_list" columnid="addr"/>
+      <BindItem id="item15" compid="Tab00.tabpage1.edt_zipCodeCompany" propid="value" datasetid="ds_list" columnid="zipCodeCompany"/>
+      <BindItem id="item16" compid="Tab00.tabpage1.edt_addrDetailHome" propid="value" datasetid="ds_list" columnid="addrDetailHome"/>
+      <BindItem id="item17" compid="Tab00.tabpage1.edit_addrCompany" propid="value" datasetid="ds_list" columnid="addrCompany"/>
+      <BindItem id="item18" compid="Tab00.tabpage1.edt_addrDetailCompany" propid="value" datasetid="ds_list" columnid="addrDetailCompany"/>
+      <BindItem id="item20" compid="Tab00.tabpage1.com_nation" propid="value" datasetid="ds_list" columnid="nationCode"/>
+      <BindItem id="item21" compid="Tab00.tabpage1.com_jobcode" propid="value" datasetid="ds_list" columnid="JobCode"/>
+      <BindItem id="item22" compid="Tab00.tabpage1.com_realname" propid="value" datasetid="ds_list" columnid="realNameNoTypeCode"/>
+      <BindItem id="item23" compid="Tab00.tabpage1.com_realnamenum" propid="value" datasetid="ds_list" columnid="realCombineCode"/>
+      <BindItem id="item24" compid="Tab00.tabpage1.com_rich" propid="value" datasetid="ds_list" columnid="richCode"/>
+      <BindItem id="item19" compid="Tab00.tabpage1.com_gender" propid="value" datasetid="ds_list" columnid="genderTypeCode"/>
+      <BindItem id="item25" compid="Tab00.tabpage2.Edit00" propid="value" datasetid="ds_deal" columnid="accNo"/>
+      <BindItem id="item26" compid="Tab00.tabpage2.Edit24" propid="value" datasetid="ds_deal" columnid="dealGoodsName"/>
+      <BindItem id="item27" compid="Tab00.tabpage2.Edit03" propid="value" datasetid="ds_deal" columnid="wonDealMount"/>
+      <BindItem id="item28" compid="Tab00.tabpage2.Edit08" propid="value" datasetid="ds_deal" columnid="focuurDealMount"/>
+      <BindItem id="item29" compid="Tab00.tabpage2.Edit04" propid="value" datasetid="ds_deal" columnid="dollarExchMount"/>
+      <BindItem id="item30" compid="Tab00.tabpage2.Edit01" propid="value" datasetid="ds_deal" columnid="dealPurp"/>
+      <BindItem id="item31" compid="Tab00.tabpage2.Edit02" propid="value" datasetid="ds_deal" columnid="fdealPurp"/>
+      <BindItem id="item32" compid="Tab00.tabpage2.Combo07" propid="value" datasetid="ds_deal" columnid="dealTypeCode"/>
+      <BindItem id="item33" compid="Tab00.tabpage2.Combo02" propid="value" datasetid="ds_deal" columnid="occurTypeCode"/>
+      <BindItem id="item34" compid="Tab00.tabpage2.Combo04" propid="value" datasetid="ds_deal" columnid="dealMethodCode"/>
+      <BindItem id="item35" compid="Tab00.tabpage2.Combo00" propid="value" datasetid="ds_deal" columnid="dealChanCode"/>
+      <BindItem id="item38" compid="Tab00.tabpage2.Combo06" propid="value" datasetid="ds_deal" columnid="fdealPurbCode"/>
+      <BindItem id="item37" compid="Tab00.tabpage2.Combo05" propid="value" datasetid="ds_deal" columnid="dealPurpCode"/>
+      <BindItem id="item36" compid="Tab00.tabpage3.Combo00" propid="value" datasetid="ds_queryList" columnid="upperCode"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+// Onload function 공통코드를 호출
+this.ReportManagement_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+	var sDsIds  = "";
+		sDsIds += "ds_nation=ds_nation";
+		sDsIds += " ds_realname=ds_realname";
+		sDsIds += " ds_rich=ds_rich";
+		sDsIds += " ds_gender=ds_gender";
+		sDsIds += " ds_jobcode=ds_jobcode";
+		sDsIds += " ds_realnamenum=ds_realnamenum";
+		
+	this.gfn_transaction(this
+					   , "commonCode"
+					   , "reportManagement/loadCommonCodes.do"
+					   , ""
+					   , sDsIds
+					   , ""
+					   , "fnCallback");
+}
+
+
+// callback function
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		this.alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+			case "commonCode":
+			break;
+			case "searchCust":
+			break;
+			case "saveList":
+				this.btn_search_onclick();
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+// 조회 버튼
+this.btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+	this.gfn_transaction(this
+					   , "commonCode"
+					   , "reportManagement/searchCust.do"
+					   , ""
+					   , "ds_list=ds_list ds_deal=ds_deal"
+					   , ""
+					   , "fnCallback");
+}
+
+// 객관적 질의 조회 버튼
+this.btn_search_onclick1 = function(obj:Button,  e:nexacro.ClickEventInfo){
+	this.gfn_transaction(this
+					   , "search"
+					   , "reportManagement/searchquery.do"
+					   , "ds_query=ds_query"
+					   , "ds_queryList=ds_queryList"
+					   , ""
+					   , "fnCallback");
+}
+// 저장 버튼
+this.btn_save_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.gfn_transaction(this
+					   , "saveList"
+					   , "reportManagement/saveList.do"
+					   , "ds_list=ds_list:U ds_deal=ds_deal:U"
+					   , ""
+					   , ""
+					   , "fnCallback");
+}
+
+
+//객관적질의 로드
+this.report_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var sDsIds  = "";
+		sDsIds += "ds_queryList=ds_queryList";
+		//sDsIds += " ds_query=ds_query";
+
+	this.gfn_transaction(this
+					   , "queryLoad"
+					   , "reportManagement/loadquery.do"
+					   , ""
+					   , sDsIds
+					   , ""
+					   , "fnCallback");
+}
+
+]]></Script>
+  </Form>
+</FDL>

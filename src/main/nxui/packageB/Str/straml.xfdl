@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="straml" classname="straml" left="0" top="0" width="1024" height="768" titletext="New Form" onload="samplecrud_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static02" taborder="32" left="40" top="54" right="40" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <Static id="Static00" taborder="6" text="업무구분" left="47" top="57" height="23" width="64"/>
+        <Static id="Static03" taborder="9" text="발생일자" left="241" top="57" height="23" width="58"/>
+        <Button id="btn_str_search" taborder="15" text="조회" top="58" height="20" onclick="btn_search_onclick" style="background:lightskyblue;color:white;" width="92" right="236"/>
+        <Static id="Static01" taborder="18" text="~" left="419" top="57" height="23" onclick="Static01_onclick" style="align:center middle;" width="18"/>
+        <Grid id="Grid00" taborder="20" useinputpanel="false" left="40" right="40" binddataset="ds_strlist" oncelldblclick="Grid00_oncelldblclick" top="82" height="550">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="0"/>
+                <Column size="135"/>
+                <Column size="164"/>
+                <Column size="108"/>
+                <Column size="132"/>
+                <Column size="136"/>
+                <Column size="125"/>
+                <Column size="147"/>
+                <Column size="81"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="고객번호"/>
+                <Cell col="2" text="발생일자"/>
+                <Cell col="3" text="그룹번호"/>
+                <Cell col="4" text="룰ID"/>
+                <Cell col="5" text="고객명"/>
+                <Cell col="6" text="실명번호"/>
+                <Cell col="7" text="RA최종등급"/>
+                <Cell col="8" text="업무구분"/>
+                <Cell col="9" text="담당자"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="expr:currow+1"/>
+                <Cell col="1" text="bind:custNo"/>
+                <Cell col="2" text="bind:dealDate" mask="####.##.##"/>
+                <Cell col="3" text="bind:alertGroupNo"/>
+                <Cell col="4" text="bind:ruleId"/>
+                <Cell col="5" text="bind:empName"/>
+                <Cell col="6" text="bind:realNameNo" mask="######-#{######}"/>
+                <Cell col="7" text="bind:raRankCode"/>
+                <Cell col="8" displaytype="combo" text="bind:workTypeCode" combodataset="ds_work" combocodecol="code" combodatacol="value"/>
+                <Cell col="9" text="bind:distChgedId"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_str_write" taborder="22" text="STR작성" top="58" height="20" onclick="btn_str_write_onclick" style="background:lightskyblue;color:white;" width="92" right="140"/>
+        <Button id="btn_change" taborder="24" text="배당변경" top="58" height="20" onclick="btn_change_onclick" style="background:lightskyblue;color:white;" width="92" right="44"/>
+        <Combo id="cbo_ds_work" taborder="25" onitemchanged="edt_acc_no_onitemchanged" left="101" top="56" height="24" innerdataset="@ds_work" datacolumn="value" codecolumn="code" autoselect="false" width="125" index="-1"/>
+        <Calendar id="edt_edDate" taborder="27" top="56" height="24" oneditclick="edt_regidt02_oneditclick" width="125" left="436"/>
+        <Calendar id="edt_stDate" taborder="29" left="295" top="56" height="24" usecontextmenu="true" ontextchanged="edt_stDate_ontextchanged" width="125"/>
+        <Static id="sta_title" taborder="30" onclick="sta_title_onclick" left="-0.1%" top="0" right="0%" height="46" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Static id="Static04" taborder="33" text="STR현황" left="40" top="0" width="200" height="45" style="color:white;font:bold 17 돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_strlist">
+        <ColumnInfo>
+          <Column id="custNo" type="STRING" size="256"/>
+          <Column id="dealDate" type="STRING" size="256"/>
+          <Column id="alertGroupNo" type="STRING" size="256"/>
+          <Column id="relRuleCount" type="STRING" size="256"/>
+          <Column id="empName" type="STRING" size="256"/>
+          <Column id="realNameNo" type="STRING" size="256"/>
+          <Column id="raRankCode" type="STRING" size="256"/>
+          <Column id="distChgedId" type="STRING" size="256"/>
+          <Column id="workTypeCode" type="STRING" size="256"/>
+          <Column id="ruleId" type="STRING" size="256"/>
+          <Column id="dealSerialNo" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_strdetail">
+        <ColumnInfo>
+          <Column id="ruleId" type="STRING" size="256"/>
+          <Column id="ruleName" type="STRING" size="256"/>
+          <Column id="ruleApply" type="STRING" size="256"/>
+          <Column id="workType" type="STRING" size="256"/>
+          <Column id="dealChged" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_work">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="stDate" type="STRING" size="256"/>
+          <Column id="edDate" type="STRING" size="256"/>
+          <Column id="workType" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="cbo_ds_work" propid="value" datasetid="ds_search" columnid="workType"/>
+      <BindItem id="item2" compid="edt_edDate" propid="value" datasetid="ds_search" columnid="edDate"/>
+      <BindItem id="item1" compid="edt_stDate" propid="value" datasetid="ds_search" columnid="stDate"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+var groupNo;
+var ruleId;
+var dealSerialNo;
+// Onload function 공통코드를 호출
+this.samplecrud_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+	var sDsIds  = "";
+		sDsIds += "ds_work=ds_work";
+		sDsIds  = "";
+		
+	this.gfn_transaction(this
+					   , "commonCode"
+					   , "straml/loadCommonCodes.do"
+					   , ""
+					   , "ds_work=ds_work"
+					   , ""
+					   , "fnCallback");
+}
+
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+			case "commonCode":
+			this.ds_work.insertRow(0);
+			this.ds_work.setColumn(0,"value","전체");
+			this.cbo_ds_work.set_index(0);
+			
+			var objDate = new Date();
+			
+			var yyyy = objDate.getYear().toString(); 
+			var mm = (objDate.getMonth()+1).toString();
+			var dd = objDate.getDate().toString();
+			
+			//alert("sssssss"+mm);
+			//alert(mm.length);
+			if(mm.length == 1) mm = '0' + mm;
+			if(dd.length == 1) dd = '0' + dd;
+			
+			//alert(month);
+			var today = yyyy + mm + dd;
+			
+			this.edt_edDate.set_value(today);
+			objDate.addMonth(-1);
+			yyyy = objDate.getYear().toString(); 
+			mm = (objDate.getMonth()+1).toString();
+			dd = objDate.getDate().toString();
+		
+			if(mm.length == 1) mm = '0' + mm;
+			if(dd.length == 1) dd = '0' + dd;
+			today = yyyy + mm + dd;
+			this.edt_stDate.set_value(today);
+			
+			break;
+			case "searchCust":
+			break;
+			case "saveList":
+				this.btn_search_onclick();
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+//조회하는곳!
+this.btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	//alert(this.gfn_IsNull(null));
+	var workType = this.ds_search.getColumn(0, "workType");
+	var sDateS = this.ds_search.getColumn(0, "stDate");
+	var sDateE = this.ds_search.getColumn(0, "edDate");		  	
+	//alert(sDateS + sDateE);
+	//날짜 유효성검사
+	//var sDateS = this.edt_stDate.value; 
+	//var sDateE = this.edt_edDate.value;
+	
+	//if(sDateS <> "" || sDateE <> "" ){
+		if(this.gfn_IsNull(sDateS) || this.gfn_IsNull(sDateE)){
+				//조회
+			this.gfn_transaction(this
+				   , "searchCust"
+				   , "straml/searchStrList.do"
+				   , "ds_search=ds_search"    //보내는곳
+				   , "ds_strlist=ds_strlist"  //받아오는곳
+				   , ""
+				   , "fnCallback");	
+			//alert("sDateS sDate둘중 하나라도 비어있으니 날짜를 기입하시오 ");
+			return;
+		}else{	
+			trace("!");
+			//this.alert(sDateS.toString().length+"=====stDate111========77=="+sDateE.toString().length);
+			if(sDateS.length == "8" && sDateE.length == "8"){
+					//alert("8자리입니다");
+				if(parseInt(sDateS) > parseInt(sDateE)){
+					//alert(parseInt(sDateS) > parseInt(sDateE));
+					alert("시작일이 종료일보다 작거나 같지않습니다");
+					return;
+				}
+			}else {
+				alert("날짜형식이 잘못되었습니다.");
+				return;
+			}			
+		}	
+	//}
+	//조회
+	this.gfn_transaction(this
+		   , "searchCust"
+		   , "straml/searchStrList.do"
+		   , "ds_search=ds_search"    //보내는곳
+		   , "ds_strlist=ds_strlist"  //받아오는곳
+		   , ""
+		   , "fnCallback");	
+
+	var cid = this.ds_search.getRowType(1);	
+}
+
+//STR작성버튼시 모달창!
+this.btn_str_write_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var count = this.ds_strlist.rowcount;
+	if(count > 0){			
+			groupNo = this.ds_strlist.getColumn(this.ds_strlist.rowposition, "alertGroupNo");
+			 
+			 var nLeft = system.clientToScreenX(this, 10);
+			 var nTop = system.clientToScreenY(this, 10);
+
+			  var newChild = new ChildFrame;
+		   newChild.init("str_popup"
+					   , "absolute", nLeft, nTop, 700, 550, null, null
+					   , "Str::Report.xfdl");
+					   
+		   newChild.set_openalign("center middle");
+		   newChild.set_dragmovetype("all");
+		   newChild.set_showtitlebar(false);
+		   newChild.showModal(this.getOwnerFrame()
+						  , {gN:groupNo}
+						  , this
+						  , "modal_callback");   
+      }else{
+		alert("조회 후 STR작성을 할 수 있습니다.");
+     }         
+                  
+}
+
+//배당변경 모달창 띄우기
+this.btn_change_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var count = this.ds_strlist.rowcount;
+	if(count > 0){		 
+		 groupNo = this.ds_strlist.getColumn(this.ds_strlist.rowposition, "alertGroupNo");
+		 //ruleId = this.ds_strlist.getColumn(this.ds_strlist.rowposition, "ruleId");
+		 dealSerialNo = this.ds_strlist.getColumn(this.ds_strlist.rowposition, "dealSerialNo");
+		 var nLeft = system.clientToScreenX(this, 10);
+		 var nTop = system.clientToScreenY(this, 10);
+
+		  var newChild = new ChildFrame;
+			newChild.init("str_popup"
+				   , "absolute", nLeft, nTop, 700, 550, null, null
+				   , "Str::PorChange.xfdl");
+				   
+			newChild.set_openalign("center middle");
+			newChild.set_dragmovetype("all");
+			newChild.set_showtitlebar(false);
+			newChild.showModal(this.getOwnerFrame()
+					  , {gN:groupNo,dsn:dealSerialNo}
+					  , this
+					  , "modal_callback");   
+      }else{
+		alert("조회 후 배당변경을 볼 수 있습니다.");
+     }                 
+                  
+}
+
+//의심거래 조사작성
+/*
+this.btn_deal_write_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	 var nLeft = system.clientToScreenX(this, 10);
+	 var nTop = system.clientToScreenY(this, 10);
+	 var newChild = new ChildFrame;
+   newChild.init("str_popup"
+               , "absolute", nLeft, nTop, 700, 550, null, null
+               , "Str::test.xfdl");
+               
+   newChild.set_openalign("center middle");
+   newChild.set_dragmovetype("all");
+   newChild.set_showtitlebar(false);
+   newChild.showModal(this.getOwnerFrame()
+                  , ""
+                  , this
+                  , "modal_callback");   
+}
+*/
+//모달창 콜백
+this.modal_callback = function(strID, variant)
+{
+   if(strID == "Popup1")
+   {
+      if(this.gfn_IsNull(variant))
+      {
+         return;
+      }
+      this.modal_selectDepo(variant);
+   }
+   else if(strID == "Popup2")
+   {
+      if(this.gfn_IsNull(variant))
+      {
+         return;
+      }
+      this.modal_selectChar(variant);
+   }
+   else if(strID == "Popup3")
+   {
+      if(this.gfn_IsNull(variant))
+      {
+         return;
+      }
+      this.modal_selectMgr(variant);
+   }
+}
+/*
+this.btn_exceldown_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	  if(!this.Export00)
+      {
+              this.exportObj = new ExcelExportObject(“Export00″,this);
+              this.addChild(“Export00″, this.exportObj);              this.exportObj.set_exporttype(nexacro.ExportTypes.EXCEL2007);
+              this.exportObj.set_exporturl(“http:// 123.456.78.90:8080/xeni/XExportImport”);
+              this.exportObj.set_exportfilename(“ExportData”);
+              this.exportObj.addExportItem(nexacro.ExportItemTypes.GRID, this.Grid00,                         “Sheet1!A1″,”allband”,””,””,””,””,””,”both”);              //동적으로 이벤트 연결
+              this.exportObj.addEventHandler(“onsuccess”, this.Export00_onsuccess, this);
+              this.exportObj.addEventHandler(“onerror”, this.Export00_onerror, this);              var objExportItem = this.exportObj.getExportItem( nexacro.ExportItemTypes.GRID, 0 );
+              objExportItem.set_exceptstyle(“background,background2″);
+      }
+      var result = this.exportObj.exportData();
+
+}
+*/
+
+
+//날짜선택 유효성검사 함수를 호출! (8자리인가? 앞뒤가 맞는가?)
+
+//그리트 클릭시 팝업띄우기
+this.Grid00_oncelldblclick = function(obj:Grid, e:GridClickEventInfo)
+{
+	if(e.col== "4"){
+		var ruleId = this.ds_strlist.getColumn(e.row,"ruleId")
+		//alert("룰"+ruleId);
+			
+		//this.ds_ruleidout.setColumn(0,"upperCode",nCode);		
+		
+		//모달창 띄우기
+		var nLeft = system.clientToScreenX(this, 10);
+		var nTop = system.clientToScreenY(this, 10);
+		var newChild = new ChildFrame;
+		newChild.init("str_popup"
+               , "absolute", nLeft, nTop, 400, 350, null, null
+               , "Str::ruleinfo.xfdl");            
+		newChild.set_openalign("center middle");
+		newChild.set_dragmovetype("all");
+		newChild.set_showtitlebar(false);
+		newChild.showModal(this.getOwnerFrame()
+                  , {ri:ruleId}
+                  , this
+                  , "modal_callback");
+                  	
+	}else if(e.col=="0" ||e.col=="5"){
+	
+		//alert("고객정보");
+		var custNo = this.ds_strlist.getColumn(e.row,"custNo")
+		//alert("룰"+ruleId);
+			
+		//this.ds_ruleidout.setColumn(0,"upperCode",nCode);		
+		
+		//모달창 띄우기
+		var nLeft = system.clientToScreenX(this, 10);
+		var nTop = system.clientToScreenY(this, 10);
+		var newChild = new ChildFrame;
+		newChild.init("str_popup"
+               , "absolute", nLeft, nTop, 400, 350, null, null
+               , "Str::custpopup.xfdl");            
+		newChild.set_openalign("center middle");
+		newChild.set_dragmovetype("all");
+		newChild.set_showtitlebar(false);
+		newChild.showModal(this.getOwnerFrame()
+                  , {cu:custNo}
+                  , this
+                  , "modal_callback");
+	
+	}
+	
+/*	
+//trace(e.row)
+trace(e.col);	
+	var varCol;
+varCol = this.Dataset00.getColumn(2,1);
+varCol = this.Dataset00.getColumn(2,"cust_addr");
+*/	
+}
+
+
+this.Static02_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

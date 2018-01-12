@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="cmmCode">
+	
+	<typeAlias alias="cmmCodeVO" type="nexacro.sample.vo.com.CmmCodeVO" />
+	
+	
+	<resultMap id="selectCode" class="cmmCodeVO">
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="className" column="CLASS_NAME" />
+		<result property="codeFullName" column="CODE_FULL_NAME" />
+	</resultMap>
+	
+	<resultMap id="parentCode" class="cmmCodeVO">
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="codeFullName" column="CODE_FULL_NAME" />
+	</resultMap>
+	
+	<resultMap id="selectCodeList" class="cmmCodeVO">
+		<result property="rownum" column="ROWNUM" />
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="className" column="CLASS_NAME" />
+		<result property="useYn" column="USE_YN" />
+		<result property="mainTable" column="MAIN_TABLE" />
+		<result property="classDesc" column="CLASS_DESC" />
+		<result property="sortSeq" column="SORT_SEQ" />
+		<result property="registTime" column="REGIST_TIME" />
+		<result property="registName" column="REGIST_NAME" />
+		<result property="updateTime" column="UPDATE_TIME" />
+		<result property="updateName" column="UPDATE_NAME" />
+		<result property="parentCode" column="PARENT_CODE" />
+		<result property="codeFullName" column="CODE_FULL_NAME" />
+		<result property="level" column="LEVEL" />
+	</resultMap>
+	
+	
+	<!-- 최상위 코드 가져오기 -->
+	<select id="cmmCode.selectCode" resultMap="selectCode">
+		<![CDATA[
+		SELECT
+			' ' AS CLASS_CODE,
+			' ' AS CLASS_NAME,
+			'전체' AS CODE_FULL_NAME
+		FROM
+			DUAL
+		UNION ALL
+		SELECT
+			CLASS_CODE,
+			CLASS_NAME,
+			CLASS_NAME || ' / ' || CLASS_CODE || '(' || USE_YN || ')' AS CODE_FULL_NAME
+		FROM
+			CMM_CODE
+		WHERE
+			PARENT_CODE IS NULL
+		]]>
+	</select>
+	
+	<!-- 부모코드 전체 이름 가져오기 -->
+	<select id="cmmCode.parentCode" resultMap="parentCode">
+		<![CDATA[
+		SELECT
+			'' AS CLASS_CODE,
+			'미지정(최상위코드)' AS CODE_FULL_NAME
+		FROM
+			DUAL
+		UNION ALL		
+		SELECT
+			CLASS_CODE,
+			SYS_CONNECT_BY_PATH(CLASS_NAME, '|') AS CODE_FULL_NAME
+		FROM
+			CMM_CODE
+		START WITH 
+			PARENT_CODE IS NULL
+		CONNECT BY
+			PRIOR CLASS_CODE = PARENT_CODE
+		]]>
+	</select>
+	
+	
+	<!-- 코드 조회하기 -->
+	<select id="cmmCode.selectCodeList" resultMap="selectCodeList"
+	parameterClass="cmmCodeVO">
+		<![CDATA[
+		SELECT ROWNUM, T1.* FROM
+			(
+			SELECT
+				SUBSTR(CLASS_CODE, -3) AS CLASS_CODE,
+				CLASS_NAME,
+				USE_YN,
+				MAIN_TABLE,
+				CLASS_DESC,
+				SORT_SEQ,
+				REGIST_TIME,
+				REGIST_NAME,
+				UPDATE_TIME,
+				UPDATE_NAME,
+				PARENT_CODE,
+				SYS_CONNECT_BY_PATH(CLASS_NAME, '|') AS CODE_FULL_NAME,
+				LEVEL
+			FROM
+				CMM_CODE
+		]]>
+			<dynamic>
+				<isNotNull property="searchKeyword">
+						WHERE CLASS_NAME LIKE '%' || #searchKeyword# || '%'
+				</isNotNull>
+			</dynamic>
+		<![CDATA[
+			START WITH PARENT_CODE IS NULL
+		]]>
+			<dynamic>
+				<isNotNull property="searchCondition" prepend=" AND ">
+						CLASS_CODE LIKE '%' || #searchCondition# || '%'
+				</isNotNull>
+			</dynamic>
+		<![CDATA[
+			CONNECT BY 
+				PRIOR CLASS_CODE = PARENT_CODE
+			ORDER SIBLINGS BY SORT_SEQ) T1
+			
+		]]>
+	</select>
+	
+	<!-- 코드 삽입 -->
+	<insert id="cmmCode.insertCmmCode" parameterClass="cmmCodeVO">
+		<![CDATA[
+		INSERT INTO
+			CMM_CODE
+		(
+		CLASS_CODE,
+		CLASS_NAME,
+		USE_YN,
+		MAIN_TABLE,
+		CLASS_DESC,
+		SORT_SEQ,
+		REGIST_TIME,
+		REGIST_NAME,
+		PARENT_CODE
+		)
+		VALUES
+		(
+		#parentCode# || #classCode#,
+		#className#,
+		#useYn#,
+		#mainTable#,
+		#classDesc#,
+		#sortSeq#,
+		SYSDATE,
+		#registName#,
+		#parentCode#
+		)
+		]]>
+	</insert>
+	
+	
+	<!-- 코드 수정 -->
+	<update id="cmmCode.updateCmmCode" parameterClass="java.util.HashMap">
+		UPDATE
+			CMM_CODE
+		SET
+			CLASS_NAME = #cmmCodeVO.className#,
+			USE_YN = #cmmCodeVO.useYn#,
+			MAIN_TABLE = #cmmCodeVO.mainTable#,
+			CLASS_DESC = #cmmCodeVO.classDesc#,
+			SORT_SEQ = #cmmCodeVO.sortSeq#,
+			UPDATE_TIME = SYSDATE,
+			UPDATE_NAME = #updateId#
+		WHERE
+			CLASS_CODE = #cmmCodeVO.parentCode# || #cmmCodeVO.classCode#
+	</update>
+	
+	
+	<!-- 코드 삭제 -->
+	<delete id="cmmCode.deleteCmmCode" parameterClass="cmmCodeVO">
+		DELETE
+		FROM
+			CMM_CODE
+		WHERE
+			CLASS_CODE = #parentCode# || #classCode#
+	</delete>
+	
+</sqlMap>

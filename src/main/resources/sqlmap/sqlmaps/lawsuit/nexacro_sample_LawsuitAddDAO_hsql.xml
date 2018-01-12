@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="LawsuitAdd">
+
+	<typeAlias alias="searchVO" type="nexacro.sample.vo.DefaultVO" />
+	<typeAlias alias="lawsuitaddVO"
+		type="nexacro.sample.service.lawsuit.vo.LawsuitAddVO" />
+
+	<!-- Sample resultObject -->
+	<resultMap id="lawsuitadd" class="lawsuitaddVO">
+		<result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+		<result property="lawsuitCtaWtr" column="LAWSUIT_CTA_WTR" />
+		<result property="lawsuitCtaNo" column="LAWSUIT_CTA_NO" />
+		<result property="lawsuitCtaCaseNo" column="LAWSUIT_CTA_CASE_NO" />
+		<result property="lawsuitCtaChg" column="LAWSUIT_CTA_CHG" />
+	</resultMap>
+
+ <update id="lawsuitaddDAO.updateAddLawsuit" parameterClass="lawsuitaddVO">
+        <![CDATA[
+            UPDATE TAB_LAWSUIT SET 
+			LAWSUIT_CTA_WTR = #lawsuitCtaWtr#
+			,LAWSUIT_CTA_NO	= #lawsuitCtaNo#
+			,LAWSUIT_CTA_CASE_NO = #lawsuitCtaCaseNo#
+			,LAWSUIT_CTA_CHG = #lawsuitCtaChg#
+			
+			WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#
+        ]]>
+    </update>
+	
+</sqlMap>

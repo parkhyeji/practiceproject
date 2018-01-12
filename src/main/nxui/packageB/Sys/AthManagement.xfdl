@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="athManagement" classname="samplecrud" left="0" top="0" width="1024" height="595" titletext="권한변경" onload="auth_onload">
+    <Layouts>
+      <Layout>
+        <Static id="str_03" taborder="37" left="40" top="54" height="28" style="background:gainsboro;border:1 solid darkgray ;" right="40"/>
+        <Button id="btn_emp_search" taborder="38" text="검색" onclick="btn_emp_search_onclick" cssclass="btn_WFSA_Search" top="58" width="92" height="20" style="background:lightskyblue;color:white;font:9 Dotum;" class="btn_WFSA_Search" right="236"/>
+        <Static id="str_04" taborder="39" text="항목" onclick="sta_no_onclick" left="44" top="57" width="4.98%" height="23" style="color:#46463dff;align:center middle;font:9 굴림;"/>
+        <Combo id="cmb_search" taborder="40" innerdataset="@ds_search" codecolumn="code" datacolumn="value" index="-1" onitemchanged="cmb_adv_code_onitemchanged" left="94" top="58" height="20" style="font:9 굴림;" width="125"/>
+        <Edit id="edt_searchKey" taborder="41" lengthunit="utf8" maxlength="100" ontextchanged="edt_out_req_tit_ontextchanged" left="223" top="58" height="20" style="font:9 굴림;" width="125"/>
+        <Button id="btn_reload" taborder="42" text="새로고침" onclick="btn_reload_onclick" cssclass="btn_WFSA_Search" top="58" height="20" style="background:lightskyblue;color:white;font:9 Dotum;" class="btn_WFSA_Search" width="92" right="44"/>
+        <Grid id="Grid01" taborder="46" binddataset="ds_delup" useinputpanel="false" left="40" top="90" right="40" bottom="125">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="51"/>
+                <Column size="119"/>
+                <Column size="154"/>
+                <Column size="119"/>
+                <Column size="84"/>
+                <Column size="84"/>
+                <Column size="84"/>
+                <Column size="83"/>
+                <Column size="84"/>
+                <Column size="84"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="상태"/>
+                <Cell col="1" text="사원이름"/>
+                <Cell col="2" text="사원번호"/>
+                <Cell col="3" text="부서"/>
+                <Cell col="4" text="로그인"/>
+                <Cell col="5" text="읽기권한"/>
+                <Cell col="6" text="쓰기권한"/>
+                <Cell col="7" text="룰작성권한"/>
+                <Cell col="8" text="룰 삭제권한"/>
+                <Cell col="9" text="결재권"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:flag" expr="expr:comp.parent.expr_flag(currow)"/>
+                <Cell col="1" text="bind:empName"/>
+                <Cell col="2" text="bind:empNo"/>
+                <Cell col="3" text="bind:departName"/>
+                <Cell col="4" displaytype="checkbox" edittype="checkbox" text="bind:loginCh"/>
+                <Cell col="5" displaytype="checkbox" edittype="checkbox" text="bind:readCh"/>
+                <Cell col="6" displaytype="checkbox" edittype="checkbox" text="bind:writeCh"/>
+                <Cell col="7" displaytype="checkbox" edittype="checkbox" text="bind:rolwriteCh"/>
+                <Cell col="8" displaytype="checkbox" edittype="checkbox" text="bind:roldelCh"/>
+                <Cell col="9" displaytype="checkbox" edittype="checkbox" text="bind:appCh"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_delup" taborder="47" text="저장" onclick="btn_delup_onclick" cssclass="btn_WFSA_Search" top="58" width="92" height="20" style="background:lightskyblue;color:white;font:9 Dotum;" class="btn_WFSA_Search" right="140"/>
+        <Static id="sta_title" taborder="48" onclick="sta_title_onclick" left="0%" top="0" right="0%" height="46" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Static id="Static04" taborder="49" text="권한관리" left="40" top="0" width="200" height="45" style="color:white;font:bold 17 돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_list" updatecontrol="false" onrowposchanged="ds_list_onrowposchanged" useclientlayout="false" oncolumnchanged="ds_list_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="ch" type="STRING" size="256"/>
+          <Column id="empName" type="STRING" size="20"/>
+          <Column id="empNo" type="STRING" size="20"/>
+          <Column id="authNo" type="STRING" size="20"/>
+          <Column id="authName" type="STRING" size="256"/>
+          <Column id="departName" type="STRING" size="20"/>
+          <Column id="appCh" type="STRING" size="20"/>
+          <Column id="loginCh" type="STRING" size="20"/>
+          <Column id="adminCh" type="STRING" size="20"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_emp">
+        <ColumnInfo>
+          <Column id="empNo" type="STRING" size="256"/>
+          <Column id="empName" type="STRING" size="20"/>
+          <Column id="posiName" type="STRING" size="20"/>
+          <Column id="celNo" type="STRING" size="20"/>
+          <Column id="email" type="STRING" size="256"/>
+          <Column id="ch" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_tree">
+        <ColumnInfo>
+          <Column id="label" type="STRING" size="256"/>
+          <Column id="level" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="label">임원</Col>
+            <Col id="level">0</Col>
+          </Row>
+          <Row>
+            <Col id="label">사장</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="label">이사</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="label">인사부</Col>
+            <Col id="level">0</Col>
+          </Row>
+          <Row>
+            <Col id="label">과장</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="label">부장</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="label">대리</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="label">사원</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="label">SI</Col>
+            <Col id="level">0</Col>
+          </Row>
+          <Row>
+            <Col id="label">과장</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="label">부장</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="label">대리</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="label">최현석</Col>
+            <Col id="level">2</Col>
+          </Row>
+          <Row>
+            <Col id="label">사원</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="level">2</Col>
+            <Col id="label">박혜지</Col>
+          </Row>
+          <Row>
+            <Col id="level">2</Col>
+            <Col id="label">한세일</Col>
+          </Row>
+          <Row>
+            <Col id="label">박대호</Col>
+            <Col id="level">2</Col>
+          </Row>
+          <Row>
+            <Col id="label">김한준</Col>
+            <Col id="level">2</Col>
+          </Row>
+          <Row>
+            <Col id="label">남현승</Col>
+            <Col id="level">2</Col>
+          </Row>
+          <Row>
+            <Col id="label">이주엽</Col>
+            <Col id="level">2</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="255"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">EMP_NAME</Col>
+            <Col id="value">이름</Col>
+          </Row>
+          <Row>
+            <Col id="code">CODE_NAME</Col>
+            <Col id="value">부서</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_condition">
+        <ColumnInfo>
+          <Column id="type" type="STRING" size="256"/>
+          <Column id="keyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="type">EMP_NAME</Col>
+            <Col id="keyword"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_delup" updatecontrol="false" useclientlayout="false" oncolumnchanged="ds_delup_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="empName" type="STRING" size="20"/>
+          <Column id="empNo" type="STRING" size="20"/>
+          <Column id="departName" type="STRING" size="20"/>
+          <Column id="appCh" type="STRING" size="20"/>
+          <Column id="loginCh" type="STRING" size="20"/>
+          <Column id="readCh" type="STRING" size="20"/>
+          <Column id="writeCh" type="STRING" size="256"/>
+          <Column id="rolwriteCh" type="STRING" size="256"/>
+          <Column id="roldelCh" type="STRING" size="256"/>
+          <Column id="flag" type="STRING" size="256"/>
+          <Column id="regiId" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item12" compid="edt_posi" propid="value" datasetid="ds_list" columnid="posiName"/>
+      <BindItem id="item1" compid="Tab00.tabpage1.cmb_search" propid="value" datasetid="ds_condition" columnid="type"/>
+      <BindItem id="item0" compid="Tab00.tabpage1.edt_searchKey" propid="value" datasetid="ds_condition" columnid="keyword"/>
+      <BindItem id="item4" compid="cmb_search" propid="value" datasetid="ds_condition" columnid="type"/>
+      <BindItem id="item5" compid="edt_searchKey" propid="value" datasetid="ds_condition" columnid="keyword"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+// Onload function  
+this.auth_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+	var sDsIds  = "";
+	    sDsIds  += " ds_list=ds_list";
+	    sDsIds  += " ds_delup=ds_delup";
+
+	this.gfn_transaction(this
+					   , "load"
+					   , "AthManagement/load.do"
+					   , ""
+					   , sDsIds
+					   , ""
+					   , "fnCallback");
+}
+
+// callback function
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		application.alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.");
+		return;
+	}else{
+		switch(sSvcId){
+			case "load":
+			this.ds_search.insertRow(0);
+			this.ds_search.setColumn(0, "code", "ALL");
+			this.ds_search.setColumn(0, "value", "전체");
+			this.cmb_search.set_index(0);
+			break;
+			case "searchCode":
+			break;
+			case "deleteup":
+			    this.btn_reload_onclick();
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+
+
+//사원검색
+this.btn_emp_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+    this.gfn_transaction(this
+					   , "searchCode"
+					   , "AthManagement/searchEmp.do"
+					   , "ds_condition=ds_condition"
+					   , "ds_delup=ds_delup"
+					   , ""
+					   , "fnCallback");
+}
+
+//새로고침클릭 다시 로딩
+this.btn_reload_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{   var sDsIds  = "";
+	    sDsIds  += " ds_list=ds_list";
+	    sDsIds  += " ds_delup=ds_delup";
+
+	this.gfn_transaction(this
+					   , "load"
+					   , "AthManagement/load.do"
+					   , ""
+					   , sDsIds
+					   , ""
+					   , "fnCallback");
+}
+
+//flag 사용
+this.ds_delup_oncolumnchanged = function(obj:Dataset, e:nexacro.DSColChangeEventInfo)
+{
+	//var nRowList = e.row;
+	var sFlag = obj.getColumn(e.row, "flag");
+	
+	if(sFlag == 'S'){
+		obj.setColumn(e.row,"flag",'U');
+	}
+}
+
+this.expr_flag = function(nRow){
+	var sFlag = this.ds_delup.getColumn(nRow, "flag");
+	if(sFlag == 'S') return '-';
+	else if(sFlag == 'I') return '신규';
+	else if(sFlag == 'D') return '삭제';
+	else if(sFlag == 'U') return '변경';
+}
+
+
+//저장버튼 클릭
+this.btn_delup_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+	var temp = application.gds_empInfo.getColumn(0, "empNo");
+	for(var j=0;j<this.ds_delup.rowcount;j++){
+		this.ds_delup.setColumn(j, "regiId", temp);
+	}
+// braclet
+    this.gfn_transaction(this
+	  				   , "deleteup"
+					   , "AthManagement/delup.do"
+					   , "ds_delup=ds_delup"
+					   , ""
+					   , ""
+					   , "fnCallback");
+}
+]]></Script>
+  </Form>
+</FDL>

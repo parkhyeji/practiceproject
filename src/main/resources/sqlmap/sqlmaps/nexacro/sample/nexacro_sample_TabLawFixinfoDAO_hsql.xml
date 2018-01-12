@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TabLawFixinfo">
+
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    <typeAlias  alias="TabLawFixinfoVO" type="nexacro.sample.vo.TabLawFixinfoVO"/>
+    
+   <!-- <resultMap id="law" class="Law_fixinfoVO">
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="instAdmCode" column="INST_ADM_CODE" />
+        <result property="instAdmCaseNo" column="INST_ADM_CASE_NO" />
+        <result property="instAdmPrgrCode" column="INST_ADM_PRGR_CODE" />
+        <result property="instAdmCortCode" column="INST_ADM_CORT_CODE" />
+        <result property="lawsuitCpPladefSepcode" column="LAWSUIT_CP_PLADEF_SEPCODE" />
+        <result property="pladefName" column="PLADEF_NAME" />
+        <result property="pladefClamVol" column="PLADEF_CLAM_VOL" />
+        <result property="lawsuitCaseTyCode" column="LAWSUIT_CASE_TY_CODE" />
+        <result property="lawFixinfoSepcode" column="LAW_FIXINFO_SEPCODE" />    
+        <result property="lawFixinfoDate" column="LAW_FIXINFO_DATE" />
+        <result property="lawFixinfoPlc" column="LAW_FIXINFO_PLC" />
+        <result property="lawFixinfoMainIssu" column="LAW_FIXINFO_MAIN_ISSU" />
+        <result property="lawFixinfoCpInsi" column="LAW_FIXINFO_CP_INSI" />
+        <result property="lawFixinfoOthInsi" column="LAW_FIXINFO_OTH_INSI" />
+        <result property="lawFixinfoCortOpin" column="LAW_FIXINFO_CORT_OPIN" />
+        <result property="lawFixinfoDlinDate" column="LAW_FIXINFO_DLIN_DATE" />
+       
+    </resultMap> -->
+    
+     <!-- 
+    //TAB_INST_ADM
+    private String lawsuitAdmNo; // 소송관리번호
+	private String instAdmCode; // 심급코드
+	private String instAdmCaseNo; // 사건번호
+	private String instAdmPrgrCode; // 소송진행상태코드
+	private String instAdmCortCode; // 수행법원코드
+
+	//TAB_PLADEF
+	private String lawsuitCpPladefSepcode; // 당사 원피고 구분코드
+	private String pladefName; // 원피고명
+	private String pladefClamVol; // 원피고별 청구소가
+
+	// TAB_LAWSUIT
+	private String lawsuitCaseTyCode; // 사건유형코드
+
+	// TAB_LAW_FIXINFO
+	private String lawFixinfoSepcode; // 기일부분코드
+	private String lawFixinfoDate; // 기일일시
+	private String lawFixinfoPlc; // 기일장소
+	private String lawFixinfoMainIssu; // 주요쟁점사항
+	private String lawFixinfoCpInsi; // 당사주장
+	private String lawFixinfoOthInsi; // 상대방주장
+	private String lawFixinfoCortOpin; // 재판부의견
+	private String lawFixinfoLyrOpin; // 변호사의견
+	private String lawFixinfoDlinDate; // 기일마감일시 -->
+    
+    
+    <resultMap id="law" class="TabLawFixinfoVO">
+    	<result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+    	<result property="instAdmCode" column="INST_ADM_CODE" />
+    	<result property="instAdmCaseNo" column="INST_ADM_CASE_NO" />
+    	<result property="lawsuitCaseTyCode" column="LAWSUIT_CASE_TY_CODE" />
+    	<result property="instAdmPrgrCode" column="INST_ADM_PRGR_CODE" />
+    	<result property="lawsuitCpPladefSepcode" column="LAWSUIT_CP_PLADEF_SEPCODE" />
+    	<result property="pladefName" column="PLADEF_NAME" />
+    	<result property="pladefClamVol" column="PLADEF_CLAM_VOL" />
+    	<result property="instAdmCortCode" column="INST_ADM_CORT_CODE" />
+    </resultMap>
+    
+    <!-- 소송기본 사항 조회(소송관리번호 및 심급) -->
+	<select id="prgr.Law_fixinfoDAO.getLawsuitRecSelect"
+		parameterClass="TabLawFixinfoVO" resultMap="law">
+		<![CDATA[
+		SELECT   
+                  T1.LAWSUIT_ADM_NO
+                 ,T1.INST_ADM_CODE
+                 ,T1.INST_ADM_CASE_NO 
+                 ,T3.LAWSUIT_CASE_TY_CODE 
+                 ,T1.INST_ADM_PRGR_CODE
+                 ,T3.LAWSUIT_CP_PLADEF_SEPCODE
+                 ,T2.PLADEF_NAME
+                 ,T2.PLADEF_CLAM_VOL
+                 ,T1.INST_ADM_CORT_CODE
+            
+            
+
+         FROM   TAB_INST_ADM T1, TAB_PLADEF T2 , TAB_LAWSUIT T3
+
+        WHERE   T3.LAWSUIT_ADM_NO = T2.LAWSUIT_ADM_NO
+          AND   T3.INST_ADM_CODE = #instAdmCode#
+          AND   T3.LAWSUIT_ADM_NO = #lawsuitAdmNo#
+          AND   T1.LAWSUIT_ADM_NO = T2.LAWSUIT_ADM_NO
+         
+     
+		]]>
+			<![CDATA[
+				ORDER BY LAWSUIT_ADM_NO
+			]]>
+	
+	</select>
+
+
+
+ <resultMap id="info" class="TabLawFixinfoVO">
+    	<result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+    	<result property="instAdmCode" column="INST_ADM_CODE" />
+    	<result property="lawFixinfoNum" column="LAW_FIXINFO_NUM" />
+    	<result property="lawFixinfoSepcode" column="LAW_FIXINFO_SEPCODE" />
+    	<result property="lawFixinfoDate" column="LAW_FIXINFO_DATE" />
+    	<result property="lawFixinfoPlc" column="LAW_FIXINFO_PLC" />
+    	<result property="lawFixinfoMainIssu" column="LAW_FIXINFO_MAIN_ISSU" />
+    	<result property="lawFixinfoCpInsi" column="LAW_FIXINFO_CP_INSI" />
+    	<result property="lawFixinfoOthInsi" column="LAW_FIXINFO_OTH_INSI" />
+    	<result property="lawFixinfoCortOpin" column="LAW_FIXINFO_CORT_OPIN" />
+    	<result property="lawFixinfoLyrOpin" column="LAW_FIXINFO_LYR_OPIN" />
+    	<result property="lawFixinfoDlinDate" column="LAW_FIXINFO_DLIN_DATE" />
+    </resultMap>
+
+
+    <!-- 기일정보 조회(성새정보포함) -->
+	<select id="prgr.Law_fixinfoDAO.getLawFixinfoSelect"
+		parameterClass="TabLawFixinfoVO" resultMap="info">
+		<![CDATA[
+		SELECT   
+				T1.LAWSUIT_ADM_NO
+				,T1.INST_ADM_CODE
+				,T1.LAW_FIXINFO_NUM
+				,T1.LAW_FIXINFO_SEPCODE
+				,T1.LAW_FIXINFO_DATE
+				,T1.LAW_FIXINFO_PLC
+				,T1.LAW_FIXINFO_MAIN_ISSU
+				,T1.LAW_FIXINFO_CP_INSI
+				,T1.LAW_FIXINFO_OTH_INSI
+				,T1.LAW_FIXINFO_CORT_OPIN
+				,T1.LAW_FIXINFO_LYR_OPIN
+				,T1.LAW_FIXINFO_DLIN_DATE
+
+				           
+            
+         FROM   TAB_LAW_FIXINFO T1
+
+        WHERE   T1.LAWSUIT_ADM_NO = #lawsuitAdmNo#
+          AND   T1.INST_ADM_CODE = #instAdmCode#
+    
+		]]>
+			<![CDATA[
+				ORDER BY LAWSUIT_ADM_NO
+			]]>
+	
+	</select>    
+	
+	<!-- 기일정보  등록(insert) -->
+	<insert id="prgr.Law_fixinfoDAO.insertFixinfo" parameterClass="TabLawFixinfoVO" >
+	<![CDATA[
+		INSERT INTO  TAB_LAW_FIXINFO (
+						LAWSUIT_ADM_NO
+						,INST_ADM_CODE
+						,LAW_FIXINFO_NUM
+						,LAW_FIXINFO_SEPCODE
+						,LAW_FIXINFO_DATE
+						,LAW_FIXINFO_PLC
+						,LAW_FIXINFO_MAIN_ISSU
+						,LAW_FIXINFO_CP_INSI
+						,LAW_FIXINFO_OTH_INSI
+						,LAW_FIXINFO_CORT_OPIN
+						,LAW_FIXINFO_LYR_OPIN
+						,LAW_FIXINFO_DLIN_DATE
+						)
+			VALUES(
+                     
+                     #lawsuitAdmNo#
+					 ,#instAdmCode#
+					 ,TAB_LAW_NUM.NEXTVAL
+					 ,#lawFixinfoSepcode#
+					 ,#lawFixinfoDate#
+					 ,#lawFixinfoPlc#
+					 ,#lawFixinfoMainIssu#
+					 ,#lawFixinfoCpInsi#
+					 ,#lawFixinfoOthInsi#
+					 ,#lawFixinfoCortOpin#
+					 ,#lawFixinfoLyrOpin#
+					 ,#lawFixinfoDlinDate#
+					 
+					)
+				]]>
+	</insert>
+	
+	<!-- 기일정보 수정 (update) -->
+	<update id="prgr.Law_fixinfoDAO.updateFixinfo" >
+		<![CDATA[
+		UPDATE  TAB_LAW_FIXINFO
+		
+		   SET  LAW_FIXINFO_SEPCODE = #lawFixinfoSepcode#
+		       ,LAW_FIXINFO_DATE = #lawFixinfoDate#
+		       ,LAW_FIXINFO_PLC = #lawFixinfoPlc#
+		       ,LAW_FIXINFO_MAIN_ISSU = #lawFixinfoMainIssu#
+		       ,LAW_FIXINFO_CP_INSI = #lawFixinfoCpInsi#
+		       ,LAW_FIXINFO_OTH_INSI = #lawFixinfoOthInsi#
+		       ,LAW_FIXINFO_CORT_OPIN = #lawFixinfoCortOpin#
+		       ,LAW_FIXINFO_DLIN_DATE = #lawFixinfoDlinDate#
+
+		WHERE  LAW_FIXINFO_NUM = #lawFixinfoNum#		
+		AND    LAWSUIT_ADM_NO = #lawsuitAdmNo#
+		AND    INST_ADM_CODE = #instAdmCode#
+		]]>
+	</update>
+
+
+	<!-- 조정안 삭제 -->
+	<delete id="prgr.Law_fixinfoDAO.deleteFixinfo"
+	parameterClass="TabLawFixinfoVO">
+		<![CDATA[
+		DELETE TAB_LAW_FIXINFO
+		
+		WHERE LAW_FIXINFO_NUM = #lawFixinfoNum#
+		]]>
+	</delete>	 
+    
+</sqlMap>

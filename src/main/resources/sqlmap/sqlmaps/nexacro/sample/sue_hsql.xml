@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="sue">
+	<typeAlias alias="sueVO" type="nexacro.sample.vo.SueVO" />
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+
+<resultMap id="sueMenList" class="sueVO" >
+	<result property="lawRaisreqNo" column="LAW_RAISREQ_NO"/>
+	<result property="lawRaisreqReqId" column="LAW_RAISREQ_REQ_ID"/>
+	<result property="lawRaisreqClasCode" column="LAW_RAISREQ_CLAS_CODE"/>
+	<result property="lawRaisreqRea" column="LAW_RAISREQ_REA"/>
+	<result property="lawRaisreqEtcPoin" column="LAW_RAISREQ_ETC_POIN"/>
+	<result property="lawRaisreqReqDate" column="LAW_RAISREQ_REQ_DATE"/>
+	<result property="lawRaisreqRepWtr" column="LAW_RAISREQ_REP_WTR"/>
+	<result property="lawRaisreqWtr" column="LAW_RAISREQ_WTR"/>
+	<result property="lawRaisreqDalwCont" column="LAW_RAISREQ_DALW_CONT"/>
+	<result property="lawRaisreqExptDate" column="LAW_RAISREQ_EXPT_DATE"/>
+	<result property="lawRaisreqRepCont" column="LAW_RAISREQ_REP_CONT"/>
+	<result property="lawRaisreqEtcreqPoin" column="LAW_RAISREQ_ETCREQ_POIN"/>
+	<result property="lawRaisreqRepDate" column="LAW_RAISREQ_REP_DATE"/>
+	<result property="lawRaisreqIssuPoin" column="LAW_RAISREQ_ISSU_POIN"/>
+	<result property="totalCnt" column="TOTAL_CNT"/>
+</resultMap>
+
+<select id="sue.sueDAO.getSueMenList" resultMap="sueMenList"
+		parameterClass="java.util.HashMap" remapResults="true">
+		<![CDATA[
+			SELECT 
+				rownum, main.*,TOTAL_CNT
+			FROM 	
+				(SELECT  
+					T1.LAW_RAISREQ_NO
+					,T2.INSA_NAME||'('||T1.LAW_RAISREQ_REQ_ID||')' AS LAW_RAISREQ_REQ_ID
+					,T1.LAW_RAISREQ_CLAS_CODE||'('||T3.CODE_NAME||')' AS LAW_RAISREQ_CLAS_CODE
+					,T1.LAW_RAISREQ_REA
+					,T1.LAW_RAISREQ_ETC_POIN
+					,T1.LAW_RAISREQ_REQ_DATE
+					,UPPER(T1.LAW_RAISREQ_REP_WTR) AS LAW_RAISREQ_REP_WTR
+					,UPPER(T1.LAW_RAISREQ_WTR) AS LAW_RAISREQ_WTR
+					,T1.LAW_RAISREQ_DALW_CONT
+					,T1.LAW_RAISREQ_EXPT_DATE	
+					,T1.LAW_RAISREQ_REP_CONT
+					,T1.LAW_RAISREQ_ETCREQ_POIN
+					,T1.LAW_RAISREQ_REP_DATE
+					,T1.LAW_RAISREQ_ISSU_POIN
+					,rownum
+					,ROW_NUMBER() OVER(ORDER BY LAW_RAISREQ_NO DESC) AS NUMROW
+					,COUNT(*) OVER() AS TOTAL_CNT
+				FROM 
+					TAB_LAW_RAISREQ T1
+					,TAB_INSA T2
+					,CMM_CODE_DETAIL T3					
+				WHERE 
+					T1.LAW_RAISREQ_REQ_ID = T2.INSA_SABUN
+					AND
+					T3.CLASS_CODE LIKE 'D01'
+					AND
+					T3.CODE_NO = T1.LAW_RAISREQ_CLAS_CODE		
+		]]>
+			<!-- 의뢰번호 -->
+			<isNotEmpty property="lawRaisreqNo" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_NO LIKE #lawRaisreqNo# || '%'
+				]]>
+			</isNotEmpty>
+			<!-- 소송제기분류 -->
+			<isNotEmpty property="lawRaisreqClasCode" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_CLAS_CODE LIKE #lawRaisreqClasCode# || '%'
+				]]>
+			</isNotEmpty>
+			<!-- 의뢰기간 -->
+			<isNotEmpty property="lawRaisreqReqDate1" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_REQ_DATE >= #lawRaisreqReqDate1#
+				]]>
+			</isNotEmpty>
+			<isNotEmpty property="lawRaisreqReqDate2" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_REQ_DATE <= #lawRaisreqReqDate2#
+				]]>
+			</isNotEmpty>
+			<!-- 회신여부 -->
+			<isNotEmpty property="lawRaisreqRepWtr" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_REP_WTR LIKE #lawRaisreqRepWtr# || '%'
+				]]>
+			</isNotEmpty>
+				ORDER BY 
+					T1.LAW_RAISREQ_REQ_DATE DESC, T1.LAW_RAISREQ_NO DESC
+				) main	
+				WHERE NUMROW BETWEEN	 (#pageNo#-1)*#listSize#+1 AND (#pageNo#)*#listSize#
+	</select>
+
+<select id="sue.sueDAO.sueView" resultClass="egovMap"
+parameterClass="java.util.HashMap">
+<![CDATA[
+			SELECT  
+				T1.LAW_RAISREQ_NO
+				,T2.INSA_NAME||'('||T1.LAW_RAISREQ_REQ_ID||')' AS LAW_RAISREQ_REQ_ID
+				,T1.LAW_RAISREQ_CLAS_CODE
+				,T1.LAW_RAISREQ_REA
+				,T1.LAW_RAISREQ_ETC_POIN
+				,T1.LAW_RAISREQ_REQ_DATE
+				,UPPER(T1.LAW_RAISREQ_REP_WTR) AS LAW_RAISREQ_REP_WTR
+				,UPPER(T1.LAW_RAISREQ_WTR) AS LAW_RAISREQ_WTR
+				,T1.LAW_RAISREQ_DALW_CONT
+				,T1.LAW_RAISREQ_EXPT_DATE	
+				,T1.LAW_RAISREQ_REP_CONT
+				,T1.LAW_RAISREQ_ETCREQ_POIN
+				,T1.LAW_RAISREQ_REP_DATE
+				,T1.LAW_RAISREQ_ISSU_POIN
+			FROM 
+				TAB_LAW_RAISREQ T1
+				,TAB_INSA T2
+			WHERE 
+				T1.LAW_RAISREQ_REQ_ID = T2.INSA_SABUN
+		]]>
+		<!-- 의뢰번호 -->
+		<isNotEmpty property="lawRaisreqNo" prepend="AND">
+			<![CDATA[
+				T1.LAW_RAISREQ_NO LIKE #lawRaisreqNo# || '%'
+			]]>
+		</isNotEmpty>
+</select>
+
+<update id="sue.sueDAO.sueUpdate" parameterClass="java.util.HashMap">
+	UPDATE
+		TAB_LAW_RAISREQ
+	SET
+		LAW_RAISREQ_REP_WTR = #lawRaisreqRepWtr,jdbcType=VARCHAR#	
+			,LAW_RAISREQ_WTR = #lawRaisreqWtr,jdbcType=VARCHAR#
+			,LAW_RAISREQ_DALW_CONT = #lawRaisreqDalwCont,jdbcType=VARCHAR#	
+			,LAW_RAISREQ_EXPT_DATE = #lawRaisreqExptDate,jdbcType=VARCHAR#
+			,LAW_RAISREQ_REP_CONT = #lawRaisreqRepCont,jdbcType=VARCHAR#
+			,LAW_RAISREQ_ETCREQ_POIN = #lawRaisreqEtcreqPoin,jdbcType=VARCHAR#
+			,LAW_RAISREQ_REP_DATE = #lawRaisreqRepDate,jdbcType=VARCHAR#
+			,LAW_RAISREQ_ISSU_POIN = #lawRaisreqIssuPoin,jdbcType=VARCHAR#				 		 
+		WHERE	
+			LAW_RAISREQ_NO = #lawRaisreqNo#
+</update>
+
+<select id="sue.sueDAO.sueTotalCnt" resultClass="Integer">
+	SELECT
+		COUNT(*) AS TOTAL_CNT
+	FROM 
+				TAB_LAW_RAISREQ T1
+				,TAB_INSA T2
+			WHERE 
+				T1.LAW_RAISREQ_REQ_ID = T2.INSA_SABUN
+</select>
+	
+</sqlMap>

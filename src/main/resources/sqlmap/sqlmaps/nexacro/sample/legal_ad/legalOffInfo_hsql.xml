@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="legalOffInfo">
+
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="LegalOfficialInfoVO" type="nexacro.sample.vo.legal_adv.LegalOfficialInfoVO" />
+	
+	<select id="legalOffInfo.Legal_OffInfoDAO.selectLgOffInfoList" resultClass="egovMap"
+		parameterClass="java.util.HashMap">
+		<![CDATA[
+			SELECT ROWNUM, T1.* FROM(
+					SELECT	LEGAL_OFFICIALINFO_RELA_NO,
+						LEGAL_OFFICIALINFO_LYR_PSW,
+						LEGAL_OFFICIALINFO_RELA_SEP,
+						LEGAL_OFFICIALINFO_TEAMNAME,
+						LEGAL_OFFICIALINFO_LYR_NAME,
+						LEGAL_OFFICIALINFO_MAIL,
+						LEGAL_OFFICIALINFO_PHONE,
+						LEGAL_OFFICIALINFO_HDPN,
+						LEGAL_OFFICIALINFO_CITY_CODE 
+					FROM	TAB_LEGAL_OFFICIALINFO
+			]]>
+			<isNotNull property="LegalofclType" >
+					<isNotEmpty property="LegalofclType" prepend="WHERE"> <!--prepend(이음) 조건 -->
+						<![CDATA[
+							LEGAL_OFFICIALINFO_RELA_SEP Like '%' || #LegalofclType# || '%'
+						]]>
+					</isNotEmpty>
+					<isNotEmpty property="LegalofclName" prepend="AND"> <!--prepend(이음) 조건 -->
+						<![CDATA[
+							LEGAL_OFFICIALINFO_LYR_NAME Like '%' || #LegalofclName# || '%'
+						]]>
+					</isNotEmpty>
+			</isNotNull>
+			<![CDATA[
+				ORDER BY LEGAL_OFFICIALINFO_RELA_NO DESC) T1
+			]]>
+	</select>
+	
+	<insert id="legalOffInfo.Legal_OffInfoDAO.insertLgOfclList" parameterClass="LegalOfficialInfoVO">
+		<selectKey keyProperty="legalOfficialinfoRelaNo" resultClass="string">
+			<![CDATA[
+	            SELECT /*+ INDEX_DESC(LEGAL_OFFICIALINFO_RELA_NO) */ 
+	                    DECODE(SUBSTR(MAX(LEGAL_OFFICIALINFO_RELA_NO),1,8) 
+	               	   ,TO_CHAR(SYSDATE,'YYYYMMDD'), MAX(LEGAL_OFFICIALINFO_RELA_NO) + 1
+	                   ,TO_CHAR(SYSDATE,'YYYYMMDD') || '01') LEGAL_OFFICIALINFO_RELA_NO            
+	            FROM TAB_LEGAL_OFFICIALINFO
+	            WHERE LEGAL_OFFICIALINFO_RELA_NO < TO_CHAR(SYSDATE,'YYYYMMDD') || '99'
+	            AND ROWNUM = 1
+		    ]]>
+		</selectKey>
+		
+		<![CDATA[
+			INSERT	INTO	TAB_LEGAL_OFFICIALINFO
+				(	
+					LEGAL_OFFICIALINFO_RELA_NO,
+					LEGAL_OFFICIALINFO_LYR_PSW,
+					LEGAL_OFFICIALINFO_RELA_SEP,
+					LEGAL_OFFICIALINFO_TEAMNAME,
+					LEGAL_OFFICIALINFO_LYR_NAME,
+					LEGAL_OFFICIALINFO_MAIL,
+					LEGAL_OFFICIALINFO_PHONE,
+					LEGAL_OFFICIALINFO_HDPN,
+					LEGAL_OFFICIALINFO_CITY_CODE	
+				)
+				VALUES	(	
+							#legalOfficialinfoRelaNo#,
+							#legalOfficialinfoLyrPsw,jdbcType=VARCHAR#,
+							#legalOfficialinfoRelaSep,jdbcType=VARCHAR#,
+							#legalOfficialinfoTeamname,jdbcType=VARCHAR#,
+							#legalOfficialinfoLyrName,jdbcType=VARCHAR#,
+							#legalOfficialinfoMail,jdbcType=VARCHAR#,
+							#legalOfficialinfoPhone,jdbcType=VARCHAR#,
+							#legalOfficialinfoHdpn,jdbcType=VARCHAR#,
+							#legalOfficialinfoCityCode,jdbcType=VARCHAR#
+						)
+		]]>
+	</insert>
+	
+	<update id="legalOffInfo.Legal_OffInfoDAO.updateLgOfclList" parameterClass="LegalOfficialInfoVO">
+		<![CDATA[
+			UPDATE	TAB_LEGAL_OFFICIALINFO
+				SET	LEGAL_OFFICIALINFO_LYR_PSW = #legalOfficialinfoLyrPsw,jdbcType=VARCHAR#,
+					LEGAL_OFFICIALINFO_RELA_SEP = #legalOfficialinfoRelaSep,jdbcType=VARCHAR#,
+					LEGAL_OFFICIALINFO_TEAMNAME = #legalOfficialinfoTeamname,jdbcType=VARCHAR#,
+					LEGAL_OFFICIALINFO_LYR_NAME = #legalOfficialinfoLyrName,jdbcType=VARCHAR#,
+					LEGAL_OFFICIALINFO_MAIL = #legalOfficialinfoMail,jdbcType=VARCHAR#,
+					LEGAL_OFFICIALINFO_PHONE = #legalOfficialinfoPhone,jdbcType=VARCHAR#,
+					LEGAL_OFFICIALINFO_HDPN = #legalOfficialinfoHdpn,jdbcType=VARCHAR#,
+					LEGAL_OFFICIALINFO_CITY_CODE = #legalOfficialinfoCityCode,jdbcType=VARCHAR#
+				WHERE	LEGAL_OFFICIALINFO_RELA_NO = #legalOfficialinfoRelaNo#
+		]]>
+	</update>
+	
+	<delete id="legalOffInfo.Legal_OffInfoDAO.deleteLgOfclList" parameterClass="LegalOfficialInfoVO">
+		<![CDATA[
+			DELETE	FROM	TAB_LEGAL_OFFICIALINFO
+				WHERE	LEGAL_OFFICIALINFO_RELA_NO = #legalOfficialinfoRelaNo#
+		]]>
+	</delete>
+</sqlMap>

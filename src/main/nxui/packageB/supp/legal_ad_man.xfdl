@@ -1,0 +1,633 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="legal_ad_man" classname="legal_ad_man" left="0" top="0" width="1024" height="768" titletext="외부법률관계자관리" onload="legal_ad_man_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_view01" taborder="25" left="0.98%" top="133" width="98.05%" height="283" style="background:lavenderblush;"/>
+        <ImageViewer id="img_titlebg" taborder="0" left="0.88%" top="8" width="98.24%" height="50" style="background:cornflowerblue;"/>
+        <Static id="sta_title" taborder="18" text="외부 법률 관계자 관리" left="26" top="18" width="188" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;" onclick="sta_title_onclick"/>
+        <ImageViewer id="img_view00" taborder="19" left="0.98%" top="63" width="98.05%" height="35" style="background:lavenderblush;"/>
+        <Static id="sta_01" taborder="20" left="1.66%" top="68" width="96.88%" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_no" taborder="21" text="관계자 구분" onclick="sta_no_onclick" left="1.56%" top="68" width="12.79%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Button id="btn_req_noti_src" taborder="3" text="검색" onclick="btn_depo_search_onclick" left="86.33%" top="70" width="52" height="21" class="btn_WFSA_Search" cssclass="btn_WFSA_Search" style="background:lightskyblue stretch 9,9 left top;color:white;font:bold 9 Dotum;"/>
+        <Button id="btn_clear" taborder="4" text="초기화" onclick="btn_reset_onclick" left="92.19%" top="70" width="52" height="21" class="btn_WFSA_Search" cssclass="btn_WFSA_Search" style="background:lightskyblue stretch 9,9 left top;color:white;font:bold 9 Dotum;"/>
+        <Static id="sta_no00" taborder="22" text="성명" onclick="sta_no_onclick" left="32.81%" top="68" width="12.79%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Combo id="cbo_legalOfclType" taborder="1" left="14.94%" top="70" right="70.7%" height="21" innerdataset="@ds_legalOfclType" codecolumn="codeno" datacolumn="codenm" onitemchanged="cbo_legalOfclType_onitemchanged"/>
+        <Edit id="edt_srcLegalOfclName" taborder="2" left="46.09%" top="70" right="38.77%" height="21" maxlength="10" style="align:center middle;"/>
+        <Static id="sta_03" taborder="23" text="법률관계자 정보" onclick="sta_03_onclick" left="17" top="113" width="197" height="19" style="color:black;align:left top;font:굴림,9,bold;"/>
+        <Grid id="Grid00" taborder="5" useinputpanel="false" left="1.56%" top="140" right="1.56%" height="268" autofittype="col" binddataset="ds_official" oncellclick="Grid00_oncellclick" onkeyup="Grid00_onkeyup">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="25" band="head"/>
+                <Row size="20"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="No"/>
+                <Cell col="1" text="법률관계자번호"/>
+                <Cell col="2" text="관계자구분"/>
+                <Cell col="3" text="소속명"/>
+                <Cell col="4" text="성명"/>
+                <Cell col="5" text="이메일"/>
+                <Cell col="6" text="연락처"/>
+                <Cell col="7" text="휴대전화"/>
+                <Cell col="8" text="지역"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:rownum"/>
+                <Cell col="1" text="bind:legalOfficialinfoRelaNo"/>
+                <Cell col="2" displaytype="combo" style="align:center;" text="bind:legalOfficialinfoRelaSep" combodataset="ds_legalOfclType" combocodecol="codeno" combodatacol="codenm"/>
+                <Cell col="3" text="bind:legalOfficialinfoTeamname"/>
+                <Cell col="4" text="bind:legalOfficialinfoLyrName"/>
+                <Cell col="5" text="bind:legalOfficialinfoMail"/>
+                <Cell col="6" displaytype="normal" edittype="mask" text="bind:legalOfficialinfoPhone" mask="expr:legalOfficialinfoPhone.length == &quot;9&quot;? &quot;##-###-####&quot; : legalOfficialinfoPhone.length == &quot;11&quot;? &quot;###-####-####&quot; : (legalOfficialinfoPhone.substr(0,2) == &quot;02&quot; &amp;&amp; legalOfficialinfoPhone.length == &quot;10&quot;)? &quot;##-####-####&quot; : &quot;###-###-####&quot;"/>
+                <Cell col="7" displaytype="normal" edittype="masknumber" text="bind:legalOfficialinfoHdpn" mask="expr:legalOfficialinfoHdpn.length == &quot;11&quot;? &quot;###-####-####&quot; : &quot;###-###-####&quot;"/>
+                <Cell col="8" displaytype="combo" style="align:center;" text="bind:legalOfficialinfoCityCode" combodataset="ds_sido" combocodecol="codeno" combodatacol="codenm"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_00" taborder="24" text="법률관계자 상세정보" onclick="sta_03_onclick" left="17" top="464" width="197" height="19" style="color:black;align:left top;font:굴림,9,bold;"/>
+        <ImageViewer id="img_view02" taborder="26" left="0.98%" top="482" width="98.05%" height="118" style="background:lavenderblush;"/>
+        <Static id="sta_04" taborder="38" left="2.34%" top="490" width="95.51%" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_no01" taborder="27" text="법률관계자번호" onclick="sta_no_onclick" left="2.34%" top="490" width="12.79%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_05" taborder="39" left="2.34%" top="514" width="95.51%" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_06" taborder="40" left="2.64%" top="538" width="65.82%" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_07" taborder="41" left="2.64%" top="562" width="65.82%" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_no02" taborder="28" text="소속명" onclick="sta_no_onclick" left="2.34%" top="514" width="12.79%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_no03" taborder="29" text="이메일" onclick="sta_no_onclick" left="2.34%" top="538" width="12.79%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_no04" taborder="30" text="시/도" onclick="sta_no_onclick" left="2.34%" top="562" width="12.79%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_no05" taborder="31" text="관계자구분" onclick="sta_no_onclick" left="37.01%" top="490" width="12.79%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_no06" taborder="32" text="성명" onclick="sta_no_onclick" left="37.01%" top="514" width="12.79%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_no07" taborder="33" text="연락처" onclick="sta_no_onclick" left="37.01%" top="538" width="12.79%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_no08" taborder="34" text="휴대전화" onclick="sta_no_onclick" left="37.01%" top="562" width="12.79%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_no09" taborder="35" text="비밀번호확인" onclick="sta_no_onclick" left="68.26%" top="514" width="12.79%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_no10" taborder="36" text="비밀번호" onclick="sta_no_onclick" left="68.26%" top="490" width="12.79%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="fixed"/>
+        <Edit id="edit_psw" taborder="15" left="81.35%" top="493" right="4.88%" height="19" maxlength="10" password="true" oneditclick="edit_psw_oneditclick" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;align:center middle;"/>
+        <Edit id="edit_pswconfirm" taborder="16" left="81.35%" top="517" right="4.88%" height="19" password="true" maxlength="10" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;align:center middle;"/>
+        <Combo id="cbo_legalAdSido" taborder="10" left="15.43%" top="565" right="70.7%" height="19" innerdataset="@ds_sido" codecolumn="codeno" datacolumn="codenm"/>
+        <Combo id="cbo_legalAdSep" taborder="11" left="50.1%" top="493" right="36.04%" height="19" innerdataset="@ds_legalOfclType2" codecolumn="codeno" datacolumn="codeFull" onitemchanged="cbo_legalAdSep_onitemchanged"/>
+        <Edit id="edt_req_no" taborder="37" left="15.43%" top="493" right="70.8%" height="19" maxlength="10" readonly="true"/>
+        <Edit id="edit_teamname" taborder="8" left="15.43%" top="517" right="63.48%" height="19" oneditclick="edit_Teamname_oneditclick" inputfilter="dot,comma,sign,symbol,digit,space" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;"/>
+        <Edit id="edit_email" taborder="9" left="15.43%" top="541" right="63.48%" height="19" oneditclick="edit_email_oneditclick" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;"/>
+        <Edit id="edit_name" taborder="12" left="50.1%" top="517" right="36.13%" height="19" inputfilter="dot,comma,sign,symbol,digit,space" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;"/>
+        <Button id="btn_add" taborder="6" text="추가" cssclass="btn_WFSA_Search" left="86.33%" top="430" width="52" height="21" class="btn_WFSA_Search" onclick="btn_add_onclick" style="background:lightskyblue stretch 9,9 left top;color:#ffffffff;font:bold 9 Dotum;"/>
+        <Button id="btn_del" taborder="7" text="삭제" cssclass="btn_WFSA_Search" left="92.19%" top="430" width="52" height="21" class="btn_WFSA_Search" onclick="btn_del_onclick" style="background:lightskyblue stretch 9,9 left top;color:#ffffffff;font:bold 9 Dotum;"/>
+        <Button id="btn_save" taborder="17" text="저장" cssclass="btn_WFSA_Search" left="92.19%" top="614" width="52" height="21" class="btn_WFSA_Search" onclick="btn_save_onclick" style="background:lightskyblue stretch 9,9 left top;color:white;font:bold 9 Dotum;"/>
+        <Div id="div_page" taborder="42" text="Div00" left="226" top="431" width="573" height="18">
+          <Layouts>
+            <Layout>
+              <Static id="stc_Prev" taborder="13" text="이전" onclick="div_page_stc_Prev_onclick" visible="false" left="98" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_Next" taborder="14" text="다음" onclick="div_page_stc_Next_onclick" visible="false" left="468" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No0" taborder="15" text="1" onclick="div_page_stc_No_onclick" visible="false" left="138" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No1" taborder="16" text="2" onclick="div_page_stc_No_onclick" visible="false" left="170" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No2" taborder="17" text="3" onclick="div_page_stc_No_onclick" visible="false" left="202" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No3" taborder="18" text="4" onclick="div_page_stc_No_onclick" visible="false" left="234" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No4" taborder="19" text="5" onclick="div_page_stc_No_onclick" visible="false" left="266" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No5" taborder="20" text="6" onclick="div_page_stc_No_onclick" visible="false" left="298" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No6" taborder="21" text="7" onclick="div_page_stc_No_onclick" visible="false" left="330" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No7" taborder="22" text="8" onclick="div_page_stc_No_onclick" visible="false" left="362" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No8" taborder="23" text="9" onclick="div_page_stc_No_onclick" visible="false" left="394" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+              <Static id="stc_No9" taborder="24" text="10" onclick="div_page_stc_No_onclick" visible="false" left="426" top="-4" width="29" height="27" style="color:black;align:center;cursor:hand;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div00" taborder="43" text="*" left="69.53%" top="519" right="28.91%" height="16" style="color:red;font:bold 9 돋움;" position="absolute">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+        <Div id="Div01" taborder="44" text="*" left="70.8%" top="494" right="27.64%" height="16" style="color:red;font:bold 9 돋움;" position="fixed"/>
+        <Div id="Div02" taborder="45" text="*" left="38.96%" top="494" right="59.47%" height="16" style="color:red;font:bold 9 돋움;">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+        <Div id="Div03" taborder="46" text="*" left="5.86%" top="565" right="92.58%" height="16" style="color:red;font:bold 9 돋움;"/>
+        <Div id="Div04" taborder="47" text="*" left="5.57%" top="542" right="92.87%" height="16" style="color:red;font:bold 9 돋움;"/>
+        <Div id="Div05" taborder="48" text="*" left="5.66%" top="517" right="92.77%" height="16" style="color:red;font:bold 9 돋움;"/>
+        <Div id="Div06" taborder="49" text="*" left="40.72%" top="518" right="57.71%" height="16" style="color:red;font:bold 9 돋움;"/>
+        <Div id="Div07" taborder="50" text="*" left="40.23%" top="542" right="58.2%" height="16" style="color:red;font:bold 9 돋움;"/>
+        <Div id="Div08" taborder="51" text="*" left="39.55%" top="566" right="58.89%" height="16" style="color:red;font:bold 9 돋움;">
+          <Layouts>
+            <Layout width="16" height="16"/>
+          </Layouts>
+        </Div>
+        <MaskEdit id="edit_phone" taborder="13" left="50.1%" top="541" right="36.13%" height="19" clipmode="excludespace" type="string" mask="###-####-####" onkillfocus="edit_phone_onkillfocus" onsetfocus="edit_phone_onsetfocus" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;align:center middle;"/>
+        <MaskEdit id="edit_handphone" taborder="14" left="50.1%" top="565" right="36.13%" height="19" type="string" clipmode="excludespace" mask="###-####-####" onkillfocus="edit_handphone_onkillfocus" onsetfocus="edit_handphone_onsetfocus" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;align:center middle;"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item1" compid="edit_teamname" propid="value" datasetid="ds_official" columnid="legalOfficialinfoTeamname"/>
+      <BindItem id="item2" compid="edit_email" propid="value" datasetid="ds_official" columnid="legalOfficialinfoMail"/>
+      <BindItem id="item3" compid="edit_name" propid="value" datasetid="ds_official" columnid="legalOfficialinfoLyrName"/>
+      <BindItem id="item4" compid="edit_psw" propid="value" datasetid="ds_official" columnid="legalOfficialinfoLyrPsw"/>
+      <BindItem id="item8" compid="cbo_legalAdSido" propid="value" datasetid="ds_official" columnid="legalOfficialinfoCityCode"/>
+      <BindItem id="item9" compid="cbo_legalAdSep" propid="value" datasetid="ds_official" columnid="legalOfficialinfoRelaSep"/>
+      <BindItem id="item0" compid="edt_req_no" propid="value" datasetid="ds_official" columnid="legalOfficialinfoRelaNo"/>
+      <BindItem id="item5" compid="edit_phone" propid="value" datasetid="ds_official" columnid="legalOfficialinfoPhone"/>
+      <BindItem id="item10" compid="edit_handphone" propid="value" datasetid="ds_official" columnid="legalOfficialinfoHdpn"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_legalOfclType" useclientlayout="false">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_official" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="legalOfficialinfoRelaNo" type="string" size="32"/>
+          <Column id="legalOfficialinfoLyrPsw" type="string" size="32"/>
+          <Column id="legalOfficialinfoRelaSep" type="string" size="32"/>
+          <Column id="legalOfficialinfoTeamname" type="string" size="32"/>
+          <Column id="legalOfficialinfoLyrName" type="string" size="32"/>
+          <Column id="legalOfficialinfoMail" type="string" size="32"/>
+          <Column id="legalOfficialinfoPhone" type="string" size="32"/>
+          <Column id="legalOfficialinfoHdpn" type="string" size="32"/>
+          <Column id="legalOfficialinfoCityCode" type="string" size="32"/>
+          <Column id="rownum" type="INT" size="10"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_sido">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_legalOfclTypeLst">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_legalOfclType2">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_sido2">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+var pageNum = "";
+var rowNum = "";
+
+this.confirmStr = "";
+
+this.fv_iStartPageNo    = 0;   // 전체 페이지 순서
+this.fv_iUnitSelRowNo   = 100; // 한번 Server호출시 가져올 row갯수
+this.fv_iStartSelRowNo  = 1;   // Server호출시 시작할 row no
+this.fv_iMaxPageNum     = 10;  // 화면에 보여줄 최대 Page번호 갯수
+this.fv_iServerRowCount = 0;   // 서버에서 넘어온 Row갯수(100건이 안될 수 있음)
+
+
+//처음 로딩시 
+this.legal_ad_man_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.gf_codeComListLoad("ds_legalOfclType",  "ds_legalOfclType",  "Y", "", "전체", "fnCallback", "O02"); //법률관계자 구분코드 조회
+	this.search_out();
+}
+
+
+//콜백함수
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	trace(sSvcId);
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		return;
+	}
+	
+	switch (sSvcId)
+	{
+		case "ds_legalOfclType":	// id 구분
+			this.fn_dsFilter();			//공통코드 필터 및 복사 		
+			this.cbo_legalOfclType.set_index(0);
+			this.gf_codeComListLoad("ds_sido",  "ds_sido",  "Y", "", "선택", "fnCallback", "Q01");   //시도 코드 조회	
+		break;
+		
+		case "selectLegalOfclList":
+				var iLastRow = this.fv_iStartPageNo * this.fv_iUnitSelRowNo;
+				this.ds_official.filter("rownum >= "+(iLastRow + this.fv_iStartSelRowNo)+" && rownum <= "+(iLastRow + this.fv_iUnitSelRowNo));
+					if (this.ds_official.getRowCount() == 0)
+					{
+						alert("더이상 조회할 자료가 없습니다.");
+						this.ds_official.filter("");
+						return;
+					}
+					else
+					{
+						this.fv_iServerRowCount = this.ds_official.getRowCount();
+						this.fn_SetStyle();
+						this.fn_SetPageNo();
+						this.div_page.stc_No0.style.set_color("black");
+					} 
+					
+				if(pageNum == 0){
+					pageNum = 1;
+				}
+				trace("rowNum : " + rowNum);
+				this.pageSelect(pageNum);
+				this.Grid00.selectCell(rowNum);
+				
+				this.edit_phone_onkillfocus();
+				this.edit_handphone_onkillfocus();
+				
+				this.edit_pswconfirm.set_value("");
+				//this.alert("조회 완료");
+		break;
+		
+		case "deleteLegalOfclList":
+			alert("삭제 되었습니다");
+			this.search_out();
+		break;
+		
+		case "saveLegalOfclList":
+			trace(this.confirmStr);
+			if(this.confirmStr == "저장"){
+				this.alert("저장 되었습니다");
+				this.search_out();
+				
+			}else if(this.confirmStr == "수정"){
+				this.alert("수정 되었습니다");
+				this.search_out();
+			}
+		break;
+		
+		
+	}
+}
+
+//공통코드 필터 및 DS 복사
+this.fn_dsFilter=function(){
+	
+	this.ds_legalOfclType.filter("codenm != '전체'");
+	this.ds_legalOfclType2.copyData(this.ds_legalOfclType);
+	
+	this.ds_legalOfclType2.setColumn(0,"codeno","");
+	this.ds_legalOfclType2.setColumn(0,"codenm","선택");
+						
+	this.ds_legalOfclType.filter("");
+}
+
+//검색 함수
+this.search_out = function()
+{
+	this.ds_official.clearData();		//데이터셋 초기화
+	
+	//페이징 초기화 
+	this.fv_iStartPageNo    = 0;   // 전체 페이지 순서
+	this.fv_iUnitSelRowNo   = 100; // 한번 Server호출시 가져올 row갯수
+	this.fv_iStartSelRowNo  = 1;   // Server호출시 시작할 row no
+	this.fv_iMaxPageNum     = 10;  // 화면에 보여줄 최대 Page번호 갯수
+	this.fv_iServerRowCount = 0;   // 서버에서 넘어온 Row갯수(100건이 안될 수 있음)
+	
+	
+	
+	var srcLegalOfclType = this.gfn_Trim(this.cbo_legalOfclType.value);
+	var srcLegalOfclName = this.gfn_Trim(this.edt_srcLegalOfclName.value);
+	
+	var strSvcid 		= "selectLegalOfclList";
+	var strController 	= "legal_ofcl/selectLegalOfclList.do";
+	var strParam = "srcLegalOfclType="		+ srcLegalOfclType;
+		strParam += " srcLegalOfclName="		+ srcLegalOfclName;
+	
+	
+	// 트랜젝션 공통함수 호출
+	this.gfn_transaction(this,
+					strSvcid,
+					strController, 
+					"", 
+					"ds_official=ds_output",
+					strParam, 
+					"fnCallback"
+					);
+}
+
+//검색 버튼
+this.btn_depo_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	rowNum = 0;
+	pageNum = 1;
+	
+	this.search_out();
+}
+
+//추가 
+this.btn_add_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_official.addRow();
+	this.cbo_legalAdSep.set_index(0);
+	this.cbo_legalAdSido.set_index(0);
+}
+
+//저장(수정)
+this.btn_save_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var yn = confirm("저장하시겠습니까?");
+	
+	if(yn == true){
+		if(this.gfn_IsNull(this.edit_teamname.value)){
+			alert("소송명을 입력해주세요.");
+			this.edit_teamname.setFocus();
+		}
+		else if(this.gfn_IsNull(this.edit_email.value)){
+			alert("이메일을 입력해주세요.");
+			this.edit_email.setFocus();
+		}
+		else if(this.gfn_IsNull(this.cbo_legalAdSido.value)){
+			alert("시/도를 입력해주세요.");
+			this.cbo_legalAdSido.setFocus();
+		}
+		else if(this.gfn_IsNull(this.cbo_legalAdSep.value)){
+			alert("관계자구분을 입력해주세요.");
+			this.cbo_legalAdSep.setFocus();
+		}
+		else if(this.gfn_IsNull(this.edit_name.value)){
+			alert("성명을 입력해주세요.");
+			this.edit_name.setFocus();
+		}
+		else if(this.gfn_IsNull(this.edit_phone.value)){
+			alert("연락처를 입력해주세요.");
+			this.edit_phone.setFocus();
+		}
+		else if(this.gfn_IsNull(this.edit_handphone.value)){
+			alert("휴대전화를 입력해주세요.");
+			this.edit_handphone.setFocus();
+		}
+		else if(this.gfn_IsNull(this.edit_psw.value)){
+			alert("비밀번호를 입력해주세요.");
+			this.edit_psw.setFocus();
+		}
+		else if(this.edit_psw.value != this.edit_pswconfirm.value){
+			alert("비밀번호가 일치하지 않습니다. 다시 확인해 주세요.");
+			this.edit_pswconfirm.setFocus();
+		}
+		else{
+			var strSvcid = "saveLegalOfclList";
+			var strController = "legal_ofcl/saveLegalOfclList.do";
+			
+			var strParam = "";
+			
+			rowNum = this.ds_official.rowposition;
+			
+			this.gfn_transaction(this
+							,strSvcid
+							,strController
+							,"ds_input=ds_official:U"
+							,""
+							,strParam
+							,"fnCallback");
+			//this.search_out();
+		}
+	}
+}
+
+//초기화
+this.btn_reset_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.fv_iStartPageNo    = 0;   // 전체 페이지 순서
+	this.fv_iUnitSelRowNo   = 100; // 한번 Server호출시 가져올 row갯수
+	this.fv_iStartSelRowNo  = 1;   // Server호출시 시작할 row no
+	this.fv_iMaxPageNum     = 10;  // 화면에 보여줄 최대 Page번호 갯수
+	this.fv_iServerRowCount = 0;   // 서버에서 넘어온 Row갯수(100건이 안될 수 있음)
+	
+	this.reload();
+}
+
+//삭제처리
+this.btn_del_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	if(this.gfn_IsNull(this.edt_req_no.value) || this.ds_official.getRowCount() <= 0){
+		alert("삭제할 외부법률관리자가 존재하지 않습니다.");
+	}
+	else{
+		var yn = confirm("해당 외부법률관리자를 삭제하시겠습니까?");
+		
+		if(yn == true){
+			if(this.edit_psw.value != this.edit_pswconfirm.value){
+				alert("비밀번호가 일치하지 않습니다. 다시 확인해 주세요.");
+				this.edit_pswconfirm.setFocus();
+				return;
+			}
+			
+			var nRow = this.ds_official.rowposition;
+			
+			this.ds_official.deleteRow(nRow);
+		
+			var strSvcid = "deleteLegalOfclList";
+			var strController = "legal_ofcl/saveLegalOfclList.do";
+			
+			var strParam = "";
+			
+			this.gfn_transaction(this
+						,strSvcid
+						,strController
+						,"ds_input=ds_official:U"
+						,""
+						,strParam
+						,"fnCallback");
+			//this.search_out();
+		}
+	}
+}
+
+
+
+
+
+//페이징처리 부분-----------------------------------------------------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------------
+// 인덱스 클릭
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_No_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+	var iNo = new Number(obj.text);
+	
+	pageNum = iNo;
+	
+	this.pageSelect(iNo);
+	
+}
+
+this.pageSelect = function(page)
+{
+	var iFirstNum = (page-1) * this.fv_iMaxPageNum + 1;
+	
+	var iLastNum = iFirstNum + this.fv_iMaxPageNum;
+	this.fn_SetStyle();
+	this.div_page.components["stc_No"+(page-1)].style.set_color("black");
+	this.ds_official.filter("");
+	this.ds_official.filter("rownum >= " + iFirstNum+" && rownum < " + iLastNum);
+}
+
+//-------------------------------------------------------------------------------------------------
+// 이전 버튼
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_Prev_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo - 1;
+	// Transaction()코딩 할 부분
+	this.fnCallback("select", 0, "succ");
+}
+
+//-------------------------------------------------------------------------------------------------
+// 다음버튼
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_Next_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo + 1;
+	// Transaction()코딩 할 부분
+	this.fnCallback("select", 0, "succ");
+}
+
+//-------------------------------------------------------------------------------------------------
+// Page번호 Setting
+//-------------------------------------------------------------------------------------------------
+this.fn_SetPageNo = function()
+{
+	var sPage = this.fv_iStartPageNo * this.fv_iMaxPageNum;
+	
+	// 이전버튼 처리
+	if (this.fv_iStartPageNo < 1)
+	{
+		this.div_page.stc_Prev.set_visible(false);
+	} 
+	else 
+	{
+		this.div_page.stc_Prev.set_visible(true);
+	}
+
+	// 마지막 버튼 처리
+	if (this.fv_iServerRowCount < this.fv_iUnitSelRowNo)
+	{
+		this.div_page.stc_Next.set_visible(false);
+	}
+	else
+	{
+		this.div_page.stc_Next.set_visible(true);
+	}
+
+	// 인덱스 번호 처리
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].set_visible(true);
+		this.div_page.components["stc_No"+i].set_text(sPage+i+1);
+
+		if (this.fv_iServerRowCount < (i * this.fv_iMaxPageNum))
+		{
+			this.div_page.components["stc_No"+i].set_visible(false);			
+		} 
+		else 
+		{
+			this.div_page.components["stc_No"+i].set_visible(true);			
+		}
+	}	
+}
+//-------------------------------------------------------------------------------------------------
+// Style조정
+//-------------------------------------------------------------------------------------------------
+this.fn_SetStyle = function()
+{
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].style.set_color("gray");			
+	}	
+}
+
+
+
+
+this.edit_phone_onkillfocus = function(obj:MaskEdit, e:nexacro.KillFocusEventInfo)
+{
+	if(this.edit_phone.getLength() == "-1"){
+		return;
+	}
+	if(this.edit_phone.getLength() == "9"){
+		this.edit_phone.set_mask("##-###-####")
+	}else if(this.edit_phone.getLength() == "10"){
+		if((this.edit_phone.value).substr(0,2) == "02"){
+			this.edit_phone.set_mask("##-####-####")
+		}else{
+			this.edit_phone.set_mask("###-###-####")
+		}
+	}else if(this.edit_phone.getLength() == "11"){
+		this.edit_phone.set_mask("###-####-####")
+	}else{
+		alert("연락처가 올바르게 적혔는지 확인해주세요");
+		this.edit_phone.setFocus();
+	}
+}
+
+this.edit_phone_onsetfocus = function(obj:MaskEdit, e:nexacro.SetFocusEventInfo)
+{
+	this.edit_phone.set_mask("###-####-####")
+}
+
+
+
+this.edit_handphone_onkillfocus = function(obj:MaskEdit, e:nexacro.KillFocusEventInfo)
+{
+	if(this.edit_handphone.getLength() == "-1"){
+		return;
+	}
+	if(this.edit_handphone.getLength() == "11"){
+		this.edit_handphone.set_mask("###-####-####")
+	}else if(this.edit_handphone.getLength() == "10"){
+		this.edit_handphone.set_mask("###-###-####")
+	}else{
+		alert("연락처가 올바르게 적혔는지 확인해주세요");
+		this.edit_handphone.setFocus();
+	}
+}
+
+this.edit_handphone_onsetfocus = function(obj:MaskEdit, e:nexacro.SetFocusEventInfo)
+{
+	this.edit_handphone.set_mask("###-####-####")
+}
+
+this.Grid00_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	this.edit_phone_onkillfocus();
+	this.edit_handphone_onkillfocus();
+}
+
+this.Grid00_onkeyup = function(obj:Grid, e:nexacro.KeyEventInfo)
+{
+	this.edit_phone_onkillfocus();
+	this.edit_handphone_onkillfocus();
+}
+]]></Script>
+  </Form>
+</FDL>

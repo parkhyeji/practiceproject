@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TabMediation">
+
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    <typeAlias  alias="TabMediationVO" type="nexacro.sample.vo.TabMediationVO"/>
+    
+    <!-- Sample resultObject -->
+    
+    
+    <resultMap id="TabMediation" class="java.util.HashMap">
+		<result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" /> 
+		<result property="instAdmCode" column="INST_ADM_CODE" />  
+		<result property="instAdmCortCode" column="INST_ADM_CORT_CODE" />
+		<result property="instAdmPrgrCode" column="INST_ADM_PRGR_CODE" />
+		<result property="instAdmCaseNo" column="INST_ADM_CASE_NO" /> 
+		<result property="instAdmIssuChg" column="INST_ADM_ISSU_CHG" />  
+		<result property="instAdmCtpmgrName" column="INST_ADM_CTPMGR_NAME" />
+		<result property="pladefSepCode" column="PLADEF_SEP_CODE" />    
+	</resultMap>
+    
+    <resultMap id="TabMediation1" class="java.util.HashMap">
+        <result property="pladefSepCode" column="PLADEF_SEP_CODE" />
+		<result property="pladefSeq" column="PLADEF_SEQ" />
+		<result property="pladefName" column="PLADEF_NAME" />
+		<result property="pladefRegNo" column="PLADEF_REG_NO" />
+		<result property="pladefClamVol" column="PLADEF_CLAM_VOL" />
+		<result property="pladefMainTel" column="PLADEF_MAIN_TEL" />
+		<result property="pladefAddTel" column="PLADEF_ADD_TEL" />
+		<result property="pladefLawConcSepcode" column="PLADEF_LAW_CONC_SEPCODE" />
+    </resultMap> 
+    
+    <resultMap id="TabMediation2" class="java.util.HashMap">
+       <result property="pladefSepCode" column="MEDIATION_SEQ" />
+		<result property="pladefSeq" column="MEDIATION_WRIT_DATE" />
+		<result property="mediationSeq" column="MEDIATION_CHG" />
+		<result property="mediationCont" column="MEDIATION_CONT" />
+		<result property="mediationWritDate" column="MEDIATION_REF_POIN" />
+    </resultMap> 
+    
+    
+    <resultMap id="TabMediation3" class="tabMediationVO">
+    	<result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" /> 
+		<result property="instAdmCode" column="INST_ADM_CODE" />  
+		<result property="pladefSepCode" column="PLADEF_SEP_CODE" />
+		<result property="pladefSeq" column="PLADEF_SEQ" />
+        <result property="pladefSepCode" column="MEDIATION_SEQ" />
+		<result property="pladefSeq" column="MEDIATION_WRIT_DATE" />
+		<result property="mediationSeq" column="MEDIATION_CHG" />
+		<result property="mediationCont" column="MEDIATION_CONT" />
+		<result property="mediationWritDate" column="MEDIATION_REF_POIN" />
+    </resultMap> 
+    
+   <!--  <resultMap id="TabMediation11" class="MediationVO">
+    </resultMap>  -->
+ 		<select id="prgr.MediationDAO.mediationSelect" resultMap="TabMediation">
+		<![CDATA[
+		SELECT T1.LAWSUIT_ADM_NO,
+		       T2.INST_ADM_CODE,
+		       T2.INST_ADM_PRGR_CODE,
+		       T3.PLADEF_SEP_CODE,
+		       T2.INST_ADM_CORT_CODE,
+		       T2.INST_ADM_CASE_NO,
+		       T2.INST_ADM_ISSU_CHG,
+		       T2.INST_ADM_CTPMGR_NAME
+		  FROM TAB_LAWSUIT T1, TAB_INST_ADM T2, TAB_PLADEF T3
+		 WHERE T1.LAWSUIT_ADM_NO = T2.LAWSUIT_ADM_NO
+		AND T2.LAWSUIT_ADM_NO = #lawsuitAdmNo#
+		       AND T2.INST_ADM_CODE = #instAdmCode#
+		]]>
+		<isNotNull property="instAdmCode" prepend="AND">
+			<![CDATA[
+				T2.INST_ADM_CODE=#instAdmCode#
+			]]>
+		</isNotNull>
+	</select>
+	
+	<select id="prgr.MediationDAO.pladefSelect" resultMap="TabMediation1">
+	<![CDATA[
+	SELECT LAWSUIT_ADM_NO
+		,PLADEF_SEP_CODE
+		,PLADEF_SEQ
+		,PLADEF_NAME
+		,PLADEF_REG_NO
+		,PLADEF_CLAM_VOL
+		,PLADEF_MAIN_TEL
+		,PLADEF_ADD_TEL
+		,PLADEF_LAW_CONC_SEPCODE
+             FROM TAB_PLADEF
+             WHERE LAWSUIT_ADM_NO = #lawsuitAdmNo#
+    ]]>
+	</select>
+	
+	<select id="prgr.MediationDAO.bottomSearch" resultMap="TabMediation2">
+		<![CDATA[
+		SELECT MEDIATION_SEQ
+			  ,MEDIATION_WRIT_DATE
+			  ,MEDIATION_CHG
+			  ,MEDIATION_CONT
+			  ,MEDIATION_REF_POIN
+		FROM TAB_MEDIATION
+		WHERE LAWSUIT_ADM_NO = #lawsuitAdmNo#
+		AND INST_ADM_CODE = #instAdmCode#
+		]]>
+		
+	</select>
+	
+	<insert id="prgr.MediationDAO.mediationSave" parameterClass="tabMediationVO">
+	<![CDATA[
+	INSERT INTO TAB_MEDIATION(
+                          LAWSUIT_ADM_NO
+                          ,INST_ADM_CODE
+                          ,PLADEF_SEP_CODE
+                          ,PLADEF_SEQ
+                          ,MEDIATION_SEQ
+                          ,MEDIATION_WRIT_DATE
+                          ,MEDIATION_CHG
+                          ,MEDIATION_CONT
+                          ,MEDIATION_REF_POIN
+                          )
+                          VALUES
+                          (
+                          #lawsuitAdmNo#
+                          ,#instAdmCode#
+                          ,#pladefSepCode#
+                          ,#pladefSeq#
+                          ,MEDIATION_SEQ.NEXTVAL
+                          ,to_char(SYSDATE,'YYYYMMDD')
+                          ,#mediationChg#
+                          ,#mediationCont#
+                          ,#mediationRefPoin#
+                          )
+                          ]]>
+    </insert>
+    
+   <!--  <update id="prgr.MediationDAO.mediationUpdate" parameterClass="MediationVO">
+	<![CDATA[			
+		
+			]]>
+	</update>  -->
+	 <delete id="prgr.MediationDAO.mediationDelect" parameterClass="TabMediationVO">
+		
+		DELETE FROM TAB_MEDIATION
+		WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#
+		AND INST_ADM_CODE = #instAdmCode#
+		
+	</delete> 
+	
+    
+</sqlMap>

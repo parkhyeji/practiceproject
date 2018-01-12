@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="samplecrud" classname="samplecrud" left="0" top="0" width="1024" height="768" titletext="샘플" onload="samplecrud_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="grd_list" taborder="4" useinputpanel="false" left="1.66%" top="47" right="2.15%" height="449" binddataset="ds_list">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="상태"/>
+                <Cell col="1" text="사번"/>
+                <Cell col="2" text="이름"/>
+                <Cell col="3" text="주민번호"/>
+                <Cell col="4" text="입사일자"/>
+                <Cell col="5" text="전화번호"/>
+                <Cell col="6" text="휴대폰번호"/>
+                <Cell col="7" text="이메일"/>
+                <Cell col="8" text="주소"/>
+                <Cell col="9" text="등록일"/>
+                <Cell col="10" text="등록자"/>
+                <Cell col="11" text="수정일"/>
+                <Cell col="12" text="수정자"/>
+                <Cell col="13" text="사용여부"/>
+                <Cell col="14" text="퇴사일"/>
+                <Cell col="15" text="보고담당자여부"/>
+                <Cell col="16" text="직급명"/>
+                <Cell col="17" text="우편번호"/>
+              </Band>
+              <Band id="body">
+                <Cell/>
+                <Cell col="1" text="bind:empNo"/>
+                <Cell col="2" text="bind:empName"/>
+                <Cell col="3" text="bind:resiNo"/>
+                <Cell col="4" text="bind:joinDate"/>
+                <Cell col="5" text="bind:telNo"/>
+                <Cell col="6" text="bind:celNo"/>
+                <Cell col="7" text="bind:email"/>
+                <Cell col="8" text="bind:addr"/>
+                <Cell col="9" text="bind:regiDt"/>
+                <Cell col="10" text="bind:regiId"/>
+                <Cell col="11" text="bind:modiDt"/>
+                <Cell col="12" text="bind:modiId"/>
+                <Cell col="13" text="bind:useYn"/>
+                <Cell col="14" text="bind:retireDate"/>
+                <Cell col="15" text="bind:reportChgedYn"/>
+                <Cell col="16" text="bind:posiName"/>
+                <Cell col="17" text="bind:zipCode"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_search" taborder="5" text="조회" left="73.34%" top="15" right="20.9%" height="20" onclick="btn_search_onclick"/>
+        <Button id="btn_add" taborder="6" text="추가" left="79.59%" top="15" right="14.65%" height="20" onclick="btn_add_onclick"/>
+        <Button id="btn_delete" taborder="7" text="삭제" left="85.84%" top="15" right="8.4%" height="20" onclick="btn_delete_onclick"/>
+        <Button id="btn_save" taborder="8" text="저장" left="92.09%" top="15" right="2.15%" height="20" onclick="btn_save_onclick"/>
+        <Static id="st_back" taborder="0" left="1.66%" top="506" right="2.15%" height="240" style="background:lavender;border:1 none black ;color:black;"/>
+        <Static id="st_c1" taborder="9" left="1.86%" top="508" right="85.94%" height="28" style="background:azure;border:1 solid black ;align:center middle;" text="이름" onclick="st_c1_onclick"/>
+        <Edit id="edt_empName" taborder="10" left="14.45%" top="509" right="72.95%" height="25" maxlength="10" onchanged="edt_custName_onchanged" onchar="edt_custName_onchar"/>
+        <Static id="st_c2" taborder="13" text="사용여부" left="36.52%" top="508" right="51.27%" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Combo id="cbo_useYn" taborder="14" innerdataset="@ds_yn" codecolumn="code" datacolumn="value" left="49.12%" top="509" right="38.28%" height="25"/>
+        <Static id="st_c3" taborder="15" text="실명번호" left="72.17%" top="508" right="15.63%" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Edit id="edt_realNo" taborder="16" maxlength="15" left="84.77%" top="509" right="2.64%" height="25"/>
+        <Static id="st_c4" taborder="17" text="전화번호" left="1.86%" top="542" right="85.94%" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <MaskEdit id="me_telNo" taborder="18" left="14.45%" top="543" right="72.95%" height="25" mask="###-###-####" type="string" style="align:center middle;"/>
+        <MaskEdit id="me_celNo" taborder="19" type="string" mask="###-####-####" left="49.12%" top="543" right="38.28%" height="25" style="align:center middle;"/>
+        <Static id="st_c5" taborder="20" text="휴대폰" left="36.52%" top="542" right="51.27%" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Static id="st_c6" taborder="21" text="우편번호" left="72.17%" top="540" right="15.63%" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Edit id="edt_zip" taborder="22" maxlength="6" left="84.77%" top="541" right="2.64%" height="25" inputtype="number"/>
+        <Static id="st_c7" taborder="23" text="주소" left="1.86%" top="576" right="85.94%" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Edit id="edt_addr" taborder="24" maxlength="100" left="14.45%" top="577" right="2.64%" height="25"/>
+        <Static id="st_c8" taborder="25" text="등록일" left="1.86%" top="610" right="85.94%" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Calendar id="cal_join" taborder="26" left="14.45%" top="611" right="72.95%" height="25" dateformat="yyyy.MM.dd" value="null" editformat="yyyy.MM.dd" style="align:center middle;"/>
+        <Calendar id="cal_retire" taborder="27" dateformat="yyyy.MM.dd" editformat="yyyy.MM.dd" left="49.12%" top="611" right="38.28%" height="25" style="align:center middle;"/>
+        <Static id="st_c9" taborder="28" text="퇴사일" left="36.52%" top="610" right="51.27%" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Edit id="edt_email" taborder="29" maxlength="50" left="84.77%" top="611" right="2.64%" height="25"/>
+        <Static id="st_c10" taborder="30" text="이메일" left="72.17%" top="610" right="15.63%" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Static id="st_c00" taborder="31" text="주민번호" left="1.86%" top="642" right="85.94%" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <MaskEdit id="me_resi" taborder="32" type="string" mask="######-#######" left="14.45%" top="648" right="72.95%" height="25" style="align:center middle;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_yn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="255"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="value">예</Col>
+          </Row>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="value">아니오</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_list" updatecontrol="false" onrowposchanged="ds_list_onrowposchanged" useclientlayout="false" oncolumnchanged="ds_list_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="empNo" type="STRING" size="20"/>
+          <Column id="empName" type="STRING" size="25"/>
+          <Column id="resiNo" type="STRING" size="25"/>
+          <Column id="joinDate" type="STRING" size="8"/>
+          <Column id="telNo" type="STRING" size="20"/>
+          <Column id="celNo" type="STRING" size="20"/>
+          <Column id="email" type="STRING" size="100"/>
+          <Column id="addr" type="STRING" size="200"/>
+          <Column id="regiDt" type="STRING" size="8"/>
+          <Column id="regiId" type="STRING" size="1"/>
+          <Column id="modiDt" type="STRING" size="14"/>
+          <Column id="modiId" type="STRING" size="20"/>
+          <Column id="useYn" type="STRING" size="14"/>
+          <Column id="retireDate" type="STRING" size="20"/>
+          <Column id="reportChgedYn" type="STRING" size="1"/>
+          <Column id="posiName" type="STRING" size="4"/>
+          <Column id="zipCode" type="STRING" size="50"/>
+          <Column id="pwd" type="STRING" size="4"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edt_empName" propid="value" datasetid="ds_list" columnid="empName"/>
+      <BindItem id="item1" compid="cbo_useYn" propid="value" datasetid="ds_list" columnid="realNameNoTypeCode"/>
+      <BindItem id="item3" compid="edt_realNo" propid="value" datasetid="ds_list" columnid="realNameNo"/>
+      <BindItem id="item4" compid="me_telNo" propid="value" datasetid="ds_list" columnid="telNo"/>
+      <BindItem id="item5" compid="me_celNo" propid="value" datasetid="ds_list" columnid="celNo"/>
+      <BindItem id="item6" compid="edt_zip" propid="value" datasetid="ds_list" columnid="zipCode"/>
+      <BindItem id="item7" compid="edt_addr" propid="value" datasetid="ds_list" columnid="addr"/>
+      <BindItem id="item8" compid="cal_join" propid="value" datasetid="ds_list" columnid="regiDt"/>
+      <BindItem id="item9" compid="cal_retire" propid="value" datasetid="ds_list" columnid="outDate"/>
+      <BindItem id="item10" compid="edt_email" propid="value" datasetid="ds_list" columnid="email"/>
+      <BindItem id="item12" compid="edt_posi" propid="value" datasetid="ds_list" columnid="posiName"/>
+      <BindItem id="item2" compid="me_resi" propid="value" datasetid="ds_list" columnid="resiNo"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+
+// callback function
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		this.alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+			case "commonCode":
+			break;
+			case "searchCust":
+			break;
+			case "saveList":
+				this.btn_search_onclick();
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+// 조회 버튼
+this.btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+	this.gfn_transaction(this
+					   , "commonCode"
+					   , "EmpCrud/searchCust.do"
+					   , ""
+					   , "ds_list=ds_list"
+					   , ""
+					   , "fnCallback");
+}
+
+// 추가 버튼
+this.btn_add_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+	this.ds_list.addRow();
+	var nDelPos  = this.ds_list.rowposition;
+	var nRowType = this.ds_list.getRowType(nDelPos);
+	this.ds_list.setRowType(nDelPos, Dataset.ROWTYPE_INSERT);
+}
+
+// 삭제 버튼
+this.btn_delete_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+	var nDelPos  = this.ds_list.rowposition;
+	var nRowType = this.ds_list.getRowType(nDelPos);
+	// setRowType를 사용하려면 해당 데이터셋의 옵션 중에서 updatecontrol를 false로 지정해야한다.
+	// Dataset.ROWTYPE_EMPTY 0 존재하지 않는 행의 상태
+	// Dataset.ROWTYPE_NORMAL 1 초기 행의 상태
+	// Dataset.ROWTYPE_INSERT 2 추가된 행의 상태
+	// Dataset.ROWTYPE_UPDATE 4 수정된 행의 상태
+	// Dataset.ROWTYPE_DELETE 8 삭제된 행의 상태
+	// Dataset.ROWTYPE_GROUP 16 그룹 정보 행의 상태
+	switch(nRowType){
+		case 1:
+			this.ds_list.setRowType(nDelPos, Dataset.ROWTYPE_DELETE);
+			this.disableComponents();
+		break;
+		case 2:
+			this.ds_list.deleteRow(nDelPos);
+		break;
+		case 4:
+			this.ds_list.setRowType(nDelPos, Dataset.ROWTYPE_DELETE);
+			this.disableComponents();
+		break;
+		default:
+		break;
+	}
+}
+
+// 콤포넌트 상태 변경
+this.disableComponents = function(){
+	this.edt_empName.enable  =false;
+	this.me_telNo.enable     =false;
+	this.edt_addr.enable     =false;
+	this.cal_join.enable     =false;
+	this.me_resi.enable      =false;
+	this.me_celNo.enable     =false;
+	this.cal_retire.enable   =false;
+	this.edt_realNo.enable   =false;
+	this.edt_zip.enable      =false;
+	this.edt_email.enable    =false;
+}
+
+this.enableComponents = function(){
+	this.edt_empName.enable  =true;
+	this.me_telNo.enable     =true;
+	this.edt_addr.enable     =true;
+	this.cal_join.enable     =true;
+	this.me_resi.enable      =true;
+	this.me_celNo.enable     =true;
+	this.cal_retire.enable   =true;
+	this.edt_realNo.enable   =true;
+	this.edt_zip.enable      =true;
+	this.edt_email.enable    =true;
+}
+
+// 행 변경 시 이벤트
+this.ds_list_onrowposchanged = function(obj:Dataset, e:nexacro.DSRowPosChangeEventInfo){
+	if(obj.getRowType(obj.rowposition) == 8){
+		this.disableComponents();
+	}else{
+		this.enableComponents();
+	}
+}
+
+// 저장 버튼
+this.btn_save_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.gfn_transaction(this
+					   , "saveList"
+					   , "EmpCrud/saveList.do"
+					   , "ds_list=ds_list:U"
+					   , ""
+					   , ""
+					   , "fnCallback");
+}
+
+// 값이 변경되었을 때
+this.ds_list_oncolumnchanged = function(obj:Dataset, e:nexacro.DSColChangeEventInfo)
+{
+	var nDelPos  = obj.rowposition;
+	var nRowType = obj.getRowType(nDelPos);
+	if(nRowType != 2){
+		this.ds_list.setRowType(nDelPos, Dataset.ROWTYPE_UPDATE);
+	}
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,684 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="POP_RAISREQ_REP2" classname="POP_RAISREQ_REP2" inheritanceid="" position="absolute" titletext="New Form" style="border:0 none #999999ff ;" onload="POP_RAISREQ_REP2_onload" left="0" top="0" width="668" height="423">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" text="  소제기 의뢰 검색" left="6" top="8" right="6" height="50" style="background:cornflowerblue;color:white;align:left middle;font:굴림,12,bold;"/>
+        <ImageViewer id="ImageViewer01" taborder="1" onclick="ImageViewer01_onclick" left="8" top="62" right="8" height="68" style="background:#f0f0f0ff;border:1 solid #808080ff ;color:#000000ff;"/>
+        <ImageViewer id="ImageViewer04" taborder="2" onclick="ImageViewer04_onclick" left="98" top="67" right="15" height="29" style="background:#f0f0f0ff;border:1 solid #969696ff ;"/>
+        <ImageViewer id="ImageViewer02" taborder="3" text="소제기의뢰번호" onclick="ImageViewer02_onclick" left="16" top="67" width="13.62%" height="29" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 굴림;"/>
+        <ImageViewer id="ImageViewer03" taborder="4" text="소송제기분류" onclick="ImageViewer02_onclick" left="29.94%" top="67" width="12.43%" height="29" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 dotum;"/>
+        <ImageViewer id="ImageViewer05" taborder="5" text="회신여부" onclick="ImageViewer02_onclick" top="67" right="31.29%" width="8.83%" height="29" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 dotum;"/>
+        <Edit id="edt_No" taborder="6" left="16.77%" top="71" width="12.72%" height="21"/>
+        <Combo id="cmb_Clas_Code" taborder="7" innerdataset="@ds_clas_code" codecolumn="codeNo" datacolumn="codeName" left="42.81%" top="72" width="16.02%" height="19" onitemchanged="cmb_Clas_Code_onitemchanged"/>
+        <Radio id="radio_Wtr" taborder="8" index="0" innerdataset="@ds_search_wtr" codecolumn="codeNo" datacolumn="codeName" value="0" direction="vertical" top="76" right="20" width="24.85%" height="13" onitemclick="radio_Wtr_onitemclick"/>
+        <ImageViewer id="ImageViewer07" taborder="9" left="98" top="95" right="15" height="29" style="background:#f0f0f0ff;border:1 solid #969696ff ;"/>
+        <ImageViewer id="ImageViewer06" taborder="10" text="회신의뢰일자" onclick="ImageViewer02_onclick" left="16" top="95" width="13.62%" height="29" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 dotum;"/>
+        <Calendar id="cal_Req_Date1" taborder="11" dateformat="yyyy-MM-dd" left="16.62%" top="99" width="16.92%" height="20"/>
+        <Calendar id="cal_Req_Date2" taborder="12" dateformat="yyyy-MM-dd" left="38.17%" top="99" width="16.92%" height="20"/>
+        <Static id="Static00" taborder="13" text="~" left="35.03%" top="102" width="2.1%" height="15" style="font:Dotum,11;"/>
+        <Button id="btn_search" taborder="14" text="검색" onclick="btn_search_onclick" top="99" right="77" width="52" height="21" style="border:1 solid #999999ff ;color:black;align:center middle;" class="btn_WFSA_Search"/>
+        <Button id="btn_clean" taborder="15" text="초기화" onclick="btn_clean_onclick" top="99" right="21" width="52" height="21" style="color:black;align:center middle;" class="btn_WFSA_Search"/>
+        <Static id="Static02" taborder="16" text="소제기 의뢰 현황" left="10" top="132" width="169" height="23" style="font:dotum,10,bold;"/>
+        <Grid id="grd_RaisReq" taborder="17" useinputpanel="false" autofittype="col" oncelldblclick="grd_RaisReq_oncelldblclick" left="8" top="155" right="7" bottom="39" binddataset="ds_raisreq">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="93"/>
+                <Column size="93"/>
+                <Column size="93"/>
+                <Column size="93"/>
+                <Column size="93"/>
+                <Column size="93"/>
+                <Column size="93"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="의뢰번호"/>
+                <Cell col="1" text="분류코드"/>
+                <Cell col="2" text="회신여부"/>
+                <Cell col="3" text="의뢰자ID"/>
+                <Cell col="4" text="의뢰일자"/>
+                <Cell col="5" text="회신일자"/>
+                <Cell col="6" text="소제기여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:lawRaisreqNo"/>
+                <Cell col="1" text="bind:lawRaisreqClasCode" combodataset="ds_clas_code"/>
+                <Cell col="2" text="bind:lawRaisreqRepWtr" combodataset="ds_raisreq_wtr"/>
+                <Cell col="3" text="bind:lawRaisreqReqId"/>
+                <Cell col="4" text="bind:lawRaisreqReqDate"/>
+                <Cell col="5" text="bind:lawRaisreqRepDate"/>
+                <Cell col="6" text="bind:lawRaisreqWtr"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_check" taborder="18" text="확인" onclick="btn_check_onclick" right="63" bottom="10" width="52" height="21" style="align:center middle;" class="btn_WFSA_Search"/>
+        <Button id="btn_close" taborder="19" text="닫기" onclick="btn_close_onclick" right="7" bottom="10" width="52" height="21" style="border:1 solid #999999ff ;color:black;align:center middle;" class="btn_WFSA_Search"/>
+        <Static id="Static01" taborder="20" text="Static01" left="41.92%" top="128" right="41.92%" height="27"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search_wtr" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="codeName">전체</Col>
+            <Col id="codeNo">0</Col>
+          </Row>
+          <Row>
+            <Col id="codeName">회신</Col>
+            <Col id="codeNo">1</Col>
+          </Row>
+          <Row>
+            <Col id="codeName">미회신</Col>
+            <Col id="codeNo">2</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_raisreq_wtr" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="codeName">미회신</Col>
+            <Col id="codeNo">N</Col>
+          </Row>
+          <Row>
+            <Col id="codeName">회신</Col>
+            <Col id="codeNo">Y</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_clas_code" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_raisreq" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false" onload="ds_raisreq_onload">
+        <ColumnInfo>
+          <Column id="lawRaisreqNo" type="STRING" size="256"/>
+          <Column id="lawRaisreqReqId" type="STRING" size="256"/>
+          <Column id="lawRaisreqClasCode" type="STRING" size="256"/>
+          <Column id="lawRaisreqRea" type="STRING" size="256"/>
+          <Column id="lawRaisreqEtcPoin" type="STRING" size="256"/>
+          <Column id="lawRaisreqReqDate" type="STRING" size="256"/>
+          <Column id="lawRaisreqRepWtr" type="STRING" size="256"/>
+          <Column id="lawRaisreqWtr" type="STRING" size="256"/>
+          <Column id="lawRaisreqDalwCont" type="STRING" size="256"/>
+          <Column id="lawRaisreqExptDate" type="STRING" size="256"/>
+          <Column id="lawRaisreqRepCont" type="STRING" size="256"/>
+          <Column id="lawRaisreqEtcreqPoin" type="STRING" size="256"/>
+          <Column id="lawRaisreqRepDate" type="STRING" size="256"/>
+          <Column id="lawRaisreqIssuPoin" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_pageStr"/>
+      <Dataset id="ds_pagination">
+        <ColumnInfo>
+          <Column id="Num" type="STRING" size="256"/>
+          <Column id="Text" type="STRING" size="256"/>
+          <Column id="Link" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Num">1</Col>
+            <Col id="Text">1</Col>
+            <Col id="Link">1</Col>
+          </Row>
+          <Row>
+            <Col id="Num">2</Col>
+            <Col id="Text">2</Col>
+            <Col id="Link">2</Col>
+          </Row>
+          <Row>
+            <Col id="Num">3</Col>
+            <Col id="Text">3</Col>
+            <Col id="Link">3</Col>
+          </Row>
+          <Row>
+            <Col id="Num">4</Col>
+            <Col id="Text">4</Col>
+            <Col id="Link">4</Col>
+          </Row>
+          <Row>
+            <Col id="Num">5</Col>
+            <Col id="Text">5</Col>
+            <Col id="Link">5</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_pageSet" onload="ds_pageSet_onload">
+        <ColumnInfo>
+          <Column id="pageName" type="STRING" size="256"/>
+          <Column id="totalCnt" type="INT" size="256"/>
+          <Column id="listSize" type="INT" size="256"/>
+          <Column id="pageSize" type="INT" size="256"/>
+          <Column id="pageNo" type="INT" size="256"/>
+          <Column id="goLeft" type="INT" size="256"/>
+          <Column id="goRight" type="INT" size="256"/>
+          <Column id="totalPage" type="INT" size="256"/>
+          <Column id="userGroup" type="INT" size="256"/>
+          <Column id="startNum" type="INT" size="256"/>
+          <Column id="endNum" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_searchDiv">
+        <ColumnInfo>
+          <Column id="searchChange" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchChange">unchanged</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind/>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+//닫기버튼
+        this.btn_close_onclick = function(obj,e)
+        {
+        	this.close();
+        }
+        //초기로드
+        this.POP_RAISREQ_REP2_onload = function(obj,e)
+        {
+        	this.ds_clas_code.clearData();//데이터셋 초기화
+        	
+        	this.classCodeListLoadTemp("ds_clas_code", "ds_clas_code",  "Y", "fnCallback", "D01"); //사건유형공통코드
+
+        }
+
+        this.classCodeListLoadTemp= function(strSvcId,strDataSet,strUseYn,strCallbackFunc,strVParam)
+        {
+        	trace("moved here~~");
+        	var strTempDataSet = strDataSet+"=ds_output";
+        	var strController 	= "code/giveMeCode.do";
+        	
+        	
+        	if(this.gfn_IsNull(strUseYn) || strUseYn == "")
+        	{	
+        		strUseYn = "N";
+        	} 
+        	var strParam = "";
+        	strParam += " UseYn=" + strUseYn+ " CLASS_CODE=" + strVParam;
+        	trace(strParam);
+        	
+        	// 트랜젝션 공통함수 호출
+        	
+        	this.gfn_transaction(this,
+        					strSvcId,
+        					strController, 
+        					"", 
+        					strTempDataSet,
+        					strParam, 
+        					strCallbackFunc
+        					);
+        	
+        }
+
+        this.divCreation = function(){
+        /***************div creation*****************************/
+        	var pageDiv = new Div();
+        	pageDiv.init("Div", "absolute", 49, 410, 480, 40, null, null);
+        	//pageDiv.style.set_border("3px solid #554466");
+        	//pageDiv.style.set_background("yellow");
+        	this.insertChild(1, "Div", pageDiv); 
+        	pageDiv.show();
+        }
+        //검색버튼
+        this.btn_search_onclick = function(obj,e,pageNo)
+        {
+        	var cmb = this["Div"];
+			if(cmb === undefined){
+				//alert("없음");
+				trace("Div exists!!!!");
+			} else {
+				this.Div.destroy();
+			}
+        	
+        	this.divCreation();
+        	
+        	//this.ds_search.clearData();
+        	var search1 = this.edt_No.text.trim();	//소제기의뢰번호
+            //var search2 = combo_Clas_Code.Index;	//소송제기분류코드
+            var search2 = this.cmb_Clas_Code.value;
+        	var search3 = this.cal_Req_Date1.value;		//의뢰일자1
+            var search4 = this.cal_Req_Date2.value;		//의뢰일자2
+            var search5 = this.radio_Wtr.index;			//회신여부
+
+            //기간 유효성체크
+            if(search3 > search4){
+        		alert("날짜를 확인해 주세요.");
+        		return;
+            }
+            if(this.gfn_IsNull(search3)==true&&this.gfn_IsNull(search4)==false){
+        		alert("날짜를 확인해 주세요.");
+        		return;
+            }
+            if(this.gfn_IsNull(search3)==true){
+        		search3="";
+            }
+            if(this.gfn_IsNull(search4)==true){
+        		search4="";
+            }
+            
+            //전체소제기분류코드 선택시 처리
+            if(search2=="000"){
+        		search2="";
+        	}else{
+        		//search2 = "00"+search2;
+        		if(this.gfn_IsNull(search2)==true){
+        			search2="";
+        		}else{
+        			search2 = this.cmb_Clas_Code.value;
+        		}
+        	}	
+            
+            //회신여부 처리
+            if(search5=="0"){
+        		search5="";
+            }else if(search5=="1"){
+        		search5="Y";
+            }else{
+        		if(this.gfn_IsNull(search5)==true){
+        			search5="";
+        		}else{
+        			search5="N";
+        		}
+            }
+            
+            //소제기 검색 버튼 클릭시 페이징 초기화 
+        	this.fv_iStartPageNo    = 0;   // 전체 페이지 순서
+        	this.fv_iUnitSelRowNo   = 100; // 한번 Server호출시 가져올 row갯수
+        	this.fv_iStartSelRowNo  = 1;   // Server호출시 시작할 row no
+        	this.fv_iMaxPageNum     = 10;  // 화면에 보여줄 최대 Page번호 갯수
+        	this.fv_iServerRowCount = 0;   // 서버에서 넘어온 Row갯수(100건이 안될 수 있음)
+            
+            trace(this.fv_iStartPageNo +" : "+this.fv_iServerRowCount);
+            
+        	var svcid="ds_raisreq";
+        	var strController="sue/getSueMenList.do";
+        	//trace("@@@pageNum4="+this.ds_pageSet.getColumn(0,"pageNo"));
+        	//trace("@@@pageNum5="+this.ds_pageSet.getColumn(0,"pageNo"));
+        	var pageNo = this.ds_pageSet.getColumn(0, "pageNo");
+        	if(pageNo=="undefined"||pageNo==null){
+        		trace("yey!!!!");
+        		pageNo=1;
+        		this.ds_pageSet.setColumn(0, "pageNo", 1);
+        	}
+        	trace("@@@pageNum6="+this.ds_pageSet.getColumn(0,"pageNo"));
+        	//trace("pageNo &&& ="+pageNo);
+        	//trace("strController=="+strController);
+        	
+        	var strParam  = "lawRaisreqNo=" +"\""+search1+"\"";
+        		strParam += " lawRaisreqClasCode=" + "\""+search2+"\"";
+        		strParam += " lawRaisreqReqDate1=" + "\""+search3+"\"";
+        		strParam += " lawRaisreqReqDate2=" + "\""+search4+"\"";
+        		strParam += " lawRaisreqRepWtr=" + "\""+search5+"\"";
+        		strParam += " pageNo=" + "\""+pageNo+"\"";
+        	
+        	trace("@@@strParam="+strParam);
+        	
+        	this.gfn_transactionList(this,
+        	svcid,
+        	strController,
+        	"",
+        	"ds_raisreq=ds_output",
+        	strParam,
+        	"fnCallback"
+        	);
+        	
+        }
+
+        this.ds_raisreq_onload = function(obj,e)
+        {
+        trace("paging start1");
+        		this.paging();
+        }
+
+        
+
+        this.paging = function(){
+
+        trace("paging() pageNo="+this.ds_raisreq.getColumn(0, "pageNo"));
+        trace("paging() totalCnt="+this.ds_raisreq.getColumn(0, "totalCnt"));
+
+        var pageNo = this.ds_raisreq.getColumn(0, "pageNo");
+        var totalCnt = this.ds_raisreq.getColumn(0, "totalCnt");
+
+        if(pageNo==null||totalCnt==null){
+        trace("paging return");
+        return;
+        }
+
+        var strParam = "pageNo="+"\""+pageNo+"\"";
+        strParam+=" totalCnt="+"\""+totalCnt+"\"";
+        var svcid = "suePaging";
+        var strController ="sue/suePaging.do";
+
+        	this.gfn_transaction(this,
+        	svcid,
+        	strController,
+        	"",
+        	"ds_pageSet=ds_page",
+        	strParam,
+        	"fnCallback"
+        	);
+
+        }
+
+        this.gfn_transactionList=function(objFrm,svcid,strURL,inputDs,outputDs,params,callbackFnc){
+        application.gdsTransInfo.clearData();
+
+        	var dsInputName = this.splitDsName(inputDs,0);
+        	var dsOutputName = this.splitDsName(outputDs,1);
+        	
+        	for (var i = 0; i < dsInputName.length ; i++ ){
+        		var row = application.gdsTransInfo.addRow();
+        		if (i == 0){										//svc id 와 url은 하나이다.
+        			application.gdsTransInfo.setColumn(row,0, svcid);
+        			application.gdsTransInfo.setColumn(row,1, strURL);
+        		}
+        		application.gdsTransInfo.setColumn(row,2, dsInputName[i]);
+        	}
+        	
+        	for (var i = 0; i < dsOutputName.length ; i++ ){
+        		application.gdsTransInfo.setColumn(row,3, dsOutputName[i]);
+        	}
+        	trace("=====1");
+        	
+        			  var oDatas =  {
+        			  svcid : svcid,
+        			  sController : strURL,			 
+        			  inds :["__DS_TRANS_INFO__=gdsTransInfo " + inputDs],
+        			  outds :[outputDs],
+        			  args  : [params],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        			
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		/*  
+        		*   callback argument
+        		*   @param : {string}    this.svcid       서비스 ID
+        		*   @param : {object}    this.fobj        : 현재 form object
+        		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+        		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+        		*/ 
+        		trace("=====2");
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg,"알림");			
+        		   return;
+        		}	
+        			
+        			trace(svcid);
+        			trace(this.errorcode);
+        			trace(this.errormsg);
+        		   var pThis = this.fobj;   //form object
+        		   pThis[callbackFnc](svcid,this.errorcode,this.errormsg); 
+        	}); 	
+        	
+
+        }
+
+        //transaction callback 버튼
+        this.fnCallback = function(svcid,errcd,errmsg)
+        {
+        trace("fnCallBack");
+
+        	switch (svcid)
+        	{
+        		case "ds_clas_code" :		
+        			//trace(ds_clas_code.saveXML());
+        			this.ds_clas_code.deleteRow(this.ds_clas_code.rowcount-1);
+        			this.ds_clas_code.insertRow(0);
+        			this.ds_clas_code.setColumn(0,"codeName","전체");
+        			this.ds_clas_code.setColumn(0,"codeNo","000");
+        			this.ds_clas_code.setColumn(0,"useYn","Y");
+        			this.cmb_Clas_Code.index = 0;
+        			break;
+        		case "ds_raisreq" :
+        			//trace(ds_raisreq.saveXML());
+        			//데이터 조회 에러 발생시
+        			if(errcd != "0"){	
+        				alert("데이터가 정상적으로 조회되지 않았습니다.\n"
+        					+ "소제기 조회 에러내용: "+ errmsg);
+        				return false;
+        			
+        			}else{
+        				trace("this.fv_iStartPageNo = "+this.fv_iStartPageNo);
+        				trace("this.fv_iUnitSelRowNo = "+this.fv_iUnitSelRowNo);
+        				var iLastRow = this.fv_iStartPageNo * this.fv_iUnitSelRowNo;
+        				trace("iLastRow = "+iLastRow);
+        				trace("rownum >= "+(iLastRow + this.fv_iStartSelRowNo));
+        				trace("rownum <= "+(iLastRow + this.fv_iUnitSelRowNo));
+        				this.ds_raisreq.filter("rownum >= "+(iLastRow + this.fv_iStartSelRowNo)+" && rownum <= "+(iLastRow + this.fv_iUnitSelRowNo));
+        				trace("this.ds_raisreq.getRowCount() = "+this.ds_raisreq.getRowCount());
+
+        				if(this.ds_raisreq.getRowCount() == 0){
+   
+        					this.ds_raisreq.filter("");
+        					return;
+        				}else{
+        					this.fv_iServerRowCount = this.ds_raisreq.getRowCount();
+        					this.fn_SetStyle();
+        					this.fn_SetPageNo();
+        					this.div_page.stc_No0.style.set_color("gray");
+        					this.div_page_stc_No_onclick(this.div_page.stc_No0,"");
+        					
+        					trace(this.fv_iStartPageNo +" : "+this.fv_iServerRowCount);
+        				}
+        				
+        			}
+        			break;
+        	}
+        	
+        }
+
+        // 초기화버튼
+        this.btn_clean_onclick = function(obj,e)
+        {
+        	this.edt_No.text="";
+        	this.cmb_Clas_Code.set_index(0);
+        	this.cal_Req_Date1.value="";
+        	this.cal_Req_Date2.value="";
+        	this.cal_Req_Date2.enable=false;
+        	this.radio_Wtr.set_index(0);
+        	this.ds_raisreq.clearData();
+        	this.reload();
+        }
+
+        //확인 버튼
+        this.btn_check_onclick = function(obj,e)
+        {
+        	/*
+        	var variant =[];
+        	
+        	var reqid = this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqReqId");
+        	var reqidname = reqid.substring(0, reqid.indexOf("("));
+        	var reqidnum = reqid.substring(reqid.indexOf("(")+1, reqid.indexOf(")"));
+        	var reqClasCode = this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqClasCode");
+        	var idx4 = reqClasCode.indexOf(")");
+        	var reqclascode = reqClasCode.substring(0, reqClasCode.indexOf(")"));
+        	trace("1="+reqid);
+        	trace("2="+reqidname);
+        	trace("3="+reqidnum);
+        	trace("4="+reqClasCode);
+        	trace("5="+idx4);
+        	trace("6="+reqclascode);
+        	trace("작업 중");
+        	variant[0] = this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqNo");
+        	variant[1] = reqidnum; //this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqReqId"); //lawRaisreqReqId
+        	variant[2] = reqclascode; //this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqClasCode");
+        	
+        	var arrvars = ["lawRaisreqRea","lawRaisreqEtcPoin","lawRaisreqReqDate","lawRaisreqRepWtr","lawRaisreqWtr"
+        	,"lawRaisreqDalwCont","lawRaisreqExptDate","lawRaisreqRepCont","lawRaisreqEtcreqPoin","lawRaisreqRepDate"
+        	,"lawRaisreqIssuPoin","lawRaisreqTempSaveWtr"];
+        	
+        	
+        	var cnt = 0;
+        	
+        	for(i=0; i<arrvars.length; i++){
+        		variant[i+3] = this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, arrvars[i]);
+        		
+        		if(i == (arrvars.length-1)){
+        			cnt = i;
+        		}
+        	}
+        	
+        	variant[(cnt+1)+3] = reqidname;
+
+        	var params = variant[0] +'/' + variant[1] + '/' + variant[2] + '/' + variant[3] +
+        				'/' + variant[4] + '/' + variant[5] +'/' + variant[6] + '/' + variant[7] +'/' + variant[8] + 
+        				'/' + variant[9] + '/' + variant[10] + '/' + variant[11] +'/' + variant[12] + '/' + variant[13] +
+        				'/' + variant[14] + '/' + variant[15];
+        	
+        	trace("param : "+params);
+        	*/
+        	var VParam = this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqNo");
+        	this.close(VParam);
+        	
+        }
+
+        /*this.ds_raisreq_onrowposchanged = function(obj,e)
+        {
+        	trace("onrowposchanged");
+        	//this.paging();
+        }
+        */
+        this.ds_pageSet_onload = function(obj,e)
+        {
+        	trace("result!@#"+this.ds_pageSet.rowcount);
+        	//trace("result!@#"+this.ds_pageSet.getColumn(0, "endNum"));
+        	this.pageSetting();
+        }
+
+        this.pageClick = function(obj,e){
+        	this.ds_searchDiv.setColumn(0, "searchChange", "unchanged");
+        	//this.alert("reached!!="+obj.name+","+e.eventid);
+        	//var pageNo1=this.ds_pageSet.getColumn(0,"pageNo");
+        	//trace("obj.text="+obj.name);
+        	//trace("pageNo1="+pageNo1);
+        	trace("@@@pageNum1="+this.ds_pageSet.getColumn(0,"pageNo"));
+        	pageNum = obj.name;
+        	//trace("pageNum="+pageNum);
+        	this.ds_pageSet.setColumn(0, "pageNo", pageNum);
+        	trace("@@@pageNum2="+pageNum);
+        	trace("@@@pageNum3="+this.ds_pageSet.getColumn(0,"pageNo"));
+        	//this.pagingSearch(pageNum);
+        	this.pageDestroy();
+        	this.btn_search_onclick();
+        }
+
+        
+        this.pageSetting = function(){
+     
+        	/****************page variables**************/
+        	var startNum = this.ds_pageSet.getColumn(0, "startNum");
+        	var endNum = this.ds_pageSet.getColumn(0, "endNum");
+        	var gap =  (endNum-startNum+1);
+        	trace("startNum="+startNum);
+        	trace("end="+endNum);
+        	trace("hahaha="+gap);
+        	//trace("@@@"+this.ds_pageSet.getColumn(0, "pageNo"));
+        	var pageArr = new Array();
+        	var temp;
+        	var pgCnt=1;
+        	var widthAdd =40;
+        	var firstWidth=50;
+        	var goLefts = this.ds_pageSet.getColumn(0, "goLeft");
+        	var goRights = this.ds_pageSet.getColumn(0, "goRight");
+        	var btnId = startNum;
+        	
+        	
+        	/***************page button creation*****************************/
+        	
+        	
+        	if(goLefts>0){
+        	//trace("goLEfts="+goLefts);
+        	var goLeft = new Button(goLefts, "absolute", 10, 0, 25, 25, null, null);
+        	goLeft.set_text("<");
+        	this.Div.insertChild(1, goLefts, goLeft);
+        	goLeft.addEventHandler("onclick", this.pageClick, this);
+        	goLeft.show();
+        	}
+        	
+        	
+        	for(var i=0; i<gap; i++){
+        		pageArr[i]=new Button((btnId+i)+"", "absolute", firstWidth, null, 25, 25, null, null);
+        		pageArr[i].set_text(startNum);
+        		pageArr[i].addEventHandler("onclick", this.pageClick, this);
+        		(firstWidth=(firstWidth+=widthAdd));
+        		(startNum=(startNum+=pgCnt));
+        		this.Div.insertChild(1, (btnId+i)+"", pageArr[i]);
+        		pageArr[i].show();
+        		//trace("generated! i="+i);
+        		trace("generated! firstWidth="+firstWidth);
+        		//trace("generated! startNum="+startNum);
+        	}
+			
+			
+        	if(goRights>0){
+        	trace("goRights="+goRights);
+        	var goRight = new Button(goRights, "absolute", firstWidth, 0, 25, 25, null, null);
+        	goRight.set_text(">");
+        	this.Div.insertChild(1, goRights, goRight);
+        	goRight.addEventHandler("onclick", this.pageClick, this);
+        	goRight.show();
+        	}
+        	
+        }
+
+        this.pageDestroy = function(){
+        	trace("pageDestroy!!!");
+        	this.Div.destroy();
+        	        	
+        }
+
+        
+
+
+this.cmb_Clas_Code_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+	var checkChange = this.ds_searchDiv.getColumn(0, "searchChange");
+	if(checkChange=="unchanged"){
+		this.ds_searchDiv.setColumn(0, "searchChange", "changed");
+		trace("this.ds_searchDiv.="+this.ds_searchDiv.getColumn(0,"searchChange"));
+		this.ds_pageSet.setColumn(0,"pageNo",null);
+		trace("this.ds_searchDiv.="+this.ds_pageSet.getColumn(0,"pageNo"));
+	}
+}
+
+this.radio_Wtr_onitemclick = function(obj:Radio, e:nexacro.RadioMouseEventInfo)
+{
+	var checkChange = this.ds_searchDiv.getColumn(0, "searchChange");
+	if(checkChange=="unchanged"){
+		this.ds_searchDiv.setColumn(0, "searchChange", "changed");
+		trace("this.ds_searchDiv.="+this.ds_searchDiv.getColumn(0,"searchChange"));
+		this.ds_pageSet.setColumn(0,"pageNo",null);
+		trace("this.ds_searchDiv.="+this.ds_pageSet.getColumn(0,"pageNo"));
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

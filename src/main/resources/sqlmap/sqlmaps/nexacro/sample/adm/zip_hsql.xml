@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="zip">
+
+	<typeAlias alias="zipVO" type="nexacro.sample.adm.vo.ZipVO" />
+	
+		<resultMap id="zip" class="zipVO">
+		<result property="zipCode" column="ZIPCODE" />
+		<result property="siDo" column="SIDO"/>
+		<result property="guGun" column="GUGUN" />
+		<result property="dong" column="DONG" />
+		<result property="ri" column="RI" />
+		<result property="bldg" column="BLDG" />
+		<result property="bunji" column="BUNJI" />
+		<result property="seq" column="SEQ"/>
+		<result property="address1" column="ADDRESS1"/>
+	</resultMap>
+	
+	<!-- 사원 승인 내역 조회 -->
+	<select id="zip.selectZipCode" resultMap="zip"
+		parameterClass="zipVO">
+        SELECT
+            A.ZIPCODE,
+            A.SIDO,
+            A.GUGUN,
+            A.DONG,
+            A.RI,
+            A.BLDG,
+            A.BUNJI,
+            A.SEQ,
+            A.SIDO ||' '|| A.GUGUN ||' '|| A.DONG ||' '|| A.RI ||' '|| A.BLDG ||' '|| A.BUNJI as address1
+            FROM INSA_ZIP A
+            WHERE 1=1
+    		<isNotEmpty property="dong" prepend="AND">
+				<![CDATA[
+					A.DONG LIKE '%' || #dong# || '%'
+				]]>
+			</isNotEmpty>        			
+	</select>
+
+		
+</sqlMap>

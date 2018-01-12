@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+   <!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+   <typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+
+   <select id="loadCommonCodes" parameterClass="java.util.HashMap" resultClass="egovMap">   
+ 
+      SELECT CODE_NO   AS CODE
+          , CODE_NAME AS VALUE
+        FROM AML_COMMON_CODE_DETAIL
+       WHERE CLASS_CODE = #classCode#
+
+   </select>
+   
+<!-- 보고서목록 -->      
+   <select id="ManageList" parameterClass="java.util.HashMap" resultClass="egovMap">
+      <![CDATA[
+	    SELECT AR.STNDRD_DATE
+		     , SRM.REGI_ID
+		     , SRM.ALERT_GROUP_NO
+		     , ACD.CODE_NAME
+		     , C.EMP_NAME
+		     , C.REAL_NAME_NO
+		     , SRM.REPORT_DATE
+		     , AR.REPORT_EXCEPT_REASON     
+		  FROM AML_RULE_ALERT_RESULT AR
+		     , AML_RULE_ALERT_DETAIL AD
+		     , AML_CUST_INFO C
+		     , AML_COMMON_CODE_DETAIL ACD
+		     , AML_STR_REPORT_MST SRM
+		 WHERE 1=1
+           AND SRM.ALERT_GROUP_NO = AR.ALERT_GROUP_NO
+           AND AR.ALERT_GROUP_NO = AD.ALERT_GROUP_NO
+           AND AD.CUST_NO     = C.CUST_NO 
+           AND C.CUST_TYPE_CODE = ACD.CODE_NO
+	  	   AND ACD.CLASS_CODE = 'A000'
+		 ]]>
+	  <dynamic>
+	 	<isNotNull property="custType" prepend="AND">
+	 	  AND C.CUST_TYPE_CODE = #custType#
+        </isNotNull>
+        <isNotNull property="stDt">
+         <![CDATA[
+          AND C.REGI_DT >= #stDt#
+         ]]>
+        </isNotNull>
+        <isNotNull property="edDt">
+         <![CDATA[
+          AND C.REGI_DT <= #edDt#
+         ]]>
+        </isNotNull>
+	  </dynamic>
+	 <!-- <![CDATA[ORDER BY SRM.REPORT_NO]]> -->
+   </select>
+   
+   <select id="rule.Reason" parameterClass="java.util.HashMap" resultClass="egovMap">
+     SELECT REPORT_EXCEPT_REASON
+       FROM AML_RULE_ALERT_RESULT
+      WHERE ALERT_GROUP_NO = #alertGroupNo#
+   </select>
+   
+</sqlMap>

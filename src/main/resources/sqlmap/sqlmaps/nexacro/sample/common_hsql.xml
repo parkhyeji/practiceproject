@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="administrator">
+
+	<typeAlias alias="comCodeVO" type="nexacro.sample.vo.com.ComCodeVO" />
+	<typeAlias alias="detailCodeVO" type="nexacro.sample.vo.com.DetailCodeVO" />
+
+	<resultMap id="comCode" class="comCodeVO">
+		<result property="rownum" column="ROWNUM" />
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="className" column="CLASS_NAME" />
+		<result property="classLen" column="CLASS_LEN" />
+		<result property="useYn" column="USE_YN" />
+		<result property="mainTable" column="MAIN_TABLE" />
+		<result property="mainColumn" column="MAIN_COLUMN" />
+		<result property="classDesc" column="CLASS_DESC" />
+		<result property="registTime" column="REGIST_TIME" />
+		<result property="registId" column="REGIST_ID" />
+	</resultMap>
+
+	<resultMap id="detailCode" class="comCodeVO">
+		<result property="detailCode" column="DETAIL_CODE" />
+	</resultMap>
+	
+	<resultMap id="detailClassCode" class="detailCodeVO">
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="className" column="CLASS_NAME" />
+		<result property="codeFull" column="CODE_FULL" />
+	</resultMap>
+	
+	<resultMap id="detailCodeList" class="detailCodeVO">
+		<result property="rownum" column="ROWNUM" />
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="className" column="CLASS_NAME" />
+		<result property="codeNo" column="CODE_NO" />
+		<result property="codeName" column="CODE_NAME" />
+		<result property="codeName2" column="CODE_NAME2" />
+		<result property="codeEngName" column="CODE_ENG_NAME" />
+		<result property="etcCode1" column="ETC_CODE1" />
+		<result property="etcCode2" column="ETC_CODE2" />
+		<result property="codeDesc" column="CODE_DESC" />
+		<result property="useYn" column="USE_YN" />
+		<result property="sortSeq" column="SORT_SEQ" />
+		<result property="registTime" column="REGIST_TIME" />
+		<result property="registId" column="REGIST_ID" />
+		<result property="updateTime" column="UPDATE_TIME" />
+		<result property="updateId" column="UPDATE_ID" />
+		<result property="lastModyTime" column="LAST_MODY_TIME" />
+		<result property="higherClassCode" column="HIGHER_CLASS_CODE" />
+		<result property="higherCodeNo" column="HIGHER_CODE_NO" />
+	</resultMap>
+	
+	
+	<!-- 공통코드 전체내역 조회하기 -->
+	<select id="common.selectCode" resultMap="comCode"
+		parameterClass="comCodeVO">
+		<![CDATA[
+		SELECT ROWNUM, T1.* FROM
+			(
+			SELECT
+			CLASS_CODE,
+			CLASS_NAME,
+			CLASS_LEN,
+			USE_YN,
+			MAIN_TABLE,
+			MAIN_COLUMN,
+			CLASS_DESC,
+			REGIST_TIME,
+			REGIST_ID
+		FROM 
+			CMM_CODE_MASTER
+		WHERE 1=1
+		]]>
+		<dynamic>
+			<isNotNull property="searchKeyword">
+				<isEqual prepend=" AND " property="searchCondition"
+					compareValue="CLASS_CODE">
+					CLASS_CODE LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+				<isEqual prepend=" AND " property="searchCondition"
+					compareValue="CLASS_NAME">
+					CLASS_NAME LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+				<isEqual prepend=" AND " property="searchCondition"
+					compareValue="useYn">
+					USE_YN LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+			</isNotNull>
+		</dynamic>
+        <![CDATA[
+		ORDER BY CLASS_CODE) T1
+		]]>
+	</select>
+
+	<!-- 마스터코드 코드번호 또는 코드네임 가져오기 -->
+	<select id="common.detailCode" resultMap="detailCode"
+		parameterClass="java.util.HashMap">
+		<![CDATA[
+		SELECT
+		]]>
+		<dynamic>
+			<isEqual property="codeSwitch"
+				compareValue="CLASS_NAME">
+				CLASS_NAME AS DETAIL_CODE
+			</isEqual>
+			<isEqual property="codeSwitch"
+				compareValue="CLASS_CODE">
+				CLASS_CODE AS DETAIL_CODE
+			</isEqual>
+		</dynamic>
+		<![CDATA[
+		FROM CMM_CODE_MASTER
+		]]>
+	</select>
+	
+	<!-- 코드마스터 등록 -->
+	<insert id="common.insertCode" parameterClass="comCodeVO">
+		INSERT INTO 
+			CMM_CODE_MASTER
+		VALUES
+		(
+			#classCode#,
+			#className#,
+			#classLen#,
+			#useYn#,
+			#mainTable#,
+			#mainColumn#,
+			#classDesc#,
+			SYSDATE,
+			#registId#
+		)
+	</insert>
+	
+	<!-- 코드마스터 업데이트 -->
+	<update id="common.updateCode" parameterClass="comCodeVO">
+		UPDATE
+			CMM_CODE_MASTER
+		SET
+			CLASS_NAME = #className#,
+			CLASS_LEN = #classLen#,
+			USE_YN = #useYn#,
+			MAIN_TABLE = #mainTable#,
+			MAIN_COLUMN = #mainColumn#,
+			CLASS_DESC = #classDesc#
+		WHERE
+			CLASS_CODE = #classCode#
+	</update>
+	
+	<!-- 코드마스터 삭제 -->
+	<delete id="common.deleteCode" parameterClass="comCodeVO">
+		DELETE
+		FROM
+			CMM_CODE_MASTER
+		WHERE
+			CLASS_CODE = #classCode#
+	</delete>
+
+	<!-- 상세코드 분류코드 가져오기 -->
+	<select id="common.selectDetailCode" resultMap="detailClassCode">
+	SELECT
+		' ' AS CLASS_CODE
+		,'' AS CLASS_NAME
+		,'전체' AS CODE_FULL
+	FROM
+		DUAL
+	UNION
+	SELECT
+		D.CLASS_CODE
+		,M.CLASS_NAME
+		,D.CLASS_CODE || ' / ' || M.CLASS_NAME AS CODE_FULL
+	FROM 
+		CMM_CODE_DETAIL D , CMM_CODE_MASTER M
+	WHERE 
+		D.CLASS_CODE = M.CLASS_CODE
+	AND D.USE_YN = 'Y'
+	AND M.USE_YN = 'Y'
+	ORDER BY CLASS_CODE ASC
+	</select>
+	
+	<!-- 분류코드에 따른 상세코드 가져오기 -->
+	<select id="common.selectDetailList" resultMap="detailCodeList"
+	parameterClass="detailCodeVO">
+	<![CDATA[
+	SELECT ROWNUM, T1.* FROM
+		(
+		SELECT
+		D.CLASS_CODE,
+		D.CODE_NO,
+		D.CODE_NAME,
+		D.CODE_NAME2,
+		D.CODE_ENG_NAME,
+		D.ETC_CODE1,
+		D.ETC_CODE2,
+		D.CODE_DESC,
+		D.USE_YN,
+		D.SORT_SEQ,
+		D.REGIST_TIME,
+		D.REGIST_ID,
+		D.UPDATE_TIME,
+		D.UPDATE_ID,
+		D.LAST_MODY_TIME,
+		D.HIGHER_CLASS_CODE,
+		D.HIGHER_CODE_NO,
+		M.CLASS_NAME
+	FROM
+		CMM_CODE_DETAIL D, CMM_CODE_MASTER M
+	WHERE D.CLASS_CODE = M.CLASS_CODE
+	]]>
+		<dynamic>
+			<isNotNull property="searchCondition" prepend=" AND ">
+					D.CLASS_CODE LIKE '%' || #searchCondition# || '%'
+			</isNotNull>
+			<isNotNull property="searchKeyword" prepend=" AND ">
+					D.CODE_NO LIKE '%' || #searchKeyword# || '%'
+			</isNotNull>
+			<isNotNull property="searchUseYn" prepend=" AND ">
+					D.CODE_NAME LIKE '%' || #searchUseYn# || '%'
+			</isNotNull>
+		</dynamic>
+	<![CDATA[
+	ORDER BY D.CODE_NO ASC) T1
+	]]>
+	</select>
+	
+	<!-- 상세코드 입력 -->
+	<insert id="common.insertDetailCode" parameterClass="detailCodeVO">
+	INSERT INTO
+	    CMM_CODE_DETAIL
+	(
+	CLASS_CODE, 
+	CODE_NO, 
+	CODE_NAME, 
+	CODE_NAME2, 
+	CODE_ENG_NAME, 
+	ETC_CODE1, 
+	ETC_CODE2, 
+	CODE_DESC,
+	USE_YN, 
+	SORT_SEQ, 
+	REGIST_TIME, 
+	REGIST_ID
+	)
+	VALUES
+	(
+	#classCode#,
+	#codeNo#,
+	#codeName#,
+	#codeName2#,
+	#codeEngName#,
+	#etcCode1#,
+	#etcCode2#,
+	#codeDesc#,
+	#useYn#,
+	#sortSeq#,
+	SYSDATE,
+	#registId#
+	)
+	</insert>
+	
+	<!-- 상세코드 수정 -->
+	<update id="common.updateDetailCode"
+	parameterClass="java.util.HashMap">
+	UPDATE CMM_CODE_DETAIL
+	SET
+		CODE_NAME = #detailCodeVO.codeName#,
+		CODE_NAME2 = #detailCodeVO.codeName2#,
+		CODE_ENG_NAME = #detailCodeVO.codeEngName#,
+		ETC_CODE1 = #detailCodeVO.etcCode1#,
+		ETC_CODE2 = #detailCodeVO.etcCode2#,
+		CODE_DESC = #detailCodeVO.codeDesc#,
+		USE_YN = #detailCodeVO.useYn#,
+		SORT_SEQ = #detailCodeVO.sortSeq#,
+		UPDATE_TIME = SYSDATE,
+		UPDATE_ID = #updateId#,
+		LAST_MODY_TIME = SYSDATE
+	WHERE
+		CLASS_CODE = #detailCodeVO.classCode#
+	AND
+		CODE_NO = #detailCodeVO.codeNo#
+	</update>
+	
+	<!-- 상세코드 삭제 -->
+	<delete id="common.deleteDetailCode" parameterClass="detailCodeVO">
+		DELETE
+		FROM
+			CMM_CODE_DETAIL
+		WHERE
+			CLASS_CODE = #classCode#
+		AND
+			CODE_NO = #codeNo#
+	</delete>
+	
+</sqlMap>

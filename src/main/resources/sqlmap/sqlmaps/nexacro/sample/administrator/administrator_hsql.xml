@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="administrator">
+
+	<typeAlias alias="admVO" type="nexacro.sample.vo.administrator.AdmVO" />
+	
+	<resultMap id="login" class="admVO">
+		<result property="insaId" column="INSA_ID" />
+		<result property="insaName" column="INSA_NAME" />
+		<result property="insaPwd" column="INSA_PSW" />
+		<result property="insaSabun" column="INSA_SABUN" />
+		<result property="insaStat" column="INSASTAT" />
+		<result property="insaPutWtr" column="INSA_PUT_WTR" />
+		<result property="insaDeptCode" column="INSA_DEPT_CODE" />
+		<result property="insaDeptName" column="INSA_DEPT_NAME" />
+	</resultMap>
+	
+	<resultMap id="id" class="admVO">
+		<result property="insaId" column="INSA_ID" />
+	</resultMap>
+	
+	<!-- 로그인 조회 -->
+	<select id="administrator.admlogin" resultMap="login"
+		parameterClass="java.util.HashMap">
+			SELECT
+				INSA_ID,
+				INSA_NAME,
+				INSA_PSW,
+				INSA_SABUN,
+				INSA_SIGN_REQ_STAT AS INSASTAT,
+				INSA_PUT_WTR,
+				INSA_DEPT_CODE,
+				(SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE INSA_DEPT_CODE = CODE_NO AND CLASS_CODE = 'B01') AS INSA_DEPT_NAME
+			FROM
+				TAB_INSA
+			WHERE
+				INSA_ID = #id#
+	</select>
+ 
+ 	<!-- 존재하는 아이디인지 조회 -->
+	<select id="administrator.selectid" resultMap="id"
+	parameterClass="java.lang.String">
+	SELECT NVL(MAX(INSA_ID), 'NONE') AS INSA_ID FROM TAB_INSA WHERE INSA_ID=#id#
+	</select>
+ 	
+ 	<!-- 회원가입 -->
+ 	<insert id="administrator.admInsert" parameterClass="admVO">
+		<selectKey keyProperty="insaSabun" resultClass="string">
+			<![CDATA[
+			SELECT /*+ INDEX_DESC(insa_sabun_PK) */ 
+                    DECODE(SUBSTR(MAX(insa_sabun),1,8) 
+                ,TO_CHAR(SYSDATE ,'YYYYMMDD'), MAX(insa_sabun) + 1
+                ,TO_CHAR(SYSDATE,'YYYYMMDD') || '01') insa_sabun            
+            FROM tab_insa
+            WHERE insa_sabun < TO_CHAR(SYSDATE,'YYYYMMDD') || '99'
+            AND ROWNUM = 1
+		    ]]>
+		</selectKey>
+	
+		<![CDATA[
+	
+		INSERT INTO TAB_INSA
+		(
+		INSA_SABUN,
+		INSA_ID,
+		INSA_NAME,
+		INSA_REG_BIRTH,
+		INSA_REG_BACKBIRTH,
+		INSA_PSW,
+		INSA_ENG_NAME,
+		INSA_HP,
+		INSA_SEX,
+		INSA_EMAIL,
+		INSA_ADDR1,
+		INSA_ADDR2,
+		INSA_ZIPCODE,
+		INSA_SIGN_REQ_STAT,
+		INSA_JOIN_DAY
+		) VALUES
+		(
+		#insaSabun#,
+		#insaId#,
+		#insaName#,
+		#birth#,
+		#backBirth#,
+		#insaPwd#,
+		#engName#,
+		#hp#,
+		#sex#,
+		#email#,
+		#address1#,
+		#address2#,
+		#zipCode#,
+		'001',
+		TO_CHAR(SYSDATE, 'YYYYMMDD')
+		)
+	
+		]]>
+	</insert>
+ 
+</sqlMap>

@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="RAISREQ_REP2" classname="RAISREQ_REP2" inheritanceid="" position="absolute" titletext="New Form" onload="RAISREQ_REP2_onload" left="0" top="0" width="1006" height="650">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" text="  소제기 의뢰 회신" left="6" top="8" width="984" height="50" style="background:cornflowerblue;color:white;align:left middle;font:굴림,12,bold;"/>
+        <ImageViewer id="ImageViewer01" taborder="1" onclick="ImageViewer01_onclick" left="10" top="60" width="980" height="52" style="background:#f0f0f0ff;border:1 solid #808080ff ;color:#000000ff;"/>
+        <ImageViewer id="ImageViewer04" taborder="3" left="131" top="67" width="851" height="37" style="background:#f0f0f0ff;border:1 solid #808080ff ;"/>
+        <ImageViewer id="ImageViewer02" taborder="4" text="소제기의뢰번호" onclick="ImageViewer02_onclick" left="16" top="67" width="139" height="37" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 굴림;"/>
+        <Edit id="edt_No" taborder="5" left="163" top="73" width="182" height="25" style="background:#ebebebff;bordertype:normal 0 0 ;" enable="false"/>
+        <Button id="btn_search" taborder="6" text="검색" onclick="btn_search_onclick" left="388" top="73" width="52" height="21" style="border:1 solid #999999ff ;color:#333333ff;"/>
+        <Button id="btn_clean" taborder="7" text="초기화" onclick="btn_clean_onclick" left="864" top="73" width="52" height="21" style="border:1 solid #999999ff ;color:#333333ff;"/>
+        <Static id="Static02" taborder="8" text="소제기 의뢰 정보" left="15" top="117" width="169" height="23" style="font:dotum,9,bold;"/>
+        <ImageViewer id="ImageViewer03" taborder="9" text="ImageViewer01" onclick="ImageViewer01_onclick" left="10" top="138" width="980" height="172" style="background:#f0f0f0ff;border:1 solid #808080ff ;color:#000000ff;"/>
+        <ImageViewer id="ImageViewer09" taborder="10" left="139" top="241" width="843" height="61" style="background:#f0f0f0ff;border:1 solid #808080ff ;"/>
+        <ImageViewer id="ImageViewer08" taborder="11" left="139" top="186" width="843" height="61" style="background:#f0f0f0ff;border:1 solid #808080ff ;"/>
+        <ImageViewer id="ImageViewer06" taborder="12" left="123" top="147" width="859" height="37" style="background:#f0f0f0ff;border:1 solid #808080ff ;"/>
+        <ImageViewer id="ImageViewer07" taborder="13" text="의뢰자" onclick="ImageViewer02_onclick" left="17" top="147" width="131" height="37" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 굴림;"/>
+        <ImageViewer id="ImageViewer10" taborder="14" text="소송제기사유" onclick="ImageViewer02_onclick" left="17" top="186" width="131" height="61" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 Dotum;"/>
+        <ImageViewer id="ImageViewer11" taborder="15" text="기타의뢰사항" onclick="ImageViewer02_onclick" left="17" top="241" width="131" height="61" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 Dotum;"/>
+        <Edit id="edt_Req_ID" taborder="16" left="155" top="153" width="174" height="25" style="background:#ebebebff;bordertype:normal 0 0 ;" enable="false"/>
+        <ImageViewer id="ImageViewer12" taborder="17" text="소송제기분류" onclick="ImageViewer02_onclick" left="334" top="147" width="131" height="37" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 굴림;"/>
+        <Combo id="combo_Clas_Code" taborder="18" innerdataset="@ds_clas_code" codecolumn="codeNo" datacolumn="codeName" onitemchanged="combo_Clas_Code_onitemchanged" left="468" top="153" width="174" height="25" style="background:#ebebebff;" enable="false"/>
+        <ImageViewer id="ImageViewer13" taborder="19" text="의뢰일자" onclick="ImageViewer02_onclick" left="643" top="147" width="131" height="37" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 굴림;"/>
+        <Calendar id="cal_Req_Date" taborder="20" left="786" top="152" width="182" height="25" style="background:#ebebebff;" enable="false"/>
+        <TextArea id="ta_Rea" taborder="21" left="154" top="190" width="820" height="49" enable="false"/>
+        <TextArea id="ta_Etc_Point" taborder="22" left="154" top="247" width="820" height="49" enable="false"/>
+        <Static id="Static00" taborder="23" text="소제기 회신 결과" left="15" top="319" width="169" height="23" style="font:dotum,9,bold;"/>
+        <ImageViewer id="ImageViewer05" taborder="24" text="ImageViewer01" onclick="ImageViewer01_onclick" left="15" top="340" width="980" height="268" style="background:#f0f0f0ff;border:1 solid #808080ff ;color:#000000ff;"/>
+        <Button id="btn_close" taborder="25" text="닫기" onclick="btn_close_onclick" left="936" top="619" width="52" height="21" style="border:1 solid #999999ff ;color:#333333ff;"/>
+        <Button id="btn_save" taborder="26" text="저장" onclick="btn_save_onclick" left="880" top="619" width="52" height="21" style="border:1 solid #999999ff ;color:#333333ff;"/>
+        <Calendar id="cal_Expt_Data" taborder="27" left="835" top="360" width="142" height="25" style="background:#ebebebff;"/>
+        <ImageViewer id="ImageViewer18" taborder="28" text="소송제기예상일자" onclick="ImageViewer02_onclick" left="700" top="355" width="131" height="37" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 Dotum;"/>
+        <Combo id="combo_Wtr" taborder="29" innerdataset="@ds_wtr" codecolumn="codeNo" datacolumn="codeName" left="554" top="361" width="142" height="25" style="background:#ebebebff;"/>
+        <ImageViewer id="ImageViewer17" taborder="30" text="소송가능여부" onclick="ImageViewer02_onclick" left="451" top="355" width="99" height="37" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 Dotum;"/>
+        <Calendar id="cal_Rep_Data" taborder="31" left="298" top="360" width="142" height="25" style="background:#ebebebff;"/>
+        <ImageViewer id="ImageViewer16" taborder="32" text="회신일자" onclick="ImageViewer02_onclick" left="218" top="355" width="75" height="37" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 Dotum;"/>
+        <Combo id="combo_Rep_Wtr" taborder="33" innerdataset="@ds_raisreq_wtr" codecolumn="codeNo" datacolumn="codeName" onitemchanged="combo_Rep_Wtr_onitemchanged" left="88" top="360" width="126" height="25" style="background:#ebebebff;"/>
+        <ImageViewer id="ImageViewer15" taborder="34" text="회신여부" onclick="ImageViewer02_onclick" left="17" top="355" width="67" height="37" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 Dotum;"/>
+        <ImageViewer id="ImageViewer14" taborder="35" left="83" top="395" width="899" height="209" style="background:#f0f0f0ff;border:1 solid #808080ff ;"/>
+        <TextArea id="ta_Dalw_Cont" taborder="36" left="138" top="551" width="836" height="49"/>
+        <TextArea id="ta_EtcReq_Poin" taborder="37" left="138" top="497" width="836" height="49"/>
+        <TextArea id="ta_Rep_Count" taborder="38" left="138" top="398" width="836" height="41"/>
+        <TextArea id="ta_Issue_Point" taborder="39" left="138" top="443" width="836" height="49"/>
+        <ImageViewer id="ImageViewer20" taborder="40" text="회신내용" onclick="ImageViewer02_onclick" left="17" top="395" width="115" height="45" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 11 Dotum;"/>
+        <ImageViewer id="ImageViewer19" taborder="41" text="쟁점사항" onclick="ImageViewer02_onclick" left="17" top="439" width="115" height="53" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 Dotum;"/>
+        <ImageViewer id="ImageViewer21" taborder="42" text="기타요구사항" onclick="ImageViewer02_onclick" left="17" top="491" width="115" height="61" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 Dotum;"/>
+        <ImageViewer id="ImageViewer22" taborder="43" text="불가사유내용" onclick="ImageViewer02_onclick" left="17" top="551" width="115" height="53" style="background:#404040ff;border:1 solid #969696ff ;color:white;font:bold 9 Dotum;"/>
+        <Static id="Static06" taborder="44" text="*" left="30" top="406" width="37" height="23" style="color:#ff0000ff;font:dotum,9,bold;"/>
+        <Static id="Static01" taborder="45" text="*" left="30" top="455" width="37" height="23" style="color:#ff0000ff;font:dotum,14,bold;"/>
+        <Static id="Static03" taborder="46" text="*" left="19" top="567" width="37" height="23" style="color:#ff0000ff;font:dotum,14,bold;"/>
+        <Static id="Static04" taborder="47" text="Static04" left="21.27%" top="119" right="69.78%" height="20"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_raisreq_wtr">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="codeName">선택</Col>
+          </Row>
+          <Row>
+            <Col id="codeName">미회신</Col>
+            <Col id="codeNo">N</Col>
+          </Row>
+          <Row>
+            <Col id="codeName">회신</Col>
+            <Col id="codeNo">Y</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_wtr">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="codeName">불가</Col>
+            <Col id="codeNo">N</Col>
+          </Row>
+          <Row>
+            <Col id="codeName">가능</Col>
+            <Col id="codeNo">Y</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_clas_code">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_raisreq">
+        <ColumnInfo>
+          <Column id="lawRaisreqNo" type="STRING" size="256"/>
+          <Column id="lawRaisreqReqId" type="STRING" size="256"/>
+          <Column id="lawRaisreqClasCode" type="STRING" size="256"/>
+          <Column id="lawRaisreqRea" type="STRING" size="256"/>
+          <Column id="lawRaisreqEtcPoin" type="STRING" size="256"/>
+          <Column id="lawRaisreqReqDate" type="STRING" size="256"/>
+          <Column id="lawRaisreqReqWtr" type="STRING" size="256"/>
+          <Column id="lawRaisreqWtr" type="STRING" size="256"/>
+          <Column id="lawRaisreqDalwCont" type="STRING" size="256"/>
+          <Column id="lawRaisreqExptDate" type="STRING" size="256"/>
+          <Column id="lawRaisreqReqCont" type="STRING" size="256"/>
+          <Column id="lawRaisreqEtcreqPoin" type="STRING" size="256"/>
+          <Column id="lawRaisreqRepDate" type="STRING" size="256"/>
+          <Column id="lawRaisreqIssuPoin" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_raisreq_temp">
+        <ColumnInfo>
+          <Column id="lawRaisreqWtr" type="STRING" size="256"/>
+          <Column id="lawRaisreqDalwCont" type="STRING" size="256"/>
+          <Column id="lawRaisreqExptDate" type="STRING" size="256"/>
+          <Column id="lawRaisreqRepCont" type="STRING" size="256"/>
+          <Column id="lawRaisreqEtcreqPoin" type="STRING" size="256"/>
+          <Column id="lawRaisreqRepDate" type="STRING" size="256"/>
+          <Column id="lawRaisreqIssuPoin" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_codename">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edt_Req_ID" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqReqId"/>
+      <BindItem id="item1" compid="combo_Clas_Code" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqClasCode"/>
+      <BindItem id="item2" compid="cal_Req_Date" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqReqDate"/>
+      <BindItem id="item3" compid="ta_Rea" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqRea"/>
+      <BindItem id="item4" compid="ta_Etc_Point" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqEtcPoin"/>
+      <BindItem id="item5" compid="combo_Rep_Wtr" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqRepWtr"/>
+      <BindItem id="item6" compid="cal_Rep_Data" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqRepDate"/>
+      <BindItem id="item7" compid="combo_Wtr" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqWtr"/>
+      <BindItem id="item12" compid="cal_Expt_Data" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqExptDate"/>
+      <BindItem id="item13" compid="edt_No" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqNo"/>
+      <BindItem id="item14" compid="edt_Req_ID" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqReqId"/>
+      <BindItem id="item15" compid="combo_Clas_Code" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqClasCode"/>
+      <BindItem id="item16" compid="cal_Req_Date" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqReqDate"/>
+      <BindItem id="item17" compid="ta_Rea" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqRea"/>
+      <BindItem id="item18" compid="ta_Etc_Point" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqEtcPoin"/>
+      <BindItem id="item19" compid="cal_Expt_Data" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqExptDate"/>
+      <BindItem id="item20" compid="combo_Wtr" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqWtr"/>
+      <BindItem id="item21" compid="cal_Rep_Data" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqRepDate"/>
+      <BindItem id="item22" compid="combo_Rep_Wtr" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqRepWtr"/>
+      <BindItem id="item11" compid="ta_Dalw_Cont" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqDalwCont"/>
+      <BindItem id="item10" compid="ta_EtcReq_Poin" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqEtcreqPoin"/>
+      <BindItem id="item8" compid="ta_Rep_Count" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqRepCont"/>
+      <BindItem id="item9" compid="ta_Issue_Point" propid="value" datasetid="ds_raisreq" columnid="lawRaisreqIssuPoin"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+//모달창 call
+this.btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var v_argParm = new Array(); // 배열선언
+    v_argParm[0] = '';
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	
+	var newChild = new ChildFrame;
+	
+	newChild.init(
+	"POPUP_RAISREQ_REP2"
+	, "absolute"
+	, nLeft
+	, nTop
+	, 668
+	, 423
+	, null
+	, null
+	, "sue::POPUP_RAISREQ_REP2.xfdl"
+	);
+	
+	newChild.set_openalign("center middle");
+	newChild.set_dragmovetype("all");
+	
+	newChild.showModal(
+		this.getOwnerFrame()
+		, ""
+		, this
+		, "modal_callback"
+	);
+}
+// 모달창 콜백
+
+this.modal_callback = function(strID, variant)
+{
+	
+	trace("variant=="+variant);
+	trace("strID="+strID);
+	if(strID == "POPUP_RAISREQ_REP2")
+	{
+		if(this.gfn_IsNull(variant))
+		{
+			return;
+		}
+		
+		if(this.ds_raisreq_temp.getRowCount > 0) {
+			this.ds_raisreq_temp.clearData();
+		}
+		this.ds_clas_code.clearData();//데이터셋 초기화
+		this.classCodeListLoadTemp("ds_clas_code", "ds_clas_code",  "Y", "fnCallback", "D01"); //사건유형공통코드
+		this.modal_selectRais(variant);
+	}
+}
+
+// 소제기 번호 지정 후 자동조회
+this.modal_selectRais = function(variant)
+{
+
+
+	var strParam  = "lawRaisreqNo=" +"\""+variant+"\"";
+	trace("modal result==="+strParam);
+	
+	
+	this.gfn_transaction(this,
+						"sueView",
+						"sue/sueView.do",
+						"",
+						"ds_raisreq=ds_output, ds_codename=ds_output2",
+						strParam,
+						"transaction_callback"
+						);
+	
+}
+
+
+this.btn_close_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+this.btn_clean_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.reload();
+}
+
+
+this.btn_save_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+/*
+trace("trace 103004");
+trace("one : "+this.edt_No.text);
+trace("two : "+this.edt_No.value);
+*/
+var edtNo = this.edt_No.value;
+//trace("processing1");
+var taRepCount = this.ta_Rep_Count.getLength();
+//trace("processing2");
+var taIssuePoint = this.ta_Issue_Point.getLength();
+//trace("processing3");
+var comboRepWtr = this.combo_Rep_Wtr.value;
+/*
+trace("=========================================");
+trace("@@@="+edtNo);
+trace("@@@="+taRepCount);
+trace("@@@="+taIssuePoint);
+trace("@@@="+comboRepWtr);
+trace("=========================================");
+*/
+if(!(this.gfn_IsNull(edtNo))){
+	trace("1");
+	if(comboRepWtr=='Y'){
+		trace("2");
+		if(taRepCount<1){
+			trace("3");
+			this.alert("회신 내용을 입력하세요");
+		}else if(taIssuePoint<1){
+			trace("4");
+			this.alert("쟁점 내용을 입력하세요");
+		}else{
+			trace("5");
+			this.sueUpdate();
+		}
+		trace("6");
+	}else if (comboRepWtr=='N'){
+		trace("7");
+		this.sueUpdate();
+	}
+	trace("8");
+}
+trace("process ends");
+}
+
+this.sueUpdate = function(){
+trace("trace 103002");
+	var strSvcid = "sueUpdate";
+	var strController = "sue/sueUpdate.do";
+	var strParam ="";
+	//trace("test103001: "+this.ds_raisreq.getColumn(1,1));
+	this.ds_raisreq.setColumn("DataSetRowType",2);
+	
+	var classCode = this.combo_Clas_Code.value;
+	trace("@@@="+classCode);
+	this.ds_raisreq.setColumn(0, "lawRaisreqClasCode", classCode);
+	
+	//trace("test103003: "+this.ds_raisreq.getColumn(1,1));
+	this.gfn_transaction(
+	this
+	, strSvcid
+	, strController
+	, "ds_input=ds_raisreq:U"
+	, ""
+	, strParam
+	, "fnCallBack"
+	)
+}
+
+
+this.classCodeListLoadTemp= function(strSvcId, strDataSet, strUseYn, strCallbackFunc, strVParam)
+{
+	trace("moved here~~");
+	var strTempDataSet = strDataSet+"=ds_output";
+	var strController 	= "code/giveMeCode.do";
+	
+	
+	if(this.gfn_IsNull(strUseYn) || strUseYn == "")
+	{	
+		strUseYn = "N";
+	} 
+	var strParam = "";
+	strParam += " UseYn=" + strUseYn+ " CLASS_CODE=" + strVParam;
+	trace(strParam);
+	
+	// 트랜젝션 공통함수 호출
+	
+	this.gfn_transaction(this,
+					strSvcId,
+					strController, 
+					"", 
+					strTempDataSet,
+					strParam, 
+					strCallbackFunc
+					);
+	
+}
+
+
+
+this.Static05_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

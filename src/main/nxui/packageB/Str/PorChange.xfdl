@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="porChange" classname="samplecrud" left="0" top="0" width="1024" height="768" titletext="샘플" onload="PorChange_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static01" taborder="19" left="40" top="372" right="40" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <Grid id="grd_list" taborder="0" useinputpanel="false" left="40" top="90" right="40" binddataset="ds_list" height="275">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40" band="left"/>
+                <Column size="80" band="left"/>
+                <Column size="99" band="left"/>
+                <Column size="302" band="left"/>
+                <Column size="87" band="left"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="89"/>
+                <Column size="61"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="No"/>
+                <Cell col="1" rowspan="2" text="거래일"/>
+                <Cell col="2" rowspan="2" text="그룹번호"/>
+                <Cell col="3" rowspan="2" text="룰 명칭"/>
+                <Cell col="4" rowspan="2" text="적용주기"/>
+                <Cell col="5" colspan="5" text="최초배당정보"/>
+                <Cell row="1" col="5" text="업무구분"/>
+                <Cell row="1" col="6" text="거래 채널"/>
+                <Cell row="1" col="7" text="거래상품"/>
+                <Cell row="1" col="8" text="담당자"/>
+                <Cell row="1" col="9" text="배당 담당자코드"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="expr:comp.parent.ds_list.getRowType(currow)"/>
+                <Cell col="1" text="bind:dealDate" mask="####.##.##"/>
+                <Cell col="2" text="bind:alertGroupNo"/>
+                <Cell col="3" text="bind:ruleName"/>
+                <Cell col="4" text="bind:ruleApplyPeeriod"/>
+                <Cell col="5" displaytype="combo" text="bind:workType" combodataset="ds_workType" combocodecol="code" combodatacol="value"/>
+                <Cell col="6" displaytype="combo" text="bind:tradeCha" combodataset="ds_trade" combocodecol="code" combodatacol="value"/>
+                <Cell col="7" displaytype="combo" text="bind:dealGoods" combodataset="ds_goods" combocodecol="code" combodatacol="value"/>
+                <Cell col="8" text="bind:distName"/>
+                <Cell col="9" text="bind:distChgedId"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="str_02" taborder="8" text="배당대상자 조회" left="44" top="381" width="197" height="19" style="color:#46463dff;align:left top;font:9 굴림;"/>
+        <Static id="str_03" taborder="9" left="40" top="408" height="28" style="background:gainsboro;border:1 solid #a8a8a8ff ;" right="40"/>
+        <Static id="str_04" taborder="12" text="항목" onclick="sta_no_onclick" left="29" top="411" width="68" height="24" style="color:#46463dff;align:center middle;font:bold 9 굴림;"/>
+        <Combo id="cmb_search" taborder="13" readonly="false" innerdataset="@ds_search" codecolumn="code" datacolumn="value" onitemchanged="cmb_adv_code_onitemchanged" left="7.91%" top="410" height="24" style="font:9 굴림;" index="0" value="EMP_NAME" text="이름" width="125"/>
+        <Edit id="edt_searchKey" taborder="14" lengthunit="utf8" maxlength="100" ontextchanged="edt_out_req_tit_ontextchanged" top="410" height="24" style="font:9 굴림;" width="125" left="212"/>
+        <Grid id="grd_emp_list" taborder="15" useinputpanel="false" left="40" top="444" right="40" height="250" binddataset="ds_emp">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="150"/>
+                <Column size="170"/>
+                <Column size="100"/>
+                <Column size="170"/>
+                <Column size="350"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사번"/>
+                <Cell col="1" text="이름"/>
+                <Cell col="2" text="직위"/>
+                <Cell col="3" text="핸드폰 번호"/>
+                <Cell col="4" text="이메일"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:empNo"/>
+                <Cell col="1" text="bind:empName"/>
+                <Cell col="2" text="bind:posiName"/>
+                <Cell col="3" text="bind:celNo" mask="###-####-####"/>
+                <Cell col="4" style="align:left;" text="bind:email" combodataset="ds_workType" combocodecol="code" combodatacol="value"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_title" taborder="17" onclick="sta_title_onclick" left="0%" top="0" right="0%" height="46" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Static id="Static02" taborder="16" text="룰 배당 변경" left="40" top="0" width="200" height="45" style="color:white;font:bold 17 돋움;"/>
+        <Static id="Static00" taborder="18" left="40" top="54" right="40" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <Static id="str_01" taborder="7" text="배당변경대상 룰" left="44" top="63" width="197" height="19" style="color:#46463dff;align:left top;font:9 굴림;"/>
+        <Button id="btn_emp_search" taborder="11" text="검색" onclick="btn_emp_search_onclick" cssclass="btn_WFSA_Search" top="412" width="92" height="20" style="background:lightskyblue;color:white;font:9 굴림;" class="btn_WFSA_Search" right="240"/>
+        <Button id="btn_chan" taborder="2" text="배당변경" top="412" height="20" onclick="btn_change_onclick" style="background:lightskyblue;color:white;" width="92" right="142"/>
+        <Button id="btn_shutdown" taborder="3" text="변경취소" top="412" height="20" onclick="btn_shutdown_onclick" style="background:lightskyblue;color:white;" width="92" right="44"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="255"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">EMP_NAME</Col>
+            <Col id="value">이름</Col>
+          </Row>
+          <Row>
+            <Col id="code">POSI_NAME</Col>
+            <Col id="value">직위</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_list" updatecontrol="false" onrowposchanged="ds_list_onrowposchanged" useclientlayout="false" oncolumnchanged="ds_list_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="dealDate" type="STRING" size="20"/>
+          <Column id="alertGroupNo" type="STRING" size="20"/>
+          <Column id="ruleId" type="STRING" size="20"/>
+          <Column id="ruleName" type="STRING" size="256"/>
+          <Column id="ruleApplyPeeriod" type="STRING" size="20"/>
+          <Column id="workType" type="STRING" size="20"/>
+          <Column id="tradeCha" type="STRING" size="20"/>
+          <Column id="dealGoods" type="STRING" size="20"/>
+          <Column id="distName" type="STRING" size="256"/>
+          <Column id="distChgedId" type="STRING" size="20"/>
+          <Column id="dealSerialNo" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_emp">
+        <ColumnInfo>
+          <Column id="empNo" type="STRING" size="256"/>
+          <Column id="empName" type="STRING" size="20"/>
+          <Column id="posiName" type="STRING" size="20"/>
+          <Column id="celNo" type="STRING" size="20"/>
+          <Column id="email" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_condition">
+        <ColumnInfo>
+          <Column id="type" type="STRING" size="256"/>
+          <Column id="keyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="type">EMP_NAME</Col>
+            <Col id="keyword"> </Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_workType">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_trade">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_goods">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_forUpdate">
+        <ColumnInfo>
+          <Column id="alertGroupNo" type="STRING" size="256"/>
+          <Column id="ruleId" type="STRING" size="256"/>
+          <Column id="dealSerialNo" type="STRING" size="256"/>
+          <Column id="empNo" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_copy">
+        <ColumnInfo>
+          <Column id="alertGroupNo" type="STRING" size="256"/>
+          <Column id="ruleId" type="STRING" size="256"/>
+          <Column id="dealSerialNo" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edt_searchKey" propid="value" datasetid="ds_condition" columnid="keyword"/>
+      <BindItem id="item1" compid="cmb_search" propid="value" datasetid="ds_condition" columnid="type"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+// Onload function  
+this.PorChange_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+	var sDsIds  = "";
+		sDsIds += "ds_workType=ds_workType";
+		sDsIds += " ds_trade=ds_trade";
+		sDsIds += " ds_goods=ds_goods";
+		sDsIds += " ds_list=ds_list";
+		
+	var groupNo = this.parent.gN;
+	//var ruleId  = this.parent.ri;
+	var dealSerialNo = this.parent.dsn;
+	this.ds_copy.setColumn(0,"alertGroupNo",groupNo);
+	//this.ds_copy.setColumn(0,"ruleId",ruleId);
+	this.ds_copy.setColumn(0,"dealSerialNo",dealSerialNo);
+
+	this.gfn_transaction(this
+					   , "commonCode"
+					   , "PorChange/loadCommonCodes.do"
+					   , "ds_copy=ds_copy"
+					   , sDsIds
+					   , ""
+					   , "fnCallback");
+}
+
+
+// callback function
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+			case "commonCode":
+			break;
+			case "searchCode":
+			break;
+			case "saveList":
+				alert("변경되었습니다.");			
+				this.PorChange_onload();
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+
+	// setRowType를 사용하려면 해당 데이터셋의 옵션 중에서 updatecontrol를 false로 지정해야한다.
+	// Dataset.ROWTYPE_EMPTY 0 존재하지 않는 행의 상태
+	// Dataset.ROWTYPE_NORMAL 1 초기 행의 상태
+	// Dataset.ROWTYPE_INSERT 2 추가된 행의 상태
+	// Dataset.ROWTYPE_UPDATE 4 수정된 행의 상태
+	// Dataset.ROWTYPE_DELETE 8 삭제된 행의 상태
+	// Dataset.ROWTYPE_GROUP 16 그룹 정보 행의 상태
+	
+	
+
+// 콤포넌트 상태 변경
+this.disableComponents = function(){
+	this.cmb_search.enable    = false;
+	this.edt_searchKey.enable = false;
+
+}
+
+this.enableComponents = function(){
+   	this.cmb_search.enable    = true;
+	this.edt_searchKey.enable = true;
+
+}
+
+// 행 변경 시 이벤트
+this.ds_list_onrowposchanged = function(obj:Dataset, e:nexacro.DSRowPosChangeEventInfo){
+	if(obj.getRowType(obj.rowposition) == 8){
+		this.disableComponents();
+	}else{
+		this.enableComponents();
+	}
+}
+
+
+
+// 배당변경 클릭
+this.btn_change_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRowList     = this.ds_list.rowposition;	
+	var nRowEmp      = this.ds_emp.rowposition;
+	if(nRowEmp < 0){
+	    alert("변경할 사원을 선택해주세요");
+		return;
+	}
+	
+	var alertGroupNo = this.ds_list.getColumn(nRowList, "alertGroupNo");
+	var ruleId       = this.ds_list.getColumn(nRowList, "ruleId");
+	var dealSerialNo = this.ds_list.getColumn(nRowList, "dealSerialNo");
+	
+	var empNo        = this.ds_emp.getColumn(nRowEmp, "empNo");
+	
+	this.ds_forUpdate.setColumn(0, "alertGroupNo", alertGroupNo);
+	this.ds_forUpdate.setColumn(0, "ruleId", ruleId);
+	this.ds_forUpdate.setColumn(0, "dealSerialNo", dealSerialNo);
+	this.ds_forUpdate.setColumn(0, "empNo", empNo);
+	
+	
+	this.gfn_transaction(this
+					   , "saveList"
+					   , "PorChange/saveList.do"
+ 					   , "ds_forUpdate=ds_forUpdate"
+ 					   , ""
+ 					   , ""
+ 					   , "fnCallback");
+}
+
+
+// 배당대상자 조회 버튼 
+this.btn_emp_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+  this.gfn_transaction(this
+					   , "searchCode"
+					   , "PorChange/searchCust.do"
+					   , "ds_condition=ds_condition"
+					   , "ds_emp=ds_emp"
+					   , ""
+					   , "fnCallback");
+	
+}
+
+// 닫기 버튼 
+this.btn_shutdown_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

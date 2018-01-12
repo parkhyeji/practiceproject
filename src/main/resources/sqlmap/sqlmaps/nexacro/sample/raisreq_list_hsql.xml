@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" />
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+
+	<!-- 소제기 현황 -->
+	<!-- resultMap="rais3" -->
+	<select id="rais.raisDAO.getRaisreqDetailList" resultClass="egovMap"
+		parameterClass="java.util.HashMap">
+		
+		WITH
+			T3 AS
+				(SELECT
+					LAW_RAISREQ_REQ_ID
+					,LAW_RAISREQ_CLAS_CODE
+					,COUNT(*) AS REP_WTR
+				FROM
+					TAB_LAW_RAISREQ
+				WHERE
+					LAW_RAISREQ_REP_WTR='Y'
+				GROUP BY
+					LAW_RAISREQ_REQ_ID
+					,LAW_RAISREQ_CLAS_CODE)
+			,T4 AS
+				(SELECT
+					LAW_RAISREQ_REQ_ID
+					,LAW_RAISREQ_CLAS_CODE
+					,COUNT(*) AS WTR
+				FROM
+					TAB_LAW_RAISREQ
+				WHERE
+					LAW_RAISREQ_WTR='Y'
+				GROUP BY
+					LAW_RAISREQ_REQ_ID
+					,LAW_RAISREQ_CLAS_CODE)
+		SELECT 
+			rownum, main.*
+		FROM	
+			(SELECT 
+				T6.INSA_NAME
+				,T5.LAW_RAISREQ_REQ_ID AS RAISREQ_REQ_ID
+				,T5.LAW_RAISREQ_CLAS_CODE||'('||T7.CODE_NAME||')' AS LAW_RAISREQ_CLAS_CODE
+				,T5.TOTAL-NVL(T3.REP_WTR,0) AS RAISREQ_REP_WTR_NNUM
+				,NVL(T3.REP_WTR,0) AS RAISREQ_REP_WTR_YNUM
+				,NVL(T5.TOTAL,0) AS RAISREQ_REP_WTR_NUM
+				,NVL(T4.WTR,0) AS RAISREQ_WTR_YNUM
+				,NVL(T3.REP_WTR,0)-NVL(T4.WTR,0) AS RAISREQ_WTR_NNUM
+				,NVL(T5.LAWSUIT,0) AS RAISREQ_DO_LAWSUIT
+				,rownum
+			FROM
+				(SELECT
+					T1.LAW_RAISREQ_REQ_ID
+					,T1.LAW_RAISREQ_CLAS_CODE
+					,COUNT(T1.LAW_RAISREQ_CLAS_CODE) AS TOTAL
+					,COUNT(T2.LAWSUIT_ADM_NO) AS LAWSUIT
+				FROM
+					TAB_LAW_RAISREQ T1
+					,TAB_LAWSUIT T2
+				WHERE
+					T1.LAW_RAISREQ_NO=T2.LAW_RAISREQ_NO(+)
+				<dynamic>
+				<!-- 의뢰번호 -->
+				<isNotEmpty property="lawRaisreqReqId" prepend="AND">
+					T1.LAW_RAISREQ_REQ_ID LIKE #lawRaisreqReqId# || '%'
+				</isNotEmpty>
+				<!-- 소송제기분류 -->
+				<isNotEmpty property="lawRaisreqClasCode" prepend="AND">
+					T1.LAW_RAISREQ_CLAS_CODE = #lawRaisreqClasCode#
+				</isNotEmpty>
+				<!-- 의뢰기간 -->
+				<isNotEmpty property="lawRaisreqReqDate1" prepend="AND">
+					T1.LAW_RAISREQ_REQ_DATE <![CDATA[>=]]>
+					#lawRaisreqReqDate1#
+				</isNotEmpty>
+				<isNotEmpty property="lawRaisreqReqDate2" prepend="AND">
+					T1.LAW_RAISREQ_REQ_DATE <![CDATA[<=]]>
+					#lawRaisreqReqDate2#
+				</isNotEmpty>
+				<!-- 회신여부 -->
+				<isNotEmpty property="lawRaisreqRepWtr" prepend="AND">
+					T1.LAW_RAISREQ_REP_WTR = #lawRaisreqRepWtr#
+				</isNotEmpty>
+				</dynamic>
+				GROUP BY
+					T1.LAW_RAISREQ_REQ_ID
+					,T1.LAW_RAISREQ_CLAS_CODE
+				) T5
+				,T3
+				,T4
+				,TAB_INSA T6
+				,CMM_CODE_DETAIL T7
+			WHERE
+				T5.LAW_RAISREQ_REQ_ID = T3.LAW_RAISREQ_REQ_ID(+)
+				AND
+				T5.LAW_RAISREQ_REQ_ID = T4.LAW_RAISREQ_REQ_ID(+)
+				AND
+				T5.LAW_RAISREQ_CLAS_CODE = T3.LAW_RAISREQ_CLAS_CODE(+)
+				AND
+				T5.LAW_RAISREQ_CLAS_CODE = T4.LAW_RAISREQ_CLAS_CODE(+)
+				AND
+				T5.LAW_RAISREQ_REQ_ID = T6.INSA_SABUN (+)
+				AND
+				T7.CLASS_CODE LIKE 'D01'
+				AND
+				T5.LAW_RAISREQ_CLAS_CODE = T7.CODE_NO
+			ORDER BY
+				T6.INSA_NAME,
+				LAW_RAISREQ_CLAS_CODE
+			) main	
+	</select>
+	
+	
+</sqlMap>

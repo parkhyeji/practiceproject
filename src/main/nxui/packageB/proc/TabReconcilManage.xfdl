@@ -1,0 +1,1679 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="TabEdocAdmManage" classname="TabEdocAdmManage" left="0" top="0" width="968" height="819" titletext="New Form" onload="TabEdocAdmManage_onload">
+    <Layouts>
+      <Layout>
+        <Static id="st00" taborder="0" left="0.55%" top="-80" height="50" width="940" style="background:cornflowerblue;font:bold 9 Dotum;" onclick="st00_onclick"/>
+        <Div id="Div00" taborder="1" left="0.62%" top="103" right="0.83%" height="736">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="재판외화해 기본사항" left="0.41%" top="0" height="25" width="124" style="font:bold 9 굴림;"/>
+              <Div id="Div01" taborder="2" left="0.31%" top="27" height="118" style="background:transparent;" width="940">
+                <Layouts>
+                  <Layout>
+                    <Div id="Div00" taborder="6" left="0.85%" top="12" right="1.6%" height="25" style="background:transparent;" scrollbars="none">
+                      <Layouts>
+                        <Layout>
+                          <Edit id="Edit02" taborder="6" left="373" top="2" right="376" height="21" readonly="true"/>
+                          <Edit id="Edit00" taborder="9" readonly="true" left="117" top="2" right="657" height="21"/>
+                          <Edit id="Edit01" taborder="10" readonly="true" left="652" top="2" right="132" height="21"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                    <Div id="Div01" taborder="7" left="0.96%" top="44" right="1.6%" height="25" style="background:transparent;" scrollbars="none">
+                      <Layouts>
+                        <Layout>
+                          <Edit id="Edit00" taborder="3" left="652" top="2" right="137" height="21" readonly="true"/>
+                          <Edit id="Edit01" taborder="4" left="371" top="2" right="379" height="21" readonly="true"/>
+                          <Edit id="Edit02" taborder="6" left="114" top="2" right="658" height="21" readonly="true"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                    <Div id="Div02" taborder="8" text="Div02" left="1.6%" top="79" right="2.23%" height="25" style="background:transparent;">
+                      <Layouts>
+                        <Layout>
+                          <Edit id="Edit00" taborder="2" left="106" top="1" right="374" height="21" readonly="true"/>
+                          <Edit id="Edit01" taborder="3" left="645" top="1" right="130" height="21" readonly="true"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Static id="Static01" taborder="3" text="원피고 목록" left="0.41%" top="140" height="25" width="100" style="font:bold 9 굴림;"/>
+              <Static id="Static02" taborder="8" text="재판외화해 상세내역" left="1.03%" top="363" height="25" width="124" style="font:bold 9 굴림;"/>
+              <Div id="Div02" taborder="9" left="255" top="393" height="181" style="background:transparent;" width="674">
+                <Layouts>
+                  <Layout>
+                    <TextArea id="ds_reconcilMgrOpin" taborder="12" left="81" top="31" height="85" ontextchanged="ds_reconcilMgrOpin_ontextchanged" width="560" maxlength="255"/>
+                    <Edit id="ds_lawsuitAdmNo" taborder="20" left="11.18%" top="152" right="78.6%" height="21" visible="false" oneditclick="Div00_Div02_ds_lawsuitAdmNo_oneditclick"/>
+                    <Edit id="ds_instAdmCode" taborder="25" left="22.82%" top="151" right="68.77%" height="21" visible="false"/>
+                    <Edit id="ds_reconcilAppvId" taborder="28" left="285" top="119" height="21" readonly="true" width="120"/>
+                    <Calendar id="ds_reconcilAppvDate" taborder="29" left="82" top="117" height="25" dateformat="yyyyMMdd" value="null" editformat="yyyyMMdd" width="120"/>
+                    <Button id="Button00" taborder="30" text="검색" left="63.35%" top="121" height="21" visible="true" onclick="Div00_Div02_Button00_onclick" width="52" style="background:lightskyblue;color:#ffffffff;"/>
+                    <Edit id="ds_pladefSepCode" taborder="31" left="34.23%" top="149" right="56.46%" height="21" visible="false"/>
+                    <Edit id="ds_pladefSeq" taborder="32" left="46.1%" top="149" right="44.59%" height="21" visible="false"/>
+                    <Edit id="ds_tabReconcilSeq" taborder="38" left="56.76%" top="149" right="33.93%" height="21" visible="false"/>
+                    <MaskEdit id="ds_reconcilExptjudgChg" taborder="39" left="80" top="6" height="25" mask="#,###" width="130"/>
+                    <MaskEdit id="ds_reconcilReqChg" taborder="40" left="523" top="7" height="25" mask="#,###" width="120"/>
+                    <Static id="Static00" taborder="41" text="/255" left="87.39%" top="87" right="5.93%" height="21"/>
+                    <Static id="Static01" taborder="42" text="0" left="81.01%" top="86" right="13.2%" height="21"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Div id="Div03" taborder="11" text="Div03" left="0.84%" top="590" right="87.74%" height="150" style="background:azure;" visible="false">
+                <Layouts>
+                  <Layout>
+                    <Grid id="Grid00" taborder="0" useinputpanel="false" left="14.07%" top="44" right="-39.7%" height="180" binddataset="ds_list">
+                      <Formats>
+                        <Format id="default">
+                          <Columns>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                            <Col size="80"/>
+                          </Columns>
+                          <Rows>
+                            <Row band="head" size="24"/>
+                            <Row band="body" size="24"/>
+                          </Rows>
+                          <Band id="head">
+                            <Cell col="0" disptype="normal" text="lawsuitAdmNo"/>
+                            <Cell col="1" disptype="normal" text="lawRaisreqNo"/>
+                            <Cell col="2" disptype="normal" text="lawsuitAplCortCode"/>
+                            <Cell col="3" disptype="normal" text="lawsuitAplCaseCode"/>
+                            <Cell col="4" disptype="normal" text="lawsuitCaseTyCode"/>
+                            <Cell col="5" disptype="normal" text="lawsuitCpPladefSepcode"/>
+                            <Cell col="6" disptype="normal" text="lawsuitAsitParcWtr"/>
+                            <Cell col="7" disptype="normal" text="lawsuitCtaWtr"/>
+                            <Cell col="8" disptype="normal" text="lawsuitCtaNo"/>
+                            <Cell col="9" disptype="normal" text="lawsuitCtaCaseNo"/>
+                            <Cell col="10" disptype="normal" text="lawsuitTempReqiDate"/>
+                            <Cell col="11" disptype="normal" text="lawsuitRaisRea"/>
+                            <Cell col="12" disptype="normal" text="instAdmPrgrCode"/>
+                            <Cell col="13" disptype="normal" text="instAdmCaseNo"/>
+                            <Cell col="14" disptype="normal" text="instAdmCortCode"/>
+                            <Cell col="15" disptype="normal" text="instAdmRaisreqDate"/>
+                            <Cell col="16" disptype="normal" text="instAdmJudId"/>
+                            <Cell col="17" disptype="normal" text="instAdmName"/>
+                            <Cell col="18" disptype="normal" text="instAdmCode"/>
+                          </Band>
+                          <Band id="body">
+                            <Cell col="0" disptype="normal" text="bind:lawsuitAdmNo"/>
+                            <Cell col="1" disptype="normal" text="bind:lawRaisreqNo"/>
+                            <Cell col="2" disptype="normal" text="bind:lawsuitAplCortCode"/>
+                            <Cell col="3" disptype="normal" text="bind:lawsuitAplCaseCode"/>
+                            <Cell col="4" disptype="normal" text="bind:lawsuitCaseTyCode"/>
+                            <Cell col="5" disptype="normal" text="bind:lawsuitCpPladefSepcode"/>
+                            <Cell col="6" disptype="normal" text="bind:lawsuitAsitParcWtr"/>
+                            <Cell col="7" disptype="normal" text="bind:lawsuitCtaWtr"/>
+                            <Cell col="8" disptype="normal" text="bind:lawsuitCtaNo"/>
+                            <Cell col="9" disptype="normal" text="bind:lawsuitCtaCaseNo"/>
+                            <Cell col="10" disptype="normal" text="bind:lawsuitTempReqiDate"/>
+                            <Cell col="11" disptype="normal" text="bind:lawsuitRaisRea"/>
+                            <Cell col="12" disptype="normal" text="bind:instAdmPrgrCode"/>
+                            <Cell col="13" disptype="normal" text="bind:instAdmCaseNo"/>
+                            <Cell col="14" disptype="normal" text="bind:instAdmCortCode"/>
+                            <Cell col="15" disptype="normal" text="bind:instAdmRaisreqDate"/>
+                            <Cell col="16" disptype="normal" text="bind:instAdmJudId"/>
+                            <Cell col="17" disptype="normal" text="bind:instAdmName"/>
+                            <Cell col="18" disptype="normal" text="bind:instAdmCode"/>
+                          </Band>
+                        </Format>
+                      </Formats>
+                    </Grid>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Button id="save" taborder="12" text="저장" left="797" top="514" height="21" onclick="Button03_onclick" width="52" style="background:lightskyblue;color:#ffffffff;"/>
+              <Button id="save00" taborder="13" text="추가" left="827" top="378" height="21" onclick="Div00_save00_onclick" visible="true" width="52" style="background:lightskyblue;color:#ffffffff;"/>
+              <Button id="save01" taborder="14" text="초기화" left="742" top="538" height="21" onclick="Div00_save01_onclick" visible="false" width="52" style="background:lightskyblue;color:#ffffffff;"/>
+              <Button id="save02" taborder="15" text="삭제" onclick="Div00_save_onclick" left="859" top="514" height="21" width="52" style="background:lightskyblue;color:#ffffffff;"/>
+              <Grid id="Grid00" taborder="16" useinputpanel="false" left="1" top="168" height="180" binddataset="tabPladef" width="948" nodatatext="데이터가 없습니다.">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="115"/>
+                      <Column size="154"/>
+                      <Column size="151"/>
+                      <Column size="184"/>
+                      <Column size="94"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="No."/>
+                      <Cell col="1" text="일련번호"/>
+                      <Cell col="2" text="성명"/>
+                      <Cell col="3" text="등록번호"/>
+                      <Cell col="4" text="주요연락처전화번호"/>
+                      <Cell col="5" text="추가연락처전화번호"/>
+                      <Cell col="6" text="청구소가"/>
+                      <Cell col="7" text="종결여부"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:pladefSepCode"/>
+                      <Cell col="1" text="bind:pladefSeq"/>
+                      <Cell col="2" text="bind:pladefName"/>
+                      <Cell col="3" text="bind:pladefRegNo"/>
+                      <Cell col="4" text="bind:pladefMainTel"/>
+                      <Cell col="5" text="bind:pladefAddTel"/>
+                      <Cell col="6" text="bind:pladefClamVol" mask="#.###"/>
+                      <Cell col="7" text="bind:pladefLawConcSepcode"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="Grid01" taborder="17" useinputpanel="false" left="0" top="393" height="180" binddataset="tabReconcil2" width="250" nodatatext="데이터가 없습니다.">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="157"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="No."/>
+                      <Cell col="1" text="승인일자"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:tabReconcilSeq"/>
+                      <Cell col="1" text="bind:reconcilAppvDate"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <MaskEdit id="ds_reconcilAppvChg" taborder="18" left="547" top="400" height="25" mask="#,###" width="130"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div01" taborder="2" text="Div01" left="34.71%" top="695" right="49.69%" height="150" style="background:azure;" visible="false">
+          <Layouts>
+            <Layout>
+              <Grid id="Grid00" taborder="0" useinputpanel="false" left="-3.31%" top="8" right="5.3%" height="180" binddataset="dds_list3">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row band="head" size="24"/>
+                      <Row band="body" size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell col="0" disptype="normal" text="lawsuitAdmNo"/>
+                      <Cell col="1" disptype="normal" text="lawRaisreqNo"/>
+                      <Cell col="2" disptype="normal" text="lawsuitAplCortCode"/>
+                      <Cell col="3" disptype="normal" text="lawsuitAplCaseCode"/>
+                      <Cell col="4" disptype="normal" text="lawsuitCaseTyCode"/>
+                      <Cell col="5" disptype="normal" text="lawsuitCpPladefSepcode"/>
+                      <Cell col="6" disptype="normal" text="lawsuitAsitParcWtr"/>
+                      <Cell col="7" disptype="normal" text="lawsuitCtaWtr"/>
+                      <Cell col="8" disptype="normal" text="lawsuitCtaNo"/>
+                      <Cell col="9" disptype="normal" text="lawsuitCtaCaseNo"/>
+                      <Cell col="10" disptype="normal" text="lawsuitTempReqiDate"/>
+                      <Cell col="11" disptype="normal" text="lawsuitRaisRea"/>
+                      <Cell col="12" disptype="normal" text="instAdmPrgrCode"/>
+                      <Cell col="13" disptype="normal" text="instAdmCaseNo"/>
+                      <Cell col="14" disptype="normal" text="instAdmCortCode"/>
+                      <Cell col="15" disptype="normal" text="instAdmRaisreqDate"/>
+                      <Cell col="16" disptype="normal" text="instAdmJudId"/>
+                      <Cell col="17" disptype="normal" text="instAdmName"/>
+                      <Cell col="18" disptype="normal" text="instAdmCode"/>
+                      <Cell col="19" disptype="normal" text="instAdmCtpmgrName"/>
+                      <Cell col="20" disptype="normal" text="instAdmIssuPoin"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell col="0" disptype="normal" text="bind:lawsuitAdmNo"/>
+                      <Cell col="1" disptype="normal" text="bind:lawRaisreqNo"/>
+                      <Cell col="2" disptype="normal" text="bind:lawsuitAplCortCode"/>
+                      <Cell col="3" disptype="normal" text="bind:lawsuitAplCaseCode"/>
+                      <Cell col="4" disptype="normal" text="bind:lawsuitCaseTyCode"/>
+                      <Cell col="5" disptype="normal" text="bind:lawsuitCpPladefSepcode"/>
+                      <Cell col="6" disptype="normal" text="bind:lawsuitAsitParcWtr"/>
+                      <Cell col="7" disptype="normal" text="bind:lawsuitCtaWtr"/>
+                      <Cell col="8" disptype="normal" text="bind:lawsuitCtaNo"/>
+                      <Cell col="9" disptype="normal" text="bind:lawsuitCtaCaseNo"/>
+                      <Cell col="10" disptype="normal" text="bind:lawsuitTempReqiDate"/>
+                      <Cell col="11" disptype="normal" text="bind:lawsuitRaisRea"/>
+                      <Cell col="12" disptype="normal" text="bind:instAdmPrgrCode"/>
+                      <Cell col="13" disptype="normal" text="bind:instAdmCaseNo"/>
+                      <Cell col="14" disptype="normal" text="bind:instAdmCortCode"/>
+                      <Cell col="15" disptype="normal" text="bind:instAdmRaisreqDate"/>
+                      <Cell col="16" disptype="normal" text="bind:instAdmJudId"/>
+                      <Cell col="17" disptype="normal" text="bind:instAdmName"/>
+                      <Cell col="18" disptype="normal" text="bind:instAdmCode"/>
+                      <Cell col="19" disptype="normal" text="bind:instAdmCtpmgrName"/>
+                      <Cell col="20" disptype="normal" text="bind:instAdmIssuPoin"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Grid id="Grid00" taborder="3" useinputpanel="false" left="13.64%" top="688" right="66.84%" height="180" binddataset="tabReconcil" visible="false">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row band="body" size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell col="0" disptype="normal" text="instAdmCode"/>
+                <Cell col="1" disptype="normal" text="lawsuitAdmNo"/>
+                <Cell col="2" disptype="normal" text="pladefSepCode"/>
+                <Cell col="3" disptype="normal" text="pladefSeq"/>
+                <Cell col="4" disptype="normal" text="tabReconcilSeq"/>
+                <Cell col="5" disptype="normal" text="reconcilReqChg"/>
+                <Cell col="6" disptype="normal" text="reconcilAppvChg"/>
+                <Cell col="7" disptype="normal" text="reconcilMgrOpin"/>
+                <Cell col="8" disptype="normal" text="reconcilExptjudgChg"/>
+                <Cell col="9" disptype="normal" text="reconcilAppvId"/>
+              </Band>
+              <Band id="body">
+                <Cell col="0" disptype="normal" text="bind:instAdmCode"/>
+                <Cell col="1" disptype="normal" text="bind:lawsuitAdmNo"/>
+                <Cell col="2" disptype="normal" text="bind:pladefSepCode"/>
+                <Cell col="3" disptype="normal" text="bind:pladefSeq"/>
+                <Cell col="4" disptype="normal" text="bind:tabReconcilSeq"/>
+                <Cell col="5" disptype="normal" text="bind:reconcilReqChg"/>
+                <Cell col="6" disptype="normal" text="bind:reconcilAppvChg"/>
+                <Cell col="7" disptype="normal" text="bind:reconcilMgrOpin"/>
+                <Cell col="8" disptype="normal" text="bind:reconcilExptjudgChg"/>
+                <Cell col="9" disptype="normal" text="bind:reconcilAppvId"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static03" taborder="5" left="7" top="71" width="937" height="30" style="background:#f4f4f4ff;border:1 solid #c8c8c8ff ;align:center middle;"/>
+        <Static id="Static00" taborder="6" text="소송관리번호" left="10" top="73" width="99" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Edit id="edt_searchKeyword" taborder="7" left="113" top="75" right="1024" height="21" readonly="true"/>
+        <Button id="Button00" taborder="8" text="검색" left="260" top="75" height="21" onclick="Div00_Div00_Button00_onclick" width="52" style="background:lightskyblue;color:#ffffffff;"/>
+        <Static id="Static01" taborder="9" text="심급" left="341" top="73" width="99" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static07" taborder="11" text="소송진행상태" left="31" top="144" width="99" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static02" taborder="12" text="사건번호" left="287" top="144" width="99" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static04" taborder="13" text="심급명" left="567" top="144" width="99" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static05" taborder="14" text="수행법원" left="31" top="176" width="99" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static06" taborder="15" text="당사원피고구분" left="287" top="176" width="99" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static08" taborder="16" text="판사" left="567" top="176" width="99" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static09" taborder="17" text="상대담당자" left="567" top="208" width="99" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static10" taborder="18" text="쟁점사항" left="31" top="208" width="99" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="sta_title" taborder="19" text="재판외 화해관리" left="20" top="18" width="157" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <ImageViewer id="img_titlebg" taborder="20" left="11" top="8" width="948" height="45" style="background:cornflowerblue;"/>
+        <Static id="sta_title00" taborder="21" text="재판외 화해관리" left="28" top="18" width="157" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <Static id="Static11" taborder="22" text="예상판결액" left="264" top="503" width="75" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static12" taborder="23" text="승인금액" left="476" top="503" width="75" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static13" taborder="24" text="요구금액" left="708" top="503" width="75" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static14" taborder="25" text="담당자의견" left="264" top="529" width="75" height="81" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static15" taborder="26" text="승인일자" left="264" top="612" width="75" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static16" taborder="27" text="최종승인자" left="470" top="613" width="75" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Edit id="edt_searchKeywords" taborder="28" left="112" top="75" height="21" readonly="true" width="120"/>
+        <Combo id="edt_searchControlls" taborder="29" left="448" top="74" height="21" width="120"/>
+        <Button id="Button99" taborder="30" text="초기화" left="884" top="75" width="52" height="21" style="background:lightskyblue;color:#ffffffff;" onclick="Button99_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_list">
+        <ColumnInfo>
+          <Column id="lawsuitAdmNo" type="STRING" size="256"/>
+          <Column id="lawRaisreqNo" type="STRING" size="256"/>
+          <Column id="lawsuitAplCortCode" type="STRING" size="256"/>
+          <Column id="lawsuitAplCaseCode" type="STRING" size="256"/>
+          <Column id="lawsuitCaseTyCode" type="STRING" size="256"/>
+          <Column id="lawsuitCpPladefSepcode" type="STRING" size="256"/>
+          <Column id="lawsuitAsitParcWtr" type="STRING" size="256"/>
+          <Column id="lawsuitCtaWtr" type="STRING" size="256"/>
+          <Column id="lawsuitCtaNo" type="STRING" size="256"/>
+          <Column id="lawsuitCtaCaseNo" type="STRING" size="256"/>
+          <Column id="lawsuitTempReqiDate" type="STRING" size="256"/>
+          <Column id="lawsuitRaisRea" type="STRING" size="256"/>
+          <Column id="instAdmPrgrCode" type="STRING" size="256" description="소송진행상태코드"/>
+          <Column id="instAdmCaseNo" type="STRING" size="256" description="사건번호"/>
+          <Column id="instAdmCortCode" type="STRING" size="256" description="수행법원코드"/>
+          <Column id="instAdmRaisreqDate" type="STRING" size="256" description="소제기일자"/>
+          <Column id="instAdmJudId" type="STRING" size="256" description="판사"/>
+          <Column id="instAdmName" type="STRING" size="256" description="심급명"/>
+          <Column id="instAdmCode" type="STRING" size="256" description="심급코드"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="tabEdocAdm">
+        <ColumnInfo>
+          <Column id="instAdmCode" type="STRING" size="256" description="심급코드"/>
+          <Column id="lawsuitAdmNo" type="STRING" size="256" description="소송관리번호"/>
+          <Column id="preIwrNo" type="STRING" size="256" description="일련번호"/>
+          <Column id="preIwrDfsDeg" type="STRING" size="256" description="변론차수"/>
+          <Column id="preIwrIssuSepcode" type="STRING" size="256" description="쟁정사항구분코드"/>
+          <Column id="preIwrName" type="STRING" size="256" description="중비서면제목"/>
+          <Column id="preIwrCont" type="STRING" size="256" description="준비서면내용"/>
+          <Column id="preIwrWritDate" type="STRING" size="256" description="작성일자"/>
+          <Column id="preIwrCompWtr" type="STRING" size="256" description="완료여부"/>
+          <Column id="preIwrOutLyrid" type="STRING" size="256" description="외부작성변호사id"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_sep">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="codeName2" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search2">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search3">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_sep2">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="codeName2" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_sep3">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="codeName2" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search4">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="sds_list2">
+        <ColumnInfo>
+          <Column id="lawsuitAdmNo" type="STRING" size="256"/>
+          <Column id="lawRaisreqNo" type="STRING" size="256"/>
+          <Column id="lawsuitAplCortCode" type="STRING" size="256"/>
+          <Column id="lawsuitAplCaseCode" type="STRING" size="256"/>
+          <Column id="lawsuitCaseTyCode" type="STRING" size="256"/>
+          <Column id="lawsuitCpPladefSepcode" type="STRING" size="256"/>
+          <Column id="lawsuitAsitParcWtr" type="STRING" size="256"/>
+          <Column id="lawsuitCtaWtr" type="STRING" size="256"/>
+          <Column id="lawsuitCtaNo" type="STRING" size="256"/>
+          <Column id="lawsuitCtaCaseNo" type="STRING" size="256"/>
+          <Column id="lawsuitTempReqiDate" type="STRING" size="256"/>
+          <Column id="lawsuitRaisRea" type="STRING" size="256"/>
+          <Column id="instAdmPrgrCode" type="STRING" size="256" description="소송진행상태코드"/>
+          <Column id="instAdmCaseNo" type="STRING" size="256" description="사건번호"/>
+          <Column id="instAdmCortCode" type="STRING" size="256" description="수행법원코드"/>
+          <Column id="instAdmRaisreqDate" type="STRING" size="256" description="소제기일자"/>
+          <Column id="instAdmJudId" type="STRING" size="256" description="판사"/>
+          <Column id="instAdmName" type="STRING" size="256" description="심급명"/>
+          <Column id="instAdmCode" type="STRING" size="256" description="심급코드"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search10">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search11">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_sep4">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="codeName2" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_sep5">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="codeName2" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dds_list3">
+        <ColumnInfo>
+          <Column id="lawsuitAdmNo" type="STRING" size="256"/>
+          <Column id="lawRaisreqNo" type="STRING" size="256"/>
+          <Column id="lawsuitAplCortCode" type="STRING" size="256"/>
+          <Column id="lawsuitAplCaseCode" type="STRING" size="256"/>
+          <Column id="lawsuitCaseTyCode" type="STRING" size="256"/>
+          <Column id="lawsuitCpPladefSepcode" type="STRING" size="256" description="원피고구분코드"/>
+          <Column id="lawsuitAsitParcWtr" type="STRING" size="256"/>
+          <Column id="lawsuitCtaWtr" type="STRING" size="256"/>
+          <Column id="lawsuitCtaNo" type="STRING" size="256"/>
+          <Column id="lawsuitCtaCaseNo" type="STRING" size="256"/>
+          <Column id="lawsuitTempReqiDate" type="STRING" size="256"/>
+          <Column id="lawsuitRaisRea" type="STRING" size="256"/>
+          <Column id="instAdmPrgrCode" type="STRING" size="256" description="소송진행상태코드"/>
+          <Column id="instAdmCaseNo" type="STRING" size="256" description="사건번호"/>
+          <Column id="instAdmCortCode" type="STRING" size="256" description="수행법원코드"/>
+          <Column id="instAdmRaisreqDate" type="STRING" size="256" description="소제기일자"/>
+          <Column id="instAdmJudId" type="STRING" size="256" description="판사"/>
+          <Column id="instAdmName" type="STRING" size="256" description="심급명"/>
+          <Column id="instAdmCode" type="STRING" size="256" description="심급코드"/>
+          <Column id="instAdmCtpmgrName" type="STRING" size="256" description="상대담당자명"/>
+          <Column id="instAdmIssuPoin" type="STRING" size="256" description="쟁정사항"/>
+          <Column id="instAdmCode2" type="STRING" size="256" description="심급코드(한글)"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="tabEdocAdm2">
+        <ColumnInfo>
+          <Column id="instAdmCode" type="STRING" size="256" description="심급코드"/>
+          <Column id="lawsuitAdmNo" type="STRING" size="256" description="소송관리번호"/>
+          <Column id="preIwrNo" type="STRING" size="256" description="일련번호"/>
+          <Column id="preIwrDfsDeg" type="STRING" size="256" description="변론차수"/>
+          <Column id="preIwrIssuSepcode" type="STRING" size="256" description="쟁정사항구분코드"/>
+          <Column id="preIwrName" type="STRING" size="256" description="중비서면제목"/>
+          <Column id="preIwrCont" type="STRING" size="256" description="준비서면내용"/>
+          <Column id="preIwrWritDate" type="STRING" size="256" description="작성일자"/>
+          <Column id="preIwrCompWtr" type="STRING" size="256" description="완료여부"/>
+          <Column id="preIwrOutLyrid" type="STRING" size="256" description="외부작성변호사id"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="tabPladef">
+        <ColumnInfo>
+          <Column id="lawsuitAdmNo" type="STRING" size="256" description="소송관리번호"/>
+          <Column id="pladefSepCode" type="STRING" size="256" description="원피고구분코드"/>
+          <Column id="pladefSeq" type="STRING" size="256" description="원피고일련번호"/>
+          <Column id="pladefName" type="STRING" size="256" description="원피고명"/>
+          <Column id="pladefRegNo" type="STRING" size="256" description="원피고등록번호"/>
+          <Column id="pladefMainTel" type="STRING" size="256" description="주요연락처전화번호"/>
+          <Column id="pladefAddTel" type="STRING" size="256" description="추가연락처전화번호"/>
+          <Column id="pladefPos" type="STRING" size="256" description="우편번호"/>
+          <Column id="pladefAddr1" type="STRING" size="256" description="주소1"/>
+          <Column id="pladefClamVol" type="STRING" size="256" description="정구소가"/>
+          <Column id="pladefLawConcSepcode" type="STRING" size="256" description="소송종결구분코드"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="tabReconcil">
+        <ColumnInfo>
+          <Column id="instAdmCode" type="STRING" size="256" description="심급코드"/>
+          <Column id="lawsuitAdmNo" type="STRING" size="256" description="소송관리번호"/>
+          <Column id="pladefSepCode" type="STRING" size="256" description="원피고구분코드"/>
+          <Column id="pladefSeq" type="STRING" size="256" description="원피고일련번호"/>
+          <Column id="tabReconcilSeq" type="STRING" size="256" description="일련번호"/>
+          <Column id="reconcilReqChg" type="STRING" size="256" description="요구금액"/>
+          <Column id="reconcilAppvChg" type="STRING" size="256" description="승인금액"/>
+          <Column id="reconcilMgrOpin" type="STRING" size="256" description="담당자의견"/>
+          <Column id="reconcilExptjudgChg" type="STRING" size="256" description="예상판결액"/>
+          <Column id="reconcilAppvId" type="STRING" size="256" description="최종승인자"/>
+          <Column id="reconcilAppvDate" type="STRING" size="256" description="승인일자"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="tabReconcil2">
+        <ColumnInfo>
+          <Column id="instAdmCode" type="STRING" size="256" description="심급코드"/>
+          <Column id="lawsuitAdmNo" type="STRING" size="256" description="소송관리번호"/>
+          <Column id="pladefSepCode" type="STRING" size="256" description="원피고구분코드"/>
+          <Column id="pladefSeq" type="STRING" size="256" description="원피고일련번호"/>
+          <Column id="tabReconcilSeq" type="STRING" size="256" description="일련번호"/>
+          <Column id="reconcilReqChg" type="STRING" size="256" description="요구금액"/>
+          <Column id="reconcilAppvChg" type="STRING" size="256" description="승인금액"/>
+          <Column id="reconcilMgrOpin" type="STRING" size="256" description="담당자의견"/>
+          <Column id="reconcilExptjudgChg" type="STRING" size="256" description="예상판결액"/>
+          <Column id="reconcilAppvId" type="STRING" size="256" description="최종승인자"/>
+          <Column id="reconcilAppvDate" type="STRING" size="256" description="승인일자"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item2" compid="Div00" propid="text" datasetid="ds_search" columnid=""/>
+      <BindItem id="item3" compid="Div00.Div01.Div00.Edit02" propid="value" datasetid="dds_list3" columnid="lawsuitCaseTyCode"/>
+      <BindItem id="item4" compid="Div00.Div01.Div01.Edit01" propid="value" datasetid="dds_list3" columnid="lawsuitCpPladefSepcode"/>
+      <BindItem id="item5" compid="Div00.Div01.Div01.Edit00" propid="value" datasetid="dds_list3" columnid="instAdmJudId"/>
+      <BindItem id="item8" compid="Div00.Div01.Div01.Edit02" propid="value" datasetid="dds_list3" columnid="instAdmCortCode"/>
+      <BindItem id="item0" compid="Div00.Div01.Div00.Edit00" propid="value" datasetid="dds_list3" columnid="instAdmPrgrCode"/>
+      <BindItem id="item1" compid="Div00.Div01.Div00.Edit01" propid="value" datasetid="dds_list3" columnid="lawsuitRaisRea"/>
+      <BindItem id="item6" compid="Div00.Div02.ds_lawsuitAdmNo" propid="value" datasetid="dds_list3" columnid="lawsuitAdmNo"/>
+      <BindItem id="item7" compid="Div00.Div02.ds_instAdmCode" propid="value" datasetid="dds_list3" columnid="instAdmCode"/>
+      <BindItem id="item13" compid="Div00.Div01.Div02.Edit00" propid="value" datasetid="dds_list3" columnid="instAdmIssuPoin"/>
+      <BindItem id="item14" compid="Div00.Div01.Div02.Edit01" propid="value" datasetid="dds_list3" columnid="instAdmCtpmgrName"/>
+      <BindItem id="item11" compid="Div00.Div02.ds_pladefSepCode" propid="value" datasetid="tabPladef" columnid="pladefSepCode"/>
+      <BindItem id="item16" compid="Div00.Div02.ds_pladefSeq" propid="value" datasetid="tabPladef" columnid="pladefSeq"/>
+      <BindItem id="item15" compid="Div00.Div02.ds_reconcilMgrOpin" propid="value" datasetid="tabReconcil2" columnid="reconcilMgrOpin"/>
+      <BindItem id="item17" compid="Div00.Div02.ds_reconcilAppvDate" propid="value" datasetid="tabReconcil2" columnid="reconcilAppvDate"/>
+      <BindItem id="item18" compid="Div00.Div02.ds_reconcilAppvId" propid="value" datasetid="tabReconcil2" columnid="reconcilAppvId"/>
+      <BindItem id="item19" compid="edt_searchKeywords" propid="value" datasetid="dds_list3" columnid="lawsuitAdmNo"/>
+      <BindItem id="item20" compid="edt_searchControlls" propid="value" datasetid="dds_list3" columnid="instAdmCode"/>
+      <BindItem id="item21" compid="edt_searchControlls" propid="text" datasetid="dds_list3" columnid="instAdmCode2"/>
+      <BindItem id="item22" compid="Div00.Div02.ds_reconcilExptjudgChg" propid="value" datasetid="tabReconcil2" columnid="reconcilExptjudgChg"/>
+      <BindItem id="item9" compid="Div00.ds_reconcilAppvChg" propid="value" datasetid="tabReconcil2" columnid="reconcilAppvChg"/>
+      <BindItem id="item10" compid="Div00.Div02.ds_reconcilReqChg" propid="value" datasetid="tabReconcil2" columnid="reconcilReqChg"/>
+      <BindItem id="item12" compid="Div00.Div02.ds_tabReconcilSeq" propid="value" datasetid="tabReconcil2" columnid="tabReconcilSeq"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[//include "Lib::Comm.xjs";
+include "Lib::common.xjs"; //공통함수 호출
+
+
+
+//검색클릭
+this.Div00_Div00_Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{	
+	
+	var lawSearchNo = "";	//소송관리번호 검색값
+	 
+	 var nLeft = system.clientToScreenX(this, 10);
+	 var nTop = system.clientToScreenY(this, 10);
+	 
+	 var newChild = new ChildFrame;
+	 newChild.init("SearchNo"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "Lawsuit::LAWSUIT_ADM_NO.xfdl");
+	newChild.set_openalign("center middle");
+	newChild.set_dragmovetype("all");
+
+	//lawSearchNo = dialog("SearchNo","lawsuit::LAWSUIT_ADM_NO.xfdl","LAWSUIT_LIST","","showtitlebar=true",0,0); // 소송관리번호 검색
+	//trace(lawSearchNo);
+	newChild.showModal(this.getOwnerFrame()
+						, ""
+						, this
+						, "modal_callback");
+							
+}
+
+
+this.modal_callback = function(sSvcId, variant)
+{
+	if(sSvcId == "SearchNo")
+	{
+		trace("lawSearchNo  =" + variant);
+		trace("lawSearchNo length =" + variant.length);
+		trace("lawSearchNo substr(0,10) =" + variant.substr(0,10));
+		trace("lawSearchNo gfn_IsNull =" + this.gfn_IsNull(variant));
+		
+		if(this.gfn_IsNull(variant)==false){
+			lawsrcrlt = variant.substr(0,10);	// 소송관리번호
+			trace(lawsrcrlt);
+				if(variant.length == "13"){
+					instcdrlt = variant.substr(10,3);	//심급코드
+			}
+			trace("소송관리 검색");
+			trace("lawsrcrlt = "+lawsrcrlt);
+			trace("instcdrlt = "+instcdrlt);
+			//this.getLawsuitSearch(lawsrcrlt,instcdrlt); //소송관리검색
+			trace("Div00_Div00_Combo00_onitemchanged");
+			
+	this.ds_search4.clearData();
+	var rowIdx = this.ds_search4.addRow();
+	  
+	this.ds_search4.setColumn(rowIdx, "searchKeyword", lawsrcrlt);
+	this.ds_search4.setColumn(rowIdx, "searchCondition", instcdrlt);
+   
+   
+   
+   var oDatas =  {
+			  svcid : "tabInstAdmSelect6VO",
+			  sController : "tabInstAdmSelect6VO.do",			 
+			  //inds :[""],
+			  inds :["ds_search=ds_search4"],
+			  outds :[
+				 "dds_list3=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+	//trace("222222222222222");
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+			trace("Div00_Div00_Button00_onclick eeeeeeeeeeee");
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      
+	       var pThis = this.fobj;   //form object
+	       	   //pThis.fn_sepcode();  //심급코드	      	       	    	  	       
+	       	   pThis.fn_search3();//준비서면목록
+	});
+	
+		}else{
+			return false;
+		}
+		
+	}
+	else if(sSvcId == "LegalCheck"){	
+		if (this.gfn_IsNull(variant)==false){
+			sp1 = variant.split("&");
+			sp2 = sp1[0].split("=");
+			sp3 = sp1[1].split("=");
+
+			var judgeid = sp2[1];	//최종승인자ID
+			var judgename= sp3[1];	//최종승인자명
+			trace("judgeid;"+judgeid);
+			trace("judgename;"+judgename);
+					
+			if(this.gfn_IsNull(judgename)==false){	//담당판사값이 있을경우
+				//edt_judge_name.text=judgename;
+				//edt_judge.text=judgeid;
+				//this.tabReconcil2.setColumn(0,"instAdmJudName",judgename);
+				this.tabReconcil2.setColumn(0,"reconcilAppvId",judgeid);
+				//this.Div00.Div02.ds_reconcilAppvId.value=judgeid;
+			}else{
+				return false;
+			}
+		}
+	
+	}
+	
+}
+
+
+//심급SELECT선택
+this.Div00_Div00_Combo00_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+	trace("Div00_Div00_Combo00_onitemchanged");
+	this.ds_search4.clearData();
+	var rowIdx = this.ds_search4.addRow();
+	  
+	this.ds_search4.setColumn(rowIdx, "searchKeyword", this.edt_searchKeywords.value);
+	this.ds_search4.setColumn(rowIdx, "searchCondition", this.edt_searchControlls.value);
+   
+   
+   
+   var oDatas =  {
+			  svcid : "tabInstAdmSelect3VO",
+			  sController : "tabInstAdmSelect3VO.do",			 
+			  //inds :[""],
+			  inds :["ds_search=ds_search4"],
+			  outds :[
+				 "dds_list3=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+	//trace("222222222222222");
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+			trace("Div00_Div00_Button00_onclick eeeeeeeeeeee");
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      
+	       var pThis = this.fobj;   //form object
+	       	   //pThis.fn_sepcode();  //심급코드	      	       	    	  	       
+	       	   pThis.fn_search3();//준비서면목록
+	});
+}
+
+//원고사항목록
+this.fn_search3 = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	
+	
+   trace("fn_search3");
+   //을호증
+   this.ds_search3.clearData();
+	var rowIdx = this.ds_search3.addRow();	
+   this.ds_search3.setColumn(rowIdx, "searchKeyword", this.edt_searchKeywords.value);
+   this.ds_search3.setColumn(rowIdx, "searchCondition", this.edt_searchControlls.value);
+   
+   
+	
+   var oDatas =  {
+			  svcid : "tabPladefOrgSelectVO",
+			  sController : "tabPladefOrgSelectVO.do",			 
+			  //inds :[""],
+			  inds :["ds_search=ds_search3"],
+			  outds :[
+				 "tabPladef=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+	//trace("222222222222222");
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+			trace("fn_search2 eeeeeeeeeeee");
+			
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      
+	      
+	      
+	       var pThis = this.fobj;   //form object
+	       	   pThis.fn_reconcil();  //재판외화해 SELECT 
+	       	   
+	       //this.tabReconcil2.setColumn(0, "reconcilAppvDate", this.gfn_Today());	  
+	        //this.Div00.Div02.ds_reconcilAppvDate.set_value(this.gfn_Today());
+	    
+	});
+}
+
+//재판외화해 SELECT
+this.fn_reconcil =function(obj:Button,  e:nexacro.ClickEventInfo){
+
+     this.tabReconcil.clearData();
+	 var rowIdx = this.tabReconcil.addRow();
+     this.tabReconcil.setColumn(rowIdx, "lawsuitAdmNo", this.Div00.Div02.ds_lawsuitAdmNo.value);//소송관리번호
+     trace("소송관리번호;"+this.Div00.Div02.ds_lawsuitAdmNo.value);
+     this.tabReconcil.setColumn(rowIdx, "instAdmCode", this.Div00.Div02.ds_instAdmCode.value);//심급코드
+     trace("심급코드;"+this.Div00.Div02.ds_instAdmCode.value);
+     this.tabReconcil.setColumn(rowIdx, "pladefSepCode", this.Div00.Div02.ds_pladefSepCode.value);//원피고구분코드
+     trace("원피고구분코드;"+this.Div00.Div02.ds_pladefSepCode.value);
+     this.tabReconcil.setColumn(rowIdx, "pladefSeq", this.Div00.Div02.ds_pladefSeq.value);//원피고일련번호
+     trace("원피고일련번호;"+this.Div00.Div02.ds_pladefSeq.value);
+     
+     
+     
+     
+     
+	var oDatas =  {
+			  svcid : "tabReconcil3SelectVO",
+			  sController : "tabReconcil3SelectVO.do",			 
+			  inds :["input1=tabReconcil:U"],			  
+			  outds :[
+				 "tabReconcil2=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		  
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	      switch(this.svcid)
+	      {
+	         case "save" : 
+	         trace("save");
+				Iject.alert("저장완료");
+				break;
+				
+	         case "dlete" : 
+	         trace("delete");
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	      //pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+	      // var pThis = this.fobj;   //form object
+		  //pThis.fn_search2();
+	});
+	
+	
+}
+
+//심급선택시
+this.fn_sepcode = function(obj:Button,  e:nexacro.ClickEventInfo)
+{		       
+	var oDatas =  {
+			  svcid : "sep1",
+			  //sController : "cmmCodeDetailSelectVO.do?classCode=F02",			 			  
+			  sController : "tabCmmSelectVO.do?classCode=G01",			 			  
+			  inds :[""],
+			  outds :[
+				 "ds_sep=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+	//trace("222222222222222");
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+			trace("eeeeeeeeeeee");
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      //trace("eeeeeeeeeee23e");
+	       var pThis2 = this.fobj;   //form object
+	       pThis2.fn_sepcode4();  //진행상태
+	       
+	      
+	    
+	    
+	});
+}
+
+
+
+
+//반론차수
+this.fn_sepcode4 = function(obj:Button,  e:nexacro.ClickEventInfo)
+{		       
+	var oDatas =  {
+			  svcid : "sep4",
+			  //sController : "cmmCodeDetailSelectVO.do?classCode=F02",			 			  
+			  sController : "tabCmmSelectVO.do?classCode=G01",			 			  
+			  inds :[""],
+			  outds :[
+				 "ds_sep4=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+	//trace("222222222222222");
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+			trace("eeeeeeeeeeee");
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      //trace("eeeeeeeeeee23e");
+	       //var pThis = this.fobj;   //form object
+	       //	   pThis.fn_search_post();  //조회후 처리 
+	    var pThis5 = this.fobj;   //form object
+			pThis5.fn_sepcode5();//쟁정사항구분
+	});
+}
+
+
+
+//쟁정사항구분
+this.fn_sepcode5 = function(obj:Button,  e:nexacro.ClickEventInfo)
+{		       
+	var oDatas =  {
+			  svcid : "sep5",
+			  //sController : "cmmCodeDetailSelectVO.do?classCode=F02",			 			  
+			  sController : "tabCmmSelectVO.do?classCode=L01",			 			  
+			  inds :[""],
+			  outds :[
+				 "ds_sep5=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+	
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+			trace("eeeeeeeeeeee");
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	
+	       //var pThis = this.fobj;   //form object
+	       //	   pThis.fn_search_post();  //조회후 처리 
+	     //var pThis3 = this.fobj;   //form object
+	      // pThis3.fn_search3();
+	});
+}
+
+///////////////////////////////////////////////////////////////
+
+
+
+
+this.fn_refresh =function(obj:Button,  e:nexacro.ClickEventInfo){
+	this.tabEdocAdm.clearData();
+}
+
+
+
+//저장
+this.fn_save = function(strid)
+{
+     trace("fn_save");
+     
+     
+      this.tabReconcil.clearData();
+	 var rowIdx = this.tabReconcil.addRow();
+     this.tabReconcil.setColumn(rowIdx, "lawsuitAdmNo", this.Div00.Div02.ds_lawsuitAdmNo.value);//소송관리번호
+     this.tabReconcil.setColumn(rowIdx, "instAdmCode", this.Div00.Div02.ds_instAdmCode.value);//심급코드
+     this.tabReconcil.setColumn(rowIdx, "pladefSepCode", this.Div00.Div02.ds_pladefSepCode.value);//원피고구분코드
+     this.tabReconcil.setColumn(rowIdx, "pladefSeq", this.Div00.Div02.ds_pladefSeq.value);//원피고일련번호
+     //this.tabReconcil.setColumn(rowIdx, "tabReconcilSeq", this.Div00.Div02.ds_tabReconcilSeq.value);//일련번호
+     
+     this.tabReconcil.setColumn(rowIdx, "reconcilReqChg", this.Div00.Div02.ds_reconcilReqChg.value);//요구금액
+     this.tabReconcil.setColumn(rowIdx, "reconcilAppvChg", this.Div00.Div02.ds_reconcilAppvChg.value);//승인금액
+     this.tabReconcil.setColumn(rowIdx, "reconcilMgrOpin", this.Div00.Div02.ds_reconcilMgrOpin.value);//담당자의견
+     this.tabReconcil.setColumn(rowIdx, "reconcilAppvDate", this.Div00.Div02.ds_reconcilAppvDate.value);//승인일자
+     this.tabReconcil.setColumn(rowIdx, "reconcilExptjudgChg", this.Div00.Div02.ds_reconcilExptjudgChg.value);//예상판결액
+     this.tabReconcil.setColumn(rowIdx, "reconcilAppvId", this.Div00.Div02.ds_reconcilAppvId.value);//최종승인자
+     
+     
+     
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "tabReconcilModifyVO.do",			 
+			  inds :["input1=tabReconcil:U"],			  
+			  outds :[
+				 "tabReconcil=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		  
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	      switch(this.svcid)
+	      {
+	         case "save" : 
+	         trace("save");
+				Iject.alert("저장완료");
+				break;
+				
+	         case "dlete" : 
+	         trace("delete");
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	      //pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+	      // var pThis = this.fobj;   //form object
+		  //pThis.fn_search2();
+	});
+	
+	
+}
+
+//저장버튼클릭시
+this.Button03_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	trace("fn_save");
+	
+    if(this.Div00.Div02.ds_pladefSepCode.value=="" || this.Div00.Div02.ds_pladefSepCode.value==null){
+		alert("원피고 정보를 입력해주셔야합니다.");
+		return;
+    }
+     
+    if(this.Div00.Div02.ds_pladefSeq.value=="" || this.Div00.Div02.ds_pladefSeq.value==null){
+		alert("원피고 정보를 입력해주셔야합니다.");
+		return;
+    }
+     
+    if (!this.fn_validation()){	//유효성검사
+		return;
+	}else{
+			  this.tabReconcil.clearData();
+			 var rowIdx = this.tabReconcil.addRow();
+			 this.tabReconcil.setColumn(rowIdx, "lawsuitAdmNo", this.Div00.Div02.ds_lawsuitAdmNo.value);//소송관리번호
+			 trace("소송관리번호;"+this.Div00.Div02.ds_lawsuitAdmNo.value);
+			 this.tabReconcil.setColumn(rowIdx, "instAdmCode", this.Div00.Div02.ds_instAdmCode.value);//심급코드
+			 trace("심급코드;"+this.Div00.Div02.ds_instAdmCode.value);
+			 this.tabReconcil.setColumn(rowIdx, "pladefSepCode", this.Div00.Div02.ds_pladefSepCode.value);//원피고구분코드
+			 trace("원피고구분코드;"+this.Div00.Div02.ds_pladefSepCode.value);
+			 this.tabReconcil.setColumn(rowIdx, "pladefSeq", this.Div00.Div02.ds_pladefSeq.value);//원피고일련번호
+			 trace("원피고일련번호;"+this.Div00.Div02.ds_pladefSeq.value);
+			 
+			 trace("일련번호;"+this.Div00.Div02.ds_tabReconcilSeq.value);
+			 if(this.Div00.Div02.ds_tabReconcilSeq.value == "" || this.Div00.Div02.ds_tabReconcilSeq.value == null){
+			 
+			 }else{
+				this.tabReconcil.setColumn(rowIdx, "tabReconcilSeq", this.Div00.Div02.ds_tabReconcilSeq.value);//일련번호
+			 }
+			 //this.tabReconcil.setColumn(rowIdx, "tabReconcilSeq", this.Div00.Div02.ds_tabReconcilSeq.value);//일련번호
+			 
+			 this.tabReconcil.setColumn(rowIdx, "reconcilReqChg", this.Div00.Div02.ds_reconcilReqChg.value);//요구금액
+			 trace("요구금액;"+this.Div00.Div02.ds_reconcilReqChg.value);
+			 this.tabReconcil.setColumn(rowIdx, "reconcilAppvChg", this.Div00.ds_reconcilAppvChg.value);//승인금액
+			 trace("승인금액;"+this.Div00.ds_reconcilAppvChg.value);
+			 this.tabReconcil.setColumn(rowIdx, "reconcilMgrOpin", this.Div00.Div02.ds_reconcilMgrOpin.value);//담당자의견
+			 trace("담당자의견;"+this.Div00.Div02.ds_reconcilMgrOpin.value);
+			 this.tabReconcil.setColumn(rowIdx, "reconcilAppvDate", this.Div00.Div02.ds_reconcilAppvDate.value);//승인일자
+			 trace("승인일자;"+this.Div00.Div02.ds_reconcilAppvDate.value);
+			 this.tabReconcil.setColumn(rowIdx, "reconcilExptjudgChg", this.Div00.Div02.ds_reconcilExptjudgChg.value);//예상판결액
+			 trace("예상판결액;"+this.Div00.Div02.ds_reconcilExptjudgChg.value);
+			 this.tabReconcil.setColumn(rowIdx, "reconcilAppvId", this.Div00.Div02.ds_reconcilAppvId.value);//최종승인자
+			 trace("최종승인자;"+this.Div00.Div02.ds_reconcilAppvId.value);
+			 
+			 //var strid="save";
+			 
+			var oDatas =  {
+					  svcid : "tabReconcilModifyVO",
+					  sController : "tabReconcilModifyVO.do",			 
+					  inds :["input1=tabReconcil:U"],			  
+					  outds :[
+						 "tabReconcil=output1"
+						 ],			     
+					  args  : [				
+					  ],
+					  bAsync : true,    // 비동기여부 (true : async  false: sync)
+					  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+					  bCompress :false,	 //			  
+					}; 
+					
+			//공통 transaction 함수 호츨   //function callback 
+			Iject.transaction(this,oDatas,function(){   
+				  
+				if(this.errorcode < 0)
+				{
+				   Iject.alert(this.errorMsg,"알림");			
+				   return;
+				}			
+				  
+				   var pThis = this.fobj;   //form object
+				   Iject.alert("수정완료되었습니다.");
+				   pThis.refresh();
+				   /*
+				  switch(this.svcid)
+				  {
+					 case "save" : 
+					 trace("save");
+						Iject.alert("저장완료");
+						break;
+						
+					 case "dlete" : 
+					 trace("delete");
+						Iject.alert("삭제완료");
+						break; 
+				  }
+				  */
+				  
+				  //pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+				  // var pThis = this.fobj;   //form object
+				  //pThis.fn_search2();
+			});
+	}
+}
+
+//B. 저장버튼 클릭시 동작
+ this.fn_validation = function()
+ {	
+	if(this.Div00.Div02.ds_reconcilExptjudgChg.value==null){
+		alert("예상판결액을 입력하세요");
+		return false;
+	}else if(this.Div00.ds_reconcilAppvChg.value==null){
+		alert("승인금액을 입력하세요");
+		return false;
+	}else if(this.Div00.Div02.ds_reconcilReqChg.value==null){
+		alert("요구금액을 입력하세요");
+		return false;
+	}else if(this.Div00.Div02.ds_reconcilMgrOpin.value==null){
+		alert("담당자의견을 입력하세요");
+		return false;
+	}else if(this.Div00.Div02.ds_reconcilAppvDate.value==null){
+		alert("승인일자를 선택하세요");
+		return false;
+	}else if(this.Div00.Div02.ds_reconcilAppvId.value==null){
+		alert("최종승인자를 검색하세요");
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+ 
+//삭제버튼클릭시
+this.Div00_save_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+
+ this.tabReconcil2.clearData();
+	 var rowIdx = this.tabReconcil2.addRow();
+     this.tabReconcil2.setColumn(rowIdx, "lawsuitAdmNo", this.Div00.Div02.ds_lawsuitAdmNo.value);//소송관리번호
+     this.tabReconcil2.setColumn(rowIdx, "instAdmCode", this.Div00.Div02.ds_instAdmCode.value);//심급코드
+     this.tabReconcil2.setColumn(rowIdx, "pladefSepCode", this.Div00.Div02.ds_pladefSepCode.value);//원피고구분코드
+     this.tabReconcil2.setColumn(rowIdx, "pladefSeq", this.Div00.Div02.ds_pladefSeq.value);//원피고일련번호
+     this.tabReconcil2.setColumn(rowIdx, "tabReconcilSeq", this.Div00.Div02.ds_tabReconcilSeq.value);//일련번호
+     trace("일련번호;"+this.Div00.Div02.ds_tabReconcilSeq.value);
+   
+   /*
+   var nRow = this.tabReconcil2.rowposition;	
+	this.tabReconcil2.setColumn(nRow, "lawsuitAdmNo", this.Div00.Div02.ds_lawsuitAdmNo.value);//소송관리번호
+     this.tabReconcil2.setColumn(nRow, "instAdmCode", this.Div00.Div02.ds_instAdmCode.value);//심급코드
+     this.tabReconcil2.setColumn(nRow, "pladefSepCode", this.Div00.Div02.ds_pladefSepCode.value);//원피고구분코드
+     this.tabReconcil2.setColumn(nRow, "pladefSeq", this.Div00.Div02.ds_pladefSeq.value);//원피고일련번호
+	
+   var rtnValue = Iject.confirm("삭제 하시겠습니까?");	
+	if(rtnValue){			
+			var oDatas =  {
+				  svcid : "delete",
+				  sController : "tabReconcilModifyVO.do",			 
+				  inds :["input1=tabReconcil2"],			  
+				  outds :[
+					 "tabReconcil2=output1"
+					 ],			     
+				  args  : [				
+				  ],
+				  bAsync : true,    // 비동기여부 (true : async  false: sync)
+				  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+				  bCompress :false,	 //			  
+				}; 
+				
+		//공통 transaction 함수 호츨   //function callback 
+		Iject.transaction(this,oDatas,function(){   
+ 
+			if(this.errorcode < 0)
+			{
+			   Iject.alert(this.errorMsg,"알림");			
+			   return;
+			}			
+			  
+			   //var pThis = this.fobj;   //form object
+			 
+		});
+   */
+
+	
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");	
+	if(rtnValue){			
+			var oDatas =  {
+				  svcid : "deleteTabReconcilVO",
+				  sController : "deleteTabReconcilVO.do",			 
+				  inds :["input1=tabReconcil2"],			  
+				  outds :[
+					 "tabReconcil2=output1"
+					 ],			     
+				  args  : [				
+				  ],
+				  bAsync : true,    // 비동기여부 (true : async  false: sync)
+				  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+				  bCompress :false,	 //			  
+				}; 
+				
+		//공통 transaction 함수 호츨   //function callback 
+		Iject.transaction(this,oDatas,function(){   
+ 
+			if(this.errorcode < 0)
+			{
+			   Iject.alert(this.errorMsg,"알림");			
+			   return;
+			}			
+			Iject.alert("삭제되었습니다.");
+			  
+			 var pThis = this.fobj;   //form object
+			 pThis.refresh();
+		});
+		
+	}
+	else
+	{
+		this.refresh();
+	}
+}
+
+
+
+
+
+this.fn_save2 = function(strid)
+{
+     trace("fn_save2");
+     
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "tabEdocAdmModifyVO.do",			 
+			  inds :["input1=tabEdocAdm2:U"],			  
+			  outds :[
+				 "tabEdocAdm2=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	      switch(this.svcid)
+	      {
+	         case "save" : 
+	         trace("save");
+				Iject.alert("저장완료");
+				break;
+				
+	         case "dlete" : 
+	         trace("delete");
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	      //pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+		  pThis.fn_search2();
+	});
+     
+	
+}
+//삭제로직
+this.fn_save3 = function(strid)
+{
+     trace("fn_save3");
+     
+     var oDatas =  {
+			  svcid : strid,
+			  sController : "tabReconcilModifyVO.do",			 
+			  inds :["input1=tabReconcil:U"],			  
+			  outds :[
+				 "tabReconcil=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		  
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	      switch(this.svcid)
+	      {
+	         case "save" : 
+	         trace("save");
+				Iject.alert("저장완료");
+				break;
+				
+	         case "dlete" : 
+	         trace("delete");
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	      //pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+	      // var pThis = this.fobj;   //form object
+		  //pThis.fn_search2();
+	});
+     
+	
+     
+	
+}
+
+/*
+
+
+
+
+
+
+//delete 갑호종
+this.Div00_Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	trace("Div00_Button00_onclick");
+	var nRow = this.tabEdocAdm2.rowposition;
+	this.tabEdocAdm2.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+	
+		this.fn_save2("delete");
+	}
+	else
+	{
+		this.fn_search2();
+	}
+}
+
+this.Div00_Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	trace("Div00_Button01_onclick");
+	var nRow = this.tabEdocAdm3.rowposition;
+	this.tabEdocAdm3.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+	
+		this.fn_save3("delete");
+	}
+	else
+	{
+		this.fn_search2();
+	}
+}
+
+//222222
+this.fn_save2 = function(strid)
+{
+     trace("fn_save2");
+     
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "tabEdocAdmModifyVO.do",			 
+			  inds :["input1=tabEdocAdm2:U"],			  
+			  outds :[
+				 "tabEdocAdm2=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		  
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	      switch(this.svcid)
+	      {
+	         case "save" : 
+	         trace("save");
+				Iject.alert("저장완료");
+				break;
+				
+	         case "dlete" : 
+	         trace("delete");
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	      //pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+		  pThis.fn_search2();
+	});
+     
+	
+}
+
+this.fn_save3 = function(strid)
+{
+     trace("fn_save3");
+     
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "tabEdocAdmModifyVO.do",			 
+			  inds :["input1=tabEdocAdm3:U"],			  
+			  outds :[
+				 "tabEdocAdm3=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		  
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	      switch(this.svcid)
+	      {
+	         case "save" : 
+	         trace("save");
+				Iject.alert("저장완료");
+				break;
+				
+	         case "dlete" : 
+	         trace("delete");
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	      //pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+		  pThis.fn_search2();
+	});
+     
+	
+}
+*/
+
+//초기화
+this.Div00_save01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	//this.tabEdocAdm2.reset(); 
+	this.tabReconcil2.clearData();
+	
+	//this.tabEdocAdm2.setColumn(rowIdx, "lawsuitAdmNo", this.Div00.Div02.ds_lawsuitAdmNo.value);//소송관리번호
+    // this.tabEdocAdm2.setColumn(rowIdx, "instAdmCode", this.Div00.Div02.ds_instAdmCode.value);//심급코드
+    //this.Div00.Div02.ds_preIwrDfsDeg.value="";//변론차수
+    //this.Div00.Div02.ds_preIwrIssuSepcode.value="";//쟁정사항구분코드
+     
+    // this.Div00.Div02.ds_preIwrName.value="";//중비서면제목
+    // this.Div00.Div02.ds_preIwrCont.value="";//준비서면내용
+    // this.Div00.Div02.ds_preIwrCompWtr.value="";//완료여부
+     
+}
+//추가
+this.Div00_save00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow = this.tabReconcil2.addRow();
+	this.Div00.Div02.ds_reconcilAppvDate.set_value(this.gfn_Today());
+}
+
+//담당자검색
+this.Div00_Div02_Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var lawSearchNo = "";	//소송관리번호 검색값
+	 
+	 var nLeft = system.clientToScreenX(this, 10);
+	 var nTop = system.clientToScreenY(this, 10);
+	 
+	 var newChild = new ChildFrame;
+	 newChild.init("LegalCheck"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "Lawsuit::LEGAL_OFFICIAL_CHECK.xfdl");
+	newChild.set_openalign("center middle");
+	newChild.set_dragmovetype("all");
+
+	//lawSearchNo = dialog("SearchNo","lawsuit::LAWSUIT_ADM_NO.xfdl","LAWSUIT_LIST","","showtitlebar=true",0,0); // 소송관리번호 검색
+	//trace(lawSearchNo);
+	newChild.showModal(this.getOwnerFrame()
+						, ""
+						, this
+						, "modal_callback");
+}
+
+
+
+this.ds_reconcilMgrOpin_ontextchanged = function(obj:TextArea,  e:nexacro.TextChangedEventInfo)
+{
+	var strLength = this.Div00.Div02.ds_reconcilMgrOpin.getLength();
+	if(strLength>255){
+		alert("255자를 넘지 못합니다.");
+	}else{
+		this.Div00.Div02.Static01.set_text(strLength);
+	}
+}
+
+
+//초기화
+this.Button99_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.dds_list3.clearData();
+	this.tabPladef.clearData();
+	this.tabReconcil2.clearData();
+	this.reload();
+}
+
+
+this.refresh = function(obj:Button,  e:nexacro.ClickEventInfo)
+{	     
+     this.ds_search4.clearData();
+	var rowIdx = this.ds_search4.addRow();
+	  
+	this.ds_search4.setColumn(rowIdx, "searchKeyword", this.Div00.Div02.ds_lawsuitAdmNo.value);//소송관리번호
+	this.ds_search4.setColumn(rowIdx, "searchCondition", this.Div00.Div02.ds_instAdmCode.value);//심급코드
+	
+	
+   
+   var oDatas =  {
+			  svcid : "tabInstAdmSelect6VO",
+			  sController : "tabInstAdmSelect6VO.do",			 
+			  //inds :[""],
+			  inds :["ds_search=ds_search4"],
+			  outds :[
+				 "dds_list3=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+	//trace("222222222222222");
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+			trace("Div00_Div00_Button00_onclick eeeeeeeeeeee");
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      
+	       var pThis = this.fobj;   //form object
+	       	   //pThis.fn_sepcode();  //심급코드	      	       	    	  	       
+	       	   pThis.fn_search3();//준비서면목록
+	});
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Pattern_Insert" classname="Pattern_Insert" left="0" top="0" width="1024" height="768" titletext="New Form" onload="Pattern_Insert_onload">
+    <Layouts>
+      <Layout>
+        <Div id="Div00" taborder="19" text="Div00" left="1.17%" top="8" right="52.34%" height="258" style="background:antiquewhite;">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="ID" left="6.8%" top="21" right="72.78%" height="31"/>
+              <Edit id="Edit00" taborder="1" left="21.01%" top="26" right="54.83%" height="21"/>
+              <Static id="Static01" taborder="2" text="PASS" left="47.9%" top="22" right="31.51%" height="31"/>
+              <Edit id="Edit01" taborder="3" left="62.18%" top="27" right="13.66%" height="21"/>
+              <Static id="Static02" taborder="4" text="NAME" left="6.93%" top="60" right="72.48%" height="31"/>
+              <Edit id="Edit02" taborder="5" left="21.22%" top="65" right="54.62%" height="21"/>
+              <Static id="Static03" taborder="6" text="ENGNAME" left="47.27%" top="59" right="32.14%" height="31"/>
+              <Edit id="Edit03" taborder="7" left="61.55%" top="64" right="14.29%" height="21"/>
+              <Static id="Static06" taborder="12" text="EMAIL" left="6.93%" top="91" right="78.57%" height="31"/>
+              <Edit id="Edit06" taborder="13" left="21.22%" top="96" right="14.29%" height="21"/>
+              <Static id="Static07" taborder="14" text="PHONE" left="6.93%" top="125" right="72.48%" height="31"/>
+              <Edit id="Edit07" taborder="15" left="21.22%" top="130" right="54.62%" height="21"/>
+              <Static id="Static08" taborder="16" text="CELLPHONE" left="47.27%" top="124" right="32.14%" height="31"/>
+              <Edit id="Edit08" taborder="17" left="61.55%" top="129" right="14.29%" height="21"/>
+              <Static id="Static09" taborder="18" text="ZIPCODE" left="6.93%" top="168" right="72.48%" height="31"/>
+              <Edit id="Edit09" taborder="19" left="21.22%" top="173" right="54.62%" height="21"/>
+              <Button id="Button00" taborder="20" text="RESET" left="30.67%" top="208" right="54.62%" height="39" onclick="Div00_Button00_onclick"/>
+              <Button id="Button01" taborder="21" text="SAVE" left="46.85%" top="209" right="36.97%" height="37" onclick="Div00_Button01_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_user">
+        <ColumnInfo>
+          <Column id="userId" type="STRING" size="256"/>
+          <Column id="password" type="STRING" size="256"/>
+          <Column id="userName" type="STRING" size="256"/>
+          <Column id="enName" type="STRING" size="256"/>
+          <Column id="email" type="STRING" size="256"/>
+          <Column id="phone" type="STRING" size="256"/>
+          <Column id="cellPhone" type="STRING" size="256"/>
+          <Column id="zipCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div00.Edit00" propid="value" datasetid="ds_user" columnid="userId"/>
+      <BindItem id="item1" compid="Div00.Edit01" propid="value" datasetid="ds_user" columnid="password"/>
+      <BindItem id="item2" compid="Div00.Edit03" propid="value" datasetid="ds_user" columnid="enName"/>
+      <BindItem id="item3" compid="Div00.Edit02" propid="value" datasetid="ds_user" columnid="userName"/>
+      <BindItem id="item4" compid="Div00.Edit06" propid="value" datasetid="ds_user" columnid="email"/>
+      <BindItem id="item5" compid="Div00.Edit07" propid="value" datasetid="ds_user" columnid="phone"/>
+      <BindItem id="item6" compid="Div00.Edit08" propid="value" datasetid="ds_user" columnid="cellPhone"/>
+      <BindItem id="item7" compid="Div00.Edit09" propid="value" datasetid="ds_user" columnid="zipCode"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************************************
+* SYSTEM      : 넥사크로플랫폼 PackageB
+* BUSINESS    : 넥사크로플랫폼 PackageB
+* FILE NAME   : Pattern_01
+* PROGRAMMER  : 
+* DATE        : 
+* DESCRIPTION : SingleDetail
+*------------------------------------------------------------------
+* MODIFY DATE   PROGRAMMER			DESCRIPTION
+*------------------------------------------------------------------
+* 
+*------------------------------------------------------------------
+***********************************************************************************/
+
+/***********************************************************************************
+* Common Library
+***********************************************************************************/
+include "Lib::Comm.xjs";
+
+
+//저장
+this.fn_save = function(strid)
+{
+     
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "userModifyVO.do",			 
+			  inds :["input1=ds_user:U"],
+			  outds :[
+				 "ds_user=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	      switch(this.svcid)
+	      {
+	         case "save" : 
+				Iject.alert("저장완료");
+				break;
+				
+	         case "dlete" : 
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	      pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+		  pThis.fn_search();
+	});
+}
+
+
+/**********************************************************************
+* User Function
+***********************************************************************/
+
+
+//저장
+this.Div00_Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.fn_save("save");
+}
+//리셋
+this.Div00_Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_user.reset();
+}
+
+this.Pattern_Insert_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.ds_user.reset();
+}
+]]></Script>
+  </Form>
+</FDL>

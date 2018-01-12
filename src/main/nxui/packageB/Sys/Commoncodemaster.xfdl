@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Commoncodemaster" classname="Commoncodemaster" left="0" top="0" width="1024" height="631" titletext="New Form" onload="Commoncodemaster_onload" style="border:0 none #808080ff ;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="27" left="40" top="54" right="40" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <Static id="sta_title" taborder="0" text="공통코드상세관리" onclick="sta_title_onclick" left="1.37%" top="14" right="0.88%" height="37" style="color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Button id="comm_btn_search" taborder="5" text="검색" top="58" right="44" width="92" height="20" style="background:lightskyblue;border:1 solid #808080ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" onclick="comm_btn_search_onclick"/>
+        <Grid id="grd_plaintiff" taborder="6" binddataset="common_master_dataset" scrollbars="autovert" useinputpanel="false" autofittype="col" nodatatext="데이터가 없습니다." left="40" top="90" right="40" height="245">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="93"/>
+                <Column size="82"/>
+                <Column size="105"/>
+                <Column size="60"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="209"/>
+                <Column size="70"/>
+                <Column size="70"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell style="font: ;" text="NO"/>
+                <Cell col="1" style="font: ;" text="분류코드"/>
+                <Cell col="2" style="font: ;" text="분류코드명"/>
+                <Cell col="3" style="font: ;" text="사용여부"/>
+                <Cell col="4" style="font: ;" text="주사용테이블"/>
+                <Cell col="5" style="font: ;" text="사용컬럼명"/>
+                <Cell col="6" style="font: ;" text="분류코드설명"/>
+                <Cell col="7" style="font: ;" text="등록일자" combodataset="ds_useYn" combocodecol="id" combodatacol="value"/>
+                <Cell col="8" style="font: ;" text="수정일자" combodataset="ds_useYn" combocodecol="id" combodatacol="value"/>
+              </Band>
+              <Band id="body">
+                <Cell style="align:center;" expr="currow+1"/>
+                <Cell col="1" edittype="none" style="align:center;" text="bind:classCode" editlimit="30"/>
+                <Cell col="2" text="bind:className"/>
+                <Cell col="3" text="bind:useYn"/>
+                <Cell col="4" edittype="none" style="align:center;" text="bind:mainTable" editlimit="15"/>
+                <Cell col="5" edittype="none" style="align:center;" text="bind:mainColumn" editlimit="15"/>
+                <Cell col="6" edittype="none" style="align:center;" text="bind:classDesc" editlimit="11"/>
+                <Cell col="7" displaytype="normal" edittype="none" style="align:center;" text="bind:registTime" mask="####-##-##" editlimit="11"/>
+                <Cell col="8" displaytype="normal" edittype="none" style="align:center;" text="bind:modifyTime" mask="####-##-##" editlimit="11"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <ImageViewer id="img_02" taborder="8" left="40" right="40" style="background:cornsilk;border:1 solid darkgray ;" height="145" top="341"/>
+        <Static id="sta_15" taborder="9" text="분류코드" left="44" width="125" height="28" style="background:azure;border:1 solid black ;color:black;align:center middle;font:9 Dotum;" top="345"/>
+        <Static id="sta_16" taborder="10" text="주사용테이블" left="384" top="372" width="125" height="28" style="background:azure;border:1 solid black ;color:black;align:center middle;font:9 Dotum;"/>
+        <Static id="sta_04" taborder="11" text="사용여부" left="44" top="372" width="125" height="28" style="background:azure;border:1 solid black ;color:black;align:center middle;font:9 Dotum;" onclick="sta_04_onclick"/>
+        <Static id="sta_07" taborder="12" text="수정일자" onclick="sta_16_onclick" top="372" width="125" height="28" style="background:azure;border:1 solid black ;color:black;align:center middle;font:9 Dotum;" right="172"/>
+        <MaskEdit id="modify_time_1" taborder="13" type="string" mask="####-##-##" enable="false" top="374" width="125" height="24" style="align:left; :disabled {align:center;}" right="44"/>
+        <Edit id="main_table_1" taborder="14" maxlength="10" enable="false" left="512" top="374" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="sta_18" taborder="15" text="사용컬럼명칭" top="345" width="125" height="28" style="background:azure;border:1 solid black ;color:black;align:center middle;font:9 Dotum;" right="172"/>
+        <Edit id="Edit04" taborder="16" inputtype="english" maxlength="10" enable="false" top="347" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" right="44"/>
+        <Static id="sta_19" taborder="17" text="분류코드명칭" left="384" top="345" width="125" height="28" style="background:azure;border:1 solid black ;color:black;align:center middle;font:9 Dotum;"/>
+        <Edit id="class_name_1" taborder="18" maxlength="10" enable="false" left="512" top="347" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="sta_20" taborder="19" text="분류코드설명" left="44" top="399" width="125" height="56" style="background:azure;border:1 solid black ;color:black;align:center middle;font:9 Dotum;"/>
+        <Edit id="use_yn_1" taborder="20" maxlength="10" enable="false" left="172" top="375" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="sta_06" taborder="21" text="등록일자" onclick="sta_06_onclick" left="44" top="454" width="125" height="28" style="background:azure;border:1 solid black ;color:black;align:center middle;font:9 Dotum;"/>
+        <MaskEdit id="regist_time_1" taborder="22" type="string" mask="####-##-##" enable="false" left="172" top="457" width="125" height="24" style="align:left; :disabled {align:center;}"/>
+        <TextArea id="class_desc_1" taborder="23" left="172" top="401" right="4.3%" height="53" enable="false"/>
+        <Edit id="class_code_2" taborder="24" maxlength="10" enable="false" left="172" top="347" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Combo id="class_code_1" taborder="1" innerdataset="@class_code_dataset" codecolumn="code" datacolumn="value" left="100" top="56" height="24" width="125" displaynulltext="선택" enable="true"/>
+        <Static id="sta_title00" taborder="25" onclick="sta_title_onclick" left="0%" top="0" right="0%" height="46" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Static id="Static04" taborder="26" text="공통코드관리" left="40" top="0" width="200" height="45" style="color:white;font:bold 17 돋움;" onclick="Static04_onclick"/>
+        <Static id="Static02" taborder="29" text="*" left="6.74%" top="354" right="91.21%" height="11" style="color:red;"/>
+        <Static id="Static03" taborder="30" text="분류코드" left="47" top="57" width="64" height="23"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item1" compid="class_code_1" propid="value" datasetid="common_search" columnid="search"/>
+      <BindItem id="item0" compid="modify_time_1" propid="value" datasetid="common_master_dataset" columnid="modifyTime"/>
+      <BindItem id="item2" compid="class_code_2" propid="value" datasetid="common_master_dataset" columnid="classCode"/>
+      <BindItem id="item3" compid="class_name_1" propid="value" datasetid="common_master_dataset" columnid="className"/>
+      <BindItem id="item4" compid="use_yn_1" propid="value" datasetid="common_master_dataset" columnid="useYn"/>
+      <BindItem id="item5" compid="main_table_1" propid="value" datasetid="common_master_dataset" columnid="mainTable"/>
+      <BindItem id="item6" compid="Edit04" propid="value" datasetid="common_master_dataset" columnid="mainColumn"/>
+      <BindItem id="item7" compid="class_desc_1" propid="value" datasetid="common_master_dataset" columnid="classDesc"/>
+      <BindItem id="item8" compid="regist_time_1" propid="value" datasetid="common_master_dataset" columnid="registTime"/>
+    </Bind>
+    <Objects>
+      <Dataset id="common_master_dataset">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="4"/>
+          <Column id="className" type="STRING" size="255"/>
+          <Column id="useYn" type="STRING" size="1"/>
+          <Column id="mainTable" type="STRING" size="255"/>
+          <Column id="mainColumn" type="STRING" size="255"/>
+          <Column id="classDesc" type="STRING" size="255"/>
+          <Column id="registTime" type="STRING" size="14"/>
+          <Column id="registId" type="STRING" size="20"/>
+          <Column id="modifyTime" type="STRING" size="14"/>
+          <Column id="modifyId" type="STRING" size="20"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="class_code_dataset">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="255"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="common_search">
+        <ColumnInfo>
+          <Column id="search" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+// Onload function 공통코드를 호출
+this.Commoncodemaster_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+	var common_call  = "";
+		common_call += "class_code_dataset=class_code_dataset";		
+
+	this.gfn_transaction(this
+					   , "commonCode"
+					   , "sysSample/loadCommonCodes.do"
+					   , ""
+					   , common_call
+					   , ""
+					   , "fnCallback");
+}
+
+
+// callback function
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+			case "commonCode":
+			this.class_code_dataset.insertRow(0);
+			this.class_code_dataset.setColumn(0, "code", "0000");
+			this.class_code_dataset.setColumn(0, "value", "전체");
+			this.class_code_1.set_index(0);
+			break;
+			case "read":
+			break;
+			case "readAll":
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+// 전체 검색 (readAll)
+/*
+this.comm_btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo) {	
+	this.gfn_transaction(this
+					   , "readAll"
+					   , "sysSample/readAll.do"
+					   , ""
+					   , "common_master_dataset=common_master_dataset" // 마스터 전체
+					   , ""
+					   , "fnCallback");
+}
+*/
+
+// 분류 코드 별 검색(search, read)
+this.comm_btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo) {
+	//this.alert(this.class_code_1.index);
+	this.gfn_transaction(this
+					   , "read"
+					   , "sysSample/read.do"
+					   , "common_search=common_search"	// 조회 데이터 셋
+					   , "common_master_dataset=common_master_dataset" // 마스터 전체
+					   , ""
+					   , "fnCallback");
+}
+
+
+
+
+this.Static04_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

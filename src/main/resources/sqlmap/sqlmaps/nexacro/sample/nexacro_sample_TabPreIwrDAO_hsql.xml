@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TabPreIwr">
+
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    <typeAlias  alias="tabPreIwrVO" type="nexacro.sample.vo.TabPreIwrVO"/>
+    <typeAlias  alias="tabInstAdmVO" type="nexacro.sample.vo.TabPreIwrVO"/>
+    <typeAlias  alias="tabAdmVO" type="nexacro.sample.vo.TabPreIwrVO"/>
+    <typeAlias  alias="codesVO" type="nexacro.sample.vo.CmmCodeDetailVO"/>
+
+    <!-- Sample resultObject -->
+    
+    <resultMap id="tabInstAdm" class="tabInstAdmVO">        
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="instAdmCode" column="INST_ADM_CODE" />        
+        <result property="instAdmName" column="INST_ADM_NAME" />
+        <result property="instAdmPrgrCode" column="INST_ADM_PRGR_CODE" />
+        <result property="instAdmCaseNo" column="INST_ADM_CASE_NO" />
+        <result property="instAdmCortCode" column="INST_ADM_CORT_CODE" />
+        <result property="instAdmRaisreqDate" column="INST_ADM_RAISREQ_DATE" />
+        <result property="instAdmJudId" column="INST_ADM_JUD_ID" />        
+    </resultMap>
+    
+    
+    <resultMap id="tabAddddm" class="tabAdmVO">        
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="instAdmCode" column="INST_ADM_CODE" />
+        <result property="instAdmCode2" column="INST_ADM_CODE2" />        
+        <result property="instAdmPrgrCode" column="INST_ADM_PRGR_CODE" /> 
+        <result property="instAdmCaseNo" column="INST_ADM_CASE_NO" />
+        <result property="instAdmCortCode" column="INST_ADM_CORT_CODE" />
+        <result property="instAdmRaisreqDate" column="INST_ADM_RAISREQ_DATE" />
+        <result property="instAdmJudId" column="INST_ADM_JUD_ID" />  
+        <result property="instAdmCtpmgrName" column="INST_ADM_CTPMGR_NAME" />   
+        <result property="lawsuitCpPladefSepcode" column="LAWSUIT_CP_PLADEF_SEPCODE" />    
+        <result property="lawsuitFulfDetmWtr" column="LAWSUIT_FULF_DETM_WTR" />  
+        <result property="lawsuitCostCfnApldate" column="LAWSUIT_COST_CFN_APLDATE" />    
+    </resultMap>
+    
+    <resultMap id="tabAdm" class="tabAdmVO">        
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="instAdmCode" column="INST_ADM_CODE" />
+        <result property="instAdmCode2" column="INST_ADM_CODE2" />        
+        <result property="instAdmPrgrCode" column="INST_ADM_PRGR_CODE" /> 
+        <result property="instAdmCaseNo" column="INST_ADM_CASE_NO" />
+        <result property="instAdmCortCode" column="INST_ADM_CORT_CODE" />
+        <result property="instAdmRaisreqDate" column="INST_ADM_RAISREQ_DATE" />
+        <result property="instAdmJudId" column="INST_ADM_JUD_ID" />  
+        <result property="instAdmCtpmgrName" column="INST_ADM_CTPMGR_NAME" />   
+        <result property="lawsuitCpPladefSepcode" column="LAWSUIT_CP_PLADEF_SEPCODE" />   
+        <result property="lawsuitFulfDetmWtr" column="LAWSUIT_FULF_DETM_WTR" />  
+        <result property="lawsuitCostCfnApldate" column="LAWSUIT_COST_CFN_APLDATE" />
+        <result property="instAdmDivRate" column="INST_ADM_DIV_RATE" />         
+    </resultMap>
+    
+    <resultMap id="tabAgm" class="tabInstAdmVO">        
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="instAdmCode" column="INST_ADM_CODE" />
+        <result property="instAdmCode2" column="INST_ADM_CODE2" />        
+        <result property="instAdmPrgrCode" column="INST_ADM_PRGR_CODE" />
+        <result property="instAdmCaseNo" column="INST_ADM_CASE_NO" />
+        <result property="instAdmCortCode" column="INST_ADM_CORT_CODE" />
+        <result property="instAdmRaisreqDate" column="INST_ADM_RAISREQ_DATE" />
+        <result property="instAdmJudId" column="INST_ADM_JUD_ID" />  
+        <result property="instAdmCtpmgrName" column="INST_ADM_CTPMGR_NAME" />   
+        <result property="lawsuitCpPladefSepcode" column="LAWSUIT_CP_PLADEF_SEPCODE" />        
+    </resultMap>
+    
+    <resultMap id="tabAfm" class="tabInstAdmVO">        
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="instAdmCode" column="INST_ADM_CODE" />  
+        <result property="instAdmCode2" column="INST_ADM_CODE2" />        
+        <result property="instAdmPrgrCode" column="INST_ADM_PRGR_CODE" />
+        <result property="instAdmCaseNo" column="INST_ADM_CASE_NO" />
+        <result property="instAdmCortCode" column="INST_ADM_CORT_CODE" />
+        <result property="instAdmRaisreqDate" column="INST_ADM_RAISREQ_DATE" />
+        <result property="instAdmJudId" column="INST_ADM_JUD_ID" />  
+                         
+    </resultMap>
+    
+    <resultMap id="tabddm" class="tabAdmVO">        
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="instAdmCode" column="INST_ADM_CODE" />        
+        <result property="instAdmName" column="INST_ADM_NAME" />
+        <result property="instAdmPrgrCode" column="INST_ADM_PRGR_CODE" />
+        <result property="instAdmCaseNo" column="INST_ADM_CASE_NO" />
+        <result property="instAdmCortCode" column="INST_ADM_CORT_CODE" />
+        <result property="instAdmRaisreqDate" column="INST_ADM_RAISREQ_DATE" />
+        <result property="instAdmJudId" column="INST_ADM_JUD_ID" />  
+        <result property="instAdmCtpmgrName" column="INST_ADM_CTPMGR_NAME" />   
+        <result property="lawsuitCpPladefSepcode" column="LAWSUIT_CP_PLADEF_SEPCODE" />
+        <result property="pladefName" column="PLADEF_NAME" />
+    </resultMap>
+    
+     <resultMap id="tabInstAdmMap" class="java.util.HashMap">
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="instAdmCode" column="INST_ADM_CODE" />        
+        <result property="instAdmPrgrCode" column="INST_ADM_PRGR_CODE" />
+        <result property="instAdmCaseNo" column="INST_ADM_CASE_NO" />
+        <result property="instAdmCortCode" column="INST_ADM_CORT_CODE" />
+        <result property="instAdmRaisreqDate" column="INST_ADM_RAISREQ_DATE" />
+        <result property="instAdmJudId" column="INST_ADM_JUD_ID" />        
+    </resultMap>    
+        
+    <resultMap id="tabPreIwr" class="tabPreIwrVO">
+        <result property="instAdmCode" column="INST_ADM_CODE" />        
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="preIwrNo" column="PRE_IWR_NO" />
+        <result property="preIwrDfsDeg" column="PRE_IWR_DFS_DEG" />
+        <result property="preIwrDfsDeg2" column="PRE_IWR_DFS_DEG2" />
+        <result property="preIwrIssuSepcode" column="PRE_IWR_ISSU_SEPCODE" />
+        <result property="preIwrIssuSepcode2" column="PRE_IWR_ISSU_SEPCODE2" />
+        <result property="preIwrName" column="PRE_IWR_NAME" />
+        <result property="preIwrCont" column="PRE_IWR_CONT" />
+        <result property="preIwrWritDate" column="PRE_IWR_WRIT_DATE" />
+        <result property="preIwrCompWtr" column="PRE_IWR_COMP_WTR" />
+        <result property="preIwrOutLyrid" column="PRE_IWR_OUT_LYRID" />        
+    </resultMap>
+    
+     <resultMap id="tabPreIwrMap" class="java.util.HashMap">
+        <result property="instAdmCode" column="INST_ADM_CODE" />        
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="preIwrNo" column="PRE_IWR_NO" />
+        <result property="preIwrDfsDeg" column="PRE_IWR_DFS_DEG" />
+        <result property="preIwrIssuSepcode" column="PRE_IWR_ISSU_SEPCODE" />
+        <result property="preIwrName" column="PRE_IWR_NAME" />
+        <result property="preIwrCont" column="PRE_IWR_CONT" />
+        <result property="preIwrWritDate" column="PRE_IWR_WRIT_DATE" />
+        <result property="preIwrCompWtr" column="PRE_IWR_COMP_WTR" />
+        <result property="preIwrOutLyrid" column="PRE_IWR_OUT_LYRID" />
+    </resultMap>
+    
+    <resultMap id="codes" class="codesVO">
+        <result property="classCode" column="CLASS_CODE" />                	    	
+        <result property="codeNo" column="CODE_NO" />
+        <result property="codeName" column="CODE_NAME" />
+        <result property="codeName2" column="CODE_NAME2" />
+        <result property="useYn" column="USE_YN" />               
+    </resultMap>
+    
+    
+    <resultMap id="codesVOMap" class="java.util.HashMap">
+        <result property="classCode" column="CLASS_CODE" />                	    	
+        <result property="codeNo" column="CODE_NO" />
+        <result property="codeName" column="CODE_NAME" />
+        <result property="codeName2" column="CODE_NAME2" />
+        <result property="useYn" column="USE_YN" />        
+    </resultMap>
+    
+    <select id="tabPreIwrDAO.selectCmmVoList" parameterClass="codesVO" resultMap="codes">
+            SELECT
+                A.CLASS_CODE AS CLASS_CODE, 
+                A.CODE_NO AS CODE_NO, 
+                A.CODE_NAME AS CODE_NAME, 
+                A.CODE_NAME2 AS CODE_NAME2, 
+                A.USE_YN AS USE_YN                
+            FROM CMM_CODE_DETAIL A
+            WHERE 1=1            
+             	<isNotNull property="classCode"> 
+             	<![CDATA[                  
+                	AND A.CLASS_CODE = #classCode#
+                	]]> 
+                </isNotNull>
+            
+    </select>
+    <select id="tabPreIwrDAO.selectTabInstAdmVOList" parameterClass="tabInstAdmVO" resultMap="tabInstAdm">
+            SELECT                
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.INST_ADM_CODE AS INST_ADM_CODE, 
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G01' AND CODE_NO =A.INST_ADM_CODE) AS INST_ADM_NAME, 
+      			(SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G02' AND CODE_NO =A.INST_ADM_PRGR_CODE) AS INST_ADM_PRGR_CODE, 
+                A.INST_ADM_CASE_NO AS INST_ADM_CASE_NO, 
+                A.INST_ADM_NAME AS INST_ADM_NAME,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='A01' AND CODE_NO =A.INST_ADM_CORT_CODE) AS INST_ADM_CORT_CODE, 
+                A.INST_ADM_JUD_NAME AS INST_ADM_JUD_ID,
+                A.INST_ADM_RAISREQ_DATE AS INST_ADM_RAISREQ_DATE
+            FROM TAB_INST_ADM A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="searchKeyword">                    
+                       AND LAWSUIT_ADM_NO LIKE '%' || #searchKeyword# || '%'                    
+                </isNotNull>
+            </dynamic>
+            ORDER BY A.LAWSUIT_ADM_NO,A.INST_ADM_CODE ASC 
+            
+    </select>
+    
+    <select id="tabPreIwrDAO.selectTabInstAdm2VOList" parameterClass="tabInstAdmVO" resultMap="tabInstAdm">
+              SELECT                
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+               A.INST_ADM_CODE AS INST_ADM_CODE, 
+               A.INST_ADM_NAME AS INST_ADM_NAME, 
+      			(SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G02' AND CODE_NO =A.INST_ADM_PRGR_CODE) AS INST_ADM_PRGR_CODE, 
+                A.INST_ADM_CASE_NO AS INST_ADM_CASE_NO, 
+                A.INST_ADM_NAME AS INST_ADM_NAME,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='A01' AND CODE_NO =A.INST_ADM_CORT_CODE) AS INST_ADM_CORT_CODE, 
+                A.INST_ADM_JUD_NAME AS INST_ADM_JUD_ID,
+                A.INST_ADM_RAISREQ_DATE AS INST_ADM_RAISREQ_DATE
+            FROM TAB_INST_ADM A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="searchKeyword">                    
+                       AND A.LAWSUIT_ADM_NO LIKE '%' || #searchKeyword# || '%'                    
+                </isNotNull>
+                <isNotNull property="searchCondition">                    
+                       AND A.INST_ADM_CODE LIKE '%' || #searchCondition# || '%'                    
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    <select id="tabPreIwrDAO.selectTabInstAdm3VOList" parameterClass="tabAdmVO" resultMap="tabAdm">
+              SELECT                
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+               A.INST_ADM_CODE AS INST_ADM_CODE, 
+               (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G01' AND CODE_NO =A.INST_ADM_CODE) AS INST_ADM_CODE2, 
+                  (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G02' AND CODE_NO =A.INST_ADM_PRGR_CODE) AS INST_ADM_PRGR_CODE, 
+                A.INST_ADM_CASE_NO AS INST_ADM_CASE_NO, 
+                A.INST_ADM_NAME AS INST_ADM_NAME,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='A01' AND CODE_NO =A.INST_ADM_CORT_CODE) AS INST_ADM_CORT_CODE, 
+                A.INST_ADM_JUD_NAME AS INST_ADM_JUD_ID,
+                A.INST_ADM_RAISREQ_DATE AS INST_ADM_RAISREQ_DATE,
+                A.INST_ADM_CTPMGR_NAME AS INST_ADM_CTPMGR_NAME,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='H02' AND CODE_NO =B.LAWSUIT_CP_PLADEF_SEPCODE) AS LAWSUIT_CP_PLADEF_SEPCODE,
+                A.INST_ADM_ISSU_POIN AS INST_ADM_ISSU_POIN,
+                A.INST_ADM_DIV_RATE AS INST_ADM_DIV_RATE,
+                B.LAWSUIT_FULF_DETM_WTR AS LAWSUIT_FULF_DETM_WTR,
+                B.LAWSUIT_COST_CFN_APLDATE AS LAWSUIT_COST_CFN_APLDATE
+            FROM TAB_INST_ADM A,TAB_LAWSUIT B
+            WHERE A.LAWSUIT_ADM_NO=B.LAWSUIT_ADM_NO
+            <dynamic>
+                <isNotNull property="searchKeyword">                    
+                       AND A.LAWSUIT_ADM_NO LIKE '%' || #searchKeyword# || '%'                    
+                </isNotNull>
+                <isNotNull property="searchCondition">                    
+                       AND A.INST_ADM_CODE LIKE '%' || #searchCondition# || '%'                    
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    <select id="tabPreIwrDAO.selectTabInstAdm4VOList" parameterClass="tabAdmVO" resultMap="tabddm">
+              SELECT                
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+               (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G01' AND CODE_NO =A.INST_ADM_CODE) AS INST_ADM_CODE, 
+                  (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G02' AND CODE_NO =A.INST_ADM_PRGR_CODE) AS INST_ADM_PRGR_CODE, 
+                A.INST_ADM_CASE_NO AS INST_ADM_CASE_NO, 
+                A.INST_ADM_NAME AS INST_ADM_NAME,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='A01' AND CODE_NO =A.INST_ADM_CORT_CODE) AS INST_ADM_CORT_CODE, 
+                A.INST_ADM_JUD_NAME AS INST_ADM_JUD_ID,
+                A.INST_ADM_RAISREQ_DATE AS INST_ADM_RAISREQ_DATE,
+                A.INST_ADM_CTPMGR_NAME AS INST_ADM_CTPMGR_NAME,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='H02' AND CODE_NO =B.LAWSUIT_CP_PLADEF_SEPCODE) AS LAWSUIT_CP_PLADEF_SEPCODE,
+                A.INST_ADM_ISSU_POIN AS INST_ADM_ISSU_POIN,
+                C.PLADEF_NAME AS PLADEF_NAME 
+            FROM TAB_INST_ADM A,TAB_LAWSUIT B,TAB_PLADEF C
+            WHERE A.LAWSUIT_ADM_NO=B.LAWSUIT_ADM_NO
+            AND B.LAWSUIT_ADM_NO=C.LAWSUIT_ADM_NO
+            
+            <dynamic>
+                <isNotNull property="searchKeyword">
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="0">
+                        (A.INST_ADM_NAME LIKE '%' || #searchKeyword# || '%') 
+                        OR
+                         (B.LAW_RAISREQ_NO LIKE '%' || #searchKeyword# || '%') 
+                         OR
+                          (C.PLADEF_NAME LIKE '%' || #searchKeyword# || '%')
+                          OR 
+                          (A.INST_ADM_CTPMGR_NAME LIKE '%' || #searchKeyword# || '%')
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="1">
+                        B.LAW_RAISREQ_NO LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                     <isEqual prepend=" AND " property="searchCondition" compareValue="2">
+                        A.INST_ADM_NAME LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                     <isEqual prepend=" AND " property="searchCondition" compareValue="3">
+                        C.PLADEF_NAME LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="4">
+                        A.INST_ADM_CTPMGR_NAME LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                </isNotNull>
+            </dynamic>
+            
+          
+            
+    </select>
+    
+    <select id="tabPreIwrDAO.selectTabInstAdm5VOList" parameterClass="tabInstAdmVO" resultMap="tabAfm">
+              SELECT                
+                 A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+               A.INST_ADM_CODE AS INST_ADM_CODE, 
+               (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G01' AND CODE_NO =A.INST_ADM_CODE) AS INST_ADM_CODE2, 
+               A.INST_ADM_NAME AS INST_ADM_NAME, 
+      			(SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G02' AND CODE_NO =A.INST_ADM_PRGR_CODE) AS INST_ADM_PRGR_CODE, 
+                A.INST_ADM_CASE_NO AS INST_ADM_CASE_NO, 
+                A.INST_ADM_NAME AS INST_ADM_NAME,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='A01' AND CODE_NO =A.INST_ADM_CORT_CODE) AS INST_ADM_CORT_CODE, 
+                A.INST_ADM_JUD_NAME AS INST_ADM_JUD_ID,
+                A.INST_ADM_RAISREQ_DATE AS INST_ADM_RAISREQ_DATE
+            FROM TAB_INST_ADM A            
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="searchKeyword">                    
+                       AND A.LAWSUIT_ADM_NO LIKE '%' || #searchKeyword# || '%'                    
+                </isNotNull>
+                <isNotNull property="searchCondition">                    
+                       AND A.INST_ADM_CODE LIKE '%' || #searchCondition# || '%'                    
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    
+    <select id="tabPreIwrDAO.selectTabInstAdm6VOList" parameterClass="tabInstAdmVO" resultMap="tabAgm">
+              SELECT                
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+               A.INST_ADM_CODE AS INST_ADM_CODE, 
+               (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G01' AND CODE_NO=A.INST_ADM_CODE) AS INST_ADM_CODE2, 
+                  (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G02' AND CODE_NO =A.INST_ADM_PRGR_CODE) AS INST_ADM_PRGR_CODE, 
+                A.INST_ADM_CASE_NO AS INST_ADM_CASE_NO, 
+                A.INST_ADM_NAME AS INST_ADM_NAME,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='A01' AND CODE_NO =A.INST_ADM_CORT_CODE) AS INST_ADM_CORT_CODE, 
+                A.INST_ADM_JUD_NAME AS INST_ADM_JUD_ID,
+                A.INST_ADM_RAISREQ_DATE AS INST_ADM_RAISREQ_DATE,
+                A.INST_ADM_CTPMGR_NAME AS INST_ADM_CTPMGR_NAME,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='H02' AND CODE_NO =B.LAWSUIT_CP_PLADEF_SEPCODE) AS LAWSUIT_CP_PLADEF_SEPCODE,
+                A.INST_ADM_ISSU_POIN AS INST_ADM_ISSU_POIN
+            FROM TAB_INST_ADM A,TAB_LAWSUIT B
+            WHERE A.LAWSUIT_ADM_NO=B.LAWSUIT_ADM_NO
+            <dynamic>
+                <isNotNull property="searchKeyword">                    
+                       AND A.LAWSUIT_ADM_NO LIKE '%' || #searchKeyword# || '%'                    
+                </isNotNull>
+                <isNotNull property="searchCondition">                    
+                       AND A.INST_ADM_CODE LIKE '%' || #searchCondition# || '%'                    
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    <!-- 소송/심급 -->
+    <select id="tabPreIwrDAO.selectTabInstAdm7VOList" parameterClass="tabAdmVO" resultMap="tabAddddm">
+              SELECT                
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+               A.INST_ADM_CODE AS INST_ADM_CODE, 
+               (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G01' AND CODE_NO =A.INST_ADM_CODE) AS INST_ADM_CODE2, 
+                  (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G02' AND CODE_NO =A.INST_ADM_PRGR_CODE) AS INST_ADM_PRGR_CODE, 
+                A.INST_ADM_CASE_NO AS INST_ADM_CASE_NO, 
+                A.INST_ADM_NAME AS INST_ADM_NAME,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='A01' AND CODE_NO =A.INST_ADM_CORT_CODE) AS INST_ADM_CORT_CODE, 
+                A.INST_ADM_JUD_NAME AS INST_ADM_JUD_ID,
+                A.INST_ADM_RAISREQ_DATE AS INST_ADM_RAISREQ_DATE,
+                A.INST_ADM_CTPMGR_NAME AS INST_ADM_CTPMGR_NAME,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='H02' AND CODE_NO =B.LAWSUIT_CP_PLADEF_SEPCODE) AS LAWSUIT_CP_PLADEF_SEPCODE,
+                A.INST_ADM_ISSU_POIN AS INST_ADM_ISSU_POIN,
+                B.LAWSUIT_FULF_DETM_WTR AS LAWSUIT_FULF_DETM_WTR,
+                B.LAWSUIT_COST_CFN_APLDATE AS LAWSUIT_COST_CFN_APLDATE
+            FROM TAB_INST_ADM A,TAB_LAWSUIT B
+            WHERE A.LAWSUIT_ADM_NO=B.LAWSUIT_ADM_NO
+            <dynamic>
+                <isNotNull property="searchKeyword">                    
+                       AND A.LAWSUIT_ADM_NO LIKE '%' || #searchKeyword# || '%'                    
+                </isNotNull>
+                <isNotNull property="searchCondition">                    
+                       AND A.INST_ADM_CODE LIKE '%' || #searchCondition# || '%'                    
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    
+    <select id="tabPreIwrDAO.selectTabInstAdmMapList" parameterClass="tabInstAdmVO" resultMap="tabInstAdmMap">
+            SELECT                
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.INST_ADM_CODE AS INST_ADM_CODE, 
+                A.INST_ADM_PRGR_CODE AS INST_ADM_PRGR_CODE, 
+                A.INST_ADM_CASE_NO AS INST_ADM_CASE_NO, 
+                A.INST_ADM_NAME AS INST_ADM_NAME,
+                A.INST_ADM_CORT_CODE AS INST_ADM_CORT_CODE, 
+                A.INST_ADM_JUD_ID AS INST_ADM_JUD_ID,
+                A.INST_ADM_RAISREQ_DATE AS INST_ADM_RAISREQ_DATE
+            FROM TAB_INST_ADM A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull prepend=" AND " property="preIwrName">
+                	AND LAWSUIT_ADM_NO LIKE '%' || #searchKeyword# || '%'  
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+ 	<select id="tabPreIwrDAO.selectTabPreIwrVOList" parameterClass="tabPreIwrVO" resultMap="tabPreIwr">
+            SELECT
+                A.INST_ADM_CODE AS INST_ADM_CODE, 
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.PRE_IWR_NO AS PRE_IWR_NO, 
+                A.PRE_IWR_DFS_DEG AS PRE_IWR_DFS_DEG,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='G01' AND CODE_NO=A.PRE_IWR_DFS_DEG) AS PRE_IWR_DFS_DEG2, 
+                A.PRE_IWR_ISSU_SEPCODE AS PRE_IWR_ISSU_SEPCODE, 
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='L01' AND CODE_NO=A.PRE_IWR_ISSU_SEPCODE) AS PRE_IWR_ISSU_SEPCODE2, 
+                A.PRE_IWR_NAME AS PRE_IWR_NAME,
+                A.PRE_IWR_CONT AS PRE_IWR_CONT, 
+                A.PRE_IWR_WRIT_DATE AS PRE_IWR_WRIT_DATE,
+                A.PRE_IWR_COMP_WTR AS PRE_IWR_COMP_WTR,                
+                A.PRE_IWR_OUT_LYRID AS PRE_IWR_OUT_LYRID
+            FROM TAB_PRE_IWR A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="searchKeyword">                    
+                       AND A.LAWSUIT_ADM_NO = #searchKeyword#                    
+                </isNotNull>
+                <isNotNull property="searchCondition">                    
+                       AND A.INST_ADM_CODE = #searchCondition#                    
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    <select id="tabPreIwrDAO.selectTabPreIwrMapList" parameterClass="tabPreIwrVO" resultMap="tabPreIwrMap">
+            SELECT
+                A.INST_ADM_CODE AS INST_ADM_CODE, 
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.PRE_IWR_NO AS PRE_IWR_NO, 
+                A.PRE_IWR_DFS_DEG AS PRE_IWR_DFS_DEG, 
+                A.PRE_IWR_ISSU_SEPCODE AS PRE_IWR_ISSU_SEPCODE, 
+                A.PRE_IWR_NAME AS PRE_IWR_NAME,
+                A.PRE_IWR_CONT AS PRE_IWR_CONT, 
+                A.PRE_IWR_WRIT_DATE AS PRE_IWR_WRIT_DATE,
+                A.PRE_IWR_COMP_WTR AS PRE_IWR_COMP_WTR,
+                A.PRE_IWR_OUT_LYRID AS PRE_IWR_OUT_LYRID
+            FROM TAB_PRE_IWR A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull prepend=" AND " property="preIwrName">
+                	PRE_IWR_NAME LIKE '%' || #preIwrName# || '%'
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    
+    
+    
+    
+    
+    <select id="tabPreIwrDAO.selectTabPreIwrCount" parameterClass="tabPreIwrVO" resultClass="int">
+            SELECT
+                COUNT(*) as totalCount
+            FROM TAB_PRE_IWR A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="searchKeyword">
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="PRE_IWR_NAME">
+                        PRE_IWR_NAME LIKE '%' || #searchKeyword# || '%'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="PRE_IWR_CONT">
+                        PRE_IWR_CONT LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                </isNotNull>
+            </dynamic>
+    </select>
+    
+	<select id="tabPreIwrDAO.selectTabPreIwrPaging" parameterClass="tabPreIwrVO" resultMap="tabPreIwr">
+            SELECT * 
+            FROM ( select
+            	rownum rnum,
+            	A.INST_ADM_CODE AS INST_ADM_CODE, 
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.PRE_IWR_NO AS PRE_IWR_NO, 
+                A.PRE_IWR_DFS_DEG AS PRE_IWR_DFS_DEG,
+                A.PRE_IWR_DFS_DEG AS PRE_IWR_DFS_DEG2, 
+                A.PRE_IWR_ISSU_SEPCODE AS PRE_IWR_ISSU_SEPCODE,
+                A.PRE_IWR_ISSU_SEPCODE AS PRE_IWR_ISSU_SEPCODE2, 
+                A.PRE_IWR_NAME AS PRE_IWR_NAME,
+                A.PRE_IWR_CONT AS PRE_IWR_CONT, 
+                A.PRE_IWR_WRIT_DATE AS PRE_IWR_WRIT_DATE,
+                A.PRE_IWR_COMP_WTR AS PRE_IWR_COMP_WTR,
+                A.PRE_IWR_OUT_LYRID AS PRE_IWR_OUT_LYRID
+            	FROM TAB_PRE_IWR A
+                order by A.PRE_IWR_NO ASC ) 
+            WHERE 1=1 and rnum between #firstIndex# and #recordCountPerPage#
+            <isNotEmpty property="searchKeyword" prepend="AND">
+            <![CDATA[
+            PRE_IWR_NAME LIKE '%'||#searchKeyword#||'%'
+            ]]> 
+            </isNotEmpty>
+            <isNotEmpty property="searchKeyword" prepend="OR">
+            <![CDATA[
+            PRE_IWR_CONT LIKE  '%'||#searchKeyword#||'%'
+            ]]> 
+            </isNotEmpty>
+           <!--  <dynamic>
+                <isNotNull property="searchKeyword">
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="TITLE">
+                        TITLE LIKE '%' || #searchKeyword# || '%'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="CONTENTS">
+                        CONTENTS LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                </isNotNull>
+            </dynamic>
+            ORDER BY A.REG_ID DESC
+            LIMIT #recordCountPerPage# OFFSET #firstIndex# -->
+    </select>
+    
+    <insert id="tabPreIwrDAO.insertTabPreIwrVO" parameterClass="tabPreIwrVO">
+        <![CDATA[
+            INSERT INTO TAB_PRE_IWR (
+                INST_ADM_CODE, 
+                LAWSUIT_ADM_NO, 
+                PRE_IWR_NO, 
+                PRE_IWR_DFS_DEG, 
+                PRE_IWR_ISSU_SEPCODE, 
+                PRE_IWR_NAME,
+                PRE_IWR_CONT, 
+                PRE_IWR_WRIT_DATE,
+                PRE_IWR_COMP_WTR
+                ]]>
+                 <dynamic>
+                <isNotNull property="preIwrOutLyrid">   
+                ,PRE_IWR_OUT_LYRID
+                </isNotNull>
+                </dynamic>
+                <![CDATA[
+            ) VALUES (
+                #instAdmCode#, 
+                #lawsuitAdmNo#, 
+                (SELECT MAX(PRE_IWR_NO)+1 FROM TAB_PRE_IWR), 
+                #preIwrDfsDeg#, 
+                #preIwrIssuSepcode#, 
+                #preIwrName#,
+                #preIwrCont#, 
+                TO_CHAR(SYSDATE,'YYYYMMDD'),
+                #preIwrCompWtr#
+                ]]>
+                <dynamic>
+                <isNotNull property="preIwrOutLyrid">
+                ,#preIwrOutLyrid#
+                </isNotNull>
+                </dynamic>
+            )
+      
+    </insert>
+    
+      <update id="tabPreIwrDAO.updateTabPreIwrVO" parameterClass="tabPreIwrVO">
+        <![CDATA[
+            UPDATE TAB_PRE_IWR 
+            SET PRE_IWR_DFS_DEG=#preIwrDfsDeg#
+                , PRE_IWR_ISSU_SEPCODE=#preIwrIssuSepcode#
+                , PRE_IWR_NAME=#preIwrName#
+                , PRE_IWR_CONT=#preIwrCont#
+                , PRE_IWR_WRIT_DATE=#preIwrWritDate#                              
+            WHERE INST_ADM_CODE=#instAdmCode#
+             AND LAWSUIT_ADM_NO=#lawsuitAdmNo#
+             AND PRE_IWR_NO=#preIwrNo#
+        ]]>
+    </update>
+    
+    <delete id="tabPreIwrDAO.deleteTabPreIwrVO" parameterClass="tabPreIwrVO">
+        <![CDATA[
+            DELETE FROM TAB_PRE_IWR 
+            WHERE INST_ADM_CODE=#instAdmCode#
+             AND LAWSUIT_ADM_NO=#lawsuitAdmNo#
+             AND PRE_IWR_NO=#preIwrNo#
+        ]]>
+    </delete>
+    
+    <insert id="tabPreIwrDAO.insertTabInstAdmVO" parameterClass="tabPreIwrVO">
+        <![CDATA[
+            INSERT INTO TAB_INST_ADM (
+                INST_ADM_CODE, 
+                LAWSUIT_ADM_NO, 
+                INST_ADM_DIV_RATE,                
+            ) VALUES (
+                #instAdmCode#, 
+                #lawsuitAdmNo#,                 
+                #instAdmDivRate#               
+            )
+        ]]>
+    </insert>
+    
+      <update id="tabPreIwrDAO.updateTabInstAdmVO" parameterClass="tabPreIwrVO">
+        <![CDATA[
+            UPDATE TAB_INST_ADM 
+            SET INST_ADM_DIV_RATE=#instAdmDivRate#                                       
+            WHERE INST_ADM_CODE=#instAdmCode#
+             AND LAWSUIT_ADM_NO=#lawsuitAdmNo#             
+        ]]>
+    </update>
+    
+    <delete id="tabPreIwrDAO.deleteTabInstAdmVO" parameterClass="tabPreIwrVO">
+        <![CDATA[
+            DELETE FROM TAB_INST_ADM 
+            WHERE INST_ADM_CODE=#instAdmCode#
+             AND LAWSUIT_ADM_NO=#lawsuitAdmNo#             
+        ]]>
+    </delete>
+    
+    
+      <update id="tabPreIwrDAO.updateTablawsuitVO" parameterClass="tabPreIwrVO">
+        <![CDATA[
+            UPDATE TAB_LAWSUIT 
+            SET LAWSUIT_FULF_DETM_WTR=#lawsuitFulfDetmWtr# 
+            , LAWSUIT_COST_CFN_APLDATE=#lawsuitCostCfnApldate#
+                , LAWSUIT_CONC_DATE=#lawsuitConcDate#                                                       
+            WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#             
+        ]]>
+    </update>
+    
+    
+</sqlMap>

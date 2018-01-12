@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="POP_RAISREQ_SCH" classname="POP_RAISREQ_SCH" left="0" top="0" width="668" height="486" titletext="New Form" onload="POP_RAISREQ_SCH_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="ImageViewer01" taborder="0" onclick="ImageViewer01_onclick" left="8" top="62" right="8" height="68" style="background:lightgrey;border:1 solid #808080ff ;color:#000000ff;"/>
+        <ImageViewer id="ImageViewer04" taborder="1" onclick="ImageViewer04_onclick" left="98" top="67" right="15" height="29" style="background:#f0f0f0ff;border:1 solid #969696ff ;"/>
+        <ImageViewer id="ImageViewer02" taborder="2" text="소제기의뢰번호" onclick="ImageViewer02_onclick" left="16" top="67" width="13.62%" height="29" style="background:#f4edfaff;border:1 solid #969696ff ;color:#133678ff;font:bold 9 굴림;"/>
+        <ImageViewer id="ImageViewer03" taborder="3" text="소송제기분류" onclick="ImageViewer02_onclick" left="29.94%" top="67" width="12.43%" height="29" style="background:#f4edfaff;border:1 solid #969696ff ;color:#133678ff;font:bold 9 dotum;"/>
+        <ImageViewer id="ImageViewer05" taborder="4" text="회신여부" onclick="ImageViewer02_onclick" top="67" right="31.29%" width="8.83%" height="29" style="background:#f4edfaff;border:1 solid #969696ff ;color:#133678ff;font:bold 9 dotum;"/>
+        <Edit id="edt_No" taborder="5" displaynulltext="전체 " oneditclick="edt_No_oneditclick" left="16.77%" top="71" width="12.72%" height="21"/>
+        <Combo id="cmb_Clas_Code" taborder="6" displaynulltext="전체" codecolumn="codecolumn" datacolumn="datacolumn" onitemchanged="cmb_Clas_Code_onitemchanged" left="42.81%" top="72" width="16.02%" height="19">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">001</Col>
+                <Col id="datacolumn">구상 (001)</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">002</Col>
+                <Col id="datacolumn">의료과실 (002)</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">003</Col>
+                <Col id="datacolumn">장기채무부존재 (003)</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">004</Col>
+                <Col id="datacolumn">특허침해 (004)</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">005</Col>
+                <Col id="datacolumn">영업방해 (005)</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">006</Col>
+                <Col id="datacolumn">계약파기 (006)</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">007</Col>
+                <Col id="datacolumn">채무불이행 (007)</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">008</Col>
+                <Col id="datacolumn">인사사고 (008)</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">099</Col>
+                <Col id="datacolumn">기타 (099)</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn"/>
+                <Col id="datacolumn">전체</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Radio id="radio_Wtr" taborder="7" index="0" codecolumn="codecolumn" datacolumn="datacolumn" value="0" direction="vertical" top="76" right="20" width="24.85%" height="13">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">0</Col>
+                <Col id="datacolumn">전체</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">1</Col>
+                <Col id="datacolumn">회신</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">2</Col>
+                <Col id="datacolumn">미회신</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Radio>
+        <ImageViewer id="ImageViewer07" taborder="8" left="98" top="95" right="15" height="29" style="background:#f0f0f0ff;border:1 solid #969696ff ;"/>
+        <ImageViewer id="ImageViewer06" taborder="9" text="회신의뢰일자" onclick="ImageViewer02_onclick" left="16" top="95" width="13.62%" height="29" style="background:#f4edfaff;border:1 solid #969696ff ;color:#133678ff;font:bold 9 dotum;"/>
+        <Calendar id="cal_Req_Date1" taborder="10" displaynulltext="전체 기간 " dateformat="yyyy-MM-dd" left="16.62%" top="99" width="16.92%" height="20"/>
+        <Calendar id="cal_Req_Date2" taborder="11" displaynulltext="전체 기간" dateformat="yyyy-MM-dd" left="38.17%" top="99" width="16.92%" height="20"/>
+        <Static id="Static00" taborder="12" text="~" left="35.03%" top="102" width="2.1%" height="15" style="font:Dotum,11;"/>
+        <Static id="Static02" taborder="13" text="소제기 의뢰 현황" left="10" top="132" width="169" height="23" style="font:dotum,10,bold;"/>
+        <Grid id="grd_RaisReq" taborder="14" binddataset="ds_raisreq" useinputpanel="false" autofittype="col" nodatatext="검색 버튼을 눌러주세요" oncellclick="grd_RaisReq_oncellclick" oncelldblclick="grd_RaisReq_oncelldblclick" left="8" top="155" right="7" height="264">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="93"/>
+                <Column size="93"/>
+                <Column size="93"/>
+                <Column size="93"/>
+                <Column size="93"/>
+                <Column size="93"/>
+                <Column size="93"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="의뢰번호"/>
+                <Cell col="1" text="분류코드"/>
+                <Cell col="2" text="회신여부"/>
+                <Cell col="3" text="의뢰자ID"/>
+                <Cell col="4" text="의뢰일자"/>
+                <Cell col="5" text="회신일자"/>
+                <Cell col="6" text="소제기여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:lawRaisreqNo"/>
+                <Cell col="1" text="bind:lawRaisreqClasCode" combodataset="ds_clas_code"/>
+                <Cell col="2" displaytype="combo" text="bind:lawRaisreqRepWtr" combodataset="ds_raisreq_wtr" combocodecol="codeNo" combodatacol="codeName"/>
+                <Cell col="3" text="bind:lawRaisreqReqId"/>
+                <Cell col="4" text="bind:lawRaisreqReqDate" mask="expr:'####년 ##월 ##일'"/>
+                <Cell col="5" displaytype="normal" edittype="mask" text="bind:lawRaisreqRepDate" mask="expr:lawRaisreqRepDate!= null? '####년 ##월 ##일' : ''" combodisplaynulltext="없음"/>
+                <Cell col="6" displaytype="combo" text="bind:lawRaisreqWtr" combodataset="ds_useYn" combocodecol="codeNo" combodatacol="codeName" combodisplaynulltext="알 수 없음"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <ImageViewer id="img_titlebg" taborder="15" text="  소제기 의뢰 검색" left="6" top="8" right="6" height="50" style="background:cornflowerblue;color:white;align:left middle;font:bold 12 굴림;"/>
+        <Button id="btn_search" taborder="16" text="검색" onclick="btn_search_onclick" top="99" right="77" width="52" height="21" style="background:lightskyblue;border:1 solid #999999ff ;color:#ffffffff;align:center middle;font:bold 9 Dotum;gradation:linear 0,0 #7055feff 0,100 #1004ffff;" class="btn_WFSA_Search"/>
+        <Button id="btn_clean" taborder="17" text="초기화" onclick="btn_clean_onclick" top="99" right="21" width="52" height="21" style="background:lightskyblue;color:#ffffffff;align:center middle;font:bold 9 Dotum;gradation:linear 0,0 #7055feff 0,100 #1004ffff;" class="btn_WFSA_Search"/>
+        <Button id="btn_check" taborder="18" text="확인" onclick="btn_check_onclick" right="63" bottom="10" width="52" height="21" style="background:lightskyblue;color:#ffffffff;align:center middle;font:bold 9 Dotum;gradation:linear 0,0 #7055feff 0,100 #1004ffff;" class="btn_WFSA_Search"/>
+        <Button id="btn_close" taborder="19" text="닫기" onclick="btn_close_onclick" right="7" bottom="10" width="52" height="21" style="background:lightskyblue;border:1 solid #999999ff ;color:#ffffffff;align:center middle;font:bold 9 Dotum;gradation:linear 0,0 #7055feff 0,100 #1004ffff;" class="btn_WFSA_Search"/>
+        <Div id="div_page" taborder="20" text="Div00" left="8" top="431" width="97.46%" height="25">
+          <Layouts>
+            <Layout>
+              <Static id="stc_Prev" taborder="13" text="이전" onclick="div_page_stc_Prev_onclick" visible="false" left="21.2%" top="-4" width="29" height="27" style="color:black; align:center; cursor:hand; "/>
+              <Static id="stc_Next" taborder="14" text="다음" onclick="div_page_stc_Next_onclick" visible="false" left="76.5%" top="-4" width="29" height="27" style="color:black; align:center; cursor:hand; "/>
+              <Static id="stc_No0" taborder="15" text="1" onclick="div_page_stc_No_onclick" visible="false" left="27.34%" top="-4" width="29" height="27" style="color:black; align:center; cursor:hand; "/>
+              <Static id="stc_No1" taborder="16" text="2" onclick="div_page_stc_No_onclick" visible="false" left="32.26%" top="-4" width="29" height="27" style="color:black; align:center; cursor:hand; "/>
+              <Static id="stc_No2" taborder="17" text="3" onclick="div_page_stc_No_onclick" visible="false" left="37.17%" top="-4" width="29" height="27" style="color:black; align:center; cursor:hand; "/>
+              <Static id="stc_No3" taborder="18" text="4" onclick="div_page_stc_No_onclick" visible="false" left="42.09%" top="-4" width="29" height="27" style="color:black; align:center; cursor:hand; "/>
+              <Static id="stc_No4" taborder="19" text="5" onclick="div_page_stc_No_onclick" visible="false" left="47%" top="-4" width="29" height="27" style="color:black; align:center; cursor:hand; "/>
+              <Static id="stc_No5" taborder="20" text="6" onclick="div_page_stc_No_onclick" visible="false" left="51.92%" top="-4" width="29" height="27" style="color:black; align:center; cursor:hand; "/>
+              <Static id="stc_No6" taborder="21" text="7" onclick="div_page_stc_No_onclick" visible="false" left="56.84%" top="-4" width="29" height="27" style="color:black; align:center; cursor:hand; "/>
+              <Static id="stc_No7" taborder="22" text="8" onclick="div_page_stc_No_onclick" visible="false" left="61.75%" top="-4" width="29" height="27" style="color:black; align:center; cursor:hand; "/>
+              <Static id="stc_No8" taborder="23" text="9" onclick="div_page_stc_No_onclick" visible="false" left="66.67%" top="-4" width="29" height="27" style="color:black; align:center; cursor:hand; "/>
+              <Static id="stc_No9" taborder="24" text="10" onclick="div_page_stc_No_onclick" visible="false" left="71.58%" top="-4" width="29" height="27" style="color:black; align:center; cursor:hand; "/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_useYn">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="codeName">예</Col>
+            <Col id="codeNo">Y</Col>
+          </Row>
+          <Row>
+            <Col id="codeName">아니오</Col>
+            <Col id="codeNo">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_raisreq" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="lawRaisreqNo" type="STRING" size="256"/>
+          <Column id="lawRaisreqReqId" type="STRING" size="256"/>
+          <Column id="lawRaisreqClasCode" type="STRING" size="256"/>
+          <Column id="lawRaisreqRea" type="STRING" size="256"/>
+          <Column id="lawRaisreqEtcPoin" type="STRING" size="256"/>
+          <Column id="lawRaisreqReqDate" type="STRING" size="256"/>
+          <Column id="lawRaisreqRepWtr" type="STRING" size="256"/>
+          <Column id="lawRaisreqWtr" type="STRING" size="256"/>
+          <Column id="lawRaisreqDalwCont" type="STRING" size="256"/>
+          <Column id="lawRaisreqExptDate" type="STRING" size="256"/>
+          <Column id="lawRaisreqRepCont" type="STRING" size="256"/>
+          <Column id="lawRaisreqEtcreqPoin" type="STRING" size="256"/>
+          <Column id="lawRaisreqRepDate" type="STRING" size="256"/>
+          <Column id="lawRaisreqIssuPoin" type="STRING" size="256"/>
+          <Column id="rownum" type="STRING" size="256"/>
+          <Column id="lawRaisreqTempSaveWtr" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_clas_code" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_raisreq_wtr" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="codeName">미회신</Col>
+            <Col id="codeNo">N</Col>
+          </Row>
+          <Row>
+            <Col id="codeName">회신</Col>
+            <Col id="codeNo">Y</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search_wtr" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="codeName">전체</Col>
+            <Col id="codeNo">0</Col>
+          </Row>
+          <Row>
+            <Col id="codeName">회신</Col>
+            <Col id="codeNo">1</Col>
+          </Row>
+          <Row>
+            <Col id="codeName">미회신</Col>
+            <Col id="codeNo">2</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+this.fv_iStartPageNo    = 0;   // 전체 페이지 순서
+this.fv_iUnitSelRowNo   = 100; // 한번 Server호출시 가져올 row갯수
+this.fv_iStartSelRowNo  = 1;   // Server호출시 시작할 row no
+this.fv_iMaxPageNum     = 10;  // 화면에 보여줄 최대 Page번호 갯수
+this.fv_iServerRowCount = 0;   // 서버에서 넘어온 Row갯수(100건이 안될 수 있음)
+
+/*===============================================================================
+ * 1. Form 관련 Script
+ *=============================================================================*                  
+/********************************************************************************
+ * Event	: Form onload
+ * Desc		: Form의 모든 컴포넌트가 생성되고, 모든 Object가 Load 되었을 때에
+              발생하는 Event
+ *******************************************************************************/ 
+this.POP_RAISREQ_SCH_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.ds_clas_code.clearData();//데이터셋 초기화
+	this.gf_classCodeListLoad("ds_clas_code",  "ds_clas_code",  "Y", "fnCallback", "D01"); //사건유형공통코드
+	this.radio_Wtr.set_value("0");
+	this.btn_search_onclick(); //모든 결과 자동 검색
+	this.btn_check.set_enable(false);
+}
+
+/********************************************************************************
+ * Desc		: 소제기 조회
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+//검색버튼
+this.btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_search_wtr.clearData();
+	var search1 = this.edt_No.text.trim();	//소제기의뢰번호
+    //var search2 = combo_Clas_Code.Index;	//소송제기분류코드
+    var search2 = this.cmb_Clas_Code.value;
+	var search3 = this.cal_Req_Date1.value;		//의뢰일자1
+    var search4 = this.cal_Req_Date2.value;		//의뢰일자2
+    var search5 = this.radio_Wtr.index;			//회신여부
+
+    //기간 유효성체크
+    if(this.gfn_IsNull(search3)==true && search3 > search4){
+		alert("날짜를 확인해 주세요.");
+		return;
+    }
+    if(this.gfn_IsNull(search3)==true){
+		search3="";
+    }
+    if(this.gfn_IsNull(search4)==true){
+		search4="";
+    }
+    
+    //전체소제기분류코드 선택시 처리
+    if(search2=="000"){
+		search2="";
+	}else{
+		//search2 = "00"+search2;
+		if(this.gfn_IsNull(search2)==true){
+			search2="";
+		}else{
+			search2 = this.cmb_Clas_Code.value;
+		}
+	}	
+    
+    //회신여부 처리
+    if(search5=="0"){
+		search5="";
+    }else if(search5=="1"){
+		search5="Y";
+    }else{
+		if(this.gfn_IsNull(search5)==true){
+			search5="";
+		}else{
+			search5="N";
+		}
+    }
+    
+    //소제기 검색 버튼 클릭시 페이징 초기화 
+	this.fv_iStartPageNo    = 0;   // 전체 페이지 순서
+	this.fv_iUnitSelRowNo   = 100; // 한번 Server호출시 가져올 row갯수
+	this.fv_iStartSelRowNo  = 1;   // Server호출시 시작할 row no
+	this.fv_iMaxPageNum     = 10;  // 화면에 보여줄 최대 Page번호 갯수
+	this.fv_iServerRowCount = 0;   // 서버에서 넘어온 Row갯수(100건이 안될 수 있음)
+    
+    trace(this.fv_iStartPageNo +" : "+this.fv_iServerRowCount);
+    
+	var strSvcid="getRaisreqList";
+	var strController="/rais/getRaisreqList.do";
+	var strParam  = "lawRaisreqNo=" +"\""+search1+"\"";
+		strParam += " lawRaisreqClasCode=" + "\""+search2+"\"";
+		strParam += " lawRaisreqReqDate1=" + "\""+search3+"\"";
+		strParam += " lawRaisreqReqDate2=" + "\""+search4+"\"";
+		strParam += " lawRaisreqRepWtr=" + "\""+search5+"\"";
+	//trace(strParam);		
+	this.gfn_transaction(this,strSvcid,strController,"ds_search=ds_search_wtr","ds_raisreq=ds_output",strParam,"fnCallback");
+	
+	
+}
+
+/*===============================================================================
+ * 5. User Function 관련 Script
+ *=============================================================================*
+/********************************************************************************
+ * Desc		: transaction 후 호출되는 콜백함수
+              소제기 조회
+ * Param	: 1.errcd  - Error Code
+			  2.errmsg - Error Msg
+			  3.svcid  - transaction id
+ * Return	: 없음
+ *******************************************************************************/ 
+
+// callback(결과전달)
+this.fnCallback = function(svcid, errcd, errmsg)
+{
+	switch (svcid)
+	{
+		case "ds_clas_code" :		
+			//trace(ds_clas_code.saveXML());
+			this.ds_clas_code.deleteRow(this.ds_clas_code.rowcount-1);
+			this.ds_clas_code.insertRow(0);
+			this.ds_clas_code.setColumn(0,"codeName","전체");
+			this.ds_clas_code.setColumn(0,"codeNo","000");
+			this.ds_clas_code.setColumn(0,"useYn","Y");
+			this.cmb_Clas_Code.index = 0;
+			break;
+		case "getRaisreqList" :
+			//trace(ds_raisreq.saveXML());
+			//데이터 조회 에러 발생시
+			if(errcd != "0"){	
+				alert("데이터가 정상적으로 조회되지 않았습니다.\n"
+					+ "소제기 조회 에러내용: "+ errmsg);
+				return false;
+			
+			}else{
+				trace("this.fv_iStartPageNo = "+this.fv_iStartPageNo);
+				trace("this.fv_iUnitSelRowNo = "+this.fv_iUnitSelRowNo);
+				var iLastRow = this.fv_iStartPageNo * this.fv_iUnitSelRowNo;
+				trace("iLastRow = "+iLastRow);
+				trace("rownum >= "+(iLastRow + this.fv_iStartSelRowNo));
+				trace("rownum <= "+(iLastRow + this.fv_iUnitSelRowNo));
+				this.ds_raisreq.filter("rownum >= "+(iLastRow + this.fv_iStartSelRowNo)+" && rownum <= "+(iLastRow + this.fv_iUnitSelRowNo));
+				trace("this.ds_raisreq.getRowCount() = "+this.ds_raisreq.getRowCount());
+
+				if(this.ds_raisreq.getRowCount() == 0){
+					alert("해당 검색조건의 결과가 없습니다.");
+					this.ds_raisreq.filter("");
+					return;
+				}else{
+					this.fv_iServerRowCount = this.ds_raisreq.getRowCount();
+					this.fn_SetStyle();
+					this.fn_SetPageNo();
+					this.div_page.stc_No0.style.set_color("gray");
+					this.div_page_stc_No_onclick(this.div_page.stc_No0,"");
+					
+					trace(this.fv_iStartPageNo +" : "+this.fv_iServerRowCount);
+				}
+			}	
+			break;
+	}
+}
+/********************************************************************************
+ * Desc		: 필드에 입력된 내용 모두 지움, 즉 초기화
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+// 초기화버튼
+this.btn_clean_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.edt_No.text = "";
+	this.cmb_Clas_Code.index = 0;
+	this.cal_Req_Date1.value = "";
+	this.cal_Req_Date2.value = "";
+	this.cal_Req_Date2.enable = false;
+	this.radio_Wtr.index = "0";
+	this.ds_raisreq.clearData();
+	this.reload();
+
+	//페이징 초기화 
+	this.fv_iStartPageNo    = 0;   // 전체 페이지 순서
+	this.fv_iUnitSelRowNo   = 100; // 한번 Server호출시 가져올 row갯수
+	this.fv_iStartSelRowNo  = 1;   // Server호출시 시작할 row no
+	this.fv_iMaxPageNum     = 10;  // 화면에 보여줄 최대 Page번호 갯수
+	this.fv_iServerRowCount = 0;   // 서버에서 넘어온 Row갯수(100건이 안될 수 있음)
+	
+	this.fn_SetPageNo();
+}
+	
+/********************************************************************************
+ * Desc		: 화면 종료시 
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+// 닫기버튼
+this.btn_close_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+/********************************************************************************
+ * Desc		: 확인버튼 누를 시 창을 닫고 소제기 회신 창에 값을 전달  
+ * Param	: 없음
+ * Return	: variant(회신 창에 전달할 값)
+ *******************************************************************************/
+//this.btn_check_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+//{	
+	//var v_RtnVal = new Array();	//배열생성
+
+	// 공탁관리번호
+
+	//var variant = this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqNo");			// 소제기 번호
+	//v_RtnVal += this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqClasCode");  //소제기 분류 코드
+	
+	//trace(variant);
+
+
+	//this.close(variant);
+	
+	/*	if(raiscode == "r1"){
+		if(ds_raisreq.getColumn(ds_raisreq.rowposition,"lawRaisreqWtr") == "Y"){
+			close(ds_raisreq.getColumn(ds_raisreq.rowposition,"lawRaisreqNo"));
+			ds_raisreq.deleteAll();
+		}else{
+			alert("소송제기가 가능하지 않은 조회건입니다.");
+			return false;
+		}
+	}else{
+		close(ds_raisreq.getColumn(ds_raisreq.rowposition,"lawRaisreqNo"));
+		ds_raisreq.deleteAll();
+	}	*/
+//}
+
+
+this.grd_RaisReq_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	this.btn_check.set_enable(true);
+}
+/********************************************************************************
+ * Desc		: 셀 선택 시
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.grd_RaisReq_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	this.btn_check.set_enable(true);
+	this.btn_check_onclick();
+	/*	if(raiscode == "r1"){
+		if(ds_raisreq.getColumn(ds_raisreq.rowposition,"lawRaisreqWtr") == "Y"){
+			close(ds_raisreq.getColumn(ds_raisreq.rowposition,"lawRaisreqNo"));
+			ds_raisreq.deleteAll();
+		}else{
+			alert("소송제기가 가능하지 않은 조회건입니다.");
+			return false;
+		}
+	}else{
+		close(ds_raisreq.getColumn(ds_raisreq.rowposition,"lawRaisreqNo"));
+		ds_raisreq.deleteAll();
+	}	*/
+}
+
+
+//-------------------------------------------------------------------------------------------------
+// 인덱스 클릭
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_No_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+	var iNo = new Number(obj.text);
+	trace("obj.text ="+obj.text);
+	var iFirstNum = (iNo-1) * this.fv_iMaxPageNum + 1;
+	trace("(iNo-1) * this.fv_iMaxPageNum + 1; =" + (iNo-1) * this.fv_iMaxPageNum + 1);
+	var iLastNum = iFirstNum + this.fv_iMaxPageNum;
+	trace("iFirstNum + this.fv_iMaxPageNum; =" + iFirstNum + this.fv_iMaxPageNum);
+	this.fn_SetStyle();
+	obj.style.set_color("gray");
+	this.ds_raisreq.filter("");
+	trace("rownum >= " + iFirstNum);
+	trace("rownum < " + iLastNum);
+	this.ds_raisreq.filter("rownum >= " + iFirstNum+" && rownum < " + iLastNum);
+}
+
+//-------------------------------------------------------------------------------------------------
+// 이전 버튼
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_Prev_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo - 1;
+	// Transaction()코딩 할 부분
+	this.fnCallback("getRaisreqList", 0, "succ");
+}
+
+//-------------------------------------------------------------------------------------------------
+// 다음버튼
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_Next_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo + 1;
+	// Transaction()코딩 할 부분
+	this.fnCallback("getRaisreqList", 0, "succ");
+}
+
+//-------------------------------------------------------------------------------------------------
+// Page번호 Setting
+//-------------------------------------------------------------------------------------------------
+this.fn_SetPageNo = function()
+{
+	var sPage = this.fv_iStartPageNo * this.fv_iMaxPageNum;
+	
+	// 이전버튼 처리
+	if (this.fv_iStartPageNo < 1)
+	{
+		this.div_page.stc_Prev.set_visible(false);
+	} 
+	else 
+	{
+		this.div_page.stc_Prev.set_visible(true);
+	}
+
+	// 마지막 버튼 처리
+	if (this.fv_iServerRowCount < this.fv_iUnitSelRowNo)
+	{
+		this.div_page.stc_Next.set_visible(false);
+	}
+	else
+	{
+		this.div_page.stc_Next.set_visible(true);
+	}
+
+	// 인덱스 번호 처리
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].set_visible(true);
+		this.div_page.components["stc_No"+i].set_text(sPage+i+1);
+
+		if (this.fv_iServerRowCount < (i * this.fv_iMaxPageNum))
+		{
+			this.div_page.components["stc_No"+i].set_visible(false);			
+		} 
+		else 
+		{
+			this.div_page.components["stc_No"+i].set_visible(true);			
+		}
+	}	
+}
+//-------------------------------------------------------------------------------------------------
+// Style조정
+//-------------------------------------------------------------------------------------------------
+this.fn_SetStyle = function()
+{
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].style.set_color("black");			
+	}	
+}
+
+/********************************************************************************
+ * Desc		: 확인버튼 누를 시 창을 닫고 소제기 회신 창에 값을 전달  
+ * Param	: 없음
+ * Return	: variant(회신 창에 전달할 값)
+ *******************************************************************************/
+this.btn_check_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var variant = [];
+	
+	var reqid = this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqReqId");
+	
+	var reqidname = reqid.substring(0, reqid.indexOf("("));
+	var reqidnum = reqid.substring(reqid.indexOf("(")+1, reqid.indexOf(")"));
+	
+	var reqClasCode = this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqClasCode");
+	
+	var idx4 = reqClasCode.indexOf(")");
+	
+	var reqclascode = reqClasCode.substring(0, reqClasCode.indexOf("("));
+	
+	//alert(reqidname + reqidnum);
+	
+	trace("작업 중");
+	variant[0] = this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqNo");
+	variant[1] = reqidnum; //this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqReqId"); //lawRaisreqReqId
+	variant[2] = reqclascode; //this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, "lawRaisreqClasCode");
+	
+	var arrvars = ["lawRaisreqRea","lawRaisreqEtcPoin","lawRaisreqReqDate","lawRaisreqRepWtr","lawRaisreqWtr"
+	,"lawRaisreqDalwCont","lawRaisreqExptDate","lawRaisreqRepCont","lawRaisreqEtcreqPoin","lawRaisreqRepDate"
+	,"lawRaisreqIssuPoin","lawRaisreqTempSaveWtr"];
+	
+	
+	var cnt = 0;
+	
+	for(i=0; i<arrvars.length; i++){
+		variant[i+3] = this.ds_raisreq.getColumn(this.ds_raisreq.rowposition, arrvars[i]);
+		
+		if(i == (arrvars.length-1)){
+			cnt = i;
+		}
+	}
+	
+	variant[(cnt+1)+3] = reqidname;
+
+	var params = variant[0] +'/' + variant[1] + '/' + variant[2] + '/' + variant[3] +
+				'/' + variant[4] + '/' + variant[5] +'/' + variant[6] + '/' + variant[7] +'/' + variant[8] + 
+				'/' + variant[9] + '/' + variant[10] + '/' + variant[11] +'/' + variant[12] + '/' + variant[13] +
+				'/' + variant[14] + '/' + variant[15];
+	trace(params);
+	
+	/*scmoon ==>test */
+	for(i= 0; i<variant.length; i++){
+		trace("scmoon_test===>"+i+"번째"+variant[i]);
+	
+	}
+	
+	this.close(params);
+}
+
+]]></Script>
+  </Form>
+</FDL>

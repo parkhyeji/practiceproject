@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Pattern_Select_Insert" classname="Pattern_Select_Insert" left="0" top="0" width="1024" height="768" titletext="New Form" onload="Pattern_Select_Insert_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="Grid00" taborder="0" useinputpanel="false" left="0.98%" top="57" right="80.37%" height="239" binddataset="ds_list">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="98"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell style="background:#348ddf18;color:#1f5ca7ff;color2:#1f5ca7ff;" text="title"/>
+                <Cell col="1" style="background:#348ddf18;color:#1f5ca7ff;color2:#1f5ca7ff;" text="contents"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:title"/>
+                <Cell col="1" text="bind:contents"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div00" taborder="1" text="Div00" left="20.21%" top="58" right="22.66%" height="238" style="background:aliceblue;">
+          <Layouts>
+            <Layout width="585" height="238">
+              <Static id="Static01" taborder="0" text="등록자ID" left="47.86%" top="22" right="31.45%" height="31"/>
+              <Static id="Static00" taborder="5" text="제목" left="5.47%" top="21" right="74.19%" height="31"/>
+              <Edit id="Edit01" taborder="2" left="62.22%" top="27" right="13.68%" height="21"/>
+              <Edit id="Edit00" taborder="1" left="21.03%" top="26" right="54.87%" height="21"/>
+              <Edit id="Edit02" taborder="6" left="9.74%" top="1" right="66.15%" height="21" readonly="true" visible="false"/>
+              <Static id="Static06" taborder="7" text="별칭" left="5.64%" top="59" right="80%" height="31"/>
+              <Edit id="Edit06" taborder="3" left="21.2%" top="64" right="54.87%" height="21"/>
+              <TextArea id="TextArea00" taborder="4" left="6.32%" top="128" right="13.5%" height="81"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="Button00" taborder="2" text="ADD" left="51.66%" top="33" right="40.14%" height="21" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="6" text="RESET" left="42.97%" top="34" right="48.83%" height="21" onclick="Button01_onclick" visible="false"/>
+        <Button id="Button02" taborder="3" text="DELETE" left="60.25%" top="33" right="31.54%" height="21" onclick="Button02_onclick"/>
+        <Button id="Button03" taborder="5" text="SAVE" left="68.85%" top="33" right="22.95%" height="21" onclick="Button03_onclick"/>
+        <Div id="Div01" taborder="13" text="Div01" left="12.5%" top="307" right="22.75%" height="150">
+          <Layouts>
+            <Layout width="663" height="150">
+              <Static id="Static00" taborder="0" text="조회" left="53.7%" top="-3" right="36.05%" height="37"/>
+              <Edit id="Edit00" taborder="1" left="59.43%" top="6" right="21.42%" height="21"/>
+              <Button id="Button00" taborder="2" text="SEARCH" left="81.15%" top="6" right="6.18%" height="23" onclick="Div01_Button00_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_list">
+        <ColumnInfo>
+          <Column id="title" type="STRING" size="256"/>
+          <Column id="regId" type="STRING" size="256"/>
+          <Column id="postId" type="STRING" size="256"/>
+          <Column id="contents" type="STRING" size="256"/>
+          <Column id="communityId" type="STRING" size="256"/>
+          <Column id="regDate" type="DATE" size="256"/>
+          <Column id="hitCount" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item1" compid="Div00.Edit01" propid="value" datasetid="ds_list" columnid="regId"/>
+      <BindItem id="item0" compid="Div00.Edit00" propid="value" datasetid="ds_list" columnid="title"/>
+      <BindItem id="item3" compid="Div00.Edit02" propid="value" datasetid="ds_list" columnid="postId"/>
+      <BindItem id="item4" compid="Div00.Edit06" propid="value" datasetid="ds_list" columnid="communityId"/>
+      <BindItem id="item2" compid="Div00.TextArea00" propid="value" datasetid="ds_list" columnid="contents"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************************************
+* SYSTEM      : 넥사크로플랫폼 PackageB
+* BUSINESS    : 넥사크로플랫폼 PackageB
+* FILE NAME   : Pattern_select
+* PROGRAMMER  : 
+* DATE        : 
+* DESCRIPTION : MultiDetail
+*------------------------------------------------------------------
+* MODIFY DATE   PROGRAMMER			DESCRIPTION
+*------------------------------------------------------------------
+* 
+*------------------------------------------------------------------
+***********************************************************************************/
+
+/***********************************************************************************
+* Common Library
+***********************************************************************************/
+include "Lib::Comm.xjs";
+
+
+//select
+this.fn_search = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	  // 조회조건(Condition)
+	//this.ds_search.setColumn(0, "searchCondition", this.div_search.cmb_searchCondition.value);
+	//this.ds_search.setColumn(0, "searchKeyword", this.div_search.edt_searchKeyword.value);
+   trace("111111111111");
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "sampleSelectVO.do",			 
+			  inds :[""],
+			  outds :[
+				 "ds_list=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+	trace("222222222222222");
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		if(this.errorcode < 0)
+		{
+			trace("eeeeeeeeeeee");
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      
+	       var pThis = this.fobj;   //form object
+	       	   pThis.fn_search_post();  //조회후 처리 
+	    
+	});
+}
+
+
+//onload
+this.Pattern_Select_Insert_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	trace("start");
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);
+    this.fn_search();
+}
+
+
+//sampleModifyVO.do
+
+//fn_save
+//저장
+this.fn_save = function(strid)
+{
+     trace("fn_save");
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "sampleModifyVO.do",			 
+			  inds :["input1=ds_list:U"],			  
+			  outds :[
+				 "ds_list=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			trace("22222");
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	      switch(this.svcid)
+	      {
+	         case "save" : 
+	         trace("save");
+				Iject.alert("저장완료");
+				break;
+				
+	         case "dlete" : 
+	         trace("delete");
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	      //pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+		  pThis.fn_search();
+	});
+}
+
+//저장버튼클릭시
+this.Button03_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.fn_save("save");
+}
+
+
+//add
+this.Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_list.addRow();
+	//this.div_search.edt_searchKeyword.set_value("");
+}
+
+//add
+this.fn_add = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_list.addRow();
+	//this.div_search.edt_searchKeyword.set_value("");
+}
+
+//DELETE
+this.Button02_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_list.rowposition;
+	this.ds_list.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+	
+		this.fn_save("delete");
+	}
+	else
+	{
+		this.fn_search();
+	}
+}
+//reset
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_list.reset();
+}
+//SEARCH
+this.Div01_Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_search.clearData();
+	var rowIdx = this.ds_search.addRow();
+	  // 조회조건(Condition)
+	//this.ds_search.setColumn(0, "searchCondition", this.div_search.cmb_searchCondition.value);
+	this.ds_search.setColumn(0, "searchKeyword", this.Div01.Edit00.value);
+   trace("SEARCH START");
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "sampleSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_list=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+	trace("SEARCH TRANSACTION");
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		if(this.errorcode < 0)
+		{
+			trace("eeeeeeeeeeee");
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      
+	       var pThis = this.fobj;   //form object
+	       	   pThis.fn_search_post();  //조회후 처리 
+	    
+	});
+}
+
+//조회
+this.Button04_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	// 조회조건(Condition)
+	//this.ds_search.setColumn(0, "searchCondition", this.div_search.cmb_searchCondition.value);
+	//var nRow = this.ds_search.addRow();
+	//this.ds_search.setColumn(0, "searchKeyword", this.Edit00.value);
+   
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "sampleSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_list=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      
+	       var pThis = this.fobj;   //form object
+	       	   pThis.fn_search_post();  //조회후 처리 
+	    
+	});
+}
+
+
+
+this.Edit00_onkeyup = function(obj:Edit, e:nexacro.KeyEventInfo)
+{
+	if ( e.keycode == 13 )
+	{
+		this.fn_search();
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

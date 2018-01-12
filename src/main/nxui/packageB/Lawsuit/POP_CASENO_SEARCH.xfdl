@@ -1,0 +1,591 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="POP_CASENO_SEARCH" classname="POP_CASENO_SEARCH" left="0" top="0" width="400" height="100" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" text="사건번호 입력" left="8" top="8" width="384" height="50" style="background:cornflowerblue;color:white;align:center middle;font:bold 12 굴림;"/>
+        <Static id="sta_01" taborder="5" left="8" top="60" width="384" height="29" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="Static01" taborder="6" text="사건년도" left="7%" top="68" width="12.25%" height="12" style="font:9 굴림;"/>
+        <Static id="Static02" taborder="7" text="유형" left="36.25%" top="68" width="6.25%" height="12" style="font:9 굴림;"/>
+        <Combo id="cmb_caseType" taborder="2" innerdataset="ds_case" codecolumn="caseType" datacolumn="caseName" onitemchanged="cmb_caseType_onitemchanged" left="43%" top="64" width="13.25%" height="21" style="itemheight:22;itemcolor:#333333ff;itemborder:1 solid transparent ;itempadding:0 3 0 6;buttonsize:18;color:#333333ff;font:9 굴림;"/>
+        <Static id="Static03" taborder="8" text="번호" left="58.75%" top="68" width="6.25%" height="12" style="font:9 굴림;"/>
+        <Edit id="edt_caseNo" taborder="3" maxlength="10" ontextchange="edt_caseNo_ontextchange" left="65.75%" top="64" width="13.5%" height="21" style="selectcolor:#333333ff;selectbackground:#ffffffff;color:#333333ff;padding:0 5 0 5;font:9 굴림;"/>
+        <Button id="btn_case_input" taborder="4" text="입력" onclick="btn_case_input_onclick" cssclass="btn_WFSA_Search" left="80.5%" top="64" width="52" height="21" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;font:bold 9 굴림;"/>
+        <Combo id="cmb_year" taborder="1" innerdataset="@ds_year" codecolumn="year" datacolumn="year" onitemchanged="cmb_year_onitemchanged" left="80" top="64" width="55" height="21" style="itemheight:22;itemcolor:#333333ff;itemborder:1 solid transparent ;itempadding:0 0 0 0;buttonsize:18;color:#333333ff;align:left middle;font:9 굴림;" imemode="none" index="0" displayrowcount="-1" value="2017" text="2017"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_case" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="caseType" type="STRING" size="256"/>
+          <Column id="caseName" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="caseType">가합</Col>
+            <Col id="caseName">가합 : 민사 제1심 합의</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">가단</Col>
+            <Col id="caseName">가단 : 민사 제1심 단독 </Col>
+          </Row>
+          <Row>
+            <Col id="caseType">가소</Col>
+            <Col id="caseName">가소 : 민사소액사건 </Col>
+          </Row>
+          <Row>
+            <Col id="caseType">나</Col>
+            <Col id="caseName">나    : 민사항소 </Col>
+          </Row>
+          <Row>
+            <Col id="caseType">다</Col>
+            <Col id="caseName">다    : 민사상고 </Col>
+          </Row>
+          <Row>
+            <Col id="caseType">라</Col>
+            <Col id="caseName">라    : 민사항고 </Col>
+          </Row>
+          <Row>
+            <Col id="caseType">마</Col>
+            <Col id="caseName">마    : 민사재항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">그</Col>
+            <Col id="caseName">그    : 민사특별항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">바</Col>
+            <Col id="caseName">바    : 민사준항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">자</Col>
+            <Col id="caseName">자    : 화해</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">차</Col>
+            <Col id="caseName">차    : 독촉</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">카합</Col>
+            <Col id="caseName">카합 : 민사신청사건중 가압류, 가처분 및 이에 대한 이의, 취소(집행취소는 제외)사건중 합의사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">카단</Col>
+            <Col id="caseName">카단 : 민사신청사건중 가압류, 가처분 및 이에 대한 이의, 취소(집행취소는 제외)사건중 단독사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">카공</Col>
+            <Col id="caseName">카공 : 공시최고사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">카담</Col>
+            <Col id="caseName">카담 : 담보취소, 담보제공, 담보물변환, 담보권리행사최고사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">카기</Col>
+            <Col id="caseName">카기 : 기타민사신청사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">타경</Col>
+            <Col id="caseName">타경 : 부동산등 경매사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">타기</Col>
+            <Col id="caseName">타기 : 기타집행사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">파</Col>
+            <Col id="caseName">파    : 비송사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">회</Col>
+            <Col id="caseName">회    : 회사정리사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">하</Col>
+            <Col id="caseName">하    : 파산사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">거</Col>
+            <Col id="caseName">거    : 화의사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">너</Col>
+            <Col id="caseName">너    : 가사조정사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">러</Col>
+            <Col id="caseName">러    : 민사공조사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">머</Col>
+            <Col id="caseName">머    : 민사조정사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">호파</Col>
+            <Col id="caseName">호파 : 호적비송사건(호적과태료사건포함)</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">과</Col>
+            <Col id="caseName">과    : 과태료사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">고합</Col>
+            <Col id="caseName">고합 : 형사제1심합의공판사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">감고</Col>
+            <Col id="caseName">감고 : 감호제1심사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">고단</Col>
+            <Col id="caseName">고단 : 형사 제1심 단독공판사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">고약</Col>
+            <Col id="caseName">고약 : 약식사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">노</Col>
+            <Col id="caseName">노    : 형사항소공판사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">감노</Col>
+            <Col id="caseName">감노 : 감호항소사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">도</Col>
+            <Col id="caseName">도    : 형사상고공판사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">감도</Col>
+            <Col id="caseName">감도 : 감호상고사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">로</Col>
+            <Col id="caseName">로    : 형사항고사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">감로</Col>
+            <Col id="caseName">감로 : 감호항고사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">모</Col>
+            <Col id="caseName">모    : 형사재항고사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">감모</Col>
+            <Col id="caseName">감모 : 감호재항고사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">보</Col>
+            <Col id="caseName">보    : 형사준항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">오</Col>
+            <Col id="caseName">오    : 비상상고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">감오</Col>
+            <Col id="caseName">감오 : 감호비상상고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">조</Col>
+            <Col id="caseName">조    : 즉결심판사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">초</Col>
+            <Col id="caseName">초    : 형사신청사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">감초</Col>
+            <Col id="caseName">감초 : 감호신청사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">코</Col>
+            <Col id="caseName">코    : 형사보상청구사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">감토</Col>
+            <Col id="caseName">감토 : 감호공조사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">구</Col>
+            <Col id="caseName">구    : 행정제1심사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">누</Col>
+            <Col id="caseName">누    : 행정상고사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">두</Col>
+            <Col id="caseName">두    : 행정상고사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">루</Col>
+            <Col id="caseName">루    : 행정특별항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">부</Col>
+            <Col id="caseName">부    : 행정준항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">아</Col>
+            <Col id="caseName">아    : 행정신청</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">수</Col>
+            <Col id="caseName">수    : 선거소송사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">수호</Col>
+            <Col id="caseName">수호 : 선거항고(재항고, 준항고, 특별항고)사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">우</Col>
+            <Col id="caseName">우    : 선거상고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">주</Col>
+            <Col id="caseName">주    : 선거신청</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">추</Col>
+            <Col id="caseName">추    : 특별소송</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">쿠</Col>
+            <Col id="caseName">쿠    : 특별신청</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">푸</Col>
+            <Col id="caseName">푸    : 소년보호</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">허</Col>
+            <Col id="caseName">허    : 특허제1심사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">흐</Col>
+            <Col id="caseName">흐    : 특허재항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">히</Col>
+            <Col id="caseName">히    : 특허특별(준)항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">카허</Col>
+            <Col id="caseName">카허 : 특허신청사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">후</Col>
+            <Col id="caseName">후    : 특허상고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">느합</Col>
+            <Col id="caseName">느합 : 가사비송합의</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">느단</Col>
+            <Col id="caseName">느단 : 가사비송단독</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">드합</Col>
+            <Col id="caseName">드합 : 가사제1심소송합의</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">드단</Col>
+            <Col id="caseName">드단 : 가사제1심소송단독</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">르</Col>
+            <Col id="caseName">르    : 가사항소</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">므</Col>
+            <Col id="caseName">므    : 가사상고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">브</Col>
+            <Col id="caseName">브    : 가사항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">스</Col>
+            <Col id="caseName">스    : 가사재항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">으</Col>
+            <Col id="caseName">으    : 가사특별항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">즈</Col>
+            <Col id="caseName">즈    : 가사신청</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">츠</Col>
+            <Col id="caseName">츠    : 가사공조</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">크</Col>
+            <Col id="caseName">크    : 소년보호항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">트</Col>
+            <Col id="caseName">트    : 소년보호재항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">정</Col>
+            <Col id="caseName">정    : 감치, 과태료재판사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">정로</Col>
+            <Col id="caseName">정로 : 감치, 과태료항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">점모</Col>
+            <Col id="caseName">정모 : 감치, 과태료 특별항고</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">선</Col>
+            <Col id="caseName">선    : 선박소유자등의 책임제한사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">유</Col>
+            <Col id="caseName">유    : 유류오염손해배상책임제한사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">헌가</Col>
+            <Col id="caseName">헌가 : 위헌법률심판사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">헌나</Col>
+            <Col id="caseName">헌나 : 탄핵심판사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">헌다</Col>
+            <Col id="caseName">헌다 : 정당해산심판사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">헌라</Col>
+            <Col id="caseName">헌라 : 권한쟁의심판사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">헌마</Col>
+            <Col id="caseName">헌마 : 헌법재판소법 제68조 제1항에 의한 헌법소원심판사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">헌바</Col>
+            <Col id="caseName">헌바 : 헌법재판소법 제68조 제2항에 의한 헌법소원심판사건</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">헌사</Col>
+            <Col id="caseName">헌사 : 각종 신청사건(국선대리인선임신청, 가처분신청, 기피신청)</Col>
+          </Row>
+          <Row>
+            <Col id="caseType">헌아</Col>
+            <Col id="caseName">헌아 : 각종 특별사건(재심 등)</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_year" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="year" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="year">2017</Col>
+          </Row>
+          <Row>
+            <Col id="year">2016</Col>
+          </Row>
+          <Row>
+            <Col id="year">2015</Col>
+          </Row>
+          <Row>
+            <Col id="year">2014</Col>
+          </Row>
+          <Row>
+            <Col id="year">2013</Col>
+          </Row>
+          <Row>
+            <Col id="year">2012</Col>
+          </Row>
+          <Row>
+            <Col id="year">2011</Col>
+          </Row>
+          <Row>
+            <Col id="year">2010</Col>
+          </Row>
+          <Row>
+            <Col id="year">2009</Col>
+          </Row>
+          <Row>
+            <Col id="year">2008</Col>
+          </Row>
+          <Row>
+            <Col id="year">2007</Col>
+          </Row>
+          <Row>
+            <Col id="year">2006</Col>
+          </Row>
+          <Row>
+            <Col id="year">2005</Col>
+          </Row>
+          <Row>
+            <Col id="year">2004</Col>
+          </Row>
+          <Row>
+            <Col id="year">2003</Col>
+          </Row>
+          <Row>
+            <Col id="year">2002</Col>
+          </Row>
+          <Row>
+            <Col id="year">2001</Col>
+          </Row>
+          <Row>
+            <Col id="year">2000</Col>
+          </Row>
+          <Row>
+            <Col id="year">1999</Col>
+          </Row>
+          <Row>
+            <Col id="year">1998</Col>
+          </Row>
+          <Row>
+            <Col id="year">1997</Col>
+          </Row>
+          <Row>
+            <Col id="year">1996</Col>
+          </Row>
+          <Row>
+            <Col id="year">1995</Col>
+          </Row>
+          <Row>
+            <Col id="year">1994</Col>
+          </Row>
+          <Row>
+            <Col id="year">1993</Col>
+          </Row>
+          <Row>
+            <Col id="year">1992</Col>
+          </Row>
+          <Row>
+            <Col id="year">1991</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************************************
+* SYSTEM      : 넥사크로플랫폼 PackageB
+* BUSINESS    : 넥사크로플랫폼 PackageB
+* FILE NAME   : POP_CASENO_SEARCH
+* PROGRAMMER  : BOK BADA
+* DATE        : 2017/10/25 ~ 2017/11/03
+* DESCRIPTION : SingleDetail
+*------------------------------------------------------------------
+* MODIFY DATE   PROGRAMMER			DESCRIPTION
+*------------------------------------------------------------------
+* 
+*------------------------------------------------------------------
+***********************************************************************************/
+
+/***********************************************************************************
+* Common Library
+***********************************************************************************/
+include "Lib::common.xjs";	//공통함수
+
+/***********************************************************************************
+* Global/Local Variable
+***********************************************************************************/
+
+var strCaseType="";	//유형
+
+//var strCaseYear="";	//사건년도
+//var strCaseNo="";	//번호
+
+/***********************************************************************************
+* Form Event
+***********************************************************************************/
+
+
+
+/********************************************************************************
+ * Desc		: 유형값 입력 후 변수에 밸류값 저장
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.cmb_caseType_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)	
+{
+		strCaseType=e.postvalue;
+		//B. 이벤트가 발생한 후 컴포넌트가 가지는 value를 나타내는 속성
+}
+
+
+/********************************************************************************
+ * Desc		: 입력버튼 ONCLICK EVENT [유효성검사, 데이터 전송 및 닫기]
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.btn_case_input_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	if(this.cmb_year.text == ""){
+		alert("년도를 선택하세요!");
+		this.cmb_year.dropdown();
+		this.cmb_year.setFocus();
+		return false;
+	}else if(this.cmb_caseType.text==""){
+		alert("유형을 선택하세요!");
+		this.cmb_caseType.dropdown();
+		this.cmb_caseType.setFocus();
+		return false;
+	}else if(this.edt_caseNo.text==""){
+		alert("번호를 입력하세요!");
+		this.edt_caseNo.setFocus();
+		return false;
+	}else{
+		var Text=this.cmb_year.text+strCaseType+this.edt_caseNo.text;	//사건년도,유형,번호 합친거를 변수에저장
+		
+		//trace(Text);
+		this.close(Text); 
+	}	
+}
+
+
+/*
+//사건년도
+this.cmb_year_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+		strCaseYear=e.postvalue;	//사건년도 값이 선택되면 해당 변수에 저장
+		//postvalue : 이벤트가 발생한 후 컴포넌트가 가지는 value를 나타내는 속성 
+}
+
+//번호
+this.edt_caseNo_ontextchange = function(obj:Edit,  e:nexacro.TextChangeEventInfo)
+{
+		strCaseNo=e.postvalue;
+	
+	var sEng = "[a-zA-Z]+";
+	var sNum = "[0-9]+";
+	var sSpe = "[^a-z0-9A-Z- ]+"; //Z 옆에 스페이스로 공백 한칸
+
+	var regEng = CreateRegExp(sEng, "ig");
+	var regNum = CreateRegExp(sNum, "g");
+	var regSpe = CreateRegExp(sSpe, "g");
+
+	var sEngTmp = regEng.Exec(strPostText);
+	var sNumTmp = regNum.Exec(strPostText);
+	var sSpeTmp = regSpe.Exec(strPostText);
+
+
+	if ( sEngTmp.length >0 || sSpeTmp.length > 0) {
+
+	edt_caseNo.Text = strPreText;
+	edt_caseNo.SetSel(edt_caseNo.text.length(), edt_caseNo.text.length());
+
+	}
+}
+*/]]></Script>
+  </Form>
+</FDL>

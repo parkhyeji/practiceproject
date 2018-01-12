@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Com_Insa_Acpt" classname="Com_Insa_Acpt" left="0" top="0" width="1024" height="704" titletext="New Form" onload="Com_Insa_Acpt_onload" style="font:bold 12 굴림;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="2" left="0.78%" top="60" right="0.88%" height="28" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="Static01" taborder="3" text="승인상태" left="0.68%" top="59" right="85.64%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Combo id="cbo_insaAcptGb" taborder="1" left="14.26%" top="61" right="72.36%" height="26" innerdataset="@ds_insaAcptGb" codecolumn="codeno" datacolumn="codenm" onitemchanged="cbo_insaAcptGb_onitemchanged" style="border:1 solid #a8a8a8ff ;font:9 굴림;"/>
+        <Static id="Static02" taborder="4" text="신청일자" left="28.42%" top="60" right="61.72%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Calendar id="cal_insaAcptReqDate" taborder="28" left="38.28%" top="63" right="49.9%" height="24"/>
+        <Static id="Static03" taborder="5" text="사원 승인 내역" left="0.78%" top="102" right="84.18%" height="28" style="font:bold 9 Dotum;"/>
+        <Grid id="grd_insaAcpt" taborder="6" useinputpanel="false" left="0.68%" top="127" right="0.88%" height="231" nodatatext="데이터가 없습니다" binddataset="ds_insaAcptList" scrollbars="fixedvert" style="font:9 굴림;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="63"/>
+                <Column size="80"/>
+                <Column size="84"/>
+                <Column size="76"/>
+                <Column size="133"/>
+                <Column size="115"/>
+                <Column size="108"/>
+                <Column size="93"/>
+                <Column size="116"/>
+                <Column size="94"/>
+                <Column size="40"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="No"/>
+                <Cell col="1" text="ID"/>
+                <Cell col="2" text="성명"/>
+                <Cell col="3" text="성별"/>
+                <Cell col="4" text="생년월일"/>
+                <Cell col="5" text="전화번호"/>
+                <Cell col="6" text="휴대폰"/>
+                <Cell col="7" text="입사구분"/>
+                <Cell col="8" text="신청일시"/>
+                <Cell col="9" text="승인상태"/>
+                <Cell col="10" displaytype="checkbox"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" text="bind:rownum"/>
+                <Cell col="1" displaytype="normal" text="bind:insaId"/>
+                <Cell col="2" text="bind:insaName"/>
+                <Cell col="3" displaytype="combo" text="bind:insaSex" combodataset="ds_insaSex" combocodecol="code" combodatacol="data"/>
+                <Cell col="4" displaytype="number" text="bind:insaBirth" mask="######"/>
+                <Cell col="5" text="bind:insaPhone"/>
+                <Cell col="6" text="bind:insaHp"/>
+                <Cell col="7" displaytype="normal" text="bind:insaJoinGbnCode" combodataset="ds_insaJoinGbn" combocodecol="codeno" combodatacol="codeFull"/>
+                <Cell col="8" displaytype="date" text="bind:insaJoinDay"/>
+                <Cell col="9" displaytype="normal" text="bind:insaSignReqStat" combodataset="ds_insaAcptGb" combocodecol="codeCd" combodatacol="codenm"/>
+                <Cell col="10"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static04" taborder="7" text="사원 승인 상세정보" left="0.59%" top="364" right="84.38%" height="28" style="font:bold 9 Dotum;"/>
+        <Static id="Static05" taborder="8" left="0.88%" top="392" right="0.78%" height="109" style="background:#f0f0f0ff;"/>
+        <Static id="Static06" taborder="13" text="ID" left="0.78%" top="392" right="85.55%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Static id="Static07" taborder="14" text="전화번호" left="0.78%" top="420" right="85.55%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 Dotum;" onclick="Static07_onclick"/>
+        <Static id="Static08" taborder="17" text="신청일시" left="0.78%" top="448" right="85.55%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 Dotum;"/>
+        <Static id="Static10" taborder="21" text="성명" left="31.15%" top="392" right="58.11%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 Dotum;" onclick="Static10_onclick"/>
+        <Static id="Static11" taborder="22" text="휴대폰" left="31.15%" top="420" right="58.11%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 Dotum;"/>
+        <Static id="Static13" taborder="24" text="생년월일" left="57.03%" top="392" right="33.11%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 Dotum;"/>
+        <Static id="Static14" taborder="25" text="성별" left="81.54%" top="392" right="8.01%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 Dotum;"/>
+        <Static id="Static15" taborder="26" text="입사구분" left="57.03%" top="416" right="33.11%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 Dotum;"/>
+        <Static id="Static16" taborder="27" text="승인상태" left="57.03%" top="442" right="33.11%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 Dotum;"/>
+        <Edit id="insaSabun" taborder="9" left="14.5%" top="392" right="70%" height="25" style="border:1 solid #000000ff ; :disabled {border:1 solid #a8a8a8ff ;align:center middle;font:9 굴림;}" enable="false" maxlength="10"/>
+        <Edit id="insaName" taborder="10" left="42%" top="394" right="43.26%" height="25" style="border:1 solid #a8a8a8ff ;align:center middle;font:9 굴림; :disabled {font:9 굴림;}" enable="true" maxlength="10" imemode="none"/>
+        <Edit id="insaSignReqDate" taborder="16" left="14.5%" top="448" right="58.4%" height="25" style="border:1 solid #000000ff ;align:center middle; :disabled {border:1 solid #a8a8a8ff ;font:9 굴림;}" enable="false" maxlength="10"/>
+        <MaskEdit id="insaBirth" taborder="11" left="67%" top="393" right="18.75%" height="25" style="border:1 solid #a8a8a8ff ;align:center middle;font:9 굴림; :disabled {font:9 굴림;}" mask="##년##월##일" enable="true" type="string"/>
+        <Combo id="insaJoinGbnCode" taborder="15" left="66.99%" top="419" right="18.75%" height="25" index="-1" onitemchanged="Combo01_onitemchanged" innerdataset="@ds_insaStat" codecolumn="CODE" datacolumn="CODE" style="border:1 solid #a8a8a8ff ;font:9 굴림; :disabled {font:9 굴림;}"/>
+        <Combo id="insaSignReqStat" taborder="30" left="66.99%" top="443" right="18.75%" height="25" innerdataset="@ds_insaAcptGb" datacolumn="codenm" codecolumn="codeno" style="border:1 solid #a8a8a8ff ;font:9 굴림; :disabled {font:9 굴림;}"/>
+        <Button id="btn_search" taborder="31" text="검색" left="85.64%" top="62" right="8.2%" height="22" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;font:bold 9 굴림;shadow:outer 0,0 0 gray;" onclick="btn_search_onclick" cssclass="btn_WFSA_Search"/>
+        <Button id="btn_save" taborder="33" text="저장" left="92.97%" top="512" right="0.88%" height="22" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;font:bold 9 굴림;shadow:outer 0,0 0 gray;" onclick="btn_save_onclick"/>
+        <Combo id="insaSex" taborder="12" left="92.09%" top="393" right="1.86%" height="25" onitemchanged="Combo00_onitemchanged" innerdataset="@ds_insaSex" codecolumn="code" datacolumn="data" style="border:1 solid #a8a8a8ff ;font:9 굴림; :disabled {font:9 굴림;}"/>
+        <MaskEdit id="insaPhone" taborder="34" left="14.5%" top="419" height="25" style="border:1 solid #a8a8a8ff ;align:center middle;font:9 굴림; :disabled {font:9 굴림;}" clipmode="excludespace" mask="###-####-####" type="string" width="157"/>
+        <MaskEdit id="insaHp" taborder="29" left="42%" top="421" right="43.26%" height="25" style="border:1 solid #a8a8a8ff ;align:center middle;font:9 굴림; :disabled {font:9 굴림;}" clipmode="excludespace" mask="###-####-####" type="string"/>
+        <Button id="btn_clear" taborder="35" text="초기화" cssclass="btn_WFSA_Search" left="92.29%" top="62" right="1.56%" height="22" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;font:bold 9 굴림;shadow:outer 0,0 0 gray;" onclick="btn_clear_onclick"/>
+        <Edit id="insaSignReqSabun" taborder="38" maxlength="10" enable="true" left="14.5%" top="475" right="58.3%" height="25" style="border:1 solid #a8a8a8ff ;align:center middle;font:9 굴림; :disabled {font:9 굴림;}"/>
+        <Static id="Static09" taborder="39" text="승인자" left="0.88%" top="473" right="85.45%" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 Dotum;" onclick="Static09_onclick"/>
+        <ImageViewer id="img_titlebg" taborder="40" left="0.39%" top="3" right="0.68%" height="49" style="background:cornflowerblue;color:#333333ff;"/>
+        <Static id="사원승인내역관리" taborder="41" text="사원승인내역관리" left="0.88%" top="4" right="0.78%" height="49" style="background:transparent;color:whitesmoke;align:center middle;font:bold 12 Dotum;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_insaAcptGb">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_insaAcptList">
+        <ColumnInfo>
+          <Column id="rownum" type="INT" size="256"/>
+          <Column id="insaSabun" type="STRING" size="32"/>
+          <Column id="insaId" type="STRING" size="32"/>
+          <Column id="insaName" type="STRING" size="32"/>
+          <Column id="insaPhone" type="STRING" size="32"/>
+          <Column id="insaHp" type="STRING" size="32"/>
+          <Column id="insaSex" type="STRING" size="32"/>
+          <Column id="insaJoinGbnCode" type="STRING" size="32"/>
+          <Column id="insaBirth" type="STRING" size="32"/>
+          <Column id="insaEmail" type="STRING" size="32"/>
+          <Column id="insaZip" type="STRING" size="32"/>
+          <Column id="insaAddr1" type="STRING" size="32"/>
+          <Column id="insaAddr2" type="STRING" size="32"/>
+          <Column id="insaSignReqDate" type="STRING" size="32"/>
+          <Column id="insaSignReqStat" type="STRING" size="32" description="ㅇ"/>
+          <Column id="insaSignReqSabun" type="STRING" size="32"/>
+          <Column id="insaSignReqName" type="STRING" size="32"/>
+          <Column id="insaSignDate" type="STRING" size="32"/>
+          <Column id="insaDeptCode" type="STRING" size="256"/>
+          <Column id="insaJoinDay" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_insaSex">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">m</Col>
+            <Col id="data">남성</Col>
+          </Row>
+          <Row>
+            <Col id="code">f</Col>
+            <Col id="data">여성</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_insaJoinGbn">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dept">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_insaStat">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">001</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">002</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">003</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">004</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_insaUpdate">
+        <ColumnInfo>
+          <Column id="insaName" type="STRING" size="256" description="성명"/>
+          <Column id="insaBirth" type="STRING" size="256" description="생년월일"/>
+          <Column id="insaSex" type="STRING" size="256" description="성별"/>
+          <Column id="insaPhone" type="STRING" size="256" description="전화번호"/>
+          <Column id="insaHp" type="STRING" size="256" description="휴대폰"/>
+          <Column id="insaJoinGbnCode" type="STRING" size="256" description="입사구분"/>
+          <Column id="insaSignReqDate" type="STRING" size="256" description="신청일시"/>
+          <Column id="insaSignReqStat" type="STRING" size="256" description="승인상태"/>
+          <Column id="insaSignReqSabun" type="STRING" size="256" description="승인자"/>
+          <Column id="insaSabun" type="STRING" size="256" description="ID"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="insaSabun" propid="value" datasetid="ds_insaAcptList" columnid="insaSabun"/>
+      <BindItem id="item1" compid="insaName" propid="value" datasetid="ds_insaAcptList" columnid="insaName"/>
+      <BindItem id="item2" compid="insaBirth" propid="value" datasetid="ds_insaAcptList" columnid="insaBirth"/>
+      <BindItem id="item4" compid="insaPhone" propid="value" datasetid="ds_insaAcptList" columnid="insaPhone"/>
+      <BindItem id="item5" compid="insaHp" propid="value" datasetid="ds_insaAcptList" columnid="insaHp"/>
+      <BindItem id="item7" compid="insaSignReqDate" propid="value" datasetid="ds_insaAcptList" columnid="insaJoinDay"/>
+      <BindItem id="item8" compid="insaSignReqStat" propid="value" datasetid="ds_insaAcptList" columnid="insaSignReqStat"/>
+      <BindItem id="item11" compid="cbo_insaAcptGb" propid="onload" datasetid="ds_insaAcptList" columnid="insaSignReqStat"/>
+      <BindItem id="item3" compid="insaSex" propid="value" datasetid="ds_insaAcptList" columnid="insaSex"/>
+      <BindItem id="item6" compid="insaJoinGbnCode" propid="value" datasetid="ds_insaAcptList" columnid="insaJoinGbnCode"/>
+      <BindItem id="item9" compid="insaSignReqSabun" propid="value" datasetid="ds_insaAcptList" columnid="insaSignReqSabun"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[
+include "Lib::common.xjs";
+
+var rowNum = "";
+var pageNum = "";
+var strSwitch = "";
+this.confirmStr = "";
+
+// form 온로드 시 이벤트
+this.Com_Insa_Acpt_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	trace("this");
+	this.gf_codeComListLoadTemp("ds_insaAcptGb",  "ds_insaAcptGb",  "Y", "", "전체", "transaction_callback", "X02"); 
+	//승인상태구분 공통코드조회
+	
+
+
+}
+
+this.gf_codeComListLoadTemp=function(strSvcId, strDataSet, strAllYn, strAllCode, strAllName, strCallbackFunc, strVParam)
+{
+	var strTempDataSet = strDataSet+"=ds_output";
+	var strController 	= "code/selectCodeList.do";
+	trace("strDataSet="+strDataSet);
+	if(this.gfn_IsNull(strAllYn) || strAllYn == "")
+	{	
+		strAllYn   = "N";
+		strAllCode = "";
+		strAllName = "";
+	}  	
+	var strParam = "";
+	strParam += " AllYn=" + strAllYn + " AllCode=" + strAllCode + " AllName=" + strAllName + " CLASS_CODE=" + strVParam;
+	//trace(strParam);
+	//trace(strSvcId);
+	// 트랜젝션 공통함수 호출
+	this.gfn_transaction(this,
+					strSvcId,
+					strController, 
+					"", 
+					strTempDataSet,
+					strParam, 
+					strCallbackFunc
+					);
+	
+}
+
+// 트랜잭션 콜백
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		return;
+	}
+	switch(sSvcId){
+		case "ds_insaAcptGb": 
+			this.gf_codeComListLoad("ds_insaJoinGbn",  "ds_insaJoinGbn",  "Y", "", "전체", "transaction_callback", "B03"); //입사구분
+			break;
+		
+		case "ds_insaJoinGbn":
+			this.gf_codeComListLoad("dsComCode", "ds_dept", "N", "", "", "transaction_callback", "B01"); // 공통코드(부서)조회
+			break;
+		
+		case "dsComCode":
+			this.btn_search_onclick();
+			break;
+		
+		case "selectInsaAcptList":
+			var iLastRow = this.fv_iStartPageNo * this.fv_iUnitSelRowNo;
+			this.ds_insaAcptList.filter("rownum >= "+(iLastRow + this.fv_iStartSelRowNo)+" && rownum <= "+(iLastRow + this.fv_iUnitSelRowNo));
+				
+				if (this.ds_insaAcptList.getRowCount() == 0)
+				{
+					this.ds_insaAcptList.filter("");
+					this.div_page.set_visible("false");
+					this.alert("조회할 자료가 없습니다.");
+					return;
+				}
+				else
+				{
+					this.div_page.set_visible("true");
+					this.fv_iServerRowCount = this.ds_insaAcptList.getRowCount();
+					this.fn_SetStyle();
+					this.fn_SetPageNo();
+					this.div_page.stc_No0.style.set_color("gray");
+				}
+				
+			if(strSwitch != "수정"){
+				pageNum = 1;
+				rowNum = 0;
+			}else{
+				strSwitch = "조회";
+			}
+			
+			this.grd_insaAcpt_oncellclick();
+			this.pageSelect(pageNum);
+			this.grd_insaAcpt.selectCell(rowNum);
+			this.alert("조회완료");
+			break;
+		
+		case "saveInsaAcptList":
+			strSwitch = "수정";
+			this.btn_search_onclick();
+			break;
+	}
+	
+}
+
+//사원 승인 내역 검색
+this.btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+		//소송관리번호조회 버튼 클릭시 페이징 초기화 
+//	this.fv_iStartPageNo    = 0;   // 전체 페이지 순서
+//	this.fv_iUnitSelRowNo   = 100; // 한번 Server호출시 가져올 row갯수
+//	this.fv_iStartSelRowNo  = 1;   // Server호출시 시작할 row no
+//	this.fv_iMaxPageNum     = 10;  // 화면에 보여줄 최대 Page번호 갯수
+//	this.fv_iServerRowCount = 0;   // 서버에서 넘어온 Row갯수(100건이 안될 수 있음)
+	trace("search!!");
+	this.ds_search.clearData();
+	var rowIdx = this.ds_search.addRow();
+	trace("rowIdx="+rowIdx);
+	var searchCondition = this.cbo_insaAcptGb.value;
+	var searchKeyword = this.cal_insaAcptReqDate.value;
+	trace("$$$="+searchCondition);
+	trace("$$$="+searchKeyword);
+	this.ds_search.setColumn(0, "searchCondition", searchCondition);
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	trace("check!!!"+this.ds_search.rowcount)
+	
+	
+	this.gfn_transaction(this,
+						"selectInsaAcptList",
+						"adm/selectInsaAcptList.do",
+						"ds_input=ds_search",
+						"ds_insaAcptList=ds_output",
+						"",
+						"transaction_callback"
+						);
+}
+
+//초기화
+this.btn_clear_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	trace("reset!!!");
+	this.cal_insaAcptReqDate.value = null;		//신청일자 초기화 
+	//this.cbo_insaAcptGb.index = 0;			//승인상태 초기화
+	//this.div_page.set_visible("false");
+	this.ds_insaAcptList.clearData();		//리스트 초기화
+}
+
+
+
+
+//승인상태 저장
+this.btn_save_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_insaUpdate.clearData();
+	
+	var insaSabun = this.insaSabun.text;
+	var insaName = this.insaName.value;
+	var insaBirth = this.insaBirth.value;
+	var insaSex = this.insaSex.value;
+	var insaPhone = this.insaPhone.value;
+	var insaHp = this.insaHp.value;
+	var insaJoinGbnCode = this.insaJoinGbnCode.value;
+	var insaSignReqDate = this.insaSignReqDate.value;
+	var insaSignReqStat = this.insaSignReqStat.value;
+	var insaSignReqSabun = this.insaSignReqSabun.value;
+	
+	trace("------------------------");
+	trace("insaSabun="+insaSabun);
+	trace("insaName="+insaName);
+	trace("insaBirth="+insaBirth);
+	trace("insaSex="+insaSex);
+	trace("insaPhone="+insaPhone);
+	trace("insaHp="+insaHp);
+	trace("insaJoinGbnCode="+insaJoinGbnCode);
+	trace("insaSignReqDate="+insaSignReqDate);
+	trace("insaSignReqStat="+insaSignReqStat);
+	trace("insaSignReqSabun="+insaSignReqSabun);
+	trace("------------------------");
+	
+	this.ds_insaUpdate.addRow();
+	
+	this.ds_insaUpdate.setColumn(0,"insaSabun", insaSabun);
+	this.ds_insaUpdate.setColumn(0,"insaName", insaName);
+	this.ds_insaUpdate.setColumn(0,"insaBirth", insaBirth);
+	this.ds_insaUpdate.setColumn(0,"insaSex", insaSex);
+	this.ds_insaUpdate.setColumn(0,"insaPhone", insaPhone);
+	this.ds_insaUpdate.setColumn(0,"insaHp", insaHp);
+	this.ds_insaUpdate.setColumn(0,"insaJoinGbnCode", insaJoinGbnCode);
+	this.ds_insaUpdate.setColumn(0,"insaSignReqDate", insaSignReqDate);
+	this.ds_insaUpdate.setColumn(0,"insaSignReqStat", insaSignReqStat);
+	this.ds_insaUpdate.setColumn(0,"insaSignReqSabun", insaSignReqSabun);
+	
+	trace("@@@"+this.ds_insaUpdate.rowcount);
+	
+	this.gfn_transactionUpdate(this,
+						"saveInsaAcptList",
+						"/adm/saveInsaAcptList.do",
+						"ds_input=ds_insaUpdate:U",
+						"",
+						"",
+						"transaction_callback"
+						);
+	/*
+	
+	var registerId = application.gds_User.getColumn(application.gds_User.rowposition, "sabun"); 
+	
+	var strParam = "registerId=" + registerId;
+	
+	rowNum = this.ds_insaAcptList.rowposition;
+	
+	this.gfn_transaction(this,
+						"saveInsaAcptList",
+						"saveInsaAcptList.do",
+						"ds_input=ds_insaAcptList:U",
+						"ds_insaAcptList=ds_output",
+						strParam,
+						"transaction_callback"
+						);
+*/
+}
+this.gfn_transactionUpdate=function(objFrm, svcid, strURL, inputDs, outputDs, params, callbackFnc)
+{	 
+trace("====");
+	//trace(objFrm);
+//	trace(svcid);
+	//trace(strURL);
+//	trace(inputDs);
+	//trace(outputDs);
+	//trace(params);
+//	trace(callbackFnc);
+	application.gdsTransInfo.clearData();
+
+	var dsInputName = this.splitDsName(inputDs,0);
+	var dsOutputName = this.splitDsName(outputDs,1);
+	
+	for (var i = 0; i < dsInputName.length ; i++ ){
+		var row = application.gdsTransInfo.addRow();
+		if (i == 0){										//svc id 와 url은 하나이다.
+			application.gdsTransInfo.setColumn(row,0, svcid);
+			application.gdsTransInfo.setColumn(row,1, strURL);
+		}
+		application.gdsTransInfo.setColumn(row,2, dsInputName[i]);
+	}
+	
+	for (var i = 0; i < dsOutputName.length ; i++ ){
+		application.gdsTransInfo.setColumn(row,3, dsOutputName[i]);
+	}
+	//trace("=====1");
+	//trace(application.gdsTransInfo.getColumn(0,2));
+	
+			  var oDatas =  {
+			  svcid : svcid,
+			  sController : strURL,			 
+			  inds :["__DS_TRANS_INFO__=gdsTransInfo " + inputDs],
+			  outds :[outputDs],
+			  args  : [params],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+			//trace(strURL);
+			//trace(oDatas.inds);
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/ 
+		var confirmStr = this.confirm("저장하시겠습니까?");
+	
+	if(confirmStr){
+		this.code_transaction("saveCode");
+	}
+		trace("=====2");
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}	
+			
+			trace(svcid);
+			trace(this.errorcode);
+			trace(this.errormsg);
+		   var pThis = this.fobj;   //form object
+		   pThis[callbackFnc](svcid,this.errorcode,this.errormsg); 
+	}); 	
+
+}
+
+
+
+
+
+
+]]></Script>
+  </Form>
+</FDL>

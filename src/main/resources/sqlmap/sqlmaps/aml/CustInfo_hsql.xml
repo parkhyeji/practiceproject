@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+   <!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+   <typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+   
+   	<select id="custinfo.custInfoDAO.loadCommonCodes" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT CODE_NO   AS CODE
+			 , CODE_NAME AS VALUE
+		  FROM AML_COMMON_CODE_DETAIL
+		 WHERE CLASS_CODE = #classCode#
+	</select>
+
+   	<select id="custinfo.custInfoDAO.searchCust" parameterClass="java.util.HashMap"  resultClass="egovMap">
+		SELECT CUST_NO
+		     , EMP_NAME
+		     , REAL_NAME_NO
+		     , JOIN_DATE
+		     , TEL_NO
+		     , CEL_NO
+		     , EMAIL
+		     , ADDR
+		     , OUT_DATE
+		     , USE_YN
+		     , REGI_DT
+		     , REGI_ID
+		     , MODI_DT
+		     , MODI_ID
+		     , EMP_YN
+		     , CUST_TYPE_CODE
+		     , JOB_NAME
+		     , BIRTH
+		     , GENDER_TYPE_CODE
+		     , NATION_CODE
+		     , RA_RANK_CODE
+		     , REAL_NAME_NO_TYPE_CODE
+		     , ZIP_CODE
+		  FROM AML_CUST_INFO
+		 ORDER BY CUST_NO DESC
+	</select>
+	
+	 <insert id="custinfo.custInfoDAO.insertCust" parameterClass="java.util.HashMap">
+   
+      INSERT INTO AML_CUST_INFO(
+         CUST_NO
+        , EMP_NAME
+        , REAL_NAME_NO_TYPE_CODE
+        , REAL_NAME_NO
+        , TEL_NO
+		, CEL_NO
+		, EMAIL
+		, ZIP_CODE
+        , JOIN_DATE
+        , ADDR
+        , REGI_DT
+        , REGI_ID
+        , EMP_YN
+        , CUST_TYPE_CODE
+        , JOB_NAME
+        , BIRTH
+        , GENDER_TYPE_CODE
+        , NATION_CODE
+        , RA_RANK_CODE
+        , USE_YN
+        , OUT_DATE
+      )VALUES(
+        (
+         SELECT TO_CHAR(SYSDATE, 'YYYYMMDD')||
+                 LPAD((SELECT COUNT(*)+1
+                        FROM AML_CUST_INFO
+                       WHERE CUST_NO LIKE TO_CHAR(SYSDATE, 'YYYYMMDD') || '%')
+                      , 5, '0')
+            FROM DUAL
+         )
+        , #empName#
+        , #realNameNoTypeCode#
+        , #realNameNo#
+        , #telNo#
+        , #celNo#
+        , #email#
+        , #zipCode#
+        , #joinDate#
+        , #addr#
+        , TO_CHAR(SYSDATE, 'YYYYMMDD')
+        , 'ADMIN'
+        , #empYn#
+        , #custTypeCode#
+        , #jobName#
+        , #birth#
+        , #genderTypeCode#
+        , #nationCode#
+        , #raRankCode#
+        , #useYn#
+        , #outDate#
+      ) 
+   </insert>
+   
+   <update id="custinfo.custInfoDAO.updateCust" parameterClass="java.util.HashMap">
+    
+      UPDATE AML_CUST_INFO
+         SET EMP_NAME              	   	= #empName#  
+        	, REAL_NAME_NO_TYPE_CODE    = #realNameNoTypeCode#
+       	 	, REAL_NAME_NO				= #realNameNo#
+        	, TEL_NO					= #telNo#
+			, CEL_NO					= #celNo#
+			, EMAIL						= #email#
+			, ZIP_CODE					= #zipCode#
+        	, JOIN_DATE					= #joinDate#      
+        	, ADDR						= #addr#
+        	, MODI_DT					= TO_CHAR(SYSDATE, 'YYYYMMDD')
+        	, MODI_ID					= 'ADMIN'
+        	, EMP_YN					= #empYn#
+        	, CUST_TYPE_CODE			= #custTypeCode#
+        	, JOB_NAME					= #jobName#
+        	, BIRTH						= #birth#
+        	, GENDER_TYPE_CODE			= #genderTypeCode#
+        	, NATION_CODE				= #nationCode#
+        	, RA_RANK_CODE				= #raRankCode#
+       		, USE_YN        			= 'Y'    
+       		, OUT_DATE					= #outDate#                                 
+       WHERE CUST_NO              		= #custNo#
+  
+   </update> 
+  
+   <delete id="custinfo.custInfoDAO.deleteCust" parameterClass="java.util.HashMap">   
+      DELETE FROM AML_CUST_INFO
+       WHERE CUST_NO = #custNo#  
+   </delete>
+     
+  <select id="custinfo.custInfoDAO.searchaddr" parameterClass="java.util.HashMap" resultClass="egovMap">   
+ 	<![CDATA[
+      SELECT ZIPCODE
+           , SEDO || 
+             NVL2(MYEON, ' ' || MYEON, ' ') ||
+             NVL2(ROADNAME, ROADNAME || ' ', ' ') ||
+             BD_NO ||
+             NVL2(BD_SNO, '-' || BD_SNO || ' ' , ' ') ||
+             NVL2(BD_NAME, '(' || BD_NAME || ')' , '') AS ADDR
+        FROM ADDRESS 
+       WHERE 1=1
+         ]]>
+         <dynamic>
+	          <isNotNull property="roadName">
+	                 AND ROADNAME LIKE #roadName#||'%'       
+	          </isNotNull>
+	          <isNotNull property="bdNo">
+                     AND BD_NO  = #bdNo#
+	          </isNotNull>         
+	          <isNotNull property="bdSno">
+                     AND BD_SNO = #bdSno#
+	          </isNotNull>         
+        </dynamic>
+   </select> 
+</sqlMap>

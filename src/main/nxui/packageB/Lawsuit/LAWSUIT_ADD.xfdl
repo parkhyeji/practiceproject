@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Pattern_01" classname="Work" inheritanceid="" position="absolute" titletext="SingleDetail" left="0" width="532" top="0" height="156" onload="LAWSUIT_ADD_onload" style="color:#333333ff;">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" text="반소사항" left="8" top="8" right="9" height="50" visible="true" style="background:cornflowerblue;color:white;align:center middle;font:bold 12 굴림;"/>
+        <Static id="Static00" taborder="8" left="8" top="64" right="9" height="59" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;align:center middle;"/>
+        <Static id="sta_02" taborder="4" left="14" top="93" right="15" height="25" wordwrap="none" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;" onclick="sta_02_onclick"/>
+        <Static id="sta_01" taborder="9" left="14" top="69" right="15" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_05" taborder="10" text="반소여부" left="14" top="69" height="25" width="22.56%" style="background:lavenderblush;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_00" taborder="11" text="반소사건번호" left="14" top="93" width="22.56%" height="25" style="background:lavenderblush;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_03" taborder="12" text="반소송번호" left="49.81%" top="69" width="22.56%" height="25" style="background:lavenderblush;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_04" taborder="13" text="반소금액" left="49.81%" top="93" width="22.56%" height="25" style="background:lavenderblush;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Button id="btn_addLawsuit" taborder="5" text="저장" right="64" height="21" cssclass="btn_WFSA_Search" width="52" bottom="7" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 굴림;opacity:100;shadow:outer 0,0 0 gray;" onclick="btn_addLawsuit_onclick"/>
+        <Button id="btn_close" taborder="6" text="취소" cssclass="btn_WFSA_Search" right="9" bottom="7" width="52" height="21" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 굴림;opacity:100;shadow:outer 0,0 0 gray;" onclick="btn_close_onclick"/>
+        <Edit id="edt_countEventNo" taborder="14" left="388" top="71" width="124" height="21"/>
+        <Edit id="edt_countNo" taborder="15" left="136" top="95" width="124" height="21"/>
+        <Edit id="edt_countSum" taborder="16" left="388" top="95" width="124" height="21"/>
+        <Radio id="rdo_re" taborder="17" left="25.56%" top="72" right="51.13%" height="20" style="buttonimage:URL('theme://images/img_WF_Radio_D.png');buttonborder:2 double #999999ff #f5f7f9ff;background:white;border:1 solid #a8a8a8ff ;" columncount="2" innerdataset="@ds_counter" datacolumn="codeName" codecolumn="codeNo" onitemclick="rdo_re_onitemclick" onitemchanged="rdo_re_onitemchanged"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_lawsuit2" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="lawsuitAdmNo" type="STRING" size="256"/>
+          <Column id="lawsuitCtaWtr" type="STRING" size="256"/>
+          <Column id="lawsuitCtaNo" type="STRING" size="256"/>
+          <Column id="lawsuitCtaCaseNo" type="STRING" size="256"/>
+          <Column id="lawsuitCtaChg" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_counter" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="codeName">예</Col>
+            <Col id="codeNo">Y</Col>
+          </Row>
+          <Row>
+            <Col id="codeName">아니요</Col>
+            <Col id="codeNo">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item1" compid="rdo_re" propid="value" datasetid="ds_lawsuit2" columnid="lawsuitCtaWtr"/>
+      <BindItem id="item0" compid="edt_countEventNo" propid="value" datasetid="ds_lawsuit2" columnid="lawsuitCtaNo"/>
+      <BindItem id="item2" compid="edt_countSum" propid="value" datasetid="ds_lawsuit2" columnid="lawsuitCtaChg"/>
+      <BindItem id="item3" compid="edt_countNo" propid="value" datasetid="ds_lawsuit2" columnid="lawsuitCtaCaseNo"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+var no = this.getOwnerFrame().no;
+var str_CtaWtr = this.getOwnerFrame().str_CtaWtr;
+var str_CtaNo = this.getOwnerFrame().str_CtaNo;
+var str_CtaCaseNo = this.getOwnerFrame().str_CtaCaseNo;
+var str_CtaChg = this.getOwnerFrame().str_CtaChg;
+
+this.rdo_re_onitemchanged = function (obj:Radio, e:ItemChangeEventInfo)
+{
+	if(this.rdo_re.index=="1"){
+		this.edt_countEventNo.set_value("");
+		this.edt_countNo.set_value("");
+		this.edt_countSum.set_value("");
+		this.edt_countEventNo.enable=false;
+		this.edt_countNo.enable=false;
+		this.edt_countSum.enable=false;
+		
+	}else{
+		this.edt_countEventNo.enable=true;
+		this.edt_countNo.enable=true;
+		this.edt_countSum.enable=true;
+	}
+	
+}
+
+this.LAWSUIT_ADD_onload = function (obj:Form, e:LoadEventInfo)
+{
+	
+	//trace("str_CtaWtr="+str_CtaWtr+" str_CtaNo="+str_CtaNo+" str_CtaCaseNo="+str_CtaCaseNo+" str_CtaChg="+str_CtaChg);
+	this.ds_lawsuit2.addRow();
+	this.ds_lawsuit2.setColumn(0,"lawsuitAdmNo",no);
+	if(this.gfn_IsNull(str_CtaWtr)==true){
+		this.ds_lawsuit2.setColumn(0,"lawsuitCtaWtr","Y");
+		this.ds_lawsuit2.setColumn(0,"lawsuitCtaNo","");
+		this.ds_lawsuit2.setColumn(0,"lawsuitCtaCaseNo","");
+		this.ds_lawsuit2.setColumn(0,"lawsuitCtaChg","");
+		//trace("Y");
+	}else{
+		this.ds_lawsuit2.setColumn(0,"lawsuitCtaWtr",str_CtaWtr);
+		this.ds_lawsuit2.setColumn(0,"lawsuitCtaNo",str_CtaNo);
+		this.ds_lawsuit2.setColumn(0,"lawsuitCtaCaseNo",str_CtaCaseNo);
+		this.ds_lawsuit2.setColumn(0,"lawsuitCtaChg",str_CtaChg);
+		//trace("N");
+	}
+	
+	
+	if(this.ds_lawsuit2.getColumn(0,"lawsuitCtaWtr")=="N"){
+		this.edt_countEventNo.enable=false;
+		this.edt_countNo.enable=false;
+		this.edt_countSum.enable=false;
+	}
+	//trace(ds_lawsuit2.saveXML());
+}
+
+this.btn_addLawsuit_onclick = function (obj:Button,  e:ClickEventInfo)
+{	
+	
+	if(this.rdo_re.index=="0"){
+		if(this.gfn_IsNull(this.edt_countEventNo.value)==true){
+			alert("반소송번호를 입력해주세요.");
+			this.edt_countEventNo.setFocus();
+			return;
+		}
+		if(this.gfn_IsNull(this.edt_countNo.value)==true){
+			alert("반소사건번호를 입력해주세요.");
+			this.edt_countNo.setFocus();
+			return;
+		}
+		if(this.gfn_IsNull(this.edt_countSum.value)==true){
+			alert("반소금액을 입력해주세요.");
+			this.edt_countSum.setFocus();
+			return;
+		}
+	}
+	
+	this.ds_lawsuit2.setColumn(0,"lawsuitCtaWtr",this.rdo_re.value);
+	this.ds_lawsuit2.setColumn(0,"lawsuitCtaNo",this.edt_countEventNo.value);
+	this.ds_lawsuit2.setColumn(0,"lawsuitCtaCaseNo",this.edt_countNo.value);
+	this.ds_lawsuit2.setColumn(0,"lawsuitCtaChg",this.edt_countSum.value);
+	//trace(ds_lawsuit2.saveXML());
+	var strSvcid="LawsuitAddSaveVO";
+	var strController="/lawsuit/LawsuitAddSaveVO.do";
+	var strParam="";
+	//trace(strParam);
+	//trace(this.ds_lawsuit2.saveXML());
+	this.gfn_transaction(this,strSvcid,strController,"ds_input=ds_lawsuit2","ds_lawsuit2=ds_output",strParam,"fnCallback");
+}
+
+this.btn_close_onclick = function (obj:Button,  e:ClickEventInfo)
+{
+	this.close();
+}
+
+this.fnCallback = function (svcid, errcd, errmsg)
+{
+	switch(svcid)
+	{
+		case "LawsuitAddSaveVO" :
+			if(errcd==0){
+				alert("등록되었습니다.");
+			}else{
+				alert(errmsg);
+			}
+			this.close(rdo_re.value+"&"+edt_countEventNo.value+"&"+edt_countNo.value+"&"+edt_countSum.value);
+		break;
+	}
+}
+
+this.rdo_re_onitemclick = function(obj:Radio, e:nexacro.RadioMouseEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

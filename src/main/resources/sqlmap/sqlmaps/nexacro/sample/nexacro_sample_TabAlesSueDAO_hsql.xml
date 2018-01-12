@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TabAlesSue">
+
+    <!-- <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/> -->
+    <typeAlias  alias="TabAlesSueVO" type="nexacro.sample.vo.TabAlesSueVO"/>
+    <typeAlias alias="egovMap"
+		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+    <!-- Sample resultObject -->
+    
+    
+  <select id="prgr.Ales_sueDAO.getAlesSueSelect" parameterClass="java.util.HashMap" resultClass="egovMap">
+		<![CDATA[
+			SELECT 
+			        A.LAWSUIT_ADM_NO
+			       ,A.LAW_RAISREQ_NO
+			       ,A.LAWSUIT_APL_CORT_CODE
+			       ,A.LAWSUIT_APL_CASE_CODE
+			       ,A.LAWSUIT_CASE_TY_CODE
+			       ,A.LAWSUIT_CP_PLADEF_SEPCODE
+			       ,A.LAWSUIT_RAIS_REA
+			       ,A.PLADEF_NAME
+			       ,B.ALES_SUE_ISSU_POIN
+			       ,B.ALES_SUE_REQ_CONT
+			       ,B.ALES_SUE_REPO_DATE
+			    FROM 
+			(SELECT  T1.LAWSUIT_ADM_NO,LAW_RAISREQ_NO
+			        ,(SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='A01' AND CODE_NO = T1.LAWSUIT_APL_CORT_CODE) AS LAWSUIT_APL_CORT_CODE
+			        ,T1.LAWSUIT_APL_CASE_CODE
+			        ,(SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='A02' AND CODE_NO =T1.LAWSUIT_CASE_TY_CODE) AS LAWSUIT_CASE_TY_CODE
+			        ,(SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='H02' AND CODE_NO =T1.LAWSUIT_CP_PLADEF_SEPCODE) AS LAWSUIT_CP_PLADEF_SEPCODE
+			        ,T1.LAWSUIT_RAIS_REA
+			        ,T2.PLADEF_NAME
+			FROM TAB_LAWSUIT T1,TAB_PLADEF T2  
+			WHERE   T1.LAWSUIT_ADM_NO = T2.LAWSUIT_ADM_NO
+			AND T1.LAWSUIT_ADM_NO=#lawsuitAdmNo#   
+			) A,TAB_ALES_SUE B
+			WHERE A.LAWSUIT_ADM_NO = B.LAWSUIT_ADM_NO(+)
+		]]>
+	</select>	
+	
+	<!-- <insert id="prgr.Ales_sueDAO.ales_sueSave" parameterClass="TabAlesSueVO" >
+	<![CDATA[
+		MERGE INTO TAB_ALES_SUE USING DUAL ON (LAWSUIT_ADM_NO = #lawsuitAdmNo#)
+		WHEN MATCHED THEN UPDATE SET ALES_SUE_ISSU_POIN= #alesSueIssuPoin#, ALES_SUE_REQ_CONT=#alesSueReqCont#, ALES_SUE_REPO_DATE = #alesSueRepoDate#  
+		WHEN NOT MATCHED THEN INSERT ( LAWSUIT_ADM_NO,ALES_SUE_ISSU_POIN,ALES_SUE_REQ_CONT,ALES_SUE_REPO_DATE)
+		VALUES( #lawsuitAdmNo#, #alesSueIssuPoin#, #alesSueReqCont#, #alesSueRepoDate#)
+				
+				]]>
+	</insert> -->
+	 
+	
+	<update id="prgr.Ales_sueDAO.ales_sueUpdate" parameterClass="TabAlesSueVO">
+		<![CDATA[
+		
+		MERGE INTO TAB_ALES_SUE USING DUAL ON (LAWSUIT_ADM_NO = #lawsuitAdmNo#)
+		WHEN MATCHED THEN UPDATE SET ALES_SUE_ISSU_POIN= #alesSueIssuPoin#, ALES_SUE_REQ_CONT=#alesSueReqCont#, ALES_SUE_REPO_DATE = #alesSueRepoDate#  
+		WHEN NOT MATCHED THEN INSERT ( LAWSUIT_ADM_NO,ALES_SUE_ISSU_POIN,ALES_SUE_REQ_CONT,ALES_SUE_REPO_DATE)
+		VALUES( #lawsuitAdmNo#, #alesSueIssuPoin#, #alesSueReqCont#, #alesSueRepoDate#)
+		
+		]]>
+	</update>
+	<!-- UPDATE TAB_ALES_SUE
+        
+	        SET  ALES_SUE_ISSU_POIN = #alesSueIssuPoin#
+	            ,ALES_SUE_REQ_CONT = #alesSueReqCont#
+	            ,ALES_SUE_REPO_DATE = #alesSueRepoDate#
+
+        	WHERE  LAWSUIT_ADM_NO = #lawsuitAdmNo# -->
+	
+    
+</sqlMap>
+
+
+
+    

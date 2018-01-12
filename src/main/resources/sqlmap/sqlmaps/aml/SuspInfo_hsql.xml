@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+   <!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+   <typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+   
+   <select id="suspInfoSql.search" parameterClass="java.util.HashMap" resultClass="egovMap">
+   	SELECT UPPER_CODE
+   		 , UPPER_NAME
+   		 , REGI_ID
+   		 , REGI_DT
+   		 , USE_YN
+   		 , 'S' AS FLAG
+      FROM AML_SUSP_DEAL_TYPE_UPPER_INFO
+      ORDER BY UPPER_CODE
+   </select>
+   
+   <insert id="upper.Insert" parameterClass="java.util.HashMap">
+     INSERT INTO AML_SUSP_DEAL_TYPE_UPPER_INFO(
+           UPPER_CODE
+         , UPPER_NAME
+         , REGI_ID
+         , REGI_DT
+         , USE_YN
+       )VALUES(
+           (SELECT MAX(UPPER_CODE)+100 
+           FROM AML_SUSP_DEAL_TYPE_UPPER_INFO)
+         , #upperName#
+         , #regiId#
+         , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+         , #useYn#
+          ) 
+   </insert>
+   
+   <update id="upper.Update" parameterClass="java.util.HashMap">
+     UPDATE AML_SUSP_DEAL_TYPE_UPPER_INFO
+        SET 
+            UPPER_NAME = #upperName#
+          , REGI_ID    = #regiId#
+          , REGI_DT    = TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') 
+          , USE_YN     = #useYn#
+     WHERE UPPER_CODE = #upperCode#
+   </update>
+   
+   <delete id="upper.Delete" parameterClass="java.util.HashMap">
+     DELETE FROM AML_SUSP_DEAL_TYPE_UPPER_INFO
+      WHERE UPPER_CODE = #upperCode#
+   </delete>
+   
+   <select id="susp.Detail" parameterClass="java.util.HashMap" resultClass="egovMap">
+     SELECT SDD.DETAIL_CODE
+          , SDD.DETAIL_NAME
+          , SDI.REGI_ID
+          , SDI.REGI_DT
+          , SDD.MODI_ID
+          , SDD.MODI_DT
+          , SDD.USE_YN
+          , 'S' AS FLAG
+          , SDI.UPPER_CODE
+       FROM AML_SUSP_DEAL_TYPE_UPPER_INFO SDI
+          , AML_SUSP_DEAL_DETAIL SDD
+      WHERE SDI.UPPER_CODE = SDD.UPPER_CODE
+        AND SDI.UPPER_CODE = #upperCode#
+        ORDER BY DETAIL_CODE
+   </select>
+   
+   <insert id="detail.Insert" parameterClass="java.util.HashMap">
+    INSERT INTO AML_SUSP_DEAL_DETAIL(
+           DETAIL_CODE
+         , DETAIL_NAME
+         , REGI_ID
+         , REGI_DT
+         , MODI_ID
+         , MODI_DT
+         , USE_YN
+         , UPPER_CODE
+    )VALUES(
+         (SELECT NVL((MAX(DETAIL_CODE)+1),#upperCode#+1)
+           FROM AML_SUSP_DEAL_DETAIL
+           WHERE UPPER_CODE = #upperCode#)           
+         , #detailName#
+         , #regiId#
+         , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+         , #modiId#
+         , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+         , #useYn#
+         , #upperCode#
+    )
+   </insert>
+   
+   <update id="detail.Update" parameterClass="java.util.HashMap">
+     UPDATE AML_SUSP_DEAL_DETAIL
+        SET UPPER_CODE = #upperCode#
+          , DETAIL_CODE = #detailCode#
+          , DETAIL_NAME = #detailName#
+          , REGI_ID = #regiId#
+          , REGI_DT = TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+          , MODI_ID = #modiId#
+          , MODI_DT = TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+          , USE_YN = #useYn#
+      WHERE UPPER_CODE = #upperCode#
+        AND DETAIL_CODE = #detailCode#
+   </update>
+   
+   <delete id="detail.Delete" parameterClass="java.util.HashMap">
+     DELETE FROM AML_SUSP_DEAL_DETAIL
+      WHERE DETAIL_CODE = #detailCode#
+   </delete>
+   
+</sqlMap>

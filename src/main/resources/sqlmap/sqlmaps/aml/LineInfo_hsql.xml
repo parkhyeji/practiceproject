@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="rais">
+
+	<!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	
+	<select id="aml.LineInfoDAO.state" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT CODE_NO   AS CODE
+			 , CODE_NAME AS VALUE
+		  FROM AML_COMMON_CODE_DETAIL
+		 WHERE CLASS_CODE = #classCode#
+	</select>
+	
+	<select resultClass="egovMap" parameterClass="java.util.HashMap" id="aml.LineInfoDAO.empName"> 
+	    SELECT EMP_NO   AS CODE
+	         , EMP_NAME AS VALUE
+	      FROM AML_EMP_INFO 
+	</select>
+
+	<select resultClass="egovMap" parameterClass="java.util.HashMap" id="aml.LineInfoDAO.report"> 
+        
+         SELECT REPORT_NO
+              , DEAL_STD 
+              , DEAL_EDD 
+              , WITH_COUNT 
+              , DEPO_COUNT 
+              , DEPO_WON_MOUNT 
+              , DEPO_DOLLAR_MOUNT 
+              , WITH_DOLLAR_MOUNT 
+              , DEAL_COUNT 
+              , WON_MOUNT 
+              , SUSP_REASON 
+              , OPPI 
+              , BRANCH_SUSP_SCORE 
+              , HEAD_SUSP_SCORE 
+              , REL_DOCU_MAKE_NO 
+              , ETC 
+              , MODI_DT 
+              , MODI_ID 
+              , REPORT_DATE 
+              , ALERT_GROUP_NO 
+              , REGI_DT 
+              , TRIM(REGI_ID) AS REGI_ID 
+              , APP_ID 
+              , APP_NO 
+              , '0' AS CH 
+           FROM AML_STR_REPORT_MST 
+           <!-- WHERE APP_ID = #value# -->
+          <isNotEqual property="code" compareValue="0000">
+            AND APP_NO = #code#
+          </isNotEqual>
+     </select>
+
+	<update parameterClass="java.util.HashMap" id="aml.LineInfoDAO.approval"> 
+         UPDATE	AML_STR_REPORT_MST 
+            SET APP_NO = '0003'
+              , OPPI= #oppi# 
+          WHERE ALERT_GROUP_NO = #alertGroupNo#
+    </update>
+
+	<update parameterClass="java.util.HashMap" id="aml.LineInfoDAO.disapproval"> 
+        UPDATE AML_STR_REPORT_MST 
+           SET APP_NO = '0004' 
+              , OPPI= #oppi#
+         WHERE ALERT_GROUP_NO = #alertGroupNo# 
+    </update>
+</sqlMap>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TabEdocAdm">
+
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>    
+    <typeAlias  alias="cmmCodeDetailVO" type="nexacro.sample.vo.CmmCodeDetailVO"/> 
+                      
+    
+    <resultMap id="cmmCodeDetail" class="cmmCodeDetailVO">
+        <result property="classCode" column="CLASS_CODE" />                	    	
+        <result property="codeNo" column="CODE_NO" />
+        <result property="codeName" column="CODE_NAME" />
+        <result property="codeName2" column="CODE_NAME2" />
+        <result property="useYn" column="USE_YN" />
+        <result property="sortSeq" column="SORT_SEQ" />
+        
+    </resultMap>
+    
+    
+    <resultMap id="cmmCodeDetailMap" class="java.util.HashMap">
+        <result property="classCode" column="CLASS_CODE" />                	    	
+        <result property="codeNo" column="CODE_NO" />
+        <result property="codeName" column="CODE_NAME" />
+        <result property="codeName2" column="CODE_NAME2" />
+        <result property="useYn" column="USE_YN" />
+        <result property="sortSeq" column="SORT_SEQ" />
+    </resultMap>
+    
+    <!-- jsd -->
+       <resultMap id="cmmCodeDetailGet" class="cmmCodeDetailVO" >
+    	<result property="classCode" column="CLASS_CODE"/>
+    	<result property="codeNo" column="CODE_NO"/>
+    	<result property="codeName" column="CODE_NAME"/>
+    	<result property="useYn" column="USE_YN"/>
+    	<!--  <result property="sortSeq" column="SORT_SEQ"/>-->
+    </resultMap>
+    
+ 	<select id="cmmCodeDetailDAO.selectCmmCodeDetailVOList" parameterClass="cmmCodeDetailVO" resultMap="cmmCodeDetail">
+            SELECT
+                A.CLASS_CODE AS CLASS_CODE, 
+                A.CODE_NO AS CODE_NO, 
+                A.CODE_NAME AS CODE_NAME, 
+                A.CODE_NAME2 AS CODE_NAME2, 
+                A.USE_YN AS USE_YN, 
+                A.SORT_SEQ AS SORT_SEQ
+            FROM CMM_CODE_DETAIL A
+            WHERE 1=1
+            
+             	<isNotNull property="classCode"> 
+             	<![CDATA[                  
+                	AND CLASS_CODE = #classCode#
+                	]]> 
+                </isNotNull>
+            
+            
+    </select>
+    
+    <select id="cmmCodeDetailDAO.selectCmmCodeDetailMapList" parameterClass="cmmCodeDetailVO" resultMap="cmmCodeDetailMap">
+            SELECT
+                A.CLASS_CODE AS CLASS_CODE, 
+                A.CODE_NO AS CODE_NO, 
+                A.CODE_NAME AS CODE_NAME, 
+                A.CODE_NAME2 AS CODE_NAME2, 
+                A.USE_YN AS USE_YN, 
+                A.SORT_SEQ AS SORT_SEQ
+            FROM CMM_CODE_DETAIL A
+            WHERE 1=1
+            
+                <isNotNull property="classCode"> 
+                <![CDATA[                 
+                	AND CLASS_CODE = #classCode#
+                	]]>
+                </isNotNull>
+            
+            
+    </select>
+    
+    <select id="cmmCodeDetailDAO.selectCmmCodeDetailCount" parameterClass="cmmCodeDetailVO" resultClass="int">
+            SELECT
+                COUNT(*) as totalCount
+            FROM CMM_CODE_DETAIL A
+            WHERE 1=1
+            
+                <isNotNull property="classCode">  
+                 <![CDATA[                 
+                	AND CLASS_CODE = #classCode#
+                	]]>
+                </isNotNull>
+            
+    </select>
+    
+	<select id="cmmCodeDetailDAO.selectCmmCodeDetailPaging" parameterClass="cmmCodeDetailVO" resultMap="cmmCodeDetail">
+            SELECT * 
+            FROM ( select
+            		rownum rnum,
+	            	A.CLASS_CODE AS CLASS_CODE, 
+                A.CODE_NO AS CODE_NO, 
+                A.CODE_NAME AS CODE_NAME, 
+                A.CODE_NAME2 AS CODE_NAME2, 
+                A.USE_YN AS USE_YN, 
+                A.SORT_SEQ AS SORT_SEQ
+            FROM CMM_CODE_DETAIL A
+                order by A.SORT_SEQ ASC ) 
+            WHERE 1=1 and rnum between #firstIndex# and #recordCountPerPage#
+            <isNotNull property="classCode">     
+            <![CDATA[           
+                	AND CLASS_CODE = #classCode#
+             ]]>    	
+                </isNotNull>
+            
+           
+    </select>
+    
+    <insert id="cmmCodeDetailDAO.insertCmmCodeDetailVO" parameterClass="cmmCodeDetailVO">
+        <![CDATA[
+            INSERT INTO CMM_CODE_DETAIL (
+            	 A.CLASS_CODE AS CLASS_CODE, 
+                A.CODE_NO AS CODE_NO, 
+                A.CODE_NAME AS CODE_NAME, 
+                A.CODE_NAME2 AS CODE_NAME2, 
+                A.USE_YN AS USE_YN, 
+                A.SORT_SEQ AS SORT_SEQ
+            ) VALUES (
+                #classCode#, 
+	            #codeNo#, 
+	            #codeName#, 
+	            #codeName2#, 
+	            #useYn#, 
+	            #sortSeq#
+            )
+        ]]>
+    </insert>
+    
+      <update id="cmmCodeDetailDAO.updateCmmCodeDetailVO" parameterClass="cmmCodeDetailVO">
+        <![CDATA[
+            UPDATE CMM_CODE_DETAIL 
+            SET CODE_NAME=#codeName#
+                , CODE_NAME2=#codeName2#
+                , USE_YN=#useYn#
+                , SORT_SEQ=#sortSeq#                
+            WHERE CLASS_CODE=#classCode# 
+            AND CODE_NO=#codeNo#
+        ]]>
+    </update>
+    
+    <delete id="cmmCodeDetailDAO.deleteCmmCodeDetailVO" parameterClass="cmmCodeDetailVO">
+        <![CDATA[
+            DELETE FROM CMM_CODE_DETAIL 
+             WHERE CLASS_CODE=#classCode# 
+            AND CODE_NO=#codeNo#
+        ]]>
+    </delete>
+    
+    <!-- jsd -->
+    <select id="cmmCodeDetailDAO.selectCodeList" 
+    resultMap="cmmCodeDetailGet" parameterClass="java.util.HashMap" remapResults="true">
+    <![CDATA[
+    SELECT 
+    	CLASS_CODE
+    	, CODE_NO
+    	, CODE_NAME
+    	, USE_YN
+    FROM
+    	(SELECT 
+    		CLASS_CODE
+    		, CODE_NO
+    		, CODE_NAME
+    		, USE_YN
+    	FROM CMM_CODE_DETAIL
+    		WHERE
+    					CLASS_CODE=#classCode# 
+    				AND 
+    					USE_YN = #useYn#
+    				OR
+    					CODE_NO=#total#
+    		ORDER BY CLASS_CODE, CODE_NO
+    	)
+    ]]>
+    </select>
+    
+    <!-- jsd -->
+    <select id="cmmCodeDetailDAO.giveMeCode" 
+    resultMap="cmmCodeDetailGet" parameterClass="java.util.HashMap" remapResults="true">
+    <![CDATA[
+    SELECT 
+    	CLASS_CODE
+    	, CODE_NO
+    	, CODE_NAME
+    	, USE_YN
+    FROM
+    	(SELECT 
+    		CLASS_CODE
+    		, CODE_NO
+    		, CODE_NAME
+    		, USE_YN
+    	FROM CMM_CODE_DETAIL
+    		WHERE
+    					CLASS_CODE=#classCode# 
+    				AND 
+    					USE_YN = #useYn#
+    				OR
+    					CODE_NO=#total#
+    		ORDER BY CLASS_CODE, CODE_NO
+    	)
+    ]]>
+    </select>
+</sqlMap>

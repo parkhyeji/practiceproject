@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+
+
+
+	<!--	 		[마스터, 상세] 공통코드 전체내역 SQL		 		-->
+	<select id="Sys.sysSampleDAO.loadCommonCodes" resultClass="egovMap">
+		SELECT CLASS_CODE AS CODE
+			 , CLASS_NAME AS VALUE
+		  FROM AML_COMMON_CODE_MASTER
+	</select>
+	<select id="Sys.sysDetailDAO.loadCommonCodesDetail" resultClass="egovMap">
+		SELECT CODE_NO AS CODE
+			 , CODE_NAME AS VALUE
+		  FROM AML_COMMON_CODE_DETAIL
+	</select>
+
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- 공통코드 MASTER 분류코드별 조회 -->
+	<select id="Sys.sysSampleDAO.read" parameterClass="java.util.HashMap" resultClass="egovMap">	
+		SELECT CLASS_CODE
+			 , CLASS_NAME
+			 , USE_YN
+			 , MAIN_TABLE
+			 , MAIN_COLUMN
+			 , CLASS_DESC
+			 , REGIST_TIME
+			 , REGIST_ID
+			 , MODIFY_TIME
+			 , MODIFY_ID
+		  FROM AML_COMMON_CODE_MASTER
+		  <isNotEqual property="search" compareValue="0000">
+		 WHERE CLASS_CODE = #search#
+		 </isNotEqual>
+	</select>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////// -->			
+
+	<!-- (공통코드 상세 DETAIL) 분류코드, 상세코드, 상세코드명으로 조회 -->
+	<select id="Sys.sysDetailDAO.read" parameterClass="java.util.HashMap" resultClass="egovMap">
+	<![CDATA[		
+		SELECT m.CLASS_CODE
+			 , d.CODE_NO
+			 , d.CODE_NAME
+			 , d.CODE_NAME2
+			 , d.CODE_ENG_NAME
+			 , d.ETC_CODE1
+			 , d.ETC_CODE2
+			 , d.CODE_DESC
+			 , d.USE_YN
+			 , d.SORT_SEQ
+			 , d.REGIST_DATE
+			 , d.REGIST_ID
+			 , d.UPDATE_TIME
+			 , d.UPDATE_ID
+			 , d.LAST_MODY_DATE
+			 , d.HIGHER_CLASS_CODE
+			 , d.HIGHER_CODE_NO
+		  FROM AML_COMMON_CODE_DETAIL d, AML_COMMON_CODE_MASTER m
+		 WHERE m.CLASS_CODE = d.CLASS_CODE
+		 ]]>		 
+		<dynamic>
+		<isNotEqual property="select_class_code" compareValue="0000">
+			<isNotNull property="select_class_code">
+			   AND m.CLASS_CODE = #select_class_code#
+		    		<!--  AND m.CLASS_CODE LIKE '%' || #select_class_code# || '%'-->
+			</isNotNull>
+		</isNotEqual>
+		<isNotEqual property="select_code_no" compareValue="0000">
+			<isNotNull property="select_code_no">
+			    AND d.CODE_NO = #select_code_no#
+		  			<!-- AND d.CODE_NO LIKE '%' || #select_code_no# || '%' -->
+			</isNotNull>
+		</isNotEqual>
+<!-- 		
+		<isNotEqual property="select_code_no" compareValue="">
+			<isNotNull property="select_code_name" >
+			   AND d.CODE_NAME = #select_code_name#
+		    		 AND d.CODE_NAME = #select_code_name# 	
+			</isNotNull>
+		</isNotEqual>
+ -->			
+		</dynamic>
+	</select>
+	
+	
+	<select id="Sys.sysDetailDAO.selectOption" parameterClass="java.util.HashMap" resultClass="egovMap">		
+		SELECT CODE_NO AS CODE
+			 , CODE_NAME AS VALUE
+		  FROM AML_COMMON_CODE_DETAIL
+		 WHERE CLASS_CODE = #col#
+	</select>
+	
+	<insert id="Sys.sysDetailDAO.insert" parameterClass="java.util.HashMap">	
+		INSERT INTO AML_COMMON_CODE_DETAIL(
+		   CLASS_CODE
+		 , CODE_NO
+	     , CODE_NAME
+	     , CODE_NAME2
+	     , CODE_ENG_NAME
+	     , ETC_CODE1
+	     , ETC_CODE2
+	     , CODE_DESC
+	     , USE_YN
+	     , SORT_SEQ
+	     , REGIST_DATE
+	     , REGIST_ID
+	     , UPDATE_TIME
+	     , UPDATE_ID
+	     , LAST_MODY_DATE
+	     , HIGHER_CLASS_CODE
+		 , HIGHER_CODE_NO	     	    
+		
+		 ) VALUES (
+		   #classCode#
+		 , #codeNo#
+		 , #codeName#
+		 , ' '<!-- #codeName2# -->
+		 , ' '<!-- #codeEngName# -->
+		 , ' '<!-- #etcCode1# -->
+		 , ' '<!-- #etcCode2# -->
+		 , ' '<!-- #codeDesc# -->
+		 , #useYn#
+		 , ' '<!-- #sortSeq# -->
+		 , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+		 , 'ADMIN'
+		 , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+		 , 'ADMIN'
+		 , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+		 , ' '<!-- higherClassCode -->
+		 , ' '<!-- higherClassNo -->
+		 )
+	</insert>
+
+	<update id="Sys.sysDetailDAO.update" parameterClass="java.util.HashMap">
+		UPDATE AML_COMMON_CODE_DETAIL
+		   SET CODE_NAME2			= #codeName2#
+		     , CODE_ENG_NAME		= #codeEngName#
+		     , ETC_CODE1			= #etcCode1#
+		     , ETC_CODE2			= #etcCode2#
+		     , CODE_DESC			= #codeDesc#
+		     , USE_YN				= #useYn#
+		     , SORT_SEQ				= #sortSeq#
+		 WHERE CLASS_CODE			= #classCode#
+		   AND CODE_NO				= #codeNo#
+	</update>
+
+	<delete id="Sys.sysDetailDAO.delete" parameterClass="java.util.HashMap">	  
+		DELETE FROM AML_COMMON_CODE_DETAIL
+		 WHERE CLASS_CODE 		= #classCode#
+		   AND CODE_NO 			= #codeNo#
+	</delete>
+	
+</sqlMap>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Pop_reportExcept" classname="Pop_reportExcept" left="0" top="0" width="374" height="240" titletext="New Form" onload="Pop_reportExcept_onload">
+    <Layouts>
+      <Layout>
+        <TextArea id="ta_reason" taborder="1" left="40" top="54" right="40" height="146" enable="false" style=":disabled {border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;}"/>
+        <Button id="bt_submit" taborder="2" text="확인" left="41.55%" top="208" right="40.64%" height="25" onclick="bt_sumit_onclick"/>
+        <Static id="sta_title" taborder="4" onclick="sta_title_onclick" left="0%" top="0" right="0%" height="46" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Static id="Static02" taborder="3" text="보고 제외 사유" left="40" top="0" width="200" height="45" style="color:white;font:bold 17 돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_viewR">
+        <ColumnInfo>
+          <Column id="alertGroupNo" type="STRING" size="20"/>
+          <Column id="reportExceptReason" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="ta_reason" propid="value" datasetid="ds_viewR" columnid="reportExceptReason"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+this.Pop_reportExcept_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var aGNO = this.parent.gNo;
+	this.ds_viewR.setColumn(0, "alertGroupNo", aGNO);
+	
+	this.gfn_transaction(this
+					   , "viewR"
+					   , "reason.do"
+					   , "ds_viewR=ds_viewR"
+					   , "ds_viewR=ds_viewR"
+					   , ""
+					   , "fnCallback");
+
+}
+
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		application.alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+			case "viewR":
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+this.bt_sumit_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{	
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

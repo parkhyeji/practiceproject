@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="lawsuitLitigantService">
+
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="LawsuitLitigantRegisterVO" type="nexacro.sample.service.lawsuit.vo.LawsuitLitigantRegisterVO" />
+	
+	<resultMap class="LawsuitLitigantRegisterVO" id="LawsuitRegister">
+		<result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+		 <result property="pladefSepCode" column="PLADEF_SEP_CODE" />
+		 <result property="pladefSeq" column="PLADEF_SEQ" />
+		 <result property="pladefName" column="PLADEF_NAME" />
+		 <result property="pladefRegNo" column="PLADEF_REG_NO" />
+		 <result property="pladefMainTel" column="PLADEF_MAIN_TEL" />
+		 <result property="pladefAddTel" column="PLADEF_ADD_TEL" />
+		 <result property="pladefPos" column="PLADEF_POS" />
+		 <result property="pladefAddr1" column="PLADEF_ADDR1" />
+		 <result property="pladefAddr2" column="PLADEF_ADDR2" />
+		 <result property="pladefClamVol" column="PLADEF_CLAM_VOL" />
+		 <result property="pladefRegInst" column="PLADEF_REG_INST" />
+		 <result property="pladefEndInst" column="PLADEF_END_INST" />
+	</resultMap>
+
+<!-- 원피고 수정 -->
+	<update id="lawsuit.LawsuitLitigantRegisterVO.updatePladefAll">	
+		<![CDATA[			
+			UPDATE TAB_PLADEF SET 
+			PLADEF_NAME=#pladefName#
+			,PLADEF_REG_NO=#pladefRegNo#
+			,PLADEF_MAIN_TEL=#pladefMainTel#
+			,PLADEF_ADD_TEL=#pladefAddTel# 
+			,PLADEF_POS=#pladefPos#  
+			,PLADEF_ADDR1=#pladefAddr1# 
+			,PLADEF_ADDR2=#pladefAddr2# 
+			,PLADEF_CLAM_VOL=#pladefClamVol#
+			  WHERE LAWSUIT_ADM_NO = #lawsuitAdmNo#
+            AND PLADEF_SEP_CODE	= #pladefSepCode#  
+			AND PLADEF_SEQ = #pladefSeq#
+		]]>
+	</update>
+	
+	<select id="LawsuitLitigantRegisterDAO.selectPladefAll" parameterClass="LawsuitLitigantRegisterVO" resultMap="LawsuitRegister">
+		 SELECT
+			A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO,
+			A.PLADEF_SEP_CODE AS PLADEF_SEP_CODE,
+			A.PLADEF_SEQ AS PLADEF_SEQ,
+			A.PLADEF_NAME AS PLADEF_NAME,
+			A.PLADEF_REG_NO AS PLADEF_REG_NO,
+			A.PLADEF_MAIN_TEL AS PLADEF_MAIN_TEL,
+			A.PLADEF_ADD_TEL AS PLADEF_ADD_TEL,
+			A.PLADEF_POS AS PLADEF_POS,
+			A.PLADEF_ADDR1 AS PLADEF_ADDR1,
+			A.PLADEF_ADDR2 AS PLADEF_ADDR2,
+			A.PLADEF_CLAM_VOL AS PLADEF_CLAM_VOL,
+			A.PLADEF_REG_INST AS PLADEF_REG_INST,
+			A.PLADEF_END_INST AS PLADEF_END_INST
+			FROM TAB_PLADEF A
+			  WHERE 1=1
+			  <dynamic>
+			  	<isNotNull property="lawsuitAdmNo">
+			  	AND LAWSUIT_ADM_NO = #lawsuitAdmNo# 
+			  	</isNotNull>
+			  	<isNotNull property="pladefSeq">
+			  	AND PLADEF_SEQ = #pladefSeq#
+			  	</isNotNull>
+			  </dynamic>
+	</select>
+	<!-- 
+	private String lawsuitAdmNo;
+	private String pladefSepCode;
+	private String pladefSeq;
+	private String pladefName;
+	private String pladefRegNo;
+	private String pladefMainTel;
+	private String pladefAddTel;
+	private String pladefPos;
+	private String pladefAddr1;
+	private String pladefAddr2;
+	private String pladefClamVol;
+	private String pladefRegInst;
+	private String pladefEndInst;
+	 -->
+		<insert id="lawsuit.LawsuitLitigantRegisterVO.plaDefMgr" parameterClass="LawsuitLitigantRegisterVO">	
+		<![CDATA[			
+			INSERT INTO TAB_PLADEF(
+				LAWSUIT_ADM_NO
+				,PLADEF_SEP_CODE
+				,PLADEF_SEQ
+				,PLADEF_NAME
+				,PLADEF_REG_NO
+				,PLADEF_MAIN_TEL
+				,PLADEF_ADD_TEL
+				,PLADEF_POS
+				,PLADEF_ADDR1
+				,PLADEF_ADDR2
+				,PLADEF_CLAM_VOL
+			) VALUES (
+				#lawsuitAdmNo#
+				,#pladefSepCode# 
+				,(SELECT MAX(PLADEF_SEQ)+1 FROM TAB_PLADEF WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#)
+				,#pladefName#
+				,#pladefRegNo#
+				,#pladefMainTel#
+				,#pladefAddTel# 
+				,#pladefPos#  
+				,#pladefAddr1# 
+				,#pladefAddr2# 
+				,#pladefClamVol#
+				)
+			
+		]]>
+	</insert>
+	
+</sqlMap>

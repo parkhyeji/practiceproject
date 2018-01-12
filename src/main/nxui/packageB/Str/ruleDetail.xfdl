@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="ruleDetail" classname="ruleDetail" left="0" top="0" width="1024" height="768" titletext="New Form" onload="ruleDetail_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="0" text="* 룰ID" left="5.47%" top="150" right="90.04%" height="21"/>
+        <Static id="Static02" taborder="2" text="총거래금액" left="3.91%" top="190" right="89.75%" height="21"/>
+        <Static id="Static03" taborder="3" text="거래자관련설명" left="2.34%" top="238" right="88.77%" height="21"/>
+        <Static id="Static04" taborder="4" text="종합의견" left="32.23%" top="195" right="62.79%" height="21"/>
+        <Static id="Static05" taborder="5" text="* 그룹번호" left="4.69%" top="118" right="88.67%" height="21"/>
+        <Static id="Static06" taborder="6" text="의심정도점수" left="67.38%" top="120" right="25.1%" height="21"/>
+        <Static id="Static07" taborder="7" text="의심거래조사상태코드" left="62.7%" top="152" right="25.49%" height="21"/>
+        <Combo id="Combo00" taborder="8" left="11.91%" top="121" right="71.48%" height="23" codecolumn="code" innerdataset="@ds_groupNo"/>
+        <Combo id="Combo01" taborder="9" left="11.91%" top="153" right="71.48%" height="23" codecolumn="code" innerdataset="@ds_ruleId"/>
+        <Combo id="Combo02" taborder="10" left="76.95%" top="123" right="6.45%" height="23" codecolumn="code" datacolumn="value" innerdataset="@ds_score"/>
+        <Combo id="Combo03" taborder="11" left="76.95%" top="155" right="6.45%" height="23" codecolumn="code" datacolumn="value" innerdataset="@ds_stCode"/>
+        <Edit id="Edit00" taborder="12" left="12.11%" top="192" right="71%" height="29"/>
+        <Edit id="Edit01" taborder="13" left="12.11%" top="232" right="70.7%" height="50"/>
+        <Edit id="Edit02" taborder="14" left="40.43%" top="189" right="6.45%" height="93"/>
+        <Button id="Button00" taborder="15" text="등록" left="26.66%" top="326" right="59.57%" height="30" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="16" text="조회" left="42.29%" top="326" right="43.95%" height="30" onclick="Button01_onclick"/>
+        <Grid id="Grid00" taborder="17" useinputpanel="false" left="3.61%" top="367" right="6.25%" height="224" binddataset="ds_detailList">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="81"/>
+                <Column size="65"/>
+                <Column size="83"/>
+                <Column size="87"/>
+                <Column size="97"/>
+                <Column size="144"/>
+                <Column size="82"/>
+                <Column size="110"/>
+                <Column size="170"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="그룹번호"/>
+                <Cell col="1" text="룰아이디"/>
+                <Cell col="2" text="거래금액"/>
+                <Cell col="3" text="수정일시"/>
+                <Cell col="4" text="수정자아이디"/>
+                <Cell col="5" text="거래자관련설명"/>
+                <Cell col="6" text="종합의견"/>
+                <Cell col="7" text="의심정도점수"/>
+                <Cell col="8" text="의심거래조사상태코드"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:alertGroupNo"/>
+                <Cell col="1" text="bind:ruleId"/>
+                <Cell col="2" text="bind:totalDealMount"/>
+                <Cell col="3" text="bind:modiDt" expr="expr:comp.parent.expr_modiDt(currow)"/>
+                <Cell col="4" text="bind:modiId"/>
+                <Cell col="5" text="bind:dealerRelMark"/>
+                <Cell col="6" text="bind:oppi"/>
+                <Cell col="7" displaytype="combo" text="bind:suspScore" combodataset="ds_score" combocodecol="code" combodatacol="value"/>
+                <Cell col="8" displaytype="combo" text="bind:suspDealInveStCode" combodataset="ds_stCode" combocodecol="code" combodatacol="value"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static08" taborder="18" text="배당지점코드" left="32.62%" top="118" right="59.57%" height="21"/>
+        <Static id="Static09" taborder="19" text="배당담당자ID" left="32.81%" top="150" right="59.47%" height="21"/>
+        <Combo id="Combo04" taborder="20" left="41.89%" top="115" right="41.31%" height="23" codecolumn="code" datacolumn="value" innerdataset="@ds_officeCode"/>
+        <Combo id="Combo05" taborder="21" left="41.99%" top="149" right="41.21%" height="23" codecolumn="code" datacolumn="value" innerdataset="@ds_chgedId"/>
+        <Static id="sta_title" taborder="22" text="룰 상세 관리" onclick="sta_title_onclick" left="1.17%" top="46" right="1.17%" height="53" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Button id="Button02" taborder="23" text="초기화" onclick="Button02_onclick" left="57.81%" top="326" right="31.54%" height="28"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_groupNo">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_ruleId">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_stCode">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="255"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_score">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="255"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="value">1점</Col>
+          </Row>
+          <Row>
+            <Col id="code">2</Col>
+            <Col id="value">2점</Col>
+          </Row>
+          <Row>
+            <Col id="code">3</Col>
+            <Col id="value">3점</Col>
+          </Row>
+          <Row>
+            <Col id="code">4</Col>
+            <Col id="value">4점</Col>
+          </Row>
+          <Row>
+            <Col id="code">5</Col>
+            <Col id="value">5점</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_detailList">
+        <ColumnInfo>
+          <Column id="alertGroupNo" type="STRING" size="20"/>
+          <Column id="ruleId" type="STRING" size="20"/>
+          <Column id="totalDealMount" type="INT" size="18"/>
+          <Column id="modiDt" type="STRING" size="14"/>
+          <Column id="modiId" type="STRING" size="20"/>
+          <Column id="distOfficeCode" type="STRING" size="4"/>
+          <Column id="distChgedId" type="STRING" size="20"/>
+          <Column id="dealerRelMark" type="STRING" size="255"/>
+          <Column id="oppi" type="STRING" size="1000"/>
+          <Column id="suspScore" type="INT" size="2"/>
+          <Column id="suspDealInveStCode" type="STRING" size="4"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_officeCode">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="255"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_chgedId">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="255"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Edit00" propid="value" datasetid="ds_detailList" columnid="totalDealMount"/>
+      <BindItem id="item1" compid="Edit01" propid="value" datasetid="ds_detailList" columnid="dealerRelMark"/>
+      <BindItem id="item2" compid="Edit02" propid="value" datasetid="ds_detailList" columnid="oppi"/>
+      <BindItem id="item3" compid="Combo03" propid="value" datasetid="ds_detailList" columnid="suspDealInveStCode"/>
+      <BindItem id="item4" compid="Combo02" propid="value" datasetid="ds_detailList" columnid="suspScore"/>
+      <BindItem id="item5" compid="Combo01" propid="value" datasetid="ds_detailList" columnid="ruleId"/>
+      <BindItem id="item6" compid="Combo00" propid="value" datasetid="ds_detailList" columnid="alertGroupNo"/>
+      <BindItem id="item7" compid="Combo04" propid="value" datasetid="ds_detailList" columnid="distOfficeCode"/>
+      <BindItem id="item8" compid="Combo05" propid="value" datasetid="ds_detailList" columnid="distChgedId"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+//공통코드 호출
+this.ruleDetail_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{	
+	var comCode = "";
+	    comCode += "ds_groupNo = ds_groupNo";
+	    comCode += " ds_ruleId = ds_ruleId";
+	    comCode += " ds_stCode = ds_stCode";
+	    comCode += " ds_officeCode = ds_officeCode";
+	    comCode += " ds_chgedId = ds_chgedId";
+	this.gfn_transaction(this
+					   , "detailLoadCode"
+					   , "detailLoadCode/detailLoadCodes.do"
+					   , ""
+					   , comCode
+					   , ""
+					   , "fnCallback");
+}
+//콜백
+this.fnCallback = function(sScvid, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		this.alert("통신에 실패하였습니다." + sScvid + " : " + sErrorMsg);
+		return;
+	}else {
+		switch(sScvid){
+			case "detailLoadCode" :
+			break;
+			case "detailList" :
+			break;
+			case "detailInsert" :
+			break;
+			default :
+			break;
+		}
+	}
+}
+
+//조회
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.gfn_transaction(this
+					  , "detailList"
+					  , "detailList/detailList.do"
+					  , ""
+					  , "ds_detailList = ds_detailList"
+					  , ""
+					  , "fnCallback");
+}
+
+//등록
+this.Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+
+	var groupNo = this.ds_detailList.getColumn(0,"alertGroupNo");
+	var ruleId = this.ds_detailList.getColumn(0,"ruleId");
+	
+	if(groupNo==null || groupNo==""){
+		alert("그룹번호를 선택해주세요");
+		return;
+	}
+	
+	if(ruleId==null || ruleId==""){
+		alert("룰ID를 선택해주세요");
+		return;
+	}
+	
+	this.gfn_transaction(this
+					  , "detailInsert"
+					  , "detailInsert/detailInsert.do"
+					  , "ds_detailList = ds_detailList"
+					  , ""
+					  , ""
+					  , "fnCallback");
+	alert("저장되었습니다.");
+}
+
+//수정일시 따른 마스크 처리
+this.expr_modiDt = function(nRow){
+	var modiDt = this.ds_detailList.getColumn(nRow, "modiDt");
+	
+	if(modiDt == null){
+		return "";
+	}else{ 
+		return modiDt.substr(0,4)+"-"+modiDt.substr(4,2)+"-"+modiDt.substr(6);
+	}
+}
+
+//초기화
+this.Button02_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.reload();
+}]]></Script>
+  </Form>
+</FDL>

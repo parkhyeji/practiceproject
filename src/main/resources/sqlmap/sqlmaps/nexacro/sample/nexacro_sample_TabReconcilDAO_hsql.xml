@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TabReconcil">
+
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>    
+    <typeAlias  alias="tabReconcilVO" type="nexacro.sample.vo.TabReconcilVO"/>
+    <typeAlias  alias="tabPladefVO" type="nexacro.sample.vo.TabReconcilVO"/>
+    <typeAlias  alias="codesVO" type="nexacro.sample.vo.CmmCodeDetailVO"/>
+
+	<!-- 원피고 -->
+	<resultMap id="tabPladef" class="tabPladefVO">
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="pladefSepCode" column="PLADEF_SEP_CODE" />
+        <result property="pladefSeq" column="PLADEF_SEQ" />
+        <result property="pladefName" column="PLADEF_NAME" />
+        <result property="pladefRegNo" column="PLADEF_REG_NO" />
+        <result property="pladefMainTel" column="PLADEF_MAIN_TEL" />
+        <result property="pladefAddTel" column="PLADEF_ADD_TEL" />
+        <result property="pladefPos" column="PLADEF_POS" />
+        <result property="pladefAddr1" column="PLADEF_ADDR1" />
+        <result property="pladefClamVol" column="PLADEF_CLAM_VOL" />
+        <result property="pladefLawConcSepcode" column="PLADEF_LAW_CONC_SEPCODE" />   
+        <result property="pladefConcDate" column="PLADEF_CONC_DATE" />
+        <result property="pladefLawconcInstcode" column="PLADEF_LAWCONC_INSTCODE" />
+        <result property="pladefConcCont" column="PLADEF_CONC_CONT" />              
+    </resultMap>
+    
+     <resultMap id="tabPladefMap" class="java.util.HashMap">
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="pladefSepCode" column="PLADEF_SEP_CODE" />
+        <result property="pladefSeq" column="PLADEF_SEQ" />
+        <result property="pladefName" column="PLADEF_NAME" />
+        <result property="pladefRegNo" column="PLADEF_REG_NO" />
+        <result property="pladefMainTel" column="PLADEF_MAIN_TEL" />
+        <result property="pladefAddTel" column="PLADEF_ADD_TEL" />
+        <result property="pladefPos" column="PLADEF_POS" />
+        <result property="pladefAddr1" column="PLADEF_ADDR1" />
+        <result property="pladefClamVol" column="PLADEF_CLAM_VOL" />
+        <result property="pladefLawConcSepcode" column="PLADEF_LAW_CONC_SEPCODE" />         
+    </resultMap>
+    <!-- 재판외화해 -->
+    <resultMap id="tabReconcil" class="tabReconcilVO">
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="pladefSepCode" column="PLADEF_SEP_CODE" />
+        <result property="pladefSeq" column="PLADEF_SEQ" />
+        <result property="instAdmCode" column="INST_ADM_CODE" />
+        <result property="tabReconcilSeq" column="TAB_RECONCIL_SEQ" />
+        <result property="reconcilReqChg" column="RECONCIL_REQ_CHG" />
+        <result property="reconcilAppvChg" column="RECONCIL_APPV_CHG" />
+        <result property="reconcilMgrOpin" column="RECONCIL_MGR_OPIN" />
+        <result property="reconcilExptjudgChg" column="RECONCIL_EXPTJUDG_CHG" />
+        <result property="reconcilAppvDate" column="RECONCIL_APPV_DATE" />        
+        <result property="reconcilAppvId" column="RECONCIL_APPV_ID" />       
+    </resultMap>
+    
+     <resultMap id="tabReconcilMap" class="java.util.HashMap">
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="pladefSepCode" column="PLADEF_SEP_CODE" />
+        <result property="pladefSeq" column="PLADEF_SEQ" />
+        <result property="instAdmCode" column="INST_ADM_CODE" />
+        <result property="tabReconcilSeq" column="TAB_RECONCIL_SEQ" />
+        <result property="reconcilReqChg" column="RECONCIL_REQ_CHG" />
+        <result property="reconcilAppvChg" column="RECONCIL_APPV_CHG" />
+        <result property="reconcilMgrOpin" column="RECONCIL_MGR_OPIN" />
+        <result property="reconcilExptjudgChg" column="RECONCIL_EXPTJUDG_CHG" />
+        <result property="reconcilAppvDate" column="RECONCIL_APPV_DATE" />
+        <result property="reconcilAppvId" column="RECONCIL_APPV_ID" />        
+    </resultMap>
+    
+    <!-- 
+      <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="pladefSepCode" column="PLADEF_SEP_CODE" />
+        <result property="pladefSeq" column="PLADEF_SEQ" />
+        <result property="pladefName" column="PLADEF_NAME" />
+        <result property="pladefRegNo" column="PLADEF_REG_NO" />
+        <result property="pladefMainTel" column="PLADEF_MAIN_TEL" />
+        <result property="pladefAddTel" column="PLADEF_ADD_TEL" />
+        <result property="pladefPos" column="PLADEF_POS" />
+        <result property="pladefAddr" column="PLADEF_ADDR" />
+        <result property="pladefClamVol" column="PLADEF_CLAM_VOL" />
+        <result property="pladefLawConcSepcode" column="PLADEF_LAW_CON_SEPCODE" />  
+     -->
+     <select id="tabReconcilDAO.selectTabPladefVOList" parameterClass="tabPladefVO" resultMap="tabPladef">
+            SELECT                 
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.PLADEF_SEP_CODE AS PLADEF_SEP_CODE, 
+                A.PLADEF_SEQ AS PLADEF_SEQ, 
+                A.PLADEF_NAME AS PLADEF_NAME, 
+                A.PLADEF_REG_NO AS PLADEF_REG_NO,
+                A.PLADEF_MAIN_TEL AS PLADEF_MAIN_TEL, 
+                A.PLADEF_ADD_TEL AS PLADEF_ADD_TEL,
+                A.PLADEF_POS AS PLADEF_POS,
+                A.PLADEF_ADDR1 AS PLADEF_ADDR1,
+                A.PLADEF_CLAM_VOL AS PLADEF_CLAM_VOL,
+                A.PLADEF_CONC_DATE AS PLADEF_CONC_DATE,
+                A.PLADEF_LAWCONC_INSTCODE AS PLADEF_LAWCONC_INSTCODE,
+                A.PLADEF_CONC_CONT AS PLADEF_CONC_CONT,
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='H01' AND CODE_NO =A.PLADEF_LAW_CONC_SEPCODE) AS PLADEF_LAW_CONC_SEPCODE                
+            FROM TAB_PLADEF A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="searchKeyword">                                        
+                        AND A.LAWSUIT_ADM_NO = #searchKeyword#                     
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+ 	<select id="tabReconcilDAO.selectTabReconcilVOList" parameterClass="tabReconcilVO" resultMap="tabReconcil">
+            SELECT                 
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.PLADEF_SEP_CODE AS PLADEF_SEP_CODE, 
+                A.PLADEF_SEQ AS PLADEF_SEQ, 
+                A.INST_ADM_CODE AS INST_ADM_CODE, 
+                A.TAB_RECONCIL_SEQ AS TAB_RECONCIL_SEQ,
+                A.RECONCIL_REQ_CHG AS RECONCIL_REQ_CHG, 
+                A.RECONCIL_APPV_CHG AS RECONCIL_APPV_CHG,
+                A.RECONCIL_MGR_OPIN AS RECONCIL_MGR_OPIN,
+                A.RECONCIL_EXPTJUDG_CHG AS RECONCIL_EXPTJUDG_CHG,
+                A.RECONCIL_APPV_DATE AS RECONCIL_APPV_DATE,
+                A.RECONCIL_APPV_ID AS RECONCIL_APPV_ID                
+            FROM TAB_RECONCIL A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="searchKeyword">
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="TAB_RECONCIL_SEQ">
+                        TAB_RECONCIL_SEQ LIKE '%' || #searchKeyword# || '%'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="LAWSUIT_ADM_NO">
+                        LAWSUIT_ADM_NO LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    <select id="tabReconcilDAO.selectTabReconcil2VOList" parameterClass="tabReconcilVO" resultMap="tabReconcil">
+            SELECT                 
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.PLADEF_SEP_CODE AS PLADEF_SEP_CODE, 
+                A.PLADEF_SEQ AS PLADEF_SEQ, 
+                A.INST_ADM_CODE AS INST_ADM_CODE, 
+                A.TAB_RECONCIL_SEQ AS TAB_RECONCIL_SEQ,
+                A.RECONCIL_REQ_CHG AS RECONCIL_REQ_CHG, 
+                A.RECONCIL_APPV_CHG AS RECONCIL_APPV_CHG,
+                A.RECONCIL_MGR_OPIN AS RECONCIL_MGR_OPIN,
+                A.RECONCIL_EXPTJUDG_CHG AS RECONCIL_EXPTJUDG_CHG,
+                A.RECONCIL_APPV_DATE AS RECONCIL_APPV_DATE,
+                A.RECONCIL_APPV_ID AS RECONCIL_APPV_ID                
+            FROM TAB_RECONCIL A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="searchKeyword">
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="TAB_RECONCIL_SEQ">
+                        TAB_RECONCIL_SEQ LIKE '%' || #searchKeyword# || '%'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="LAWSUIT_ADM_NO">
+                        LAWSUIT_ADM_NO LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    
+    <select id="tabReconcilDAO.selectTabReconcil3VOList" parameterClass="tabReconcilVO" resultMap="tabReconcil">
+            SELECT                 
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.PLADEF_SEP_CODE AS PLADEF_SEP_CODE, 
+                A.PLADEF_SEQ AS PLADEF_SEQ, 
+                A.INST_ADM_CODE AS INST_ADM_CODE, 
+                A.TAB_RECONCIL_SEQ AS TAB_RECONCIL_SEQ,
+                A.RECONCIL_REQ_CHG AS RECONCIL_REQ_CHG, 
+                A.RECONCIL_APPV_CHG AS RECONCIL_APPV_CHG,
+                A.RECONCIL_MGR_OPIN AS RECONCIL_MGR_OPIN,
+                A.RECONCIL_EXPTJUDG_CHG AS RECONCIL_EXPTJUDG_CHG,
+                A.RECONCIL_APPV_DATE AS RECONCIL_APPV_DATE,
+                A.RECONCIL_APPV_ID AS RECONCIL_APPV_ID                
+            FROM TAB_RECONCIL A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="lawsuitAdmNo">
+                   AND A.LAWSUIT_ADM_NO = #lawsuitAdmNo#
+                </isNotNull>
+                <isNotNull property="pladefSepCode">
+                   AND A.PLADEF_SEP_CODE = #pladefSepCode#
+                </isNotNull>
+                <isNotNull property="pladefSeq">
+                   AND A.PLADEF_SEQ = #pladefSeq#
+                </isNotNull>
+                <isNotNull property="instAdmCode">
+                   AND A.INST_ADM_CODE = #instAdmCode#
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    <select id="tabReconcilDAO.selectTabReconcilMapList" parameterClass="tabReconcilVO" resultMap="tabReconcilMap">
+            SELECT                 
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.PLADEF_SEP_CODE AS PLADEF_SEP_CODE, 
+                A.PLADEF_SEQ AS PLADEF_SEQ, 
+                A.INST_ADM_CODE AS INST_ADM_CODE, 
+                A.TAB_RECONCIL_SEQ AS TAB_RECONCIL_SEQ,
+                A.RECONCIL_REQ_CHG AS RECONCIL_REQ_CHG, 
+                A.RECONCIL_APPV_CHG AS RECONCIL_APPV_CHG,
+                A.RECONCIL_MGR_OPIN AS RECONCIL_MGR_OPIN,
+                A.RECONCIL_EXPTJUDG_CHG AS RECONCIL_EXPTJUDG_CHG,
+                A.RECONCIL_APPV_ID AS RECONCIL_APPV_ID                
+            FROM TAB_RECONCIL A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull prepend=" AND " property="lawsuitAdmNo">
+                	LAWSUIT_ADM_NO LIKE '%' || #preIwrName# || '%'
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    <select id="tabReconcilDAO.selectTabReconcilCount" parameterClass="tabReconcilVO" resultClass="int">
+            SELECT
+                COUNT(*) as totalCount
+            FROM TAB_RECONCIL A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="searchKeyword">
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="TAB_RECONCIL_SEQ">
+                        TAB_RECONCIL_SEQ LIKE '%' || #searchKeyword# || '%'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="LAWSUIT_ADM_NO">
+                        LAWSUIT_ADM_NO LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                </isNotNull>
+            </dynamic>
+    </select>
+    
+	<select id="tabReconcilDAO.selectTabReconcilPaging" parameterClass="tabReconcilVO" resultMap="tabReconcil">
+            SELECT * 
+            FROM ( select
+            	rownum rnum,
+            	A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.PLADEF_SEP_CODE AS PLADEF_SEP_CODE, 
+                A.PLADEF_SEQ AS PLADEF_SEQ, 
+                A.INST_ADM_CODE AS INST_ADM_CODE, 
+                A.TAB_RECONCIL_SEQ AS TAB_RECONCIL_SEQ,
+                A.RECONCIL_REQ_CHG AS RECONCIL_REQ_CHG, 
+                A.RECONCIL_APPV_CHG AS RECONCIL_APPV_CHG,
+                A.RECONCIL_MGR_OPIN AS RECONCIL_MGR_OPIN,
+                A.RECONCIL_EXPTJUDG_CHG AS RECONCIL_EXPTJUDG_CHG,
+                A.RECONCIL_APPV_ID AS RECONCIL_APPV_ID                
+            	FROM TAB_RECONCIL A
+                order by A.LAWSUIT_ADM_NO ASC ) 
+            WHERE 1=1 and rnum between #firstIndex# and #recordCountPerPage#
+            <isNotEmpty property="searchKeyword" prepend="AND">
+            <![CDATA[
+            TAB_RECONCIL_SEQ LIKE '%'||#searchKeyword#||'%'
+            ]]> 
+            </isNotEmpty>
+            <isNotEmpty property="searchKeyword" prepend="OR">
+            <![CDATA[
+            LAWSUIT_ADM_NO LIKE  '%'||#searchKeyword#||'%'
+            ]]> 
+            </isNotEmpty>
+           <!--  <dynamic>
+                <isNotNull property="searchKeyword">
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="TITLE">
+                        TITLE LIKE '%' || #searchKeyword# || '%'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="CONTENTS">
+                        CONTENTS LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                </isNotNull>
+            </dynamic>
+            ORDER BY A.REG_ID DESC
+            LIMIT #recordCountPerPage# OFFSET #firstIndex# -->
+    </select>
+    
+    <insert id="tabReconcilDAO.insertTabReconcilVO" parameterClass="tabReconcilVO">       
+            INSERT INTO TAB_RECONCIL (
+                LAWSUIT_ADM_NO, 
+                PLADEF_SEP_CODE, 
+                PLADEF_SEQ, 
+                INST_ADM_CODE, 
+                TAB_RECONCIL_SEQ,
+                RECONCIL_REQ_CHG, 
+                RECONCIL_APPV_CHG,
+                RECONCIL_MGR_OPIN,
+                RECONCIL_EXPTJUDG_CHG,
+                RECONCIL_APPV_DATE,
+                RECONCIL_APPV_ID
+            ) VALUES (
+                #lawsuitAdmNo#,
+        		#pladefSepCode#,
+        		#pladefSeq#,
+        		#instAdmCode#,
+        		tab_reconcil_seq.nextval,
+        		#reconcilReqChg#,
+        		#reconcilAppvChg#,
+        		#reconcilMgrOpin#,
+        		#reconcilExptjudgChg#,
+        		#reconcilAppvDate#,
+        		#reconcilAppvId#
+            )        
+    </insert>
+    
+      <update id="tabReconcilDAO.updateTabReconcilVO" parameterClass="tabReconcilVO">
+        <![CDATA[
+            UPDATE TAB_RECONCIL 
+            SET RECONCIL_REQ_CHG=#reconcilReqChg# 
+                ,RECONCIL_APPV_CHG=#reconcilAppvChg#
+                ,RECONCIL_MGR_OPIN=#reconcilMgrOpin#
+                ,RECONCIL_EXPTJUDG_CHG=#reconcilExptjudgChg#
+                ,RECONCIL_APPV_ID=#reconcilAppvId# 
+                ,RECONCIL_APPV_DATE=#reconcilAppvDate#                     
+            WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#
+             AND PLADEF_SEP_CODE=#pladefSepCode#
+             AND PLADEF_SEQ=#pladefSeq#
+             AND INST_ADM_CODE=#instAdmCode#
+             AND TAB_RECONCIL_SEQ=#tabReconcilSeq#
+        ]]>
+    </update>
+    
+    <update id="tabReconcilDAO.updateTabReconcil2VO" parameterClass="tabReconcilVO">
+        		<![CDATA[	
+		MERGE INTO TAB_RECONCIL
+			USING DUAL
+			ON (
+			LAWSUIT_ADM_NO=#lawsuitAdmNo# 
+			AND PLADEF_SEP_CODE=#pladefSepCode#
+			AND PLADEF_SEQ=#pladefSeq#
+			AND INST_ADM_CODE=#instAdmCode#
+			AND TAB_RECONCIL_SEQ=#tabReconcilSeq#
+			)
+			WHEN MATCHED THEN
+			
+			UPDATE SET 
+				RECONCIL_REQ_CHG=#reconcilReqChg# 
+                ,RECONCIL_APPV_CHG=#reconcilAppvChg#
+                ,RECONCIL_MGR_OPIN=#reconcilMgrOpin#
+                ,RECONCIL_EXPTJUDG_CHG=#reconcilExptjudgChg#
+                ,RECONCIL_APPV_ID=#reconcilAppvId# 
+                ,RECONCIL_APPV_DATE=#reconcilAppvDate#                                 
+             
+			WHEN NOT MATCHED THEN
+			INSERT (
+                LAWSUIT_ADM_NO, 
+                PLADEF_SEP_CODE, 
+                PLADEF_SEQ, 
+                INST_ADM_CODE, 
+                TAB_RECONCIL_SEQ,
+                RECONCIL_REQ_CHG, 
+                RECONCIL_APPV_CHG,
+                RECONCIL_MGR_OPIN,
+                RECONCIL_EXPTJUDG_CHG,
+                RECONCIL_APPV_DATE,
+                RECONCIL_APPV_ID
+            ) VALUES (
+                #lawsuitAdmNo#,
+        		#pladefSepCode#,
+        		#pladefSeq#,
+        		#instAdmCode#,
+        		tab_reconcil_seq.nextval,
+        		#reconcilReqChg#,
+        		#reconcilAppvChg#,
+        		#reconcilMgrOpin#,
+        		#reconcilExptjudgChg#,
+        		#reconcilAppvDate#,
+        		#reconcilAppvId#
+            )        
+		]]>                           
+    </update>
+    
+    <!-- 
+    <delete id="tabReconcilDAO.deleteTabReconcilVO" parameterClass="tabReconcilVO">
+        <![CDATA[
+            DELETE FROM TAB_RECONCIL 
+            WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#
+             AND PLADEF_SEP_CODE=#pladefSepCode#
+             AND PLADEF_SEQ=#pladefSeq#
+             AND INST_ADM_CODE=#instAdmCode#
+             AND TAB_RECONCIL_SEQ=#tabReconcilSeq#
+        ]]>
+    </delete>
+    -->
+    <delete id="tabReconcilDAO.deleteTabReconcilVO" parameterClass="tabReconcilVO">    
+    <![CDATA[    
+            DELETE FROM TAB_RECONCIL 
+            WHERE 1=1
+            AND LAWSUIT_ADM_NO = #lawsuitAdmNo#
+            AND PLADEF_SEP_CODE = #pladefSepCode#
+            AND PLADEF_SEQ = #pladefSeq#
+            AND INST_ADM_CODE = #instAdmCode#              
+           ]]>                                                         
+    </delete>
+    
+    
+     <update id="tabReconcilDAO.updateTabPladefVO" parameterClass="tabReconcilVO">
+        <![CDATA[
+            UPDATE TAB_PLADEF
+            SET PLADEF_CONC_DATE=#pladefConcDate# 
+                ,PLADEF_LAW_CONC_SEPCODE=#pladefLawConcSepcode#
+                ,PLADEF_LAWCONC_INSTCODE=#pladefLawconcInstcode#
+                ,PLADEF_CONC_CONT=#pladefConcCont#                                        
+            WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#
+             AND PLADEF_SEP_CODE=#pladefSepCode#
+             AND PLADEF_SEQ=#pladefSeq#            
+        ]]>
+    </update>
+</sqlMap>

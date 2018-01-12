@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="LawsuitList">
+
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    <typeAlias  alias="LawsuitListVO" type="nexacro.sample.service.lawsuit.vo.LawsuitListVO"/>
+
+    <!-- Sample resultObject -->
+    <resultMap id="lawsuitList" class="LawsuitListVO">
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+        <result property="lawRaisreqNo" column="LAW_RAISREQ_NO" />
+        <result property="lawsuitAplCortCode" column="LAWSUIT_APL_CORT_CODE" />
+        <result property="lawsuitAplCaseCode" column="LAWSUIT_APL_CASE_CODE" />
+        <result property="lawsuitCaseTyCode" column="LAWSUIT_CASE_TY_CODE" />
+        <result property="lawsuitCpPladefSepcode" column="LAWSUIT_CP_PLADEF_SEPCODE" />
+        <result property="lawsuitAsitParcWtr" column="LAWSUIT_ASIT_PARC_WTR" />
+        <result property="lawsuitCtaWtr" column="LAWSUIT_CTA_WTR" />
+        <result property="lawsuitCtaNo" column="LAWSUIT_CTA_NO" />
+        <result property="lawsuitCtaCaseNo" column="LAWSUIT_CTA_CASE_NO" />
+        <result property="lawsuitCtaChg" column="LAWSUIT_CTA_CHG" />
+        <result property="lawsuitTempReqiDate" column="LAWSUIT_TEMP_REQI_DATE" />
+        <result property="lawsuitRaisRea" column="LAWSUIT_RAIS_REA" />
+        <result property="lawsuitCostCfnApldate" column="LAWSUIT_COST_CFN_APLDATE" />
+        <result property="lawsuitConcDate" column="LAWSUIT_CONC_DATE" />
+        <result property="lawsuitFulfDetmWtr" column="LAWSUIT_FULF_DETM_WTR" />
+        <result property="instAdmCode" column="INST_ADM_CODE" />
+        <result property="instAdmPrgrCode" column="INST_ADM_PRGR_CODE" />
+        <result property="instAdmCaseNo" column="INST_ADM_CASE_NO" />
+        <result property="instAdmName" column="INST_ADM_NAME" />
+        <result property="instAdmCortCode" column="INST_ADM_CORT_CODE" />
+        <result property="instAdmPetiSenddate" column="INST_ADM_PETI_SENDDATE" />
+        <result property="instAdmCortReqidate" column="INST_ADM_CORT_REQIDATE" />
+        <result property="instAdmAsitParcdate" column="INST_ADM_ASIT_PARCDATE" />
+        <result property="instAdmAsitParcopin" column="INST_ADM_ASIT_PARCOPIN" />
+        <result property="instAdmIssuPoin" column="INST_ADM_ISSU_POIN" />
+        <result property="instAdmCpOpin" column="INST_ADM_CP_OPIN" />
+        <result property="instAdmClamVopcode" column="INST_ADM_CLAM_VOPCODE" />
+        <result property="instAdmClamVop" column="INST_ADM_CLAM_VOP" />
+        <result property="instAdmDivRate" column="INST_ADM_DIV_RATE" />
+        <result property="instAdmJudId" column="INST_ADM_JUD_ID" />
+        <result property="instAdmIssuChg" column="INST_ADM_ISSU_CHG" />
+        <result property="instAdmCtpmgrName" column="INST_ADM_CTPMGR_NAME" />
+        <result property="instAdmCtpmgrDepuname" column="INST_ADM_CTRMGR_DEPUNAME" />
+        <result property="instAdmRaisreqDate" column="INST_ADM_RAISREQ_DATE" />
+        <result property="instAdmVodSepcode" column="INST_ADM_VOD_SEPCODE" />
+        <result property="instAdmJudgDate" column="INST_ADM_JUDG_DATE" />
+        <result property="instAdmJudgCfmDate" column="INST_ADM_JUDG_CFM_DATE" />
+        <result property="instAdmJudgDelidate" column="INST_ADM_JUDG_DELIDATE" />
+        <result property="instAdmVodChg" column="INST_ADM_VOD_CHG" />
+        <result property="instAdmRegnChg" column="INST_ADM_REGN_CHG" />
+        <result property="instAdmPayDlindate" column="INST_ADM_PAY_DLINDATE" />
+        <result property="instAdmWincRate" column="INST_ADM_WINC_RATE" />
+        <result property="instAdmJudgCont" column="INST_ADM_JUDG_CONT" />
+        <result property="instAdmEntLyrId" column="INST_ADM_ENT_LYR_ID" />
+        <result property="instAdmJudName" column="INST_ADM_JUD_NAME" />
+        <result property="instAdmEntLyrName" column="INST_ADM_ENT_LYR_NAME" />
+        <result property="pladefSepCode" column="PLADEF_SEP_CODE" />
+        <result property="pladefSeq" column="PLADEF_SEQ" />
+        <result property="pladefName" column="PLADEF_NAME" />
+        <result property="pladefRegNo" column="PLADEF_REG_NO" />
+        <result property="pladefMainTel" column="PLADEF_MAIN_TEL" />
+        <result property="pladefAddTel" column="PLADEF_ADD_TEL" />
+        <result property="pladefPos" column="PLADEF_POS" />
+        <result property="pladefAddr1" column="PLADEF_ADDR1" />
+        <result property="pladefAddr2" column="PLADEF_ADDR2" />
+        <result property="pladefClamVol" column="PLADEF_CLAM_VOL" />
+        <result property="pladefRegInst" column="PLADEF_REG_INST" />
+        <result property="pladefEndInst" column="PLADEF_END_INST" />
+    </resultMap>
+    
+     
+   
+ 	<select id="lawsuitDAO.selectLawsuitVOList" parameterClass="LawsuitListVO" resultMap="lawsuitList">
+            SELECT
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.LAW_RAISREQ_NO AS LAW_RAISREQ_NO, 
+                A.LAWSUIT_APL_CORT_CODE AS LAWSUIT_APL_CORT_CODE, 
+                A.LAWSUIT_APL_CASE_CODE AS LAWSUIT_APL_CASE_CODE, 
+                A.LAWSUIT_CASE_TY_CODE AS LAWSUIT_CASE_TY_CODE, 
+                A.LAWSUIT_CP_PLADEF_SEPCODE AS LAWSUIT_CP_PLADEF_SEPCODE,
+                A.LAWSUIT_ASIT_PARC_WTR AS LAWSUIT_ASIT_PARC_WTR,
+                A.LAWSUIT_CTA_WTR AS LAWSUIT_CTA_WTR,
+                A.LAWSUIT_CTA_NO AS LAWSUIT_CTA_NO,
+                A.LAWSUIT_CTA_CASE_NO AS LAWSUIT_CTA_CASE_NO,
+                A.LAWSUIT_CTA_CHG AS LAWSUIT_CTA_CHG,
+                A.LAWSUIT_TEMP_REQI_DATE AS LAWSUIT_TEMP_REQI_DATE,
+                A.LAWSUIT_RAIS_REA AS LAWSUIT_RAIS_REA,
+                A.LAWSUIT_COST_CFN_APLDATE AS LAWSUIT_COST_CFN_APLDATE,
+                A.LAWSUIT_CONC_DATE AS LAWSUIT_CONC_DATE,
+                A.LAWSUIT_FULF_DETM_WTR AS LAWSUIT_FULF_DETM_WTR,
+                B.INST_ADM_CODE AS INST_ADM_CODE,
+                B.INST_ADM_PRGR_CODE AS INST_ADM_PRGR_CODE,
+                B.INST_ADM_CASE_NO AS INST_ADM_CASE_NO,
+                B.INST_ADM_NAME AS INST_ADM_NAME,
+                B.INST_ADM_CORT_CODE AS INST_ADM_CORT_CODE,
+                B.INST_ADM_PETI_SENDDATE AS INST_ADM_PETI_SENDDATE,
+                B.INST_ADM_CORT_REQIDATE AS INST_ADM_CORT_REQIDATE,
+                B.INST_ADM_ASIT_PARCDATE AS INST_ADM_ASIT_PARCDATE,
+                B.INST_ADM_ASIT_PARCOPIN AS INST_ADM_ASIT_PARCOPIN,
+                B.INST_ADM_ISSU_POIN AS INST_ADM_ISSU_POIN,
+                B.INST_ADM_CP_OPIN AS INST_ADM_CP_OPIN,
+                B.INST_ADM_CLAM_VOPCODE AS INST_ADM_CLAM_VOPCODE,
+                B.INST_ADM_CLAM_VOP AS INST_ADM_CLAM_VOP,
+                B.INST_ADM_DIV_RATE AS INST_ADM_DIV_RATE,
+                B.INST_ADM_JUD_ID AS INST_ADM_JUD_ID,
+                (SELECT LEGAL_OFFICIALINFO_LYR_NAME 
+                FROM TAB_LEGAL_OFFICIALINFO WHERE LEGAL_OFFICIALINFO_RELA_NO=B.INST_ADM_JUD_ID)
+                 AS INST_ADM_JUD_NAME,
+                B.INST_ADM_ISSU_CHG AS INST_ADM_ISSU_CHG,
+                B.INST_ADM_CTPMGR_NAME AS INST_ADM_CTPMGR_NAME,
+                B.INST_ADM_CTRMGR_DEPUNAME AS INST_ADM_CTRMGR_DEPUNAME,
+                B.INST_ADM_RAISREQ_DATE AS INST_ADM_RAISREQ_DATE,
+                B.INST_ADM_VOD_SEPCODE AS INST_ADM_VOD_SEPCODE,
+                B.INST_ADM_JUDG_DATE AS INST_ADM_JUDG_DATE,
+                B.INST_ADM_JUDG_CFM_DATE AS INST_ADM_JUDG_CFM_DATE,
+                B.INST_ADM_JUDG_DELIDATE AS INST_ADM_JUDG_DELIDATE,
+                B.INST_ADM_VOD_CHG AS INST_ADM_VOD_CHG,
+                B.INST_ADM_REGN_CHG AS INST_ADM_REGN_CHG,
+                B.INST_ADM_PAY_DLINDATE AS INST_ADM_PAY_DLINDATE,
+                B.INST_ADM_WINC_RATE AS INST_ADM_WINC_RATE,
+                B.INST_ADM_JUDG_CONT AS INST_ADM_JUDG_CONT,
+                B.INST_ADM_ENT_LYR_ID AS INST_ADM_ENT_LYR_ID,
+                (SELECT LEGAL_OFFICIALINFO_LYR_NAME FROM TAB_LEGAL_OFFICIALINFO
+                WHERE LEGAL_OFFICIALINFO_RELA_NO=B.INST_ADM_ENT_LYR_ID) AS INST_ADM_ENT_LYR_NAME,
+                C.PLADEF_SEP_CODE AS PLADEF_SEP_CODE,
+                C.PLADEF_SEQ AS PLADEF_SEQ,
+                C.PLADEF_NAME AS PLADEF_NAME,
+                C.PLADEF_REG_NO AS PLADEF_REG_NO,
+                C.PLADEF_MAIN_TEL AS PLADEF_MAIN_TEL,
+                C.PLADEF_ADD_TEL AS PLADEF_ADD_TEL,
+                C.PLADEF_POS AS PLADEF_POS,
+                C.PLADEF_ADDR1 AS PLADEF_ADDR1,
+                C.PLADEF_ADDR2 AS PLADEF_ADDR2,
+                C.PLADEF_CLAM_VOL AS PLADEF_CLAM_VOL,
+                C.PLADEF_REG_INST AS PLADEF_REG_INST,
+                C.PLADEF_END_INST AS PLADEF_END_INST
+            FROM TAB_LAWSUIT A, TAB_INST_ADM B, TAB_PLADEF C
+            WHERE 1=1 AND
+            	  A.LAWSUIT_ADM_NO=B.LAWSUIT_ADM_NO(+) AND
+            	  A.LAWSUIT_ADM_NO=C.LAWSUIT_ADM_NO(+)
+            <dynamic>
+                <isNotNull property="lawsuitAdmNo">
+                    AND A.LAWSUIT_ADM_NO=#lawsuitAdmNo#
+                </isNotNull>
+                <isNotNull property="instAdmCode">
+                    AND B.INST_ADM_CODE=#instAdmCode#
+                </isNotNull>
+            </dynamic>
+            ORDER BY C.PLADEF_SEQ ASC
+    </select>
+    
+    <select id="lawsuitDAO.setInstanceLevel" parameterClass="LawsuitListVO">
+    	SELECT NVL(COUNT(INST_ADM_CODE),'0') AS INST_ADM_CODE
+		FROM TAB_INST_ADM 
+		WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#
+    </select>
+    
+    <insert id="lawsuitDao.insertLawsuit" parameterClass="LawsuitListVO">
+    	INSERT INTO TAB_LAWSUIT(LAWSUIT_ADM_NO, LAW_RAISREQ_NO, LAWSUIT_APL_CORT_CODE, LAWSUIT_APL_CASE_CODE,
+    	LAWSUIT_CASE_TY_CODE, LAWSUIT_CP_PLADEF_SEPCODE, LAWSUIT_ASIT_PARC_WTR, LAWSUIT_CTA_WTR, LAWSUIT_CTA_NO,
+    	LAWSUIT_CTA_CASE_NO, LAWSUIT_CTA_CHG, LAWSUIT_TEMP_REQI_DATE, LAWSUIT_RAIS_REA, LAWSUIT_COST_CFN_APLDATE,
+    	LAWSUIT_CONC_DATE, LAWSUIT_FULF_DETM_WTR, INST_ADM_CODE)
+    	VALUES((SELECT NVL(MAX(LAWSUIT_ADM_NO),0)+1 FROM TAB_LAWSUIT), #lawRaisreqNo#, #lawsuitAplCortCode#, #lawsuitAplCaseCode#, #lawsuitCaseTyCode#,
+    	#lawsuitCpPladefSepcode#, #lawsuitAsitParcWtr#, #lawsuitCtaWtr#, #lawsuitCtaNo#, #lawsuitCtaCaseNo#, #lawsuitCtaChg#
+    	,#lawsuitTempReqiDate#, #lawsuitRaisRea#, #lawsuitCostCfnApldate#, #lawsuitConcDate#, #lawsuitFulfDetmWtr#
+    	, #instAdmCode#)
+    </insert>
+     
+    <update id="lawsuitDAO.updateLawsuit" parameterClass="LawsuitListVO">
+        <![CDATA[
+            UPDATE TAB_LAWSUIT
+            SET LAW_RAISREQ_NO=#lawRaisreqNo#
+                , LAWSUIT_APL_CORT_CODE=#lawsuitAplCortCode#
+                , LAWSUIT_APL_CASE_CODE=#lawsuitAplCaseCode#
+                , LAWSUIT_CASE_TY_CODE=#lawsuitCaseTyCode#
+                , LAWSUIT_CP_PLADEF_SEPCODE=#lawsuitCpPladefSepcode#
+                , LAWSUIT_ASIT_PARC_WTR=#lawsuitAsitParcWtr#
+                , LAWSUIT_CTA_WTR=#lawsuitCtaWtr#
+                , LAWSUIT_CTA_NO=#lawsuitCtaNo#
+                , LAWSUIT_CTA_CASE_NO=#lawsuitCtaCaseNo#
+                , LAWSUIT_CTA_CHG=#lawsuitCtaChg#
+                , LAWSUIT_TEMP_REQI_DATE=#lawsuitTempReqiDate#
+                , LAWSUIT_RAIS_REA=#lawsuitRaisRea#
+                , LAWSUIT_COST_CFN_APLDATE=#lawsuitCostCfnApldate#
+                , LAWSUIT_CONC_DATE=#lawsuitConcDate#
+                , LAWSUIT_FULF_DETM_WTR=#lawsuitFulfDetmWtr#
+            WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#
+        ]]>
+    </update>
+    <update id="lawsuitDAO.updateInstance" parameterClass="LawsuitListVO">
+        <![CDATA[
+            UPDATE TAB_INST_ADM
+            SET INST_ADM_PRGR_CODE=#instAdmPrgrCode#
+                , INST_ADM_CASE_NO=#instAdmCaseNo#
+                , INST_ADM_NAME=#instAdmName#
+                , INST_ADM_CORT_CODE=#instAdmCortCode#
+                , INST_ADM_PETI_SENDDATE=#instAdmPetiSenddate#
+                , INST_ADM_CORT_REQIDATE=#instAdmCortReqidate#
+                , INST_ADM_ASIT_PARCDATE=#instAdmAsitParcdate#
+                , INST_ADM_ASIT_PARCOPIN=#instAdmAsitParcopin#
+                , INST_ADM_ISSU_POIN=#instAdmIssuPoin#
+                , INST_ADM_CP_OPIN=#instAdmCpOpin#
+                , INST_ADM_CLAM_VOPCODE=#instAdmClamVopcode#
+                , INST_ADM_CLAM_VOP=#instAdmClamVop#
+                , INST_ADM_DIV_RATE=#instAdmDivRate#
+                , INST_ADM_JUD_ID=#instAdmJudId#
+                , INST_ADM_ISSU_CHG=#instAdmIssuChg#
+                , INST_ADM_CTPMGR_NAME=#instAdmCtpmgrName#
+                , INST_ADM_CTRMGR_DEPUNAME=#instAdmCtpmgrDepuname#
+                , INST_ADM_RAISREQ_DATE=#instAdmRaisreqDate#
+                , INST_ADM_VOD_SEPCODE=#instAdmVodSepcode#
+                , INST_ADM_JUDG_DATE=#instAdmJudgDate#
+                , INST_ADM_JUDG_CFM_DATE=#instAdmJudgCfmDate#
+                , INST_ADM_JUDG_DELIDATE=#instAdmJudgDelidate#
+                , INST_ADM_VOD_CHG=#instAdmVodChg#
+                , INST_ADM_REGN_CHG=#instAdmRegnChg#
+                , INST_ADM_WINC_RATE=#instAdmWincRate#
+                , INST_ADM_JUDG_CONT=#instAdmJudgCont#
+                , INST_ADM_ENT_LYR_ID=#instAdmEntLyrId#
+            WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#
+        ]]>
+    </update>
+    <update id="lawsuitDAO.updatePladef" parameterClass="LawsuitListVO">
+        <![CDATA[
+            UPDATE TAB_PLADEF
+            SET PLADEF_NAME=#pladefName#
+                , PLADEF_REG_NO=#pladefRegNo#
+                , PLADEF_MAIN_TEL=#pladefMainTel#
+                , PLADEF_ADD_TEL=#pladefAddTel#
+                , PLADEF_POS=#pladefPos#
+                , PLADEF_ADDR1=#pladefAddr1#
+                , PLADEF_ADDR2=#pladefAddr2#
+                , PLADEF_CLAM_VOL=#pladefClamVol#
+                , PLADEF_REG_INST=#pladefRegInst#
+            WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#
+        ]]>
+    </update>
+</sqlMap>

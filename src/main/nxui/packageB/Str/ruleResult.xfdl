@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="ruleResult" classname="ruleResult" left="0" top="0" width="1024" height="768" titletext="New Form" onload="ruleResult_onload">
+    <Layouts>
+      <Layout>
+        <Combo id="Combo00" taborder="0" left="13.18%" top="119" right="73.44%" height="33" codecolumn="code" datacolumn="value" innerdataset="@ds_custNo"/>
+        <Static id="Static02" taborder="5" text="보고서 상태 코드" left="3.22%" top="219" right="87.5%" height="26"/>
+        <Static id="Static03" taborder="7" text="보고 제외 구분 코드" left="1.66%" top="177" right="86.62%" height="26"/>
+        <Static id="Static04" taborder="9" text="보고 제외 사유" left="4.79%" top="262" right="86.72%" height="26"/>
+        <Edit id="Edit03" taborder="10" left="13.18%" top="263" right="53.91%" height="126"/>
+        <Static id="Static05" taborder="11" text="* 고객 번호" left="6.15%" top="126" right="87.01%" height="26"/>
+        <Button id="Button01" taborder="14" text="조회" left="48.83%" top="122" right="43.36%" height="27" onclick="Button01_onclick"/>
+        <Grid id="Grid00" taborder="15" useinputpanel="false" left="48.83%" top="154" right="0.78%" height="243" binddataset="ds_ruleResult">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="34"/>
+                <Column size="67"/>
+                <Column size="76"/>
+                <Column size="132"/>
+                <Column size="78"/>
+                <Column size="132"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="그룹번호"/>
+                <Cell col="2" text="고객번호"/>
+                <Cell col="3" text="보고제외구분코드" combodataset="bind:reportExceptTypeCode"/>
+                <Cell col="4" text="대상룰건수"/>
+                <Cell col="5" text="보고서 상태 코드"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="(currow)+1"/>
+                <Cell col="1" text="bind:alertGroupNo"/>
+                <Cell col="2" displaytype="combo" text="bind:custNo" combodataset="ds_custNo" combocodecol="code" combodatacol="value"/>
+                <Cell col="3" text="bind:reportExceptTypeCode" combodataset="ds_reportReason" combocodecol="code" combodatacol="value"/>
+                <Cell col="4" text="bind:relRuleCount"/>
+                <Cell col="5" displaytype="combo" text="bind:strReportStCode" combodataset="ds_reportCode" combocodecol="code" combodatacol="value"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button02" taborder="16" text="저장" left="57.03%" top="121" right="35.16%" height="27" onclick="Button02_onclick"/>
+        <Combo id="Combo01" taborder="17" innerdataset="@ds_reportCode" codecolumn="code" datacolumn="value" left="13.18%" top="218" right="53.91%" height="33"/>
+        <Combo id="Combo02" taborder="18" innerdataset="@ds_reportReason" codecolumn="code" datacolumn="value" left="13.18%" top="172" right="53.91%" height="33"/>
+        <Static id="sta_title" taborder="19" text="룰 결과 관리" onclick="sta_title_onclick" left="1.56%" top="48" right="0.78%" height="53" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Button id="Button00" taborder="20" text="초기화" onclick="Button02_onclick" left="65.63%" top="121" right="23.73%" height="28"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_custNo">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_resultInsert">
+        <ColumnInfo>
+          <Column id="strReportStCode" type="STRING" size="4"/>
+          <Column id="custNo" type="STRING" size="20"/>
+          <Column id="reportExceptTypeCode" type="STRING" size="4"/>
+          <Column id="reportExceptReason" type="STRING" size="255"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_reportCode">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_reportReason">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_ruleResult">
+        <ColumnInfo>
+          <Column id="custNo" type="STRING" size="256"/>
+          <Column id="modiID" type="STRING" size="256"/>
+          <Column id="relRuleCount" type="STRING" size="256"/>
+          <Column id="strReportStCode" type="STRING" size="256"/>
+          <Column id="alertGroupNo" type="STRING" size="256"/>
+          <Column id="reportExceptTypeCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Combo00" propid="value" datasetid="ds_resultInsert" columnid="custNo"/>
+      <BindItem id="item3" compid="Edit03" propid="value" datasetid="ds_resultInsert" columnid="reportExceptReason"/>
+      <BindItem id="item1" compid="Combo01" propid="value" datasetid="ds_resultInsert" columnid="strReportStCode"/>
+      <BindItem id="item2" compid="Combo02" propid="value" datasetid="ds_resultInsert" columnid="reportExceptTypeCode"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+
+// Onload function
+this.ruleResult_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+	var onloadData  = "";
+		onloadData += "ds_custNo=ds_custNo";
+		onloadData += " ds_reportCode=ds_reportCode";
+		onloadData += " ds_reportReason=ds_reportReason";
+	this.gfn_transaction(this
+					   , "custCode"
+					   , "custCombo/loadCustCodes.do"
+					   , ""
+					   , onloadData
+					   , ""
+					   , "fnCallback");
+}
+
+// callback function
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		this.alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+			case "custCode":
+			break;
+			case "ruleResultInsert":
+			break;
+			case "resultList":
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+// 조회 
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+    this.gfn_transaction(this
+					  , "resultList"
+					  , "ruleResultList/resultList.do"
+					  , ""
+					  , "ds_ruleResult = ds_ruleResult"
+					  , ""
+					  , "fnCallback");
+}
+
+//저장
+this.Button02_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var custNo = this.ds_resultInsert.getColumn(0,"custNo");
+	if(custNo==null || custNo==""){
+		alert("고객을 선택해주세요.");
+		return;
+	}
+	this.gfn_transaction(this
+					   , "ruleResultInsert"
+					   , "ruleInsert/insertList.do"
+					   , "ds_resultInsert = ds_resultInsert"
+					   , ""
+					   , ""
+					   , "fnCallback");
+					   
+	alert("저장되었습니다.");
+}
+
+//초기화
+this.Button02_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.reload();
+}]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="PD_IN_COM_MM002" classname="PD_IN_COM_MM002" inheritanceid="" position="absolute" titletext="New Form" onload="PD_IN_COM_MM002_onload" left="0" top="0" width="1025" height="731">
+    <Layouts>
+      <Layout>
+        <Shape id="Shape00" type="rectangle" style="background:lavenderblush;border:0 solid #808080ff ;" position="absolute" left="8" right="9" top="60px" height="35"/>
+        <Static id="sta_01" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;" onclick="sta_01_onclick" position="absolute" left="14" right="12" top="65px" height="25"/>
+        <ImageViewer id="img_titlebg" taborder="0" style="background:cornflowerblue;" position="absolute" left="8" right="10" top="8" height="50"/>
+        <Static id="sta_title" text="공통상세관리" style="color:whitesmoke;align:left middle;font:굴림,12,bold;" onclick="sta_title_onclick" position="absolute" left="26" width="168" top="18" height="29"/>
+        <Static id="sta_no" text="분류코드" onclick="sta_no_onclick" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="14" width="124" top="65px" height="25"/>
+        <Button id="btn_lawsuit_search" taborder="1" text="검색" onclick="btn_serc_onclick" style="background:URL('theme://images/btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:Dotum,9,bold;shadow:drop 0,1 2 #0000007f;" position="absolute" right="13" width="52" top="66" height="24"/>
+        <Button id="btn_clear" taborder="1" text="초기화" onclick="btn_clear_onclick" style="background:URL('theme://images/btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:Dotum,9,bold;shadow:drop 0,1 2 #0000007f;" position="absolute" right="13" width="52" top="94" height="24"/>
+        <Shape id="Shape02" type="rectangle" style="background:lavenderblush;border:0 solid #808080ff ;" onclick="Shape02_onclick" position="absolute" left="8" right="9" top="395px" height="173"/>
+        <Static id="sta_15" text="* 분류코드" onclick="sta_15_onclick" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="14" width="124" top="408" height="25"/>
+        <Static id="sta_16" text="상세코드명2" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" onclick="sta_16_onclick" position="absolute" left="14" width="124" top="440" height="25"/>
+        <Static id="sta_17" text="* 상세코드" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" onclick="sta_17_onclick" position="absolute" left="335" width="124" top="408" height="25"/>
+        <Static id="sta_18" text="코드영문명" onclick="sta_18_onclick" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="335" width="124" top="440" height="25"/>
+        <Static id="sta_19" text="상세코드명" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" onclick="sta_19_onclick" position="absolute" left="668" width="124" top="408" height="25"/>
+        <Static id="sta_20" text="기타코드1" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" onclick="sta_20_onclick" position="absolute" left="668" width="124" top="440" height="25"/>
+        <Edit id="Edit01" taborder="1" maxlength="3" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" enable="false" inputtype="number" canchange="Edit01_canchange" position="absolute" left="461" width="203" top="411" height="19"/>
+        <Edit id="Edit02" taborder="3" maxlength="10" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" oneditclick="Edit02_oneditclick" enable="true" position="absolute" left="794" width="136" top="411" height="19"/>
+        <Edit id="Edit05" taborder="6" maxlength="10" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" enable="true" position="absolute" left="794" width="136" top="443" height="19"/>
+        <Static id="sta_33" text="공통코드상세리스트" style="color:black;align:left top;font:굴림,9,bold;" position="absolute" left="8" width="197" top="103" height="19"/>
+        <Button id="btn_delete" taborder="1" text="삭제" onclick="btn_delete" style="pusheddrawoffset:0 0;background:URL('theme://images/btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:Dotum,9,bold;cursor:hand;shadow:drop 0,1 2 #0000007f;" position="absolute" right="184" width="55" top="94px" height="24"/>
+        <Grid id="grd_plaintiff" taborder="1" binddataset="ds_cmmdetail" scrollbars="fixedvert" useinputpanel="false" nodatatext="데이터가 없습니다." selecttype="row" autofittype="col" position="absolute" left="8" right="10" top="120px" height="270">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="84"/>
+                <Column size="122"/>
+                <Column size="185"/>
+                <Column size="207"/>
+                <Column size="200"/>
+                <Column size="104"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="분류코드"/>
+                <Cell col="2" text="분류명칭"/>
+                <Cell col="3" text="상세코드"/>
+                <Cell col="4" text="상세코드명"/>
+                <Cell col="5" text="사용여부"/>
+              </Band>
+              <Band id="body">
+                <Cell style="align:center;" expr="currow+1"/>
+                <Cell col="1" edittype="normal" style="align:center;" text="bind:classCode" editlimit="30"/>
+                <Cell col="2" style="align:center;" text="bind:className"/>
+                <Cell col="3" edittype="mask" style="align:center;" text="bind:codeNo" editlimit="15"/>
+                <Cell col="4" edittype="mask" style="align:center;" text="bind:codeName" editlimit="11"/>
+                <Cell col="5" displaytype="combo" edittype="combo" style="align:center;" text="bind:useYn" editlimit="11" combodataset="ds_useryn" combocodecol="id" combodatacol="value"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_new" taborder="1" text="신규" onclick="btn_new_onclick" style="background:URL('theme://images/btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:Dotum,9,bold;shadow:drop 0,1 2 #0000007f;" position="absolute" right="126" width="55" top="94px" height="24"/>
+        <Button id="btn_save" taborder="1" text="저장" onclick="btn_save_onclick" style="background:URL('theme://images/btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:Dotum,9,bold;shadow:drop 0,1 2 #0000007f;" position="absolute" right="68" width="55" top="94px" height="24"/>
+        <Edit id="Edit03" taborder="4" maxlength="10" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" oneditclick="Edit03_oneditclick" enable="true" position="absolute" left="141" width="187" top="443" height="19"/>
+        <Edit id="Edit04" taborder="5" maxlength="10" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" oneditclick="Edit04_oneditclick" enable="true" inputtype="english" position="absolute" left="461" width="203" top="443" height="19"/>
+        <Combo id="Combo02" taborder="1" codecolumn="classCode" datacolumn="className" onitemchanged="Combo02_onitemchanged" index="0" text="사용" innerdataset="@ds_codekind1" enable="false" position="absolute" left="141" width="187" top="410" height="20"/>
+        <Static id="sta_no00" text="상세코드" onclick="sta_no_onclick" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="326" width="124" top="65px" height="25"/>
+        <Static id="sta_no01" text="코드명" onclick="sta_no_onclick" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" right="247" width="124" top="65px" height="25"/>
+        <Static id="sta_00" text="기타코드2" onclick="sta_16_onclick" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="14" width="124" top="472" height="25"/>
+        <Static id="sta_02" text="상세코드설명" onclick="sta_18_onclick" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="335" width="124" top="472" height="25"/>
+        <Static id="sta_04" text="* 사용여부" onclick="sta_16_onclick" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="14" width="124" top="504" height="25"/>
+        <Static id="sta_05" text="소팅순서" onclick="sta_18_onclick" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="335" width="124" top="504" height="25"/>
+        <Static id="sta_06" text="등록일자" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" onclick="sta_06_onclick" position="absolute" left="668" width="124" top="504" height="25"/>
+        <Static id="sta_07" text="수정일자" onclick="sta_16_onclick" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="14" width="124" top="536" height="25"/>
+        <Static id="sta_08" text="최종수정일자" onclick="sta_18_onclick" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="335" width="124" top="536" height="25"/>
+        <Edit id="Edit07" taborder="7" maxlength="10" oneditclick="Edit03_oneditclick" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" enable="true" position="absolute" left="141" width="187" top="475" height="19"/>
+        <Edit id="Edit08" taborder="8" maxlength="10" oneditclick="Edit04_oneditclick" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" enable="true" position="absolute" left="461" width="469" top="475" height="19"/>
+        <Edit id="Edit11" taborder="10" maxlength="10" oneditclick="Edit04_oneditclick" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" enable="true" inputtype="number" position="absolute" left="461" width="203" top="507" height="19"/>
+        <Combo id="Combo01" taborder="9" onitemchanged="Combo02_onitemchanged" index="0" value="Y" text="사용" enable="true" codecolumn="codecolumn" datacolumn="datacolumn" position="absolute" left="141" width="187" top="504" height="22">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">YN</Col>
+                <Col id="datacolumn">선택</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">Y</Col>
+                <Col id="datacolumn">사용</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">N</Col>
+                <Col id="datacolumn">미사용</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Edit id="Edit00" taborder="1" position="absolute" left="453" width="123" top="68" height="18"/>
+        <Edit id="Edit06" taborder="1" position="absolute" right="68" width="176" top="68px" height="18"/>
+        <MaskEdit id="Edit12" taborder="1" mask="####-##-##" type="string" style="align:left;" position="absolute" left="794" width="136" top="507" height="19"/>
+        <MaskEdit id="MaskEdit00" taborder="0" mask="####-##-##" type="string" style="align:left;" position="absolute" left="141" width="187" top="538" height="20"/>
+        <MaskEdit id="MaskEdit01" taborder="0" mask="####-##-##" type="string" style="align:left;" position="absolute" left="461" width="203" top="538" height="20"/>
+        <Combo id="Combo00" taborder="1" index="-1" innerdataset="@ds_codekind1" codecolumn="classCode" datacolumn="className" onitemchanged="Combo00_onitemchanged" position="absolute" left="142" width="174" top="69px" height="17"/>
+        <Static id="Static02" text="*" style="color:red;font:arial,18;" position="absolute" left="43" width="18" top="416" height="22"/>
+        <Static id="Static00" text="*" style="color:red;font:arial,18;" position="absolute" left="364" width="18" top="416" height="22"/>
+        <Static id="Static01" text="*" style="color:red;font:arial,18;" position="absolute" left="43" width="18" top="512" height="22"/>
+        <Static id="Static03" text="*" style="color:red;font:arial,18;" position="absolute" left="688" width="18" top="415" height="22"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_useryn" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="id" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="id">YN</Col>
+            <Col id="value">전체</Col>
+          </Row>
+          <Row>
+            <Col id="id">Y</Col>
+            <Col id="value">사용</Col>
+          </Row>
+          <Row>
+            <Col id="id">N</Col>
+            <Col id="value">미사용</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_codekind" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="className" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_codekind1" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="className" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_cmmdetail" firefirstcount="0" firenextcount="0" useclientlayout="true" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="classCode" size="256" type="STRING"/>
+          <Column id="codeNo" size="256" type="STRING"/>
+          <Column id="codeName" size="256" type="STRING"/>
+          <Column id="codeName2" size="256" type="STRING"/>
+          <Column id="codeEngName" size="256" type="STRING"/>
+          <Column id="etcCode1" size="256" type="STRING"/>
+          <Column id="etcCode2" size="256" type="STRING"/>
+          <Column id="codeDesc" size="256" type="STRING"/>
+          <Column id="useYn" size="256" type="STRING"/>
+          <Column id="sortSeq" size="256" type="STRING"/>
+          <Column id="registTime" size="256" type="STRING"/>
+          <Column id="registId" size="256" type="STRING"/>
+          <Column id="updateTime" size="256" type="STRING"/>
+          <Column id="updateId" size="256" type="STRING"/>
+          <Column id="lastModyTime" size="256" type="STRING"/>
+          <Column id="higherClassCode" size="256" type="STRING"/>
+          <Column id="higherCodeNo" size="256" type="STRING"/>
+          <Column id="className" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dept" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item3" compid="Combo02" propid="value" datasetid="ds_cmmdetail" columnid="classCode"/>
+      <BindItem id="item4" compid="Edit01" propid="value" datasetid="ds_cmmdetail" columnid="codeNo"/>
+      <BindItem id="item5" compid="Edit02" propid="value" datasetid="ds_cmmdetail" columnid="codeName"/>
+      <BindItem id="item6" compid="Edit03" propid="value" datasetid="ds_cmmdetail" columnid="codeName2"/>
+      <BindItem id="item7" compid="Edit04" propid="value" datasetid="ds_cmmdetail" columnid="codeEngName"/>
+      <BindItem id="item8" compid="Edit05" propid="value" datasetid="ds_cmmdetail" columnid="etcCode1"/>
+      <BindItem id="item9" compid="Edit07" propid="value" datasetid="ds_cmmdetail" columnid="etcCode2"/>
+      <BindItem id="item10" compid="Edit08" propid="value" datasetid="ds_cmmdetail" columnid="codeDesc"/>
+      <BindItem id="item12" compid="Edit11" propid="value" datasetid="ds_cmmdetail" columnid="sortSeq"/>
+      <BindItem id="item13" compid="grd_plaintiff" propid="binddataset" datasetid="ds_cmmdetail"/>
+      <BindItem id="item11" compid="Combo01" propid="value" datasetid="ds_cmmdetail" columnid="useYn"/>
+      <BindItem id="item15" compid="grd_plaintiff" propid="visible" datasetid="ds_useryn" columnid="id"/>
+      <BindItem id="item2" compid="Edit12" propid="value" datasetid="ds_cmmdetail" columnid="registTime"/>
+      <BindItem id="item0" compid="MaskEdit00" propid="value" datasetid="ds_cmmdetail" columnid="updateTime"/>
+      <BindItem id="item1" compid="MaskEdit01" propid="value" datasetid="ds_cmmdetail" columnid="lastModyTime"/>
+    </Bind>
+  </Form>
+</FDL>

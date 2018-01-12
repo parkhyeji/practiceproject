@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="empInfo" classname="empInfo" left="0" top="0" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Static id="Static11" taborder="53" left="40" right="40" style="background:cornsilk;border:1 solid darkgray ;" height="90" top="533"/>
+        <Static id="Static10" taborder="51" left="40" top="54" right="40" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <Grid id="Grid00" taborder="2" useinputpanel="false" left="40" top="89" right="40" binddataset="ds_empInfo" height="437" nodatatext="데이터가 없습니다.">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="48"/>
+                <Column size="100"/>
+                <Column size="94"/>
+                <Column size="141"/>
+                <Column size="111"/>
+                <Column size="109"/>
+                <Column size="83"/>
+                <Column size="115"/>
+                <Column size="99"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="상태"/>
+                <Cell col="1" text="NO"/>
+                <Cell col="2" text="직원번호"/>
+                <Cell col="3" text="직원명"/>
+                <Cell col="4" text="주민번호"/>
+                <Cell col="5" text="입사일자"/>
+                <Cell col="6" text="휴대번호"/>
+                <Cell col="7" text="직급명"/>
+                <Cell col="8" text="퇴사일자"/>
+                <Cell col="9" text="사용여부"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="expr:comp.parent.expr_flag(currow)"/>
+                <Cell col="1" text="expr:currow+1"/>
+                <Cell col="2" text="bind:empNo"/>
+                <Cell col="3" edittype="expr:comp.parent.expr_edittype(flag)" text="bind:empName" editautoselect="false" editdisplay="edit"/>
+                <Cell col="4" text="bind:resiNo" mask="######-#{######}"/>
+                <Cell col="5" text="bind:joinDate" expr="expr:comp.parent.expr_jdate(currow)"/>
+                <Cell col="6" text="bind:celNo" mask="expr:comp.parent.expr_phoneNumber(currow)"/>
+                <Cell col="7" text="bind:posiName"/>
+                <Cell col="8" text="bind:retireDate" expr="expr:comp.parent.expr_rdate(currow)"/>
+                <Cell col="9" text="bind:useYn"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_title" taborder="24" onclick="sta_title_onclick" left="0%" top="0" right="0%" height="46" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;" positionstep="0"/>
+        <Button id="Button03" taborder="26" text="퇴사처리" onclick="Button03_onclick" top="58" height="20" style="background:lightskyblue;color:white;" width="92" right="44"/>
+        <Button id="Button02" taborder="27" text="입사승인" onclick="Button02_onclick" top="58" height="20" style="background:lightskyblue;color:white;" width="92" right="140"/>
+        <Button id="Button01" taborder="28" text="정보수정" onclick="Button01_onclick" top="58" height="20" style="background:lightskyblue;color:white;" width="92" right="236"/>
+        <Button id="Button00" taborder="29" text="전체조회" onclick="Button00_onclick" top="58" height="20" style="background:lightskyblue;color:white;" width="92" right="332"/>
+        <Button id="Button04" taborder="30" text="검색" onclick="Button04_onclick" top="58" height="20" style="background:lightskyblue;color:white;" width="92" right="428"/>
+        <Combo id="Combo02" taborder="31" innerdataset="@ds_posiName" datacolumn="value" left="100" top="56" height="24" width="125"/>
+        <Static id="Static00" taborder="34" text="직원번호" left="44" top="537" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Edit id="Edit00" taborder="35" left="172" top="539" height="24" width="125" style="align:center middle;"/>
+        <Edit id="Edit01" taborder="36" left="532" top="539" height="24" width="125" style="align:center middle;"/>
+        <Static id="Static01" taborder="37" text="직원명" left="404" top="537" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Static id="Static02" taborder="39" text="주민번호" top="537" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125" right="172"/>
+        <Static id="Static03" taborder="41" text="전화번호" left="44" top="564" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Static id="Static04" taborder="42" text="입사일자" left="404" top="564" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Calendar id="Calendar00" taborder="43" left="532" top="566" height="24" width="125" style="align:center middle;"/>
+        <Static id="Static05" taborder="44" text="퇴사일자" top="564" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125" right="172"/>
+        <Calendar id="Calendar01" taborder="45" top="566" height="24" width="125" right="44" style="align:center middle;"/>
+        <Static id="Static06" taborder="46" text="직급명" left="44" top="591" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Combo id="Combo00" taborder="47" innerdataset="@ds_posiName" datacolumn="value" left="172" top="593" height="24" width="125" style="align:center middle;"/>
+        <Static id="Static07" taborder="48" text="사용여부" left="404" top="591" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Combo id="Combo01" taborder="49" innerdataset="@ds_yseYn" datacolumn="value" left="532" top="593" height="24" width="125" index="-1" style="align:center middle;"/>
+        <Static id="Static08" taborder="54" text="직급구분" left="47" top="57" width="64" height="23"/>
+        <Static id="Static09" taborder="55" text="직원정보" left="40" top="0" width="200" height="45" style="color:white;font:bold 17 돋움;"/>
+        <MaskEdit id="MaskEdit00" taborder="56" left="172" top="566" mask="###-####-####" width="125" height="24" type="string" style="align:center middle;"/>
+        <MaskEdit id="MaskEdit01" taborder="57" top="539" height="24" mask="######-#######" right="44" width="125" maskchar="_" style="align:center middle;" type="string"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_posiName">
+        <ColumnInfo>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="value">전체</Col>
+          </Row>
+          <Row>
+            <Col id="value">사원</Col>
+          </Row>
+          <Row>
+            <Col id="value">대리</Col>
+          </Row>
+          <Row>
+            <Col id="value">과장</Col>
+          </Row>
+          <Row>
+            <Col id="value">부장</Col>
+          </Row>
+          <Row>
+            <Col id="value">사장</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_yseYn">
+        <ColumnInfo>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="value">Y</Col>
+          </Row>
+          <Row>
+            <Col id="value">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_empInfo" oncolumnchanged="ds_empInfo_oncolumnchanged" onrowposchanged="ds_empInfo_onrowposchanged">
+        <ColumnInfo>
+          <Column id="empNo" type="STRING" size="20"/>
+          <Column id="empName" type="STRING" size="20"/>
+          <Column id="resiNo" type="STRING" size="13"/>
+          <Column id="joinDate" type="STRING" size="8"/>
+          <Column id="celNo" type="STRING" size="20"/>
+          <Column id="posiName" type="STRING" size="20"/>
+          <Column id="retireDate" type="STRING" size="8"/>
+          <Column id="useYn" type="STRING" size="1"/>
+          <Column id="flag" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_posiSearch">
+        <ColumnInfo>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="value">전체</Col>
+          </Row>
+          <Row>
+            <Col id="value">사원</Col>
+          </Row>
+          <Row>
+            <Col id="value">대리</Col>
+          </Row>
+          <Row>
+            <Col id="value">과장</Col>
+          </Row>
+          <Row>
+            <Col id="value">부장</Col>
+          </Row>
+          <Row>
+            <Col id="value">사장</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Edit00" propid="value" datasetid="ds_empInfo" columnid="empNo"/>
+      <BindItem id="item1" compid="Edit01" propid="value" datasetid="ds_empInfo" columnid="empName"/>
+      <BindItem id="item4" compid="Calendar00" propid="value" datasetid="ds_empInfo" columnid="joinDate"/>
+      <BindItem id="item5" compid="Calendar01" propid="value" datasetid="ds_empInfo" columnid="retireDate"/>
+      <BindItem id="item6" compid="Combo00" propid="value" datasetid="ds_empInfo" columnid="posiName"/>
+      <BindItem id="item7" compid="Combo01" propid="value" datasetid="ds_empInfo" columnid="useYn"/>
+      <BindItem id="item8" compid="Combo02" propid="value" datasetid="ds_posiSearch" columnid="value"/>
+      <BindItem id="item3" compid="MaskEdit00" propid="value" datasetid="ds_empInfo" columnid="celNo"/>
+      <BindItem id="item2" compid="MaskEdit01" propid="value" datasetid="ds_empInfo" columnid="resiNo"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+var dsRow = 0;
+this.fnCallback = function(sScvid, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		this.alert("통신에 실패하였습니다." + sScvid + " : " + sErrorMsg);
+		return;
+	}else {
+		switch(sScvid){
+			case "allEmpInfo" :
+			this.ds_empInfo.set_rowposition(dsRow);
+			break;
+			case "empInfoUpdate" :
+			this.Button00_onclick();
+			break;
+			case "empJoinDateUpdate" :
+			this.Button00_onclick();
+			break;
+			case "empRetireDateUpdate" :
+			this.Button00_onclick();
+			break;
+			case "empPosiNameSearch" :
+			break;
+			default :
+			break;
+		}
+	}
+}
+
+//전체 직원정보 조회
+this.Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.gfn_transaction(this
+	                   , "allEmpInfo"
+	                   , "allEmpInfo/allEmpInfo.do"
+	                   , ""
+	                   , "ds_empInfo=ds_empInfo"
+	                   , ""
+	                   , "fnCallback");
+	                   
+}
+
+
+//선택한 행 직원정보 업데이트
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow     = this.ds_empInfo.rowposition;
+	var joinDate = this.ds_empInfo.getColumn(nRow, "joinDate");
+	var retireDate = this.ds_empInfo.getColumn(nRow, "retireDate");
+	var useYn    = this.ds_empInfo.getColumn(nRow, "useYn");
+	if(joinDate!=null && retireDate!=null){
+		if(joinDate > retireDate){
+			alert("퇴사일이 입사일 보다 작을수 없습니다.");
+			return;
+		}
+	}else if(joinDate==null && retireDate!=null){
+		alert("입사일이 존재하지않습니다.");
+		return;
+	}
+	
+	if(joinDate!=null && retireDate==null && useYn=='N'){
+		var tf = confirm("사용여부가 N입니다.\n사용여부를 Y로 전환 하시겠습니까?");
+		if(tf==true){
+			this.ds_empInfo.setColumn(nRow, "useYn", "Y");
+		}
+	}else if(joinDate!=null && retireDate!=null && useYn=='Y'){
+		var tf = confirm("사용여부가 Y입니다.\n사용여부를 N로 전환 하시겠습니까?");
+		if(tf==true){
+			this.ds_empInfo.setColumn(nRow, "useYn", "N");
+		}
+	}else if(joinDate==null && retireDate==null && useYn=='N'){
+		var tf = confirm("사용여부가 N입니다.\n사용여부를 Y로 전환 하시겠습니까?");
+		if(tf==true){
+			this.ds_empInfo.setColumn(nRow, "useYn", "Y");
+		}
+	}
+	
+	this.gfn_transaction(this
+	                   , "empInfoUpdate"
+	                   , "empInfoUpdate/empInfoUpdate.do"
+	                   , "ds_empInfo=ds_empInfo"
+	                   , ""
+	                   , ""
+	                   , "fnCallback");
+	                   
+	alert("직원정보 수정완료");
+}
+
+//입사승인
+this.Button02_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_empInfo.rowposition;
+	var joinDate = this.ds_empInfo.getColumn(nRow,"joinDate");
+	if(joinDate==null){
+		var tf = confirm("입사일을 선택하지 않으셨습니다.\n오늘날짜로 승인하시겠습니까?");
+		if(tf==true){
+			this.ds_empInfo.setColumn(nRow, "flag", "U" );
+			this.gfn_transaction(this
+	                   , "empJoinDateUpdate"
+	                   , "empJoinDateUpdate/empJoinDateUpdate.do"
+	                   , "ds_empInfo=ds_empInfo"
+	                   , ""
+	                   , ""
+	                   , "fnCallback");
+	        alert("승인처리완료");
+		}else{
+			alert("입사일 선택후 다시 시도해주세요.");
+		}
+	}else{
+		alert("입사일이 등록되어 있습니다.");
+	}
+}
+
+//퇴사처리
+this.Button03_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow       = this.ds_empInfo.rowposition;
+	var joinDate   = this.ds_empInfo.getColumn(nRow,"joinDate");
+	var retireDate = this.ds_empInfo.getColumn(nRow,"retireDate");
+	
+	if(joinDate!=null && retireDate==null){
+		var tf = confirm("퇴사일을 선택하지 않으셨습니다.\n오늘날짜로 처리하시겠습니까?");
+		if(tf==true){
+			this.ds_empInfo.setColumn(nRow, "flag", "U" );
+			this.gfn_transaction(this
+	                   , "empRetireDateUpdate"
+	                   , "empRetireDateUpdate/empRetireDateUpdate.do"
+	                   , "ds_empInfo=ds_empInfo"
+	                   , ""
+	                   , ""
+	                   , "fnCallback");
+	        alert("퇴사처리완료");
+		}else{
+			alert("퇴사일 선택후 다시 시도해주세요.");
+			return;
+		}
+	}else if(joinDate==null){
+		alert("입사날짜가 존재하지 않는 직원입니다.");
+		return;
+	}else{
+		alert("퇴사처리가 되어있는 직원입니다.");
+		return;
+	}
+}
+
+//직급별 검색
+this.Button04_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var posiName = this.Combo02.value;
+	this.ds_posiSearch.setColumn(0, "value", posiName);
+	
+	this.gfn_transaction(this
+				, "empPosiNameSearch"
+				, "empPosiNameSearch/empPosiNameSearch.do"
+				, "ds_posiSearch=ds_posiSearch"
+				, "ds_empInfo=ds_empInfo"
+				, ""
+				, "fnCallback");
+}
+
+// S = select result
+// I = insert
+// D = delete
+// U = modified
+
+// ADD >> FLAG:I
+// DELETE >> U, S:D I:deleteRow
+// UPDATE >> oncolumnchanged S>>U I>>I
+
+//flag상태 set 
+this.ds_empInfo_oncolumnchanged = function(obj:Dataset, e:nexacro.DSColChangeEventInfo)
+{
+	//var nRowList = e.row;
+	var sFlag = obj.getColumn(e.row, "flag");
+	
+	if(sFlag == 'S'){
+		obj.setColumn(e.row,"flag",'U');
+	}
+}
+
+//flag상태에 따른 마스크 처리
+this.expr_flag = function(nRow){
+	var sFlag = this.ds_empInfo.getColumn(nRow, "flag");
+	if(sFlag == 'S') return '-';
+	else if(sFlag == 'I') return '신규';
+	else if(sFlag == 'D') return '삭제';
+	else if(sFlag == 'U') return '변경';
+}
+
+//edit type
+this.expr_edittype = function(flag){
+	var result = "A";
+	if(flag == 'S') result = 'none';
+	else if(flag == 'I') result = 'text';
+	else if(flag == 'D') result = 'none';
+	else if(flag == 'U') result = 'text';
+	return result;
+}
+
+//전화번호부 조건에 따른 마스크 처리
+this.expr_phoneNumber = function(nRow){
+	var phoneNo = this.ds_empInfo.getColumn(nRow, "celNo");
+	
+	if(phoneNo == null){
+		return "";
+	}else if(phoneNo.substr(0,2) == "02"){
+		if(phoneNo.length == '9'){
+			return phoneNo.substr(0,2)+"-"+phoneNo.substr(2,3)+"-"+phoneNo.substr(5);
+		}else{
+			return phoneNo.substr(0,2)+"-"+phoneNo.substr(2,4)+"-"+phoneNo.substr(6);
+		}
+	}else{
+		if(phoneNo.length == '10'){
+			return phoneNo.substr(0,3)+"-"+phoneNo.substr(3,3)+"-"+phoneNo.substr(6);
+		}else{
+			return phoneNo.substr(0,3)+"-"+phoneNo.substr(3,4)+"-"+phoneNo.substr(7);
+		}
+	}
+}
+
+//주민번호에 따른 마스크 처리
+this.expr_resiNo = function(nRow){
+	var resiNo = this.ds_empInfo.getColumn(nRow, "resiNo");
+	
+	if(resiNo == null){
+		return "";
+	}else{ 
+		return resiNo.substr(0,6)+"-"+resiNo.substr(7,1);//+"{"+resiNo.subStr(8)+"}";
+	}
+}
+
+//입사날짜,퇴사날짜에 따른 마스크 처리
+this.expr_jdate = function(nRow){
+	var jdate = this.ds_empInfo.getColumn(nRow, "joinDate");
+	
+	if(jdate == null){
+		return "";
+	}else{ 
+		return jdate.substr(0,4)+"-"+jdate.substr(4,2)+"-"+jdate.substr(6);
+	}
+}
+
+//퇴사날짜에 따른 마스크 처리
+this.expr_rdate = function(nRow){
+	var rdate = this.ds_empInfo.getColumn(nRow, "retireDate");
+	
+	if(rdate == null){
+		return "";
+	}else{ 
+		return rdate.substr(0,4)+"-"+rdate.substr(4,2)+"-"+rdate.substr(6);
+	}
+}
+
+
+// 행 변경 시 이벤트
+this.ds_empInfo_onrowposchanged = function(obj:Dataset, e:nexacro.DSRowPosChangeEventInfo){
+	if(e.newrow != 0) dsRow = e.newrow;
+}]]></Script>
+  </Form>
+</FDL>

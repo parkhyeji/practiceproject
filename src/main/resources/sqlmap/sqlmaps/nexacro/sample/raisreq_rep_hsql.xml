@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" />
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+
+	<!-- 소제기의뢰 회신용 검색 -->
+	<select id="rais.raisDAO.getRaisreqView" resultClass="egovMap"
+		parameterClass="java.util.HashMap">
+		<![CDATA[
+			SELECT  
+				T1.LAW_RAISREQ_NO
+				,T2.INSA_NAME||'('||T1.LAW_RAISREQ_REQ_ID||')' AS LAW_RAISREQ_REQ_ID
+				,T1.LAW_RAISREQ_CLAS_CODE
+				,T1.LAW_RAISREQ_REA
+				,T1.LAW_RAISREQ_ETC_POIN
+				,T1.LAW_RAISREQ_REQ_DATE
+				,UPPER(T1.LAW_RAISREQ_REP_WTR) AS LAW_RAISREQ_REP_WTR
+				,UPPER(T1.LAW_RAISREQ_WTR) AS LAW_RAISREQ_WTR
+				,T1.LAW_RAISREQ_DALW_CONT
+				,T1.LAW_RAISREQ_EXPT_DATE	
+				,T1.LAW_RAISREQ_REP_CONT
+				,T1.LAW_RAISREQ_ETCREQ_POIN
+				,T1.LAW_RAISREQ_REP_DATE
+				,T1.LAW_RAISREQ_ISSU_POIN
+			FROM 
+				TAB_LAW_RAISREQ T1
+				,TAB_INSA T2
+			WHERE 
+				T1.LAW_RAISREQ_REQ_ID = T2.INSA_SABUN
+		]]>
+		<!-- 의뢰번호 -->
+		<isNotEmpty property="lawRaisreqNo" prepend="AND">
+			<![CDATA[
+				T1.LAW_RAISREQ_NO LIKE #lawRaisreqNo# || '%'
+			]]>
+		</isNotEmpty>
+	</select>
+	
+	<!-- 소제기의뢰 회신 -->
+	<update id="rais.raisDAO.updateRep" parameterClass="java.util.HashMap">	
+		UPDATE	
+			TAB_LAW_RAISREQ
+		SET							
+			LAW_RAISREQ_REP_WTR = #lawRaisreqRepWtr,jdbcType=VARCHAR#	
+			,LAW_RAISREQ_WTR = #lawRaisreqWtr,jdbcType=VARCHAR#
+			,LAW_RAISREQ_DALW_CONT = #lawRaisreqDalwCont,jdbcType=VARCHAR#	
+			,LAW_RAISREQ_EXPT_DATE = #lawRaisreqExptDate,jdbcType=VARCHAR#
+			,LAW_RAISREQ_REP_CONT = #lawRaisreqRepCont,jdbcType=VARCHAR#
+			,LAW_RAISREQ_ETCREQ_POIN = #lawRaisreqEtcreqPoin,jdbcType=VARCHAR#
+			,LAW_RAISREQ_REP_DATE = #lawRaisreqRepDate,jdbcType=VARCHAR#
+			,LAW_RAISREQ_ISSU_POIN = #lawRaisreqIssuPoin,jdbcType=VARCHAR#				 		 
+		WHERE	
+			LAW_RAISREQ_NO = #lawRaisreqNo#				
+	</update>
+	
+	
+	
+</sqlMap>

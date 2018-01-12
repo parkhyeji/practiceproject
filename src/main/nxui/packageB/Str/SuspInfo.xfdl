@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="SupInfo" classname="SupInfo" left="0" top="0" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Static id="Static02" taborder="56" left="40" top="330" right="40" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <Static id="Static00" taborder="54" left="40" top="54" right="40" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <Grid id="grd_upper" taborder="1" useinputpanel="false" left="3.91%" top="90" right="4%" height="184" binddataset="ds_upper">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="62"/>
+                <Column size="104"/>
+                <Column size="246"/>
+                <Column size="141"/>
+                <Column size="183"/>
+                <Column size="108"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="flag" expr="comp.parent.chflag(currow)"/>
+                <Cell col="1" text="대항목코드"/>
+                <Cell col="2" text="대항목명"/>
+                <Cell col="3" text="등록자"/>
+                <Cell col="4" text="등록일시"/>
+                <Cell col="5" text="사용여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:flag" expr="expr:comp.parent.upperflag(currow)"/>
+                <Cell col="1" text="bind:upperCode"/>
+                <Cell col="2" text="bind:upperName"/>
+                <Cell col="3" text="bind:regiId"/>
+                <Cell col="4" text="bind:regiDt" mask="####.##.## ##:##:##"/>
+                <Cell col="5" text="bind:useYn"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="st_upper" taborder="2" text="대항목" left="44" top="58" height="20" style="color:#46463dff;font:9 Dotum;" right="904"/>
+        <Grid id="grd_detail" taborder="4" useinputpanel="false" left="40" top="366" right="40" height="183" binddataset="ds_detail">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="70"/>
+                <Column size="113"/>
+                <Column size="216"/>
+                <Column size="80"/>
+                <Column size="143"/>
+                <Column size="80"/>
+                <Column size="142"/>
+                <Column size="72"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="flag" expr="comp.parent.chflag(currow)"/>
+                <Cell col="1" text="세부항목코드"/>
+                <Cell col="2" text="세부항목 명"/>
+                <Cell col="3" text="등록자"/>
+                <Cell col="4" text="등록일시"/>
+                <Cell col="5" text="수정자"/>
+                <Cell col="6" text="수정일시"/>
+                <Cell col="7" text="사용여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:flag" expr="expr:comp.parent.detailflag(currow)"/>
+                <Cell col="1" text="bind:detailCode"/>
+                <Cell col="2" style="align:left middle;" text="bind:detailName"/>
+                <Cell col="3" text="bind:regiId"/>
+                <Cell col="4" text="bind:regiDt" mask="####.##.## ##:##:##"/>
+                <Cell col="5" text="bind:modiId"/>
+                <Cell col="6" text="bind:modiDt" mask="####.##.## ##:##:##"/>
+                <Cell col="7" text="bind:useYn"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="bt_search" taborder="5" text="조회" top="58" height="20" onclick="bt_search_onclick" width="92" right="332" style="background:lightskyblue;border:1 solid #808080ff ;color:white;"/>
+        <Static id="st_back" taborder="8" left="40" top="283" right="40" height="38" style="background:cornsilk;border:1 solid darkgray ;"/>
+        <Static id="st_000" taborder="10" text="대항목 코드" left="44" top="288" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Static id="st_01" taborder="11" text="대항목 명" left="385" top="288" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Static id="st_04" taborder="14" text="등록자" left="726" top="288" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Edit id="edt_00" taborder="19" top="290" height="24" enable="false" width="125" left="172" style=":disabled {align:center middle;}"/>
+        <Edit id="edt_01" taborder="20" top="290" height="24" enable="true" width="125" left="513" style="align:center middle;"/>
+        <Edit id="edt_04" taborder="23" top="290" height="24" readonly="false" left="854" width="125" style="align:center middle;"/>
+        <Button id="bt_upperadd" taborder="29" text="추가" top="58" height="20" onclick="bt_upperadd_onclick" width="92" right="236" style="background:lightskyblue;border:1 solid #808080ff ;color:white;"/>
+        <Button id="bt_detailadd" taborder="30" text="추가" top="334" right="236" height="20" onclick="bt_detailadd_onclick" width="92" style="background:lightskyblue;border:1 solid #808080ff ;color:white;"/>
+        <Button id="bt_upperDel" taborder="32" text="삭제" top="58" height="20" onclick="bt_upperDel_onclick" right="44" width="92" style="background:lightskyblue;border:1 solid #808080ff ;color:white;"/>
+        <Button id="bt_detailDel" taborder="33" text="삭제" top="334" right="44" height="20" onclick="bt_detailDel_onclick" width="92" style="background:lightskyblue;border:1 solid #808080ff ;color:white;"/>
+        <Static id="st_back02" taborder="35" left="40" right="40" style="background:cornsilk;border:1 solid darkgray ;" height="66" top="557"/>
+        <Static id="st_09" taborder="36" text="세부항목 코드" left="44" top="562" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Edit id="edt_06" taborder="37" top="564" height="24" enable="false" width="125" left="172" style=":disabled {align:center middle;}"/>
+        <Static id="st_12" taborder="41" text="세부항목 명" left="44" top="589" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Edit id="edt_" taborder="42" top="592" height="24" width="465" left="172" style="align:left middle;"/>
+        <Static id="st_13" taborder="44" text="사용여부" top="562" height="28" style="background:azure;border:1 solid black ;align:center middle;" left="384" width="125"/>
+        <Combo id="cmb_01" taborder="45" innerdataset="@ds_yn" codecolumn="code" datacolumn="value" top="562" height="24" width="125" left="512" style="align:center middle;"/>
+        <Static id="st_02" taborder="48" text="사용여부" left="726" top="288" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Combo id="cmo_00" taborder="49" top="290" height="24" innerdataset="@ds_yn" codecolumn="code" datacolumn="value" width="125" left="854" style="align:center middle;"/>
+        <Button id="bt_uppersave" taborder="34" text="저장" top="58" height="20" onclick="bt_uppersave_onclick" width="92" right="140" style="background:lightskyblue;border:1 solid #808080ff ;color:white;"/>
+        <Static id="st_detail" taborder="3" text="세부 항목" left="44" top="332" height="24" style="font:9 Dotum;" width="72"/>
+        <Button id="bt_detailsave" taborder="47" text="저장" top="334" right="140" height="20" onclick="bt_detailsave_onclick" width="92" style="background:lightskyblue;border:1 solid #808080ff ;color:white;"/>
+        <Static id="sta_title" taborder="58" onclick="sta_title_onclick" left="-0.1%" top="0" right="0%" height="46" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Static id="Static01" taborder="59" text="의심거래유형정보" left="40" top="0" width="200" height="45" style="color:white;font:bold 17 돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_upper" onrowposchanged="ds_upper_onrowposchanged" oncolumnchanged="ds_upper_oncolumnchanged" updatecontrol="true" firefirstcount="0">
+        <ColumnInfo>
+          <Column id="flag" type="STRING" size="10"/>
+          <Column id="upperCode" type="STRING" size="256"/>
+          <Column id="upperName" type="STRING" size="256"/>
+          <Column id="regiId" type="STRING" size="256"/>
+          <Column id="regiDt" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_detail" oncolumnchanged="ds_detail_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="detailCode" type="STRING" size="256"/>
+          <Column id="detailName" type="STRING" size="256"/>
+          <Column id="regiId" type="STRING" size="256"/>
+          <Column id="regiDt" type="STRING" size="256"/>
+          <Column id="modiId" type="STRING" size="256"/>
+          <Column id="modiDt" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+          <Column id="flag" type="STRING" size="256"/>
+          <Column id="upperCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_code">
+        <ColumnInfo>
+          <Column id="upperCode" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_yn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="value">예</Col>
+          </Row>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="value">아니오</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edt_00" propid="value" datasetid="ds_upper" columnid="upperCode"/>
+      <BindItem id="item1" compid="edt_01" propid="value" datasetid="ds_upper" columnid="upperName"/>
+      <BindItem id="item4" compid="edt_04" propid="value" datasetid="ds_upper" columnid="regiId"/>
+      <BindItem id="item9" compid="edt_06" propid="value" datasetid="ds_detail" columnid="detailCode"/>
+      <BindItem id="item11" compid="edt_" propid="value" datasetid="ds_detail" columnid="detailName"/>
+      <BindItem id="item13" compid="cmb_01" propid="value" datasetid="ds_detail" columnid="useYn"/>
+      <BindItem id="item2" compid="cmo_00" propid="value" datasetid="ds_upper" columnid="useYn"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+this.bt_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.gfn_transaction(this
+								, "x"
+								, "susp/search.do"
+								, "" //보내는곳
+        					    , "ds_upper=ds_upper" //받는곳
+        					    , ""
+        					    , "fnCallback");
+}
+
+this.fnCallback = function(sSvcId,nErrorCode,sErrorMsg){
+	if(nErrorCode < 0){
+		application.alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+		case "manageList":
+		break;
+		case "saveUpper" : 
+			alert("저장되었습니다");
+			this.gfn_transaction(this
+								, "upperRe"
+								, "susp/search.do"
+								, "" //보내는곳
+        					    , "ds_upper=ds_upper" //받는곳
+        					    , ""
+        					    , "fnCallback");
+		break;
+		case "saveDetail" :
+			alert("저장되었습니다");
+			this.gfn_transaction(this
+								, "detailRe"
+								, "susp/detail.do"
+								, "ds_code=ds_code" //보내는곳
+        					    , "ds_detail=ds_detail" //받는곳
+        					    , ""
+        					    , "fnCallback");
+		break;
+		case "detail" :
+			if(this.ds_detail.rowcount < 1){
+				this.ds_detail.clear();
+				this.ds_detail.addColumn("detailCode", "string");
+				this.ds_detail.addColumn("detailName", "string");
+				this.ds_detail.addColumn("regiId", "string");
+				this.ds_detail.addColumn("regiDt", "string");
+				this.ds_detail.addColumn("modiId", "string");
+				this.ds_detail.addColumn("modiDt", "string");
+				this.ds_detail.addColumn("useYn", "string");
+				this.ds_detail.addColumn("flag", "string");
+				this.ds_detail.addColumn("upperCode", "string");
+			}
+		break;
+		case "upperRe":
+		break;
+		case "detailRe":
+		break;
+		default:
+		break;
+		}
+	}
+}
+
+this.ds_upper_onrowposchanged = function(obj:Dataset, e:nexacro.DSRowPosChangeEventInfo)
+{
+	var nRow =  e.newrow;
+	var nCode = this.ds_upper.getColumn(nRow, "upperCode");
+// 	var cCon = this.ds_detail.lookup("flag", "U","flag");
+// 	 alert(cCon);
+	this.ds_code.setColumn(0,"upperCode",nCode);
+	this.gfn_transaction(this
+								, "detail"
+								, "susp/detail.do"
+								, "ds_code=ds_code" //보내는곳
+        					    , "ds_detail=ds_detail" //받는곳
+        					    , ""
+        					    , "fnCallback");
+      
+}
+
+this.bt_close_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+// S = select result
+// I = insert
+// D = delete
+// U = modified
+// ADD >> FLAG:I
+// DELETE >> U, S:D I:deleteRow
+// UPDATE >> oncolumnchanged S>>U I>>I
+this.chflag = function(co0l){
+	if(col0 = 'flag') return '상태';
+}
+this.upperflag = function(nRow){
+	var sFlag = this.ds_upper.getColumn(nRow, "flag");
+	if(sFlag == 'S') return '-';
+	else if(sFlag == 'I') return '신규';
+	else if(sFlag == 'D') return '삭제';
+	else if(sFlag == 'U') return '변경';
+}
+
+this.detailflag = function(nRow){
+	var sFlag = this.ds_detail.getColumn(nRow, "flag");
+	if(sFlag == 'S') return '-';
+	else if(sFlag == 'I') return '신규';
+	else if(sFlag == 'D') return '삭제';
+	else if(sFlag == 'U') return '변경';
+}
+
+this.bt_upperadd_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_upper.addRow();
+	this.ds_upper.setColumn(this.ds_upper.rowposition,"flag",'I');
+	
+	//var a = this.ds_upper.addRow();
+	//this.ds_upper.setColumn(a,"flag",'I');
+}
+
+this.bt_detailadd_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var strXml = this.ds_detail.saveXML("Dataset00","normal");
+	
+	this.ds_detail.addRow();
+	trace(strXml);
+	var gCode = this.ds_upper.getColumn(this.ds_upper.rowposition, "upperCode");
+	trace("============ code == : "+gCode);
+	trace("position: "+this.ds_detail.rowposition);
+	trace("c: "+ this.ds_detail.getColumn(this.ds_detail.rowposition,"flag"));
+	var gRegiDt =  this.ds_upper.getColumn(this.ds_upper.rowposition, "regiDt");
+	var gId = this.ds_upper.getColumn(this.ds_upper.rowposition, "regiId");	
+	this.ds_detail.setColumn(this.ds_detail.rowposition,"upperCode", gCode);
+	this.ds_detail.setColumn(this.ds_detail.rowposition,"regiId", gId);
+	this.ds_detail.setColumn(this.ds_detail.rowposition,"regiDt", gRegiDt);
+	this.ds_detail.setColumn(this.ds_detail.rowposition,"flag",'I');
+}
+
+this.bt_upperDel_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nDelPos  = this.ds_upper.rowposition;
+	var nRowType = this.ds_upper.getRowType(nDelPos);
+	
+	// setRowType를 사용하려면 해당 데이터셋의 옵션 중에서 updatecontrol를 false로 지정해야한다.
+	// Dataset.ROWTYPE_EMPTY 0 존재하지 않는 행의 상태
+	// Dataset.ROWTYPE_NORMAL 1 초기 행의 상태
+	// Dataset.ROWTYPE_INSERT 2 추가된 행의 상태
+	// Dataset.ROWTYPE_UPDATE 4 수정된 행의 상태
+	// Dataset.ROWTYPE_DELETE 8 삭제된 행의 상태
+	// Dataset.ROWTYPE_GROUP 16 그룹 정보 행의 상태
+	var count = this.ds_detail.rowcount;
+	trace("-----count : "+count); 
+	if(0<count){
+		var ck = confirm("상세항목이 있습니다./n 진행하시겠습니까? (상세항목도 지워주세요)");
+		if(ck == true){
+	switch(nRowType){
+		case 1:
+			this.ds_upper.setRowType(nDelPos, Dataset.ROWTYPE_DELETE);
+			this.ds_upper.setColumn(nDelPos,"flag",'D');
+		break;
+		case 2:
+			this.ds_upper.deleteRow(nDelPos);
+		break;
+		case 4:
+			this.ds_upper.setRowType(nDelPos, Dataset.ROWTYPE_DELETE);
+			this.ds_upper.setColumn(nDelPos,"flag",'D');
+		break;
+		default:
+		break;
+	}
+	}
+	}
+	
+}
+
+this.bt_detailDel_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nDelPos  = this.ds_detail.rowposition;
+	var nRowType = this.ds_detail.getRowType(nDelPos);
+	
+	switch(nRowType){
+		case 1:
+			this.ds_detail.setRowType(nDelPos, Dataset.ROWTYPE_DELETE);
+			this.ds_detail.setColumn(nDelPos,"flag",'D');
+		break;
+		case 2:
+			this.ds_detail.deleteRow(nDelPos);
+		break;
+		case 4:
+			this.ds_detail.setRowType(nDelPos, Dataset.ROWTYPE_DELETE);
+			this.ds_detail.setColumn(nDelPos,"flag",'D');
+		break;
+		default:
+		break;
+	}
+}
+
+this.ds_upper_oncolumnchanged = function(obj:Dataset, e:nexacro.DSColChangeEventInfo)
+{
+	var sFlag = this.ds_upper.getColumn(e.row, "flag");
+	if(sFlag == 'S'){
+		this.ds_upper.setColumn(e.row,"flag",'U');
+	}
+}
+
+this.bt_uppersave_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{	
+	
+	this.gfn_transaction(this
+					   , "saveUpper"
+					   , "susp/uppersave.do"
+					   , "ds_upper=ds_upper"
+					   , ""
+					   , ""
+					   , "fnCallback");
+		 
+}
+
+this.bt_detailsave_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	
+	this.gfn_transaction(this
+					   , "saveDetail"
+					   , "susp/detailsave.do"
+					   , "ds_detail=ds_detail"
+					   , ""
+					   , ""
+					   , "fnCallback");
+}
+
+this.ds_detail_oncolumnchanged = function(obj:Dataset, e:nexacro.DSColChangeEventInfo)
+{
+	var sFlag = this.ds_detail.getColumn(e.row, "flag");
+	if(sFlag == 'S'){
+		this.ds_detail.setColumn(e.row,"flag",'U');
+	}
+}
+
+]]></Script>
+  </Form>
+</FDL>

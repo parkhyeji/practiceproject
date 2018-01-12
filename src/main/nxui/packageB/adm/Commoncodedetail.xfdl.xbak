@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.4">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="PD_IN_COM_MM002" classname="PD_IN_COM_MM002" inheritanceid="" position="absolute 0 0 1025 731" titletext="New Form" onload="PD_IN_COM_MM002_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" left="8" top="8" right="10" height="50" style="background:cornflowerblue;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_useryn" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="id" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="id">YN</Col>
+            <Col id="value">전체</Col>
+          </Row>
+          <Row>
+            <Col id="id">Y</Col>
+            <Col id="value">사용</Col>
+          </Row>
+          <Row>
+            <Col id="id">N</Col>
+            <Col id="value">미사용</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_codekind" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="className" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_codekind1" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="className" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_cmmdetail" firefirstcount="0" firenextcount="0" useclientlayout="true" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="classCode" size="256" type="STRING"/>
+          <Column id="codeNo" size="256" type="STRING"/>
+          <Column id="codeName" size="256" type="STRING"/>
+          <Column id="codeName2" size="256" type="STRING"/>
+          <Column id="codeEngName" size="256" type="STRING"/>
+          <Column id="etcCode1" size="256" type="STRING"/>
+          <Column id="etcCode2" size="256" type="STRING"/>
+          <Column id="codeDesc" size="256" type="STRING"/>
+          <Column id="useYn" size="256" type="STRING"/>
+          <Column id="sortSeq" size="256" type="STRING"/>
+          <Column id="registTime" size="256" type="STRING"/>
+          <Column id="registId" size="256" type="STRING"/>
+          <Column id="updateTime" size="256" type="STRING"/>
+          <Column id="updateId" size="256" type="STRING"/>
+          <Column id="lastModyTime" size="256" type="STRING"/>
+          <Column id="higherClassCode" size="256" type="STRING"/>
+          <Column id="higherCodeNo" size="256" type="STRING"/>
+          <Column id="className" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dept" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind/>
+  </Form>
+</FDL>

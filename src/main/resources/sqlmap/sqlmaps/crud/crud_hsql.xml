@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+
+	<select id="crud.crudSampleDAO.loadCommonCodes" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT CODE_NO   AS CODE
+			 , CODE_NAME AS VALUE
+		  FROM AML_COMMON_CODE_DETAIL
+		 WHERE CLASS_CODE = #classCode#
+	</select>
+	
+	<select id="crud.crudSampleDAO.searchCust" resultClass="egovMap">
+		SELECT CUST_NO
+		     , EMP_NAME
+		     , REAL_NAME_NO
+		     , JOIN_DATE
+		     , TEL_NO
+		     , CEL_NO
+		     , EMAIL
+		     , ADDR
+		     , OUT_DATE
+		     , USE_YN
+		     , REGI_DT
+		     , REGI_ID
+		     , MODI_DT
+		     , MODI_ID
+		     , EMP_YN
+		     , CUST_TYPE_CODE
+		     , JOB_NAME
+		     , BIRTH
+		     , GENDER_TYPE_CODE
+		     , NATION_CODE
+		     , RA_RANK_CODE
+		     , REAL_NAME_NO_TYPE_CODE
+		     , ZIP_CODE
+		  FROM AML_CUST_INFO
+		 ORDER BY CUST_NO DESC
+	</select>
+	
+	<insert id="crud.crudSampleDAO.insertCust" parameterClass="java.util.HashMap">
+		INSERT INTO AML_CUST_INFO(
+		   CUST_NO
+	     , EMP_NAME
+	     , REAL_NAME_NO
+	     , JOIN_DATE
+	     , TEL_NO
+	     , CEL_NO
+	     , EMAIL
+	     , ADDR
+	     , OUT_DATE
+	     , USE_YN
+	     , REGI_DT
+	     , REGI_ID
+	     , MODI_DT
+	     , MODI_ID
+	     , EMP_YN
+	     , CUST_TYPE_CODE
+	     , JOB_NAME
+	     , BIRTH
+	     , GENDER_TYPE_CODE
+	     , NATION_CODE
+	     , RA_RANK_CODE
+	     , REAL_NAME_NO_TYPE_CODE
+	     , ZIP_CODE
+		)VALUES(
+		  (
+		   SELECT TO_CHAR(SYSDATE, 'YYYYMMDD')||
+		   		  LPAD((SELECT COUNT(*)+1
+		                  FROM AML_CUST_INFO
+		                 WHERE CUST_NO LIKE TO_CHAR(SYSDATE, 'YYYYMMDD') || '%')
+             			, 5, '0')
+ 		     FROM DUAL
+ 		  )
+	     , #empName#
+	     , #realNameNo#
+	     , #joinDate#
+	     , #telNo#
+	     , #celNo#
+	     , #email#
+	     , #addr#
+	     , #outDate#
+	     , 'Y'
+	     , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+	     , 'ADMIN'
+	     , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+	     , 'ADMIN'
+	     , #empYn#
+	     , #custTypeCode#
+	     , #jobName#
+	     , #birth#
+	     , #genderTypeCode#
+	     , #nationCode#
+	     , #raRankCode#
+	     , #realNameNoTypeCode#
+	     , #zipCode#
+		)
+	</insert>
+	
+	<update id="crud.crudSampleDAO.updateCust" parameterClass="java.util.HashMap">
+		UPDATE AML_CUST_INFO
+		   SET EMP_NAME               = #empName#
+             , REAL_NAME_NO           = #realNameNo#
+             , JOIN_DATE              = #joinDate#
+             , TEL_NO                 = #telNo#
+             , CEL_NO                 = #celNo#
+             , EMAIL                  = #email#
+             , ADDR                   = #addr#
+             , OUT_DATE               = #outDate#
+             , MODI_DT                = TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+             , MODI_ID                = 'ADMIN'
+             , EMP_YN                 = #empYn#
+             , CUST_TYPE_CODE         = #custTypeCode#
+             , JOB_NAME               = #jobName#
+             , BIRTH                  = #birth#
+             , GENDER_TYPE_CODE       = #genderTypeCode#
+             , NATION_CODE            = #nationCode#
+             , RA_RANK_CODE           = #raRankCode#
+             , REAL_NAME_NO_TYPE_CODE = #realNameNoTypeCode#
+             , ZIP_CODE               = #zipCode#
+		 WHERE CUST_NO				  = #custNo#
+	</update>
+	
+	<delete id="crud.crudSampleDAO.deleteCust" parameterClass="java.util.HashMap">
+		DELETE FROM AML_CUST_INFO
+		 WHERE CUST_NO = #custNo#
+	</delete>
+	
+</sqlMap>

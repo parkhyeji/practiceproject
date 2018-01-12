@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="depo">
+	<typeAlias alias="DepoVO" type="nexacro.sample.vo.depo.DepoVO" />
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="MgrInfoVO" type="nexacro.sample.vo.depo.MgrInfoVO"/>
+
+	<resultMap class="DepoVO" id="depoList">
+		<result property="rownum" column="ROWNUM"/>
+		<result property="depositDepoAdmNo" column="DEPOSIT_DEPO_ADM_NO"/>
+		<result property="depositDepoName" column="DEPOSIT_DEPO_NAME"/>
+		<result property="depositOthDepoName" column="DEPOSIT_OTH_DEPO_NAME"/>
+		<result property="depositDepoDate" column="DEPOSIT_DEPO_DATE"/>
+		<result property="depositDepoChg" column="DEPOSIT_DEPO_CHG"/>	
+	</resultMap>	
+	
+	<resultMap class="DepoVO" id="depo">
+		<result property="depositDepoAdmNo" column="DEPOSIT_DEPO_ADM_NO"/>
+		<result property="depositJuriCortCode" column="DEPOSIT_JURI_CORT_CODE"/>
+		<result property="depositForcExecSeq" column="DEPOSIT_FORC_EXEC_SEQ"/>
+		<result property="depositOthDepoName" column="DEPOSIT_OTH_DEPO_NAME"/>
+		<result property="depositDepoName" column="DEPOSIT_DEPO_NAME"/>
+		<result property="depositDepuName" column="DEPOSIT_DEPU_NAME"/>
+		<result property="depositDepoChg" column="DEPOSIT_DEPO_CHG"/>
+		<result property="depositKeepDeptCode" column="DEPOSIT_KEEP_DEPT_CODE"/>
+		<result property="depositDepoDate" column="DEPOSIT_DEPO_DATE"/>
+		<result property="depositDepoReleDate" column="DEPOSIT_DEPO_RELE_DATE"/>
+		<result property="depositDepchgCollDate" column="DEPOSIT_DEPCHG_COLL_DATE"/>
+		<result property="depositDepoCollChg" column="DEPOSIT_DEPO_COLL_CHG"/>
+		<result property="depositDepoCollRea" column="DEPOSIT_DEPO_COLL_REA"/>
+		<result property="depositmgrDepoAdmNo" column="DEPOSITMGR_DEPO_ADM_NO"/>
+		<result property="depositmgrSeq" column="DEPOSITMGR_SEQ"/>
+		<result property="depositmgrDeptCode" column="DEPOSITMGR_DEPT_CODE"/>
+		<result property="depositmgrName" column="DEPOSITMGR_NAME"/>
+		<result property="depositmgrAsigDate" column="DEPOSITMGR_ASIG_DATE"/>
+	</resultMap>
+	
+	<resultMap class="MgrInfoVO" id="MgrInfo">
+		<result property="rownum" column="ROWNUM"/>
+		<result property="insaSabun" column="INSA_SABUN"/>
+		<result property="insaName" column="INSA_NAME"/>
+		<result property="insaEmail" column="INSA_EMAIL"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="insaDeptCode" column="INSA_DEPT_CODE"/>
+	</resultMap>
+	
+	<!--  공탁정보 조회  -->
+	<select id="depo.DepoDAO.selectDepoList" parameterClass="DepoVO" resultMap="depoList">
+		<![CDATA[
+			SELECT ROWNUM, T1.*
+				FROM (
+					SELECT	DEPOSIT_DEPO_ADM_NO,
+							DEPOSIT_DEPO_NAME,
+							DEPOSIT_OTH_DEPO_NAME,
+							DEPOSIT_DEPO_DATE,
+							DEPOSIT_DEPO_CHG
+						FROM TAB_DEPOSIT
+		]]>
+		<dynamic>
+			<isNotEmpty prepend="WHERE" property="searchKeyword">
+				<isEqual property="searchCondition" compareValue="adm_no">
+					DEPOSIT_DEPO_ADM_NO LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+				<isEqual property="searchCondition" compareValue="forc_exec_seq">
+					DEPOSIT_DEPO_ADM_NO LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+				<isEqual property="searchCondition" compareValue="depo_name">
+					DEPOSIT_DEPO_NAME LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+			</isNotEmpty>
+		</dynamic>
+		<![CDATA[
+			ORDER BY DEPOSIT_DEPO_ADM_NO DESC) T1
+		]]>
+	</select>
+	
+	 <!-- 공탁정보 상세조회  -->
+	<select id="depo.DepoDAO.selectDepoOne" parameterClass="DepoVO" resultMap="depo">
+		SELECT	DEPOSIT_DEPO_ADM_NO, 
+              	DEPOSIT_JURI_CORT_CODE,
+                DEPOSIT_FORC_EXEC_SEQ,
+                DEPOSIT_OTH_DEPO_NAME,
+                DEPOSIT_DEPO_NAME,
+                DEPOSIT_DEPU_NAME,
+                DEPOSIT_DEPO_CHG,
+                DEPOSIT_KEEP_DEPT_CODE,
+                DEPOSIT_DEPO_DATE,
+                DEPOSIT_DEPO_RELE_DATE,
+                DEPOSIT_DEPCHG_COLL_DATE,
+                DEPOSIT_DEPO_COLL_CHG,
+                DEPOSIT_DEPO_COLL_REA,
+                MGR.DEPOSITMGR_DEPO_ADM_NO,
+                MGR.DEPOSITMGR_SEQ,
+                MGR.DEPOSITMGR_DEPT_CODE,
+                (
+                    SELECT	INSA_NAME
+                    	FROM	TAB_INSA
+                    	WHERE	INSA_SABUN = MGR.DEPOSITMGR_ID
+                )DEPOSITMGR_NAME,
+                MGR.DEPOSITMGR_ASIG_DATE
+             FROM TAB_DEPOSIT JOIN TAB_DEPOSITMGR MGR
+             ON TAB_DEPOSIT.DEPOSIT_DEPO_ADM_NO = MGR.DEPOSITMGR_DEPO_ADM_NO(+)
+             WHERE DEPOSIT_DEPO_ADM_NO = #searchKeyword#
+	</select>
+	
+	<!--  담당자 조회  -->
+	<select id="depo.DepoDAO.selectMgrList" parameterClass="MgrInfoVO" resultMap="MgrInfo">
+		<![CDATA[
+		SELECT ROWNUM, T1.* FROM(
+				SELECT	INSA_SABUN,
+						INSA_NAME,
+						INSA_EMAIL,
+						(SELECT CODE_NAME 
+							FROM CMM_CODE_DETAIL
+                        	WHERE CLASS_CODE ='B01' AND CODE_NO = INSA_DEPT_CODE) AS DEPT_NAME,
+						INSA_DEPT_CODE
+					FROM	TAB_INSA
+					ORDER BY INSA_SABUN DESC ) T1
+		]]>	
+		<dynamic>
+			<isNotEmpty prepend="WHERE" property="searchKeyword">
+				<isEqual property="searchCondition" compareValue="insa_sabun">
+					INSA_SABUN LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+				<isEqual property="searchCondition" compareValue="insa_name">
+					INSA_NAME LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+				<isEqual property="searchCondition" compareValue="dept_name">
+					DEPT_NAME LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+			</isNotEmpty>
+		</dynamic>
+		
+	</select>
+	
+	 <!-- 모든 정보를 포함하는 공탁정보 입력  -->
+	<insert id="depo.DepoDAO.insertAlldepoInfo" parameterClass="DepoVO">
+		<selectKey keyProperty="depositDepoAdmNo" resultClass="string">
+			<![CDATA[
+	            SELECT /*+ INDEX_DESC(DEPOSIT_DEPO_ADM_NO) */ 
+	                    DECODE(SUBSTR(MAX(DEPOSIT_DEPO_ADM_NO),1,8) 
+	               	   ,TO_CHAR(SYSDATE,'YYYYMMDD'), MAX(DEPOSIT_DEPO_ADM_NO) + 1
+	                   ,TO_CHAR(SYSDATE,'YYYYMMDD') || '01') DEPOSIT_DEPO_ADM_NO            
+	            FROM TAB_DEPOSIT
+	            WHERE DEPOSIT_DEPO_ADM_NO < TO_CHAR(SYSDATE,'YYYYMMDD') || '99'
+	            AND ROWNUM = 1
+		    ]]>
+		</selectKey>
+		
+		<![CDATA[
+			INSERT ALL 
+			INTO TAB_DEPOSIT
+			(	DEPOSIT_DEPO_ADM_NO,
+					DEPOSIT_JURI_CORT_CODE,
+					DEPOSIT_FORC_EXEC_SEQ,
+					DEPOSIT_OTH_DEPO_NAME,
+					DEPOSIT_DEPO_NAME,
+					DEPOSIT_DEPU_NAME,
+					DEPOSIT_DEPO_CHG,
+					DEPOSIT_KEEP_DEPT_CODE,
+					DEPOSIT_DEPO_DATE,
+					DEPOSIT_DEPO_RELE_DATE,
+					DEPOSIT_DEPCHG_COLL_DATE,
+					DEPOSIT_DEPO_COLL_CHG,
+					DEPOSIT_DEPO_COLL_REA
+			)
+			VALUES(
+				#depositDepoAdmNo,jdbcType=VARCHAR#,
+				#depositJuriCortCode,jdbcType=VARCHAR#,
+				#depositForcExecSeq,jdbcType=VARCHAR#,
+				#depositOthDepoName,jdbcType=VARCHAR#,
+				#depositDepoName,jdbcType=VARCHAR#,
+				#depositDepuName,jdbcType=VARCHAR#,
+                #depositDepoChg,jdbcType=VARCHAR#,
+                #depositKeepDeptCode,jdbcType=VARCHAR#,
+                #depositDepoDate,jdbcType=VARCHAR#,
+                #depositDepoReleDate,jdbcType=VARCHAR#,
+                #depositDepchgCollDate,jdbcType=VARCHAR#,
+                #depositDepoCollChg,jdbcType=VARCHAR#,
+                #depositDepoCollRea,jdbcType=VARCHAR#
+            )
+            INTO TAB_DEPOSITMGR
+            (	DEPOSITMGR_DEPO_ADM_NO,
+            	DEPOSITMGR_SEQ,
+            	DEPOSITMGR_ID,
+            	DEPOSITMGR_ASIG_DATE,
+            	DEPOSITMGR_DEPT_CODE	)
+            VALUES
+            (
+            	#depositDepoAdmNo,jdbcType=VARCHAR#,
+            	(SELECT DECODE (COUNT(*),0,'1',MAX(DEPOSITMGR_SEQ)+1) 
+		    		FROM TAB_DEPOSITMGR),
+            	#depositmgrId#,
+            	#depositmgrAsigDate#,
+            	#depositmgrDeptCode#
+            )
+            SELECT * FROM DUAL    
+		]]>
+	</insert>
+	
+	 <!-- 담당자정보 제외한 공탁정보 입력  -->
+	<insert id="depo.DepoDAO.insertdepo" parameterClass="DepoVO">
+		<selectKey keyProperty="depositDepoAdmNo" resultClass="string">
+			<![CDATA[
+	            SELECT /*+ INDEX_DESC(DEPOSIT_DEPO_ADM_NO) */ 
+	                    DECODE(SUBSTR(MAX(DEPOSIT_DEPO_ADM_NO),1,8) 
+	               	   ,TO_CHAR(SYSDATE,'YYYYMMDD'), MAX(DEPOSIT_DEPO_ADM_NO) + 1
+	                   ,TO_CHAR(SYSDATE,'YYYYMMDD') || '01') DEPOSIT_DEPO_ADM_NO            
+	            FROM TAB_DEPOSIT
+	            WHERE DEPOSIT_DEPO_ADM_NO < TO_CHAR(SYSDATE,'YYYYMMDD') || '99'
+	            AND ROWNUM = 1
+		    ]]>
+		</selectKey>
+		
+		<![CDATA[
+			INSERT INTO TAB_DEPOSIT
+				(	DEPOSIT_DEPO_ADM_NO
+					,DEPOSIT_JURI_CORT_CODE
+					,DEPOSIT_FORC_EXEC_SEQ
+				    ,DEPOSIT_OTH_DEPO_NAME
+				    ,DEPOSIT_DEPO_NAME
+				    ,DEPOSIT_DEPU_NAME
+				    ,DEPOSIT_DEPO_CHG
+				    ,DEPOSIT_KEEP_DEPT_CODE
+				    ,DEPOSIT_DEPO_DATE
+				    ,DEPOSIT_DEPO_RELE_DATE
+				    ,DEPOSIT_DEPCHG_COLL_DATE
+				    ,DEPOSIT_DEPO_COLL_CHG
+				    ,DEPOSIT_DEPO_COLL_REA
+				 )	 
+				VALUES(	#depositDepoAdmNo,jdbcType=VARCHAR#,
+						#depositJuriCortCode,jdbcType=VARCHAR#,
+						#depositForcExecSeq,jdbcType=VARCHAR#,
+						#depositOthDepoName,jdbcType=VARCHAR#,
+						#depositDepoName,jdbcType=VARCHAR#,
+						#depositDepuName,jdbcType=VARCHAR#,
+		                #depositDepoChg,jdbcType=VARCHAR#,
+		                #depositKeepDeptCode,jdbcType=VARCHAR#,
+		                #depositDepoDate,jdbcType=VARCHAR#,
+		                #depositDepoReleDate,jdbcType=VARCHAR#,
+		                #depositDepchgCollDate,jdbcType=VARCHAR#,
+		                #depositDepoCollChg,jdbcType=VARCHAR#,
+		                #depositDepoCollRea,jdbcType=VARCHAR#
+            			)
+				
+		]]>
+	
+	</insert>
+	
+	<!-- 공탁정보 수정 -->
+	<update id="depo.DepoDAO.updatedepo" parameterClass="DepoVO">
+		<![CDATA[
+		UPDATE TAB_DEPOSIT
+			SET DEPOSIT_JURI_CORT_CODE = #depositJuriCortCode,jdbcType=VARCHAR#,
+				DEPOSIT_FORC_EXEC_SEQ = #depositForcExecSeq,jdbcType=INTEGER#,
+				DEPOSIT_OTH_DEPO_NAME = #depositOthDepoName,jdbcType=VARCHAR#,
+				DEPOSIT_DEPO_NAME = #depositDepoName,jdbcType=VARCHAR#,
+				DEPOSIT_DEPU_NAME = #depositDepuName,jdbcType=VARCHAR#,
+		        DEPOSIT_DEPO_CHG = #depositDepoChg,jdbcType=INTEGER#,
+		        DEPOSIT_KEEP_DEPT_CODE = #depositKeepDeptCode,jdbcType=VARCHAR#,
+		        DEPOSIT_DEPO_DATE = #depositDepoDate,jdbcType=VARCHAR#,
+		        DEPOSIT_DEPO_RELE_DATE = #depositDepoReleDate,jdbcType=VARCHAR#,
+		        DEPOSIT_DEPCHG_COLL_DATE = #depositDepchgCollDate,jdbcType=VARCHAR#,
+		        DEPOSIT_DEPO_COLL_CHG = #depositDepoCollChg,jdbcType=INTEGER#,
+		        DEPOSIT_DEPO_COLL_REA = #depositDepoCollRea,jdbcType=VARCHAR#
+			WHERE DEPOSIT_DEPO_ADM_NO = #depositDepoAdmNo,jdbcType=VARCHAR#    
+		]]>
+	</update>
+	<!-- 공탁관리자정보수정 : 관리자정보가 있을 시에는 수정 없을시에는 입력 -->
+	<update id="depo.DepoDAO,updatedepomgr" parameterClass="DepoVO">
+		<![CDATA[	
+		MERGE INTO TAB_DEPOSITMGR
+			USING DUAL
+			ON (DEPOSITMGR_DEPO_ADM_NO = #depositDepoAdmNo#)
+			WHEN MATCHED THEN
+			UPDATE SET 
+					DEPOSITMGR_ID = #depositmgrId#,
+	            	DEPOSITMGR_ASIG_DATE = #depositmgrAsigDate#,
+	            	DEPOSITMGR_DEPT_CODE = #depositmgrDeptCode#
+			WHEN NOT MATCHED THEN
+			INSERT (
+				DEPOSITMGR_DEPO_ADM_NO,
+            	DEPOSITMGR_SEQ,
+            	DEPOSITMGR_ID,
+            	DEPOSITMGR_ASIG_DATE,
+            	DEPOSITMGR_DEPT_CODE
+            )
+            VALUES (
+            	#depositDepoAdmNo#,
+            	(SELECT DECODE (COUNT(*),0,'1',MAX(DEPOSITMGR_SEQ)+1) 
+		    		FROM TAB_DEPOSITMGR),
+            	#depositmgrId#,
+            	#depositmgrAsigDate#,
+            	#depositmgrDeptCode#
+            )
+		]]>           	
+	</update>
+	
+	<!-- 공탁정보삭제 -->
+	<delete id="depo.DepoDAO.deletedepo" parameterClass="DepoVO">
+		<![CDATA[	
+			DELETE FROM TAB_DEPOSIT
+				WHERE DEPOSIT_DEPO_ADM_NO = #depositDepoAdmNo# 
+		]]>
+	</delete>
+
+</sqlMap>

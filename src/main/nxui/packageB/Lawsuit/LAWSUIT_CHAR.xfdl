@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="LAWSUIT_CHAR" classname="Work" inheritanceid="" position="absolute" titletext="SingleDetail" left="0" width="480" top="0" height="385" style="color:#333333ff;" onload="LAWSUIT_CHAR_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" text="의뢰자 조회" left="8" top="8" right="8" height="50" visible="true" style="background:cornflowerblue;color:white;align:center middle;font:bold 12 굴림;"/>
+        <Static id="sta_01" taborder="7" left="8" top="63" right="8" height="29" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Edit id="edt_mgr_tx" taborder="3" maxlength="100" left="35.42%" top="67" width="35.83%" height="19" style="selectcolor:#333333ff;selectbackground:#ffffffff;background:#f7f7f7ff;border:1 solid #a8a8a8ff ;color:#505050ff;padding:0 5 0 5;font:9 굴림;" onkeydown="edt_mgr_tx_onkeydown"/>
+        <Button id="btn_mgr_search" taborder="4" text="검색" cssclass="btn_WFSA_Search" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 굴림;opacity:100;shadow:outer 0,0 0 gray;" onclick="btn_mgr_search_onclick" left="71.88%" width="52" top="67" height="21"/>
+        <Combo id="cmb_mgr_com" taborder="2" left="84" top="67" height="19" index="0" codecolumn="id" datacolumn="value" innerdataset="ds_mgrno" style="itemheight:22;itemcolor:#333333ff;itemborder:1 solid transparent ;itempadding:0 3 0 6;buttonsize:18;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;color:#333333ff;font:9 굴림;" width="17.92%" value="-1" text="전체" onitemchanged="cmb_mgr_com_onitemchanged"/>
+        <Grid id="grd_person" taborder="5" useinputpanel="false" left="8" top="128" right="8" autofittype="col" binddataset="ds_mgr" treeinitstatus="collapse,null" bottom="65" style="color:#000000ff;" oncelldblclick="grd_person_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="121"/>
+                <Column size="123"/>
+                <Column size="180"/>
+              </Columns>
+              <Rows>
+                <Row size="25" band="head"/>
+                <Row size="20"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="No."/>
+                <Cell col="1" text="사번"/>
+                <Cell col="2" text="이름"/>
+                <Cell col="3" text="이메일"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="currow+1"/>
+                <Cell col="1" text="bind:insaSabun"/>
+                <Cell col="2" text="bind:insaName"/>
+                <Cell col="3" text="bind:insaEmail"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_12" taborder="8" text="소송담당자 목록" left="8" top="109" height="13" width="100" style="color:black;align:left top;font:bold 9 굴림;"/>
+        <Button id="btn_check" taborder="6" text="확인" onclick="btn_check_onclick" cssclass="btn_WFSA_Search" left="73.54%" top="356" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 굴림;opacity:100;shadow:outer 0,0 0 gray;" width="52" height="21"/>
+        <Button id="btn_close" taborder="1" text="닫기" onclick="btn_close_onclick" cssclass="btn_WFSA_Search" left="86.67%" top="356" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 굴림;opacity:100;shadow:outer 0,0 0 gray;" width="52" height="21"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_mgrno" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="id" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="value">전체</Col>
+            <Col id="id">-1</Col>
+          </Row>
+          <Row>
+            <Col id="value">사번</Col>
+            <Col id="id">0</Col>
+          </Row>
+          <Row>
+            <Col id="value">이름</Col>
+            <Col id="id">1</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_mgr" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="insaSabun" type="STRING" size="256"/>
+          <Column id="insaName" type="STRING" size="256"/>
+          <Column id="insaEmail" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dept" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="100"/>
+          <Column id="searchKeyword" type="STRING" size="100"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="cmb_mgr_com" propid="value" datasetid="ds_instance" columnid="instAdmCortCode"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+var raiscode="";
+
+this.LAWSUIT_CHAR_onload = function (obj:Form, e:LoadEventInfo)
+{
+
+    this.edt_mgr_tx.setFocus();
+    
+    this.getList();
+}
+
+// 셀 더블클릭
+this.grd_person_oncelldblclick = function (obj:Grid, e:GridClickEventInfo)
+{
+    // close(grd_person.getCellValue(e.row,0)+grd_person.getCellValue(e.row,1));
+	this.btn_check_onclick();
+}
+
+this.getList = function (){
+   
+    var strSvcid="LawsuitCharSelectVO";
+    var strController="/lawsuit/LawsuitCharSelectVO.do";
+    var strParam="";
+
+    if(this.cmb_mgr_com.value < 0){      
+        strParam = "insaName=" + nexacro.wrapQuote(this.edt_mgr_tx.text);
+    }else if(this.cmb_mgr_com.value == "0"){
+        strParam = "insaSabun=" + nexacro.wrapQuote(this.edt_mgr_tx.text);
+    }else if(this.cmb_mgr_com.value == "1"){
+        strParam = "insaName=" + nexacro.wrapQuote(this.edt_mgr_tx.text);
+    }   
+   
+      
+   
+    this.gfn_transaction(this,
+                    strSvcid,
+                    strController,
+                    "ds_mgr=ds_mgr", 
+                    "ds_mgr=ds_output",
+                    strParam,
+                    "fnCallBack");
+}
+
+this.fnCallBack = function (svcid, errcd, errmsg)
+{
+    switch(svcid)
+    {
+        case "LawsuitCharSelectVO":
+            //trace(ds_mgr.saveXML());
+            //데이터 조회 에러 발생시
+            if(errcd != "0"){   
+            alert("데이터가 정상적으로 조회되지 않았습니다.\n"
+                + "소송관리조회 에러내용: "+ errmsg);
+            return false;
+            }
+            else{
+               
+            }
+            break;
+    }
+}
+ 
+this.btn_mgr_search_onclick = function (obj:Button,  e:ClickEventInfo)
+{
+    this.getList();
+}
+  
+this.btn_close_onclick = function (obj:Button,  e:ClickEventInfo)
+{
+    this.close();
+}
+ 
+/*function edt_mgr_tx_onkeydown(obj:Edit, e:KeyEventInfo)
+{
+    if(e.keycode == 13){
+        btn_mgr_search_onclick();
+    }
+}*/
+
+this.cmb_mgr_com_onitemchanged = function (obj:Combo, e:ItemChangeEventInfo)
+{
+    if(this.cmb_mgr_com.value == -1){
+        this.edt_mgr_tx.value = "";
+        this.edt_mgr_tx.enable = false;
+    }else{
+        this.edt_mgr_tx.enable = true;
+    }
+}
+  
+/*    function grd_person_onheadclick(obj:Grid, e:GridClickEventInfo)
+{
+    gfn_GridSort(grd_person,grd_lawsuit_no,nCell,10);
+}    */
+
+// Grid Row Select
+this.btn_check_onclick = function (obj:Button,  e:ClickEventInfo)
+{	
+	v_RtnVal = this.ds_mgr.getColumn(this.ds_mgr.rowposition,  "insaSabun");
+	v_RtnVal +="&"+this.ds_mgr.getColumn(this.ds_mgr.rowposition,  "insaName");
+	
+	this.close(v_RtnVal);
+}
+]]></Script>
+  </Form>
+</FDL>

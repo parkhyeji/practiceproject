@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="zipcode" classname="zipcode" inheritanceid="" position="absolute" titletext="New Form" left="0" top="0" width="465" height="489">
+    <Layouts>
+      <Layout>
+        <Static id="Static01" taborder="11" left="8" top="365" right="16" height="69" style="background:cornsilk;border:1 solid darkgray ;"/>
+        <Grid id="grd_plaintiff" taborder="1" binddataset="ds_list" scrollbars="fixedvert" useinputpanel="false" nodatatext="데이터가 없습니다." visible="true" position="absolute" left="8" width="442" top="120" height="237">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="362"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="우편변호"/>
+                <Cell col="1" text="주소"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:zipcode"/>
+                <Cell col="1" text="bind:addr"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_33" style="color:black;align:left top;font:굴림,9,bold;" position="absolute" left="7" width="96" top="69" height="19"/>
+        <ImageViewer id="img_titlebg" taborder="1" style="background:cornflowerblue;" position="absolute" left="8" width="445" top="8" height="50"/>
+        <Static id="sta_title" text="도로명 주소 조회" onclick="sta_title_onclick" style="color:whitesmoke;align:left middle;font:굴림,12,bold;" position="absolute" left="26" width="168" top="18" height="29"/>
+        <Button id="btn_save" taborder="1" onclick="btn_save_onclick" position="absolute" left="127" width="92" top="448" height="20" style="background:lightskyblue;color:white;" text="저장"/>
+        <Button id="btn_cancel" taborder="1" text="취소" onclick="btn_cancel_onclick" position="absolute" left="232" width="92" top="448" height="20" style="background:lightskyblue;color:white;"/>
+        <Static id="Static00" taborder="3" text="※ 도로명 : 국곡길  건물번호 : 126-27" left="2.8%" top="96" right="27.31%" height="23" onclick="Static00_onclick"/>
+        <Static id="Static02" taborder="4" left="9" top="64" right="15" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <Button id="btn_search" taborder="5" text="검색" onclick="btn_search_onclick" top="68" right="19" width="92" height="20" style="background:lightskyblue;color:white;"/>
+        <Static id="Static03" taborder="8" text="도로명" left="16" top="67" width="64" height="23"/>
+        <Static id="Static04" taborder="9" text="건물번호" left="177" top="67" width="58" height="23"/>
+        <Edit id="edt_addr00" taborder="2" imemode="alpha" maxlength="100" autoselect="true" autoskip="true" oneditclick="edt_app_case_no_oneditclick" left="60" top="67" width="100" height="22" style=":disabled {border:1 solid #a8a8a8ff ;color:black;}"/>
+        <Edit id="edt_addr2" taborder="1" imemode="alpha" maxlength="100" autoselect="true" autoskip="true" oneditclick="edt_app_case_no_oneditclick" enable="true" style=":disabled {border:1 solid #a8a8a8ff ;color:black;}" position="absolute" left="229" width="100" top="67" height="22"/>
+        <Static id="st_c7" taborder="14" text="주소" left="14" top="371" width="125" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Edit id="edt_addr" taborder="15" maxlength="100" left="141" top="373" right="23" height="24" readonly="true"/>
+        <Static id="st_c00" taborder="16" text="상세 주소" left="14" top="398" width="125" height="28" style="background:azure;border:1 solid black ;align:center middle;"/>
+        <Edit id="edt_addr_de" taborder="17" maxlength="100" left="141" top="401" right="23" height="24"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item20" compid="grd_plaintiff" propid="visible" datasetid="ds_pladef" columnid=""/>
+      <BindItem id="item5" compid="edt_addr2" propid="value" datasetid="ds_search" columnid="bdNoSno"/>
+      <BindItem id="item0" compid="edt_addr00" propid="value" datasetid="ds_search" columnid="roadName"/>
+      <BindItem id="item7" compid="edt_addr" propid="value" datasetid="ds_list" columnid="addr"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="roadName" type="STRING" size="256"/>
+          <Column id="bdNoSno" type="STRING" size="256"/>
+          <Column id="bdNo" type="STRING" size="256"/>
+          <Column id="bdSno" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_list">
+        <ColumnInfo>
+          <Column id="zipcode" type="STRING" size="256"/>
+          <Column id="addr" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs"; //공통함수 호출
+/*
+var fv_chk = "";
+
+this.btn_search_onclick=function(obj:Button,  e:ClickEventInfo)
+{
+	fv_chk = "";
+	
+	acx_browser.Navigate2("http://localhost:8080/zipcodeSearch.jsp");	//Jsp 호출
+}
+
+function acx_browser_TitleChange(obj:ActiveX, e)
+{
+	if (fv_chk != "" && fv_chk != e.Text)
+    {
+		var address = e.Text;
+		
+		var addressspl = address.split("_");
+        edt_pos.value = addressspl[0];
+        edt_addr.value = addressspl[1];
+    }
+   
+    fv_chk = e.Text;
+}
+
+function btn_save_onclick(obj:Button,  e:ClickEventInfo)
+{
+	var addr = edt_addr.value + " " + edt_addr2.value
+	var rtn = edt_pos.value + "&" + addr
+	close(rtn);
+}
+
+function btn_cancel_onclick(obj:Button,  e:ClickEventInfo)
+{
+	close();
+}
+*/
+
+//주소 검색
+this.btn_search_onclick=function(obj:Button,  e:ClickEventInfo)
+{
+	var roadName = this.ds_search.getColumn(0, "roadName");
+	var bdNoSno = this.ds_search.getColumn(0, "bdNoSno");
+
+	//본번부번이 입력되었을때
+	if(!this.gfn_IsNull(bdNoSno)){ 	
+		//	var bdNo = bdNoSno
+		var bdNO = bdNoSno.split('-');
+		
+		if(bdNO.length=="1"){	
+			this.ds_search.setColumn(0,"bdNo",bdNO[0]);	
+		}
+		else if(bdNO.length=="2"){
+			this.ds_search.setColumn(0,"bdNo",bdNO[0]);
+			this.ds_search.setColumn(0,"bdSno",bdNO[1]);
+		}
+	}else{
+		this.ds_search.setColumn(0,"bdNo", null);
+		this.ds_search.setColumn(0,"bdSno", null);
+	}
+	
+	this.gfn_transaction(this
+					   , "searchCust"
+					   , "custinfo/searchaddr.do"
+					   , "ds_search=ds_search"    //보내는곳
+					   , "ds_list=ds_list"  //받아오는곳
+					   , ""
+					   , "fnCallback");	
+		
+}
+
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+			case "searchCust":
+				
+			break;
+			case "searchCode":
+			break;
+			case "saveList":
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+//주소및 상세주소 저장
+this.btn_save_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var rowCnt = this.ds_list.rowcount;
+	if(rowCnt < 1){
+		alert("주소를 선택해 주세요");
+	}else{
+		//var zipCode = "5";
+		//var addr = "";
+		//var addrDe = "";	
+		var	zipCode = this.ds_list.getColumn(this.ds_list.rowposition, "zipcode");
+		var	addr = this.ds_list.getColumn(this.ds_list.rowposition, "addr");		
+		var addrDe = this.edt_addr_de.value;
+
+		var result = zipCode + "|" + addr + " " + addrDe;
+		this.close(result);	
+	}
+}
+
+//닫기
+this.btn_cancel_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

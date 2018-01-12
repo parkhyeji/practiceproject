@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="custList" classname="custList" left="0" top="0" width="683" height="512" titletext="New Form" onload="custList_onload">
+    <Layouts>
+      <Layout>
+        <Static id="sta_title" taborder="0" onclick="sta_title_onclick" left="0" top="0" right="0" height="45" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Static id="Static09" taborder="1" text="고객리스트" left="40" top="0" width="200" height="45" style="color:white;font:bold 17 돋움;"/>
+        <Static id="Static10" taborder="2" left="40" top="54" right="40" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <Button id="Button03" taborder="3" text="닫기" top="58" right="44" width="92" height="20" style="background:lightskyblue;color:white;" onclick="Button03_onclick"/>
+        <Button id="Button02" taborder="6" text="선택" top="58" right="140" width="92" height="20" style="background:lightskyblue;color:white;" onclick="Button02_onclick"/>
+        <Grid id="Grid00" taborder="7" useinputpanel="false" left="40" top="89" right="40" height="350" binddataset="ds_custList" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="93"/>
+                <Column size="80"/>
+                <Column size="116"/>
+                <Column size="314"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="고객번호"/>
+                <Cell col="1" text="고객명"/>
+                <Cell col="2" text="실명구분"/>
+                <Cell col="3" text="주소"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:custNo"/>
+                <Cell col="1" text="bind:empName"/>
+                <Cell col="2" text="bind:realNameNo" mask="######-#{######}"/>
+                <Cell col="3" style="align:left middle;" text="bind:addr"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_custList">
+        <ColumnInfo>
+          <Column id="custNo" type="STRING" size="256"/>
+          <Column id="empName" type="STRING" size="256"/>
+          <Column id="realNameNo" type="STRING" size="256"/>
+          <Column id="addr" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+//고객리스트 온로드
+this.custList_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.gfn_transaction(this
+					   , "custListRoadData"
+					   , "custListRoadData/custListRoadData.do"
+					   , ""
+					   , "ds_custList=ds_custList"
+					   , ""
+					   , "fnCallback");
+}
+
+//콜백
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		this.alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+			case "custListRoadData":
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+//닫기
+this.Button03_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+//선택값 넘기기 버튼클릭시
+this.Button02_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nCustRow = this.ds_custList.rowposition;
+	var nCustSelect = this.ds_custList.getColumn(nCustRow,"custNo");
+	
+	this.close(nCustSelect);
+}
+
+//선택값 넘기기 더블클릭
+this.Grid00_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var nCustRow = this.ds_custList.rowposition;
+	var nCustSelect = this.ds_custList.getColumn(nCustRow,"custNo");
+	
+	this.close(nCustSelect);
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="ManageList" classname="ManageList" left="0" top="0" width="1024" height="768" titletext="New Form" onload="aml_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="12" left="40" top="54" height="28" style="background:gainsboro;" right="40"/>
+        <Static id="st_custType" taborder="0" text="고객구분" left="49" top="56" height="24" width="64"/>
+        <Combo id="cbo_workType" taborder="1" innerdataset="@ds_custType" codecolumn="code" datacolumn="value" onitemchanged="edt_acc_no_onitemchanged" top="56" height="24" width="125" left="103"/>
+        <Static id="st_regiDt" taborder="2" text="발생일자" top="56" height="24" width="65" left="245"/>
+        <Calendar id="edt_regidt00" taborder="3" top="56" height="24" width="125" left="301"/>
+        <Static id="Static01" taborder="4" text="~" onclick="Static01_onclick" top="57" height="24" style="align:center middle;" width="18" left="424"/>
+        <Calendar id="edt_regidt01" taborder="5" top="56" height="24" width="125" left="440"/>
+        <Button id="bt_exceptreason" taborder="8" text="보고제외사유" top="58" height="20" onclick="bt_exceptreason_onclick" width="92" right="44" style="background:lightskyblue;color:white;"/>
+        <Grid id="Grid00" taborder="10" binddataset="ds_managelist" useinputpanel="false" left="40" top="91" right="40" oncellclick="Grid00_oncellclick" height="548">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="68"/>
+                <Column size="124"/>
+                <Column size="178"/>
+                <Column size="201"/>
+                <Column size="115"/>
+                <Column size="148"/>
+                <Column size="180"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="No"/>
+                <Cell col="1" text="기준 일자"/>
+                <Cell col="2" text="그룹번호"/>
+                <Cell col="3" text="고객구분"/>
+                <Cell col="4" text="고객명"/>
+                <Cell col="5" text="실명번호"/>
+                <Cell col="6" text="보고서 생성"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="currow+1"/>
+                <Cell col="1" style="align: ;" text="bind:stndrdDate" mask="####.##.##"/>
+                <Cell col="2" text="bind:alertGroupNo"/>
+                <Cell col="3" style="align:left;" text="bind:codeName"/>
+                <Cell col="4" text="bind:empName"/>
+                <Cell col="5" style="align: ;" text="bind:realNameNo" mask="######-#######"/>
+                <Cell col="6" edittype="none" text="bind:reportExceptReason" expr="expr:comp.parent.bttext(currow)"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_title" taborder="13" onclick="sta_title_onclick" left="-0.1%" top="0" right="0%" height="46" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Static id="Static02" taborder="14" text="보고서목록" left="40" top="0" width="200" height="45" style="color:white;font:bold 17 돋움;"/>
+        <Button id="bt_search" taborder="7" text="조회" top="58" height="20" onclick="bt_search_onclick" width="92" right="44" style="background:lightskyblue;color:white;"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="cbo_workType" propid="value" datasetid="ds_find" columnid="custType"/>
+      <BindItem id="item1" compid="edt_regidt00" propid="value" datasetid="ds_find" columnid="stDt"/>
+      <BindItem id="item2" compid="edt_regidt01" propid="value" datasetid="ds_find" columnid="edDt"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_managelist">
+        <ColumnInfo>
+          <Column id="stndrdDate" type="STRING" size="256"/>
+          <Column id="regiId" type="STRING" size="256"/>
+          <Column id="alertGroupNo" type="STRING" size="20"/>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="empName" type="STRING" size="256"/>
+          <Column id="realNameNo" type="STRING" size="256"/>
+          <Column id="reportDate" type="STRING" size="256"/>
+          <Column id="reportExceptReason" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_custType">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_find">
+        <ColumnInfo>
+          <Column id="custType" type="STRING" size="256"/>
+          <Column id="stDt" type="STRING" size="256"/>
+          <Column id="edDt" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+var groupN;
+
+this.aml_onload = function(obj,e)
+{
+  	var sDsIds  = "";
+	sDsIds += "ds_custType=ds_custType";
+	sDsIds  = "";
+        		 
+    this.gfn_transaction(this
+							   , "commonCode"
+        					   , "manageCommonCodes.do"
+        					   , ""
+        					   , "ds_custType=ds_custType"
+        					   , ""
+        					   , "fnCallback");
+        				
+	}
+
+// callback function
+this.fnCallback = function(sSvcId,nErrorCode,sErrorMsg){
+	if(nErrorCode < 0){
+		application.alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+			switch(sSvcId){
+			case "commonCode":
+				this.ds_custType.insertRow(0);
+				this.ds_custType.setColumn(0, "value", "전체");
+				this.cbo_workType.set_index(0);
+				
+				var objDate = new Date();
+			
+				var yyyy = objDate.getYear().toString(); 
+				var mm = (objDate.getMonth()+1).toString();
+				var dd = objDate.getDate().toString();
+				
+				if(mm.length == 1) mm = '0' + mm;
+				if(dd.length == 1) dd = '0' + dd;
+				
+				var today = yyyy + mm + dd;
+				
+				this.edt_regidt01.set_value(today);
+				objDate.addMonth(-1);
+				yyyy = objDate.getYear().toString(); 
+				mm = (objDate.getMonth()+1).toString();
+				dd = objDate.getDate().toString();
+			
+				if(mm.length == 1) mm = '0' + mm;
+				if(dd.length == 1) dd = '0' + dd;
+				today = yyyy + mm + dd;
+				this.edt_regidt00.set_value(today);				
+			break;
+			case "manageList":
+			break;
+			default:
+			break;
+			}
+		}
+	}
+
+//조회
+this.bt_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_managelist.clearData();
+	var stDt = this.ds_find.getColumn(0, "stDt");
+	var edDt = this.ds_find.getColumn(0, "edDt");		  		
+	//날짜 유효성검사
+	//var sDateS = this.edt_stDate.value; 
+	//var sDateE = this.edt_edDate.value;
+	
+	//if(sDateS <> "" || sDateE <> "" ){
+		if(this.gfn_IsNull(stDt) || this.gfn_IsNull(edDt)){
+				//조회
+			this.gfn_transaction(this
+								, "commonCode"
+								, "straml/managelist.do"
+								, "ds_find=ds_find" //보내는곳
+        					    , "ds_managelist=ds_managelist" //받는곳
+        					    , ""
+        					    , "fnCallback");
+			//alert("sDateS sDate둘중 하나라도 비어있으니 날짜를 기입하시오 ");
+			return;
+		}else{	
+			//this.alert(sDateS.toString().length+"=====stDate111========77=="+sDateE.toString().length);
+			if(stDt.length == "8" && edDt.length == "8"){
+					//alert("8자리입니다");
+				if(parseInt(stDt) > parseInt(edDt)){
+					//alert(parseInt(sDateS) > parseInt(sDateE));
+					alert("시작일이 종료일보다 작거나 같지않습니다");
+					return;
+				}
+			}else {
+				alert("날짜형식이 잘못되었습니다.");
+				return;
+			}			
+		}	
+	this.gfn_transaction(this
+								, "commonCode"
+								, "straml/managelist.do"
+								, "ds_find=ds_find" //보내는곳
+        					    , "ds_managelist=ds_managelist" //받는곳
+        					    , ""
+        					    , "fnCallback");
+      this.ds_custType.deleteRow(0);
+}
+
+this.bt_exceptreason_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	if(0<this.ds_managelist.rowcount){
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+        	 
+    groupN = this.ds_managelist.getColumn(this.ds_managelist.rowposition,"alertGroupNo");
+	var newChild = new ChildFrame;
+	newChild.init("Popup1"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "Str::Pop_reportExcept.xfdl");
+        					
+	newChild.set_openalign("center middle");
+	newChild.set_dragmovetype("all");
+	newChild.showModal(this.getOwnerFrame()
+        						, {gNo:groupN}
+        						, this
+        						, "modal_callback"
+        						);
+	}else{
+		alert("입력한 내용이 없습니다");
+	}
+}
+
+this.modal_callback = function(strID,variant)
+{
+		if(strID == "Popup")
+		{
+			if(this.gfn_IsNull(variant))
+			{
+				return;
+			}
+        	//	this.modal_selectDepo(variant);
+		}
+}
+
+this.bttext = function(nRow){
+	var rea = this.ds_managelist.getColumn(nRow, "reportExceptReason");
+	//trace("===========" +rea);
+	if(rea == null) return 'XML생성';
+	else if(rea != null) return '제외 사유';
+}
+
+this.Grid00_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var rea = this.ds_managelist.getColumn(this.ds_managelist.rowposition, "reportExceptReason");
+	var reDate = this.ds_managelist.getColumn(this.ds_managelist.rowposition,"reportDate");
+	var name = this.ds_managelist.getColumn(this.ds_managelist.rowposition,"empName");
+	
+	if(rea == null){
+	var copy = this.ds_managelist.getColumn(this.ds_managelist.rowposition,"stndrdDate");
+		 copy+= ","
+		 copy+= this.ds_managelist.getColumn(this.ds_managelist.rowposition,"regiId");
+		 copy+= ","
+		 copy+= this.ds_managelist.getColumn(this.ds_managelist.rowposition,"codeName");
+		 copy+= ","
+		 copy+= this.ds_managelist.getColumn(this.ds_managelist.rowposition,"empName");
+		 copy+= ","
+		 copy+= this.ds_managelist.getColumn(this.ds_managelist.rowposition,"reportDate");
+
+		//alert(copy);	
+	}else{
+		var nLeft = system.clientToScreenX(this, 10);
+		var nTop = system.clientToScreenY(this, 10);
+		groupN = this.ds_managelist.getColumn(this.ds_managelist.rowposition,"alertGroupNo");
+		var newChild = new ChildFrame;
+		newChild.init("Popup1"
+						, "absolute", nLeft, nTop, 300, 250, null, null
+						, "Str::Pop_reportExcept.xfdl");
+								
+		newChild.set_openalign("center middle");
+		newChild.set_dragmovetype("all");
+		newChild.showModal(this.getOwnerFrame()
+									, {gNo:groupN}
+									, this
+									, "modal_callback"
+									);
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

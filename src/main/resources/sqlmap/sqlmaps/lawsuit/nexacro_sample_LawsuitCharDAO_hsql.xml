@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="LawsuitChar">
+
+	<typeAlias alias="searchVO" type="nexacro.sample.vo.DefaultVO" />
+	<typeAlias alias="lawsuitcharVO"
+		type="nexacro.sample.service.lawsuit.vo.LawsuitCharVO" />
+
+	<!-- Sample resultObject -->
+	<resultMap id="lawsuitchar" class="lawsuitcharVO">
+		<result property="insaSabun" column="INSA_SABUN" />
+		<result property="insaName" column="INSA_NAME" />
+		<result property="insaEmail" column="INSA_EMAIL" />
+	</resultMap>
+
+
+	<select id="lawsuitcharDAO.LawsuitCharSelectVO" parameterClass="java.util.HashMap"
+		resultMap="lawsuitchar">
+		<![CDATA[
+		 SELECT  
+		 A.INSA_SABUN AS INSA_SABUN,
+         A.INSA_NAME AS INSA_NAME,
+         A.INSA_EMAIL AS INSA_EMAIL 
+        FROM TAB_INSA A
+        Where 1=1
+        ]]>
+		<isNotNull property="insaSabun" prepend="AND">
+		<![CDATA[
+ 			INSA_SABUN LIKE '%'||#insaSabun#||'%'
+ 		]]>
+		</isNotNull>
+		<isNotNull property="insaName" prepend="AND"> 
+		<![CDATA[
+			INSA_NAME LIKE '%'||#insaName#||'%'
+ 		]]>
+		</isNotNull>
+	</select>
+	
+</sqlMap>

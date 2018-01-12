@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script type="xscript5.0"><![CDATA[/******************************************************************************************
+ * 함  수  명	:	gfn_transaction(strId, strModel,inDs,outDs,strParam,sCall,bSync,strDomain)
+ * 입      력	:	objFrm		- 호출한 Frame
+					svcid		- transaction을 구분하기 위한 ID
+ *					strModel	- XUP 모델명
+ *					inputDs		- transaction을 요청할 때 입력값으로 보낼 Dataset 의 ID 리스트
+ *					outputDs	- transaction을 처리 결과를 받을 Dataset의 ID 리스트
+ *					params	- transaction을 요청할 때 입력값으로 보낼 변수
+ *					callbackFnc	- transaction callback 함수
+ * 반      환	:	없음
+ * 기      능	:	transaction함수
+ *****************************************************************************************/
+this.gfn_transaction=function(objFrm, svcid, strURL, inputDs, outputDs, params, callbackFnc)
+{	 
+//trace("====");
+	//trace(objFrm);
+	//trace("trans:"+svcid);
+	//trace(strURL);
+	//trace(inputDs);
+	//trace(outputDs);
+//	trace(params);
+	//trace(callbackFnc);
+	application.gdsTransInfo.clearData();
+
+	var dsInputName = this.splitDsName(inputDs,0);
+	var dsOutputName = this.splitDsName(outputDs,1);
+	
+	for (var i = 0; i < dsInputName.length ; i++ ){
+		var row = application.gdsTransInfo.addRow();
+		if (i == 0){										//svc id 와 url은 하나이다.
+			application.gdsTransInfo.setColumn(row,0, svcid);
+			application.gdsTransInfo.setColumn(row,1, strURL);
+		}
+		application.gdsTransInfo.setColumn(row,2, dsInputName[i]);
+	}
+	
+	for (var i = 0; i < dsOutputName.length ; i++ ){
+		application.gdsTransInfo.setColumn(row,3, dsOutputName[i]);
+	}
+	//trace("=====1");
+	//trace(application.gdsTransInfo.getColumn(0,2));
+	
+			  var oDatas =  {
+			  svcid : svcid,
+			  sController : strURL,			 
+			  inds :["__DS_TRANS_INFO__=gdsTransInfo " + inputDs],
+			  outds :[outputDs],
+			  args  : [params],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			};
+			
+			//trace(strURL);
+			//trace(oDatas.inds);
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/ 
+		//trace("=====2");
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}	
+			
+			//trace(svcid);
+			//trace(this.errorcode);
+			//trace(this.errormsg);
+		   var pThis = this.fobj;   //form object
+		   pThis[callbackFnc](svcid,this.errorcode,this.errormsg); 
+	}); 	
+
+}
+
+/******************************************************************************************
+ * 함  수  명	:	splitDsName(objString, type)
+ * 입      력	:	objString	- 넘어온 dataset의 이름들
+ *					type		- 분류 코드
+ * 반      환	:	Arr[]
+ * 기      능	:	넘어온 dataset이 여러개일 경우 분류하여 넘김
+ *****************************************************************************************/
+
+this.splitDsName=function(objString, type)
+{
+	var strDsMapping;			//mapping string
+	var objArr;					//dataset name array
+	var objReturn = new Array();
+	
+	strDsMapping = objString.split(" ");
+	
+	for (var i = 0; i < strDsMapping.length ; i++ ){
+		objArr = strDsMapping[i].split("=");    // objArr = a,cd
+		if (type == 0)
+			objReturn[i] = objArr[0];
+		else
+			objReturn[i] = objArr[1];
+	}
+	
+	return objReturn;
+}
+
+/******************************************************************************************
+ * 함  수  명	:	gfn_Trim(sValue)
+ * 입      력	:	sValue		- target String
+ * 반      환	:	
+ * 기      능	:	null값이나 undefined등 값이 들어올때 ""로 변환
+ *****************************************************************************************/
+this.gfn_Trim=function(sValue)
+{
+	if (sValue == null) return "";
+	if (new String(sValue).valueOf() == "undefined") return "";
+	if (new String(sValue) == null) return "";
+
+	var retVal = (new String(sValue)).replace(/^\s+|\s+$/g, '');
+
+	return retVal;
+}
+
+
+/******************************************************************************************
+ * 함  수  명	:	gfn_IsNull
+ * 입      력	:	sValue			벨류값
+ * 반      환	:	true/false
+ * 기      능	:	Null에 해당하는 값 체크.
+ ******************************************************************************************/
+this.gfn_IsNull= function(sValue)
+ {
+	  if( new String(sValue).valueOf() == "undefined")
+		return true;
+	  if( sValue == null )
+		return true;
+	  if( ("x"+sValue == "xNaN") && ( new String(sValue.length).valueOf() == "undefined" ) )
+		return true;
+	  if( sValue.length == 0 )
+		return true;
+	  return false;
+ }
+
+/******************************************************************************************
+ * 함  수  명	:	gf_codeComListLoad
+ * 입      력	:	strSvcId, strDataSet, strAllYn, strAllCode, strAllName, strCallbackFunc, strVParam			벨류값
+ * 반      환	:   code value
+ * 기      능	:	조건에 해당하는 공통코드 호출
+ ******************************************************************************************/
+this.gf_codeComListLoad=function(strSvcId, strDataSet, strAllYn, strAllCode, strAllName, strCallbackFunc, strVParam)
+{
+	var strTempDataSet = strDataSet+"=ds_output";
+	var strController 	= "code/selectCodeList.do";
+	
+	if(this.gfn_IsNull(strAllYn) || strAllYn == "")
+	{	
+		strAllYn   = "N";
+		strAllCode = "";
+		strAllName = "";
+	}  	
+	var strParam = "";
+	strParam += " AllYn=" + strAllYn + " AllCode=" + strAllCode + " AllName=" + strAllName + " CLASS_CODE=" + strVParam;
+	//trace(strParam);
+	//trace(strSvcId);
+	// 트랜젝션 공통함수 호출
+	this.gfn_transaction(this,
+					strSvcId,
+					strController, 
+					"", 
+					strTempDataSet,
+					strParam, 
+					strCallbackFunc
+					);
+	
+}
+
+/******************************************************************************************
+ * 함  수  명	:	gf_sampleCodeComListLoad
+ * 입      력	:	strSvcId, strDataSet, strAllYn, strAllCode, strAllName, strCallbackFunc, strVParam			벨류값
+ * 반      환	:   code value
+ * 기      능	:	조건에 해당하는 공통코드 호출(샘플용)
+ ******************************************************************************************/
+this.gf_sampleCodeComListLoad=function(strSvcId, strDataSet, strAllYn, strAllCode, strAllName, strCallbackFunc, strVParam,isSync)
+{
+	
+	var strTempDataSet = strDataSet+"=ds_output";
+	var strController 	= "code/selectSampleComCode.do";
+	
+	
+	if(gfn_IsNull(strAllYn) || strAllYn == "")
+	{	
+		strAllYn   = "N";
+		strAllCode = "";
+		strAllName = "";
+	} 
+	var strParam = "";
+	strParam += " AllYn=" + strAllYn + " AllCode=" + strAllCode + " AllName=" + strAllName + " CLASS_CODE=" + strVParam;
+//	trace(strParam);
+	
+	var isHttpAsync = true;
+    // 동기식 설정 
+    if ( isSync != undefined && isSync != null && isSync == true ) {
+        isHttpAsync = false;
+    }
+    
+    
+	
+	// 트랜젝션 공통함수 호출
+	gfn_transaction(this,
+					strSvcId,
+					strController, 
+					"", 
+					strTempDataSet,
+					strParam, 
+					strCallbackFunc,
+					isHttpAsync
+					);
+	
+}
+
+
+ /******************************************************************************************
+ * 함  수  명	:	gfn_exeXls
+ * 입      력	:	obj				Grid 오브젝트			
+ *					strSheetNm      Sheet이름
+ * 반      환	:	없음
+ * 기      능	:	엑셀 파일 Open
+ *****************************************************************************************/
+ function gfn_exeXls(objGrd, strSheetNm) {
+  
+	  var objExport = new ExportObject();
+ 
+	  objExport.exporttype    			= ExportTypes.EXCEL;
+	  objExport.activepagename   		= strSheetNm;
+	  objExport.addExportItem(ExportItemTypes.GRID, objGrd, strSheetNm+"!A0" );
+	  objExport.exportuitype    		= "exportprogress";
+	  //objExport.exportmessageprocess  	= "%d Recrod, %d Total";
+	  objExport.exportmessageprocess = "%d 항목을 출력중입니다. %d/%d";
+
+   var rtnVal = objExport.export();
+  
+}
+
+/******************************************************************************************
+ * 함  수  명	:	gfn_Message()
+ * 입      력	:	
+ * 반      환	:	
+ * 기      능	:	공통 메세지 출력 
+ *****************************************************************************************/ 
+ function gfn_Message(msgCode, param, type){
+ 
+	var message = gds_Message.lookup("code",msgCode,"message");
+	
+	//trace("message="+message);
+	
+	if(gfn_IsNull(message)){
+		if(!gfn_IsNull(type)){
+			if(type == "A"){
+					return alert(msgCode);
+			}else if(type =="C"){
+				return confirm(msgCode);
+			}
+		}
+		return alert(msgCode);
+	}
+	
+	
+	var arrMsg = message.split("@");
+	var arrLen = arrMsg.length;
+	var msg = "";
+	
+	for(var i=0; i<arrLen; i++){
+		
+		if(i>0 && i<arrLen){
+			trace("i"+i);
+			trace(param[i-1]);
+			if(!gfn_IsNull(param[i-1])){
+				msg += param[i-1];
+			}
+		}
+		
+		msg += arrMsg[i];
+	}
+	
+	var mrtn = gfn_replaceLF(msg);
+	
+	if(type == "A"){
+		return alert(mrtn);
+	}else if(type =="C"){
+		return confirm(mrtn);
+	}else{
+		return alert(mrtn);
+	}		
+	
+ }
+ 
+ /******************************************************************************************
+ * 함  수  명	:	gfn_replaceLF()
+ * 입      력	:	
+ * 반      환	:	
+ * 기      능	:	줄바꿈 기능 
+ *****************************************************************************************/ 
+function gfn_replaceLF(str)
+{
+	var rtn = "";
+	var arr = str.split("\\n");
+	
+	for (var i=0; i<arr.length; i++)
+	{
+		if (i > 0)
+			rtn += String.fromCharCode(10);
+			
+		rtn += arr[i];
+	}
+	return rtn;
+}
+
+/*****************************************************************************************
+ * 함  수  명	: 	gfn_setMainParams
+ * 입      력	: 	argParamArr : 파라미터 값
+ * 반      환	:   
+ * 기      능	: 	메인화면에서 파라미터 값 저장하기 
+ *****************************************************************************************/
+this.gfn_setMainParams = function(argParamArr)
+{
+	this.gds_Params.clearData();		// 기존의 자료를 지운다
+
+	if (!this.gfn_IsNull(argParamArr))
+	{
+		for(var ii=0; ii<argParamArr.length; ii++)
+		{
+			this.gds_Params.addRow();
+			this.gds_Params.setColumn(ii, "PARAM_ID", 	ii);
+			this.gds_Params.setColumn(ii, "PARAM_VAL", 	argParamArr[ii]);
+		}
+	}
+}
+
+/*****************************************************************************************
+ * 함  수  명	: 	gfn_getMainParams
+ * 입      력	: 	
+ * 반      환	:   Array
+ * 기      능	: 	서브화면에서 파라미터 값 불러오기 
+ *****************************************************************************************/
+this.gfn_getMainParams = function()
+{
+	var v_rtnArr = new Array();
+	
+	for(var ii=0; ii<this.gds_Params.getRowCount(); ii++)
+	{
+		v_rtnArr[ii] = this.gds_Params.getColumn(ii, "PARAM_VAL");
+	}
+
+	this.gds_Params.clearData();		// 기존의 자료를 지운다
+
+	return v_rtnArr;
+}
+
+this.gfn_getObjFont = function(iFontSize, sFontName)
+{
+	var objFont = new Font;
+	objFont.size = iFontSize;
+	objFont.name = sFontName;
+	objFont.bold = true;
+	return objFont;
+}
+
+this.gfn_GetTextSize = function(sText, objFont, iLimitWidth, sConstWordWrapOption)
+{
+	var objPainter = this.canvas.getPainter();
+	if(gfn_IsNull(objPainter)==false)
+	{
+		var objTextSize = objPainter.getTextSize(sText, objFont);
+		return objTextSize;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+/******************************************************************************************
+ * 함  수  명	:	gf_classCodeListLoad
+ * 입      력	:	strSvcId, strDataSet, strAllYn, strAllCode, strAllName, strCallbackFunc, strVParam			벨류값
+ * 반      환	:   code value
+ * 기      능	:	전체 사유코드 리스트 검색
+ * 사 용방법   :   gf_classCodeListLoad("ds_schCampusGb",  "ds_schCampusGb",  "Y", "", "전체", "fnCallback", "A01");
+ 마지막 A01 에 사용하려는 공통코드 번호 입력
+ ******************************************************************************************/
+this.gf_classCodeListLoad = function(strSvcId, strDataSet, strAllYn, strCallbackFunc, strVParam)
+{
+	
+	var strTempDataSet = strDataSet+"=ds_output";
+	var strController 	= "code/getReasonList.do";
+	
+	
+	if(this.gfn_IsNull(strAllYn) || strAllYn == "")
+	{	
+		strAllYn   = "N";
+	} 
+	var strParam = "";
+	strParam += " AllYn=" + strAllYn + " CLASS_CODE=" + strVParam;
+	//trace(strParam);
+	
+	// 트랜젝션 공통함수 호출
+	this.gfn_transaction(this,
+					strSvcId,
+					strController, 
+					"", 
+					strTempDataSet,
+					strParam, 
+					strCallbackFunc
+					);
+	
+}
+
+//데이타중복확인
+//파라메터 1:저장 데이터셋, 2:중복확인할데이터값,3:데이블값,4:테이블 컬럼값,5:콜백함수이름
+//2 번 파라매터를 "" 빈값으로 주면 전체검색이 됨
+function gfn_transactionT(strds,strval,strtal,strcol,strCallbackFunc)
+{
+var strSvcId = "olcheck";
+var strTempDataSet = strds+"=ds_output";
+	var strController 	= "administrator/olcheck.do";
+	var strParam="strval="+strval;
+	strParam+=" strcol="+strcol;
+	strParam+=" strtal="+strtal;
+	
+	
+	
+	
+
+	gfn_transaction(this,
+					strSvcId,
+					strController, 
+					"", 
+					strTempDataSet,
+					strParam, 
+					strCallbackFunc);
+					
+}
+/*
+ * Function Name : fn_getFileName
+ * Description   : 파일명 구하기
+ * Parameter     : realFilePath - 실제 컴퓨터에 저장되어 있는 파일의 경로
+ * Return        : strFileName - 파일명.확장자
+ * Example       : fn_getFileName(realFilePath);
+ */
+function fn_getFileName(realFilePath)
+{	
+	//if(realFilePath!=undefined){
+	var i_idx = realFilePath.lastIndexOf('\\') + 1;
+	var strFileName ="";
+
+	if(i_idx > 0)
+		strFileName = realFilePath.substr(i_idx);
+
+	return strFileName;
+	//}else{
+	//return;
+//	}
+}
+
+/*
+ * Function Name : fn_getFileSize
+ * Description   : 파일 사이즈 구하기 
+ * Parameter     : filenm - 전체경로
+ * Return        : nFileSize - 파일사이즈배열?..
+ * Example       : fn_getFileSize(filenm);
+ */
+function fn_getFileSize(filenm, strUnit)
+{	
+	fn_MoveFile(filenm); //내문서 경로가 아닌 경우 파일을 내문서내의 temp로 폴더 복사
+	filenm = system.convertRealPath("%DOCUMENT%")+"\\temp\\"+fn_getFileName(filenm);
+	//trace("fn_getFileSize에서 filenm : " + filenm);
+	
+	var vFile = new VirtualFile;
+	vFile.open(filenm, VirtualFile.openRead | VirtualFile.openText);
+	
+	var nFileSize = vFile.getFileSize();
+	if(nFileSize > ( 1*1024*1024) )
+		nFileSize = Math.round((nFileSize /1024)/1024,2)+"/MB" +"/"+nFileSize ; //Mega byte
+	else if(nFileSize <1024)
+		nFileSize = Math.round(nFileSize /1024,2) +"/KB" + "/"+nFileSize; //byte
+	else
+		nFileSize = Math.round(nFileSize /1024,2) + "/KB" + "/"+nFileSize; //kilo byte
+	vFile.close();
+	VirtualFile.delete(system.convertRealPath("%DOCUMENT%")+"\\temp\\"+fn_getFileName(filenm)); //임시파일을 지움
+	
+	return nFileSize;
+}
+
+/*
+ * Function Name : fn_MoveFile
+ * Description   : 파일옮기기 
+ * Parameter     : filenm - 실제 컴퓨터에 저장되어 있는 파일의 경로
+ * Return        : strFileName - 파일명.확장자
+ * Example       : fn_MoveFile(filenm);
+ */
+function fn_MoveFile(filenm)
+{
+	fn_ChkFolder();//폴더 있나 체크
+	
+	var DownObj;
+	var ObjExt = new ExtCommon;
+	DownObj = ObjExt.readFile(system.convertRealPath(filenm),"OBJ");
+	ObjExt.writeFile(system.convertRealPath("%DOCUMENT%")+"\\temp\\"+fn_getFileName(filenm),DownObj);
+}
+
+/*
+ * Function Name : fn_ChkFolder
+ * Description   : 내문서경로에 temp폴더 존재여부 체크해 생성
+ * Parameter     : 
+ * Return        : 
+ * Example       : fn_ChkFolder();
+ */
+function fn_ChkFolder()
+{
+	var bChk = VirtualFile.isExist(system.convertRealPath("%DOCUMENT%")+"temp\\");
+	if(!bChk)
+		VirtualFile.createDirectory(system.convertRealPath("%DOCUMENT%")+"temp\\",true);
+}
+//다운로드 함수구현
+function fn_fileDown(rtn)
+{
+	if(rtn == undefined) return;
+	else
+	{
+		//var nNum = Math.floor(Math.random() * 1000) + 1;
+		iCnt = 0; //초기화
+		var objHttpObject = new HttpObject();
+		objHttpObject.onload.setHandler(gfn_httpObject_onload);
+
+		var objFileDlg = new FileDialog();	
+		downFolder = rtn;//objFileDlg.open("File download",FileDialog.SELFOLDER); //사용자 폴더 선택
+
+		//var fileNm;
+		var fileSeqCo;
+		for(var i=0; i < ds_filelist.rowcount; i++)
+		{
+		    fileSeqCo = ds_filelist.getColumn(i,"atchFileSeqCode");
+			fileNm = ds_filelist.getColumn(i, "serversavefilenm")+"."+ds_filelist.getColumn(i, "pcfileExtnm");
+			rFileNm = ds_filelist.getColumn(grd_addFile.currentrow, "pcfileNm");
+			var vFile_down = new VirtualFile();
+			vFile_down.open(".\\temp\\"+fileNm , VirtualFile.openWrite );//임시로 내문서로 다운로드. 		
+			var rtn = objHttpObject.download("svc::fileDownload.jsp?file="+fileNm+"&seqCd="+fileSeqCo,vFile_down, false);
+		}//for		
+	}
+}
+]]></Script>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="codeCall">
+
+<!-- 	<typeAlias alias="codeDTO" type="nexacro.sample.vo.CodeCallVO" />
+	
+	<cacheModel id="product-cache" type="LRU">
+		<flushInterval hours="1"/>
+		<property name="size" value="1000"/>
+	</cacheModel>
+	
+	<resultMap id="code" class="codeDTO">
+		<result property="codeno" column="CODE" />
+		<result property="codenm" column="DATA" />
+		<result property="classcode" column="CLASS_CODE" />
+		<result property="sort" column="SORT_SEQ" />
+		<result property="codeFull" column="CODEFULL" />
+	</resultMap>
+	
+	<resultMap id="code_reason" class="codeDTO">
+		<result property="codeno" column="CODE_NO" />
+		<result property="codenm" column="CODE_NAME" />
+		<result property="classcode" column="CLASS_CODE" />
+		<result property="sort" column="SORT_SEQ" />
+		<result property="useYn" column="use_yn" />		
+	</resultMap>
+	
+	
+	공통코드출력
+	<select id="code.CodeCallDAO.selectCodeList" resultMap="code"
+		parameterClass="java.util.HashMap" >
+
+		<isEqual property="allYn" compareValue="Y">
+			<![CDATA[
+			SELECT #allCode# AS CODE
+				 ,#allName# AS DATA
+				 ,#classCode# AS CLASS_CODE
+				 ,0 AS SORT_SEQ
+				 ,' ' AS CODEFULL
+			FROM DUAL
+			UNION ALL
+			]]>
+		</isEqual>
+		<![CDATA[
+		SELECT D.CODE_NO AS CODE
+			  ,D.CODE_NAME	AS DATA
+			  ,D.CLASS_CODE   AS CLASS_CODE
+			  ,D.SORT_SEQ AS SORT_SEQ
+			  ,D.CODE_NAME || ' / ' || D.CODE_NO AS CODEFULL
+			FROM CMM_CODE_DETAIL D , CMM_CODE_MASTER M
+			WHERE D.CLASS_CODE = M.CLASS_CODE
+			AND D.CLASS_CODE = #classCode#
+			AND D.USE_YN = 'Y'
+			AND M.USE_YN = 'Y'
+			ORDER BY SORT_SEQ 
+		]]>
+	</select>
+	
+	전체 사유코드 리스트 검색
+	
+	
+	전체 사유코드 리스트 검색
+ 	<select id="code.CodeCallDAO.getReasonList" resultMap="code_reason" 
+ 	parameterClass="java.util.HashMap" cacheModel="product-cache">
+ 	<![CDATA[
+		SELECT CLASS_CODE, CODE_NO, CODE_NAME, use_yn
+        FROM
+        (SELECT CLASS_CODE, CODE_NO, CODE_NAME, use_yn
+        FROM CMM_CODE_DETAIL
+        WHERE CLASS_CODE = #classCode# AND USE_YN = #allYn#
+        ORDER BY CLASS_CODE, CODE_NO)
+    ]]>
+ 	</select> -->
+
+	
+</sqlMap>

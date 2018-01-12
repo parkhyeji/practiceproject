@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	
+	<select id="aml.PorChangeDAO.loadCommonCodes" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT CODE_NO   AS CODE
+			 , CODE_NAME AS VALUE
+		  FROM AML_COMMON_CODE_DETAIL
+		 WHERE CLASS_CODE = #classCode#
+	</select>
+	
+	<select id="aml.PorChangeDAO.showList" parameterClass="java.util.HashMap" resultClass="egovMap">
+     SELECT DEAL_DATE
+              , ALERT_GROUP_NO
+              , DEAL_SERIAL_NO
+              , (SELECT RULE_NAME
+                   FROM AML_RULE_INFO R
+                  WHERE SUBSTR(DD.ALERT_GROUP_NO,12,3) = R.RULE_ID) AS RULE_NAME 
+              , (SELECT CD.CODE_NAME 
+                   FROM AML_COMMON_CODE_DETAIL CD
+                  WHERE CD.CLASS_CODE='O000'
+                    AND CD.CODE_NO 
+                        = (SELECT R.DIST_CHGED_ID
+                             FROM AML_RULE_ALERT_DETAIL R
+                            WHERE SUBSTR(DD.ALERT_GROUP_NO,12,3) = R.ALERT_GROUP_NO)) AS RULE_APPLY_PEERIOD
+              , WORK_TYPE_CODE AS WORK_TYPE
+              , DEAL_OFFICE_CODE AS TRADE_CHA
+              , DEAL_GOODS
+              , (SELECT EMP_NAME
+                    FROM AML_EMP_INFO E
+                   WHERE E.EMP_NO = DD.DEAL_CHGED_ID) AS DIST_NAME
+              , DEAL_CHGED_ID AS DIST_CHGED_ID 
+         FROM AML_RULE_ALERT_DEAL_DETAIL DD
+        WHERE ALERT_GROUP_NO = #alertGroupNo#
+
+          AND DEAL_SERIAL_NO = #dealSerialNo#
+         
+	</select>
+	
+	<select id="aml.PorChangeDAO.searchList" parameterClass="java.util.HashMap" resultClass="egovMap">
+          SELECT EMP_NO
+               , EMP_NAME
+               , POSI_NAME
+               , CEL_NO
+               , EMAIL
+           FROM AML_EMP_INFO
+          WHERE 1=1
+            AND $type$ LIKE '%' || #keyword# || '%'
+    </select>
+	
+	
+	
+	<update id="aml.PorChangeDAO.updateList" parameterClass="java.util.HashMap">
+		UPDATE AML_RULE_ALERT_DEAL_DETAIL
+           SET DEAL_CHGED_ID = #empNo#
+         WHERE ALERT_GROUP_NO = #alertGroupNo#
+           AND DEAL_SERIAL_NO= #dealSerialNo#
+	</update>
+	
+
+	
+</sqlMap>

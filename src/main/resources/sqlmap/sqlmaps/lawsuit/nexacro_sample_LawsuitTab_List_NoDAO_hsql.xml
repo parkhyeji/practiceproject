@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="LawsuitTab_List_No">
+
+	<typeAlias alias="searchVO" type="nexacro.sample.vo.DefaultVO" />
+	<typeAlias alias="lawsuittablistnoVO"
+		type="nexacro.sample.service.lawsuit.vo.LawsuitTab_List_NoVO" />
+
+	<!-- Sample resultObject -->
+	<resultMap id="lawsuittablistno" class="lawsuittablistnoVO">
+		<result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />
+		<result property="lawsuitMgrSeq" column="LAWSUIT_MGR_SEQ" />
+		<result property="lawsuitMgrId" column="LAWSUIT_MGR_ID" />
+		<result property="lawsuitMgrName" column="LAWSUIT_MGR_NAME" />
+		<result property="lawsuitMgrDeptCode" column="LAWSUIT_MGR_DEPT_CODE" />
+		<result property="lawsuitMgrAsigDate" column="LAWSUIT_MGR_ASIG_DATE" />
+	</resultMap>
+
+<!-- 법률관계자 조회 -->
+	<select id="lawsuittablistnoDAO.LawsuitTabListNoSelectVO" parameterClass="java.util.HashMap"
+		resultMap="lawsuittablistno">
+		<![CDATA[
+		SELECT 
+		     SELECT LAWSUIT_ADM_NO
+			,LAWSUIT_MGR_SEQ
+			,LAWSUIT_MGR_ID
+			,LAWSUIT_MGR_NAME
+			,LAWSUIT_MGR_DEPT_CODE
+			,LAWSUIT_MGR_ASIG_DATE
+		FROM TAB_LAWSUIT_MGR
+		WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#
+		order by LAWSUIT_ADM_NO
+	]]>
+	</select>
+	
+	<!-- 0이면 1로 바꿔주고 그렇지 않으면 MAX값에 1을 더한다 -->
+	<insert id="lawsuittablistnoDAO.insertlawsuittablistnoVO">
+	<selectKey keyProperty="selectedId" resultClass="int">
+		<![CDATA[
+			SELECT DECODE (COUNT(*),0,'1',MAX(ABS(LAWSUIT_MGR_SEQ))+1) 
+			FROM TAB_LAWSUIT_MGR 
+			WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#
+		]]>
+	</selectKey>
+	<![CDATA[
+		INSERT INTO TAB_LAWSUIT_MGR(LAWSUIT_ADM_NO
+				,LAWSUIT_MGR_SEQ
+				,LAWSUIT_MGR_ID
+				,LAWSUIT_MGR_NAME
+				,LAWSUIT_MGR_DEPT_CODE
+				,LAWSUIT_MGR_ASIG_DATE
+		) VALUES(#lawsuitAdmNo#
+				,#selectedId#
+				,#lawsuitMgrId#
+				,#lawsuitMgrName#
+				,#lawsuitMgrDeptCode#
+				,#lawsuitMgrAsigDate#
+		)
+	]]>
+	</insert>
+	<update id="lawsuittablistnoDAO.updatelawsuittablistnoVO">	
+		<![CDATA[			
+			UPDATE TAB_LAWSUIT_MGR SET
+				LAWSUIT_MGR_ID=#lawsuitMgrId#
+				,LAWSUIT_MGR_NAME=#lawsuitMgrName#
+				,LAWSUIT_MGR_DEPT_CODE=#lawsuitMgrDeptCode#
+				,LAWSUIT_MGR_ASIG_DATE=#lawsuitMgrAsigDate#
+			WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo#
+			AND LAWSUIT_MGR_SEQ=#lawsuitMgrSeq#
+		]]>
+	</update>
+</sqlMap>

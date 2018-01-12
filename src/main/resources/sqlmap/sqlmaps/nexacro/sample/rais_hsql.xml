@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" />
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+
+	
+	
+	<select id="rais.raisDAO.getRaisInitInfo" resultClass="egovMap">
+		<![CDATA[
+			SELECT 
+				LAW_RAISREQ_NO
+			FROM
+				TAB_LAW_RAISREQ
+			GROUP BY
+				LAW_RAISREQ_NO
+		]]>
+	</select>
+			
+	 <!-- 피고사항 -->
+	<!-- <insert id="rais.raisDAO.insertDefAll1" parameterClass="java.util.HashMap">
+		<![CDATA[
+			INSERT INTO 
+				TAB_LAW_RAISREQ_DEF
+			
+			(LAW_RAISREQ_NO	
+			,LAW_RAISREQ_DEF_SEQ
+			,LAW_RAISREQ_DEF_REGNO	
+			,LAW_RAISREQ_DEF_NAME
+			,LAW_RAISREQ_DEF_TEL
+			,LAW_RAISREQ_DEF_POS
+			,LAW_RAISREQ_DEF_ADDR	
+			,LAW_RAISREQ_DEF_CLAMCHG) 
+			
+			VALUES(
+				#lawRaisreqNo#
+			
+				,(SELECT 
+					DECODE(
+						COUNT(*)
+						,0
+						,'1'
+						,MAX(ABS(LAW_RAISREQ_DEF_SEQ))+1) 
+				FROM 
+					TAB_LAW_RAISREQ_DEF 
+				WHERE 
+					LAW_RAISREQ_NO = #lawRaisreqNo#) 
+					      
+				,#lawRaisreqDefRegno,jdbcType=VARCHAR#
+				,#lawRaisreqDefName,jdbcType=VARCHAR#
+				,#lawRaisreqDefTel,jdbcType=VARCHAR#
+				,#lawRaisreqDefPos,jdbcType=VARCHAR#
+				,#lawRaisreqDefAddr,jdbcType=VARCHAR#
+				,#lawRaisreqDefClamchg,jdbcType=VARCHAR#)
+		]]>
+	</insert> -->
+
+	<!-- 예비sql -->
+	<delete id="deleteDefAll" parameterClass="java.util.HashMap" >
+	 	DELETE FROM
+	 		TAB_LAW_RAISREQ_DEF
+		WHERE 
+			LAW_RAISREQ_DEF_SEQ = #lawRaisreqDefSeq#
+			AND
+			LAW_RAISREQ_NO= #lawRaisreqNo#
+	</delete>
+	
+	<update id="updateDefAll" parameterClass="java.util.HashMap">	
+		UPDATE 	
+			TAB_LAW_RAISREQ_DEF
+		SET 						
+			LAW_RAISREQ_DEF_REGNO=#lawRaisreqDefRegno#	
+			,LAW_RAISREQ_DEF_NAME=#lawRaisreqDefName#
+			,LAW_RAISREQ_DEF_TEL=#lawRaisreqDefTel#
+			,LAW_RAISREQ_DEF_POS=#lawRaisreqDefPos#
+			,LAW_RAISREQ_DEF_ADDR=#lawRaisreqDefAddr#	
+			,LAW_RAISREQ_DEF_CLAMCHG=#lawRaisreqDefClamchg#
+		WHERE 
+			LAW_RAISREQ_NO=#lawRaisreqNo#
+			AND
+			LAW_RAISREQ_DEF_SEQ=#lawRaisreqDefSeq#				
+	</update>
+</sqlMap>

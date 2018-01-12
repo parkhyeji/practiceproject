@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="insaAcpt">
+
+	<typeAlias alias="insaAcptVO" type="nexacro.sample.vo.com.InsaAcptVO" />
+	
+	<resultMap id="insaAcpt" class="insaAcptVO">
+		<result property="rownum" column="ROWNUM" />
+		<result property="insaSabun" column="INSA_SABUN" />
+		<result property="insaId" column="INSA_ID" />
+		<result property="insaName" column="INSA_NAME" />
+		<result property="insaPhone" column="INSA_PHONE" />
+		<result property="insaHp" column="INSA_HP" />
+		<result property="insaSex" column="INSA_SEX" />
+		<result property="insaJoinGbnCode" column="INSA_JOIN_GBN_CODE" />
+		<result property="insaBirth" column="INSA_REG_BIRTH" />
+		<result property="insaEmail" column="INSA_EMAIL" />
+		<result property="insaZip" column="INSA_ZIP" />
+		<result property="insaAddr1" column="INSA_ADDR1" />
+		<result property="insaAddr2" column="INSA_ADDR2" />
+		<result property="insaSignReqDate" column="INSA_SIGN_REQ_DATE" />
+		<result property="insaSignReqStat" column="INSA_SIGN_REQ_STAT" />
+		<result property="insaSignReqSabun" column="INSA_SIGN_REQ_SABUN" />
+		<result property="insaSignReqName" column="INSA_SIGN_REQ_NAME" />
+		<result property="insaSignDate" column="INSA_SIGN_DATE" />
+		<result property="insaDeptCode" column="INSA_DEPT_CODE" />
+		<result property="insaJoinDay" column="INSA_JOIN_DAY" />
+	</resultMap>
+	
+	<!-- 사원 승인 내역 조회 -->
+	<select id="com.InsaAcptDAO.selectinsaAcptList" resultMap="insaAcpt"
+		parameterClass="java.util.HashMap">
+		<![CDATA[
+		SELECT ROWNUM, T1.* FROM
+			(SELECT
+			INSA_SABUN
+			,INSA_ID
+			,INSA_NAME
+			,INSA_PHONE
+		   	,INSA_HP
+		    ,INSA_SEX
+		    ,INSA_JOIN_GBN_CODE
+		    ,INSA_REG_BIRTH
+		    ,INSA_EMAIL
+		    ,INSA_ZIP
+		    ,INSA_ADDR1
+		    ,INSA_ADDR2
+		    ,TO_CHAR(INSA_SIGN_REQ_DATE,'YYYY-MM-DD HH24:MI:SS') INSA_SIGN_REQ_DATE
+		    ,INSA_SIGN_REQ_STAT
+		    ,INSA_SIGN_REQ_SABUN
+		    ,(SELECT INSA_NAME FROM TAB_INSA B WHERE B.INSA_SABUN  = A.INSA_SIGN_REQ_SABUN) AS INSA_SIGN_REQ_NAME
+		    ,TO_CHAR(INSA_SIGN_DATE,'YYYY-MM-DD HH24:MI:SS') INSA_SIGN_DATE
+		    ,INSA_DEPT_CODE
+		    ,INSA_JOIN_DAY
+		FROM
+			TAB_INSA A
+			WHERE 1=1
+			]]>
+			
+			<dynamic>
+                <isNotNull property="searchKeyword">
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="099">
+                     INSA_SIGN_REQ_STAT = '099' AND INSA_JOIN_DAY >= #searchKeyword#
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="004">
+                     INSA_SIGN_REQ_STAT = '004' AND INSA_JOIN_DAY >= #searchKeyword#
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="003">
+                     INSA_SIGN_REQ_STAT = '003' AND INSA_JOIN_DAY >= #searchKeyword#
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="002">
+                     INSA_SIGN_REQ_STAT = '002' AND INSA_JOIN_DAY >= #searchKeyword#
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="001">
+                     INSA_SIGN_REQ_STAT = '001' AND INSA_JOIN_DAY >= #searchKeyword#
+                    </isEqual>
+                </isNotNull>
+                <isNull property="searchKeyword">
+                	<isEqual prepend=" AND " property="searchCondition" compareValue="099">
+                     INSA_SIGN_REQ_STAT = '099'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="004">
+                     INSA_SIGN_REQ_STAT = '004'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="003">
+                     INSA_SIGN_REQ_STAT = '003'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="002">
+                     INSA_SIGN_REQ_STAT = '002'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="001">
+                     INSA_SIGN_REQ_STAT = '001'
+                    </isEqual>
+                </isNull>
+            </dynamic>
+			
+			<![CDATA[
+				ORDER BY INSA_JOIN_DAY DESC, INSA_SABUN DESC) T1
+			]]>
+			
+			
+	</select>
+	
+	<!-- 사원 승인 내역 정보 저장 -->
+	<update id="com.InsaAcptDAO.updateInsaAcptList" 
+	parameterClass="java.util.HashMap">
+	
+		<![CDATA[			
+			UPDATE TAB_INSA
+				SET
+					INSA_SEX = #insaSex,jdbcType=VARCHAR#,
+					INSA_PHONE = #insaPhone,jdbcType=VARCHAR#,
+					INSA_HP = #insaHp,jdbcType=VARCHAR#,
+					INSA_SIGN_REQ_STAT = #insaSignReqStat,jdbcType=VARCHAR#,
+					INSA_SIGN_REQ_SABUN = #insaSignReqSabun,jdbcType=VARCHAR#,
+					INSA_SIGN_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD'), 
+					INSA_JOIN_GBN_CODE = #insaJoinGbnCode,jdbcType=VARCHAR#,
+					INSA_REG_BIRTH =#insaBirth,jdbcType=VARCHAR#,
+					INSA_NAME = #insaName,jdbcType=VARCHAR#
+			WHERE INSA_SABUN = #insaSabun#
+		]]>
+	</update>
+	
+		
+</sqlMap>

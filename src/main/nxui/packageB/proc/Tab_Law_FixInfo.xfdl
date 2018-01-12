@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Tab_Law_FixInfo" classname="Tab_Law_FixInfo" left="0" top="0" width="1280" height="819" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Edit id="Edit00" taborder="0" left="0.63%" top="9" right="0.63%" height="50" style="background:cornflowerblue;"/>
+        <Static id="Static00" taborder="1" text="기일정보관리" left="1.41%" top="24" right="88.98%" height="30" style="color:white;font:bold 12 arial;"/>
+        <Edit id="Edit01" taborder="2" left="0.63%" top="72" right="0.86%" height="26" style="background:lavender;"/>
+        <Static id="Static01" taborder="3" text="소송관리번호" left="1.17%" top="77" right="89.45%" height="20" style="align:middle;font:bold 9 arial;"/>
+        <Edit id="Edit_searchKeyword" taborder="4" oneditclick="Edit_searchKeyword_oneditclick" left="10.55%" top="75" right="79.53%" height="21" style="background:lavender;"/>
+        <Button id="Button00" taborder="5" text="검색" onclick="Button00_onclick" left="20.7%" top="75" right="76.48%" height="21"/>
+        <Static id="Static02" taborder="6" text="심급" left="24.06%" top="78" right="66.56%" height="20" style="align:middle;font:bold 9 arial;" onclick="Static02_onclick"/>
+        <Combo id="Combo01" taborder="7" left="30.16%" top="75" right="57.66%" height="24" onitemchanged="Combo01_onitemchanged" innerdataset="@Tab_Law_Fixinfo" datacolumn="instAdmCode" codecolumn="instAdmCode"/>
+        <Static id="Static10" taborder="28" text="기일정보" left="0.86%" top="257" right="93.13%" height="34" style="font:bold 9 arial;"/>
+        <Static id="Static12" taborder="30" left="0.63%" top="529" right="0.63%" height="225" onclick="Static12_onclick" style="background:lavender;"/>
+        <Static id="Static13" taborder="31" text="기일장소" left="1.64%" top="552" right="88.2%" height="33" style="font:bold 9 arial;"/>
+        <Static id="Static14" taborder="32" text="기일구분" left="1.41%" top="607" right="93.05%" height="39" style="font:bold 9 arial;"/>
+        <Edit id="Edit03" taborder="33" left="8.2%" top="544" right="79.14%" height="42"/>
+        <Edit id="Edit05" taborder="34" left="8.05%" top="608" right="79.3%" height="42" readonly="true"/>
+        <Static id="Static15" taborder="35" text="기일일시" left="1.64%" top="688" right="88.2%" height="33" style="font:bold 9 arial;"/>
+        <Calendar id="Calendar00" taborder="36" left="8.13%" top="680" right="79.14%" height="43"/>
+        <Button id="Button01" taborder="42" text="등록" left="89.84%" top="503" right="6.48%" height="21" onclick="Button01_onclick"/>
+        <Button id="Button02" taborder="43" text="취소" left="94.22%" top="503" right="2.11%" height="21"/>
+        <Grid id="Grid00" taborder="46" useinputpanel="false" left="0.55%" top="286" right="0.08%" height="158" binddataset="Tab_Law_Fixinfo02" oncellclick="cellClick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="260"/>
+                <Column size="260"/>
+                <Column size="260"/>
+                <Column size="260"/>
+                <Column size="260"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="구분"/>
+                <Cell col="2" text="기일일시"/>
+                <Cell col="3" text="기일장소"/>
+                <Cell col="4" text="마감일시"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:lawFixinfoNum"/>
+                <Cell col="1" text="bind:lawFixinfoSepcode"/>
+                <Cell col="2" text="bind:lawFixinfoDate"/>
+                <Cell col="3" text="bind:lawFixinfoPlc"/>
+                <Cell col="4" text="bind:lawFixinfoDlinDate"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Edit id="Edit09" taborder="47" left="10%" top="470" right="82.5%" height="29" visible="false"/>
+        <Edit id="Edit11" taborder="48" left="18.13%" top="470" right="74.38%" height="29" visible="false"/>
+        <Edit id="Edit12" taborder="49" left="26.25%" top="470" right="66.25%" height="29" visible="false"/>
+        <Edit id="Edit13" taborder="50" left="34.38%" top="470" right="58.13%" height="29" visible="false"/>
+        <Edit id="Edit14" taborder="51" left="42.5%" top="470" right="50%" height="29" visible="false"/>
+        <Static id="Static16" taborder="52" left="1.02%" top="131" right="0.63%" height="121" style="background:lavender;"/>
+        <Static id="Static03" taborder="53" text="심급기본사항" left="1.25%" top="108" right="88.36%" height="24" style="font:bold 9 arial;"/>
+        <Static id="Static05" taborder="54" text="사건번호" left="1.48%" top="137" right="89.69%" height="28" style="font:bold 9 arial;"/>
+        <Edit id="Edit08" taborder="55" left="7.81%" top="136" right="81.33%" height="25"/>
+        <Static id="Static06" taborder="56" text="사건유형" left="21.17%" top="138" right="73.13%" height="25" style="font:bold 9 arial;"/>
+        <Combo id="Combo00" taborder="57" left="25.62%" top="137" right="63.44%" height="25"/>
+        <Static id="Static07" taborder="58" text="진행상태" left="40%" top="138" right="48.52%" height="26" style="font:bold 9 arial;"/>
+        <Combo id="Combo02" taborder="59" left="9.22%" top="170" right="78.59%" height="28"/>
+        <Static id="Static08" taborder="60" text="당사원피고구분" left="1.48%" top="171" right="89.06%" height="27" style="font:bold 9 arial;"/>
+        <Static id="Static09" taborder="61" text="원고" left="23.44%" top="172" right="68.2%" height="26" style="font:bold 9 arial;"/>
+        <Edit id="Edit10" taborder="62" left="26.02%" top="172" right="63.44%" height="26"/>
+        <Combo id="Combo04" taborder="63" left="44.53%" top="137" right="44.53%" height="25"/>
+        <Static id="Static04" taborder="64" text="청구소가" left="40.08%" top="170" right="55.31%" height="26" style="font:bold 9 arial;"/>
+        <Combo id="Combo03" taborder="65" left="7.34%" top="204" right="77.5%" height="27"/>
+        <Static id="Static11" taborder="66" text="수행법원" left="1.64%" top="204" right="91.88%" height="27" style="font:bold 9 arial;"/>
+        <Edit id="Edit02" taborder="67" left="44.61%" top="169" right="44.22%" height="26"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item3" compid="Edit09" propid="value" datasetid="Tab_Law_Fixinfo02" columnid="lawFixinfoSepcode"/>
+      <BindItem id="item7" compid="Edit11" propid="value" datasetid="Tab_Law_Fixinfo02" columnid="lawFixinfoDate"/>
+      <BindItem id="item9" compid="Edit12" propid="value" datasetid="Tab_Law_Fixinfo02" columnid="lawFixinfoPlc"/>
+      <BindItem id="item10" compid="Edit13" propid="value" datasetid="Tab_Law_Fixinfo02" columnid="lawFixinfoDlinDate"/>
+      <BindItem id="item11" compid="Edit14" propid="value" datasetid="Tab_Law_Fixinfo02" columnid="lawFixinfoNum"/>
+      <BindItem id="item12" compid="Edit03" propid="value" datasetid="Tab_Law_Fixinfo02" columnid="lawFixinfoPlc"/>
+      <BindItem id="item13" compid="Edit05" propid="value" datasetid="Tab_Law_Fixinfo02" columnid="lawFixinfoNum"/>
+      <BindItem id="item14" compid="Calendar00" propid="value" datasetid="Tab_Law_Fixinfo02" columnid="lawFixinfoDate"/>
+      <BindItem id="item0" compid="Edit08" propid="value" datasetid="Tab_Law_Fixinfo01" columnid="lawsuitAplCaseCode"/>
+      <BindItem id="item1" compid="Combo00" propid="value" datasetid="Tab_Law_Fixinfo01" columnid="lawsuitCaseTyCode"/>
+      <BindItem id="item4" compid="Combo02" propid="value" datasetid="Tab_Law_Fixinfo01" columnid="lawsuitCpPladefSepcode"/>
+      <BindItem id="item5" compid="Edit10" propid="value" datasetid="Tab_Law_Fixinfo01" columnid="lawsuitRaisRea"/>
+      <BindItem id="item2" compid="Combo04" propid="value" datasetid="Tab_Law_Fixinfo01" columnid="instAdmPrgrCode"/>
+      <BindItem id="item8" compid="Combo03" propid="value" datasetid="Tab_Law_Fixinfo01" columnid="instAdmCortCode"/>
+      <BindItem id="item6" compid="Edit02" propid="value" datasetid="Tab_Law_Fixinfo01" columnid="instAdmClamVop"/>
+    </Bind>
+    <Objects>
+      <Dataset id="Time">
+        <ColumnInfo>
+          <Column id="codecolumn" type="STRING" size="256"/>
+          <Column id="datacolumn" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Tab_Law_Fixinfo">
+        <ColumnInfo>
+          <Column id="lawsuitAdmNo" type="STRING" size="30"/>
+          <Column id="instAdmCode" type="STRING" size="30"/>
+          <Column id="lawFixinfoNum" type="STRING" size="30"/>
+          <Column id="lawFixinfoSepcode" type="STRING" size="30"/>
+          <Column id="lawFixinfoDate" type="DATE" size="30"/>
+          <Column id="lawFixinfoPlc" type="STRING" size="30"/>
+          <Column id="lawFixinfoMainIssu" type="STRING" size="30"/>
+          <Column id="lawFixinfoCpInsi" type="STRING" size="30"/>
+          <Column id="lawFixinfoOthInsi" type="STRING" size="30"/>
+          <Column id="lawFixinfoCortOpin" type="STRING" size="30"/>
+          <Column id="lawFixinfoLyrOpin" type="STRING" size="30"/>
+          <Column id="lawFixinfoDlinDate" type="DATE" size="30"/>
+          <Column id="instAdmCaseNo" type="STRING" size="30"/>
+          <Column id="lawsuitCaseTyCode" type="STRING" size="30"/>
+          <Column id="instAdmPrgrCode" type="STRING" size="30"/>
+          <Column id="lawsuitCpPladefSepcode" type="STRING" size="30"/>
+          <Column id="instAdmClamVop" type="STRING" size="30"/>
+          <Column id="instAdmCortCode" type="STRING" size="30"/>
+          <Column id="amPm" type="STRING" size="30"/>
+          <Column id="hour" type="STRING" size="30"/>
+          <Column id="minutes" type="STRING" size="30"/>
+          <Column id="lawsuitAplCaseCode" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchKeyword" type="STRING" size="30"/>
+          <Column id="searchCondition" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Tab_Law_Fixinfo01">
+        <ColumnInfo>
+          <Column id="lawsuitAdmNo" type="STRING" size="30"/>
+          <Column id="instAdmCode" type="STRING" size="30"/>
+          <Column id="lawFixinfoNum" type="STRING" size="30"/>
+          <Column id="lawFixinfoSepcode" type="STRING" size="30"/>
+          <Column id="lawFixinfoDate" type="DATE" size="30"/>
+          <Column id="lawFixinfoPlc" type="STRING" size="30"/>
+          <Column id="lawFixinfoMainIssu" type="STRING" size="30"/>
+          <Column id="lawFixinfoCpInsi" type="STRING" size="30"/>
+          <Column id="lawFixinfoOthInsi" type="STRING" size="30"/>
+          <Column id="lawFixinfoCortOpin" type="STRING" size="30"/>
+          <Column id="lawFixinfoLyrOpin" type="STRING" size="30"/>
+          <Column id="lawFixinfoDlinDate" type="DATE" size="30"/>
+          <Column id="instAdmCaseNo" type="STRING" size="30"/>
+          <Column id="lawsuitCaseTyCode" type="STRING" size="30"/>
+          <Column id="instAdmPrgrCode" type="STRING" size="30"/>
+          <Column id="lawsuitCpPladefSepcode" type="STRING" size="30"/>
+          <Column id="instAdmClamVop" type="STRING" size="30"/>
+          <Column id="instAdmCortCode" type="STRING" size="30"/>
+          <Column id="amPm" type="STRING" size="30"/>
+          <Column id="hour" type="STRING" size="30"/>
+          <Column id="minutes" type="STRING" size="30"/>
+          <Column id="lawsuitAplCaseCode" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Tab_Law_Fixinfo00">
+        <ColumnInfo>
+          <Column id="lawFixinfoNum" type="STRING" size="30"/>
+          <Column id="lawFixinfoSepcode" type="STRING" size="30"/>
+          <Column id="lawFixinfoDate" type="DATE" size="30"/>
+          <Column id="lawFixinfoPlc" type="STRING" size="30"/>
+          <Column id="lawFixinfoDlinDate" type="DATE" size="30"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+          <Column id="searchCondition" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search1">
+        <ColumnInfo>
+          <Column id="searchKeyword" type="STRING" size="30"/>
+          <Column id="searchCondition" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Tab_Law_Fixinfo02">
+        <ColumnInfo>
+          <Column id="lawFixinfoSepcode" type="STRING" size="30"/>
+          <Column id="lawFixinfoDate" type="STRING" size="30"/>
+          <Column id="lawFixinfoPlc" type="STRING" size="30"/>
+          <Column id="lawFixinfoDlinDate" type="STRING" size="30"/>
+          <Column id="lawFixinfoNum" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+
+
+this.Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_search.clearData();
+	var rowIndex = this.ds_search.addRow();
+	
+	this.ds_search.setColumn(rowIndex, "searchKeyword", this.Edit_searchKeyword.value);
+	trace(this.Edit_searchKeyword.value);
+	
+	
+      var oDatas =  {
+			  svcid : "tabLawFixinfoSelectVO",
+			  sController : "tabLawFixinfoSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "Tab_Law_Fixinfo=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		if(this.errorcode < 0)
+		{
+			trace("error1");
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      
+	       
+	    
+	});
+}
+
+this.Combo01_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+	
+	
+	this.ds_search.clearData();
+	var rowIndex = this.ds_search.addRow();
+	this.ds_search.setColumn(rowIndex, "searchKeyword", this.Edit_searchKeyword.value);
+	if(this.Combo01.value=='1차'){
+		this.Combo01.value = '001';
+	}
+	if(this.Combo01.value=='2차'){
+	this.Combo01.value = '002';
+	}
+	if(this.Combo01.value=='3차'){
+	this.Combo01.value = '003';
+	}
+	this.ds_search.setColumn(rowIndex, "searchCondition", this.Combo01.value);
+	
+	      //trace(this.Combo01.value);
+	 
+	      
+	      var oDatas =  {
+			  svcid : "tabLawFixinfoSelectVO1",
+			  sController : "tabLawFixinfoSelectVO1.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "Tab_Law_Fixinfo01=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+			
+	
+    //공통 transaction 함수 호츨   //function callback 
+	
+	Iject.transaction(this,oDatas,function(){   
+	
+		  /*
+		   callback argument
+		   @param : {string}    this.svcid       서비스 ID
+		   @param : {object}    this.fobj        : 현재 form object
+		   @param : {number}    this.errorcode  : 서비스 에러 코드
+		   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		   */
+		    
+		if(this.errorcode < 0)
+		{
+			
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	     
+	       var pThis = this.fobj;   //form object
+	       	   pThis.fn_search_post();  //조회후 처리 
+	    
+	});
+	
+}
+this.fn_search_post = function(){
+		
+		this.ds_search1.clearData();
+	var rowIndex = this.ds_search1.addRow();
+	this.ds_search1.setColumn(rowIndex, "searchKeyword", this.Edit_searchKeyword.value);
+	this.ds_search1.setColumn(rowIndex, "searchCondition", this.Combo01.value);
+	      
+	      var oDatas =  {
+			  svcid : "tabLawFixinfoSelectVO2",
+			  sController : "tabLawFixinfoSelectVO2.do",			 
+			  inds :["ds_search=ds_search1"],
+			  outds :[
+				 "Tab_Law_Fixinfo02=output2"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 2,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}		
+	      
+	       //var pThis = this.fobj;   //form object
+	       	   //pThis.fn_search_post();  //조회후 처리 
+	});
+}
+
+
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.fn_save("save");
+}
+
+this.fn_save = function(strid)
+{	
+	var yn = confirm("등록하시겠습니까?");
+	
+	if(yn == true){
+	var rowIndex = this.Tab_Law_Fixinfo00.addRow();
+	this.Tab_Law_Fixinfo00.setColumn(rowIndex, "lawFixinfoSepcode", this.Edit05.value);
+	this.Tab_Law_Fixinfo00.setColumn(rowIndex, "lawFixinfoNum", this.Edit14.value);
+	this.Tab_Law_Fixinfo00.setColumn(rowIndex, "lawFixinfoPlc", this.Edit03.value);
+    this.Tab_Law_Fixinfo00.setColumn(rowIndex, "lawFixinfoDate", this.Calendar00.value);
+    this.Tab_Law_Fixinfo00.setColumn(rowIndex, "searchKeyword", this.Edit_searchKeyword.value);
+	this.Tab_Law_Fixinfo00.setColumn(rowIndex, "searchCondition", this.Combo01.value);
+     
+     
+	var oDatas =  {
+			  svcid : "tabLawFixinfoModifyVO",
+			  sController : "tabLawFixinfoModifyVO.do",			 
+			  inds :["input1=Tab_Law_Fixinfo00:U" ],
+			  outds :[
+				 ""
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	      switch(this.svcid)
+	      {
+	         case "save" : 
+				Iject.alert("저장완료");
+				break;
+				
+	         case "dlete" : 
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	      pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+		  pThis.fn_search();
+	});
+	}
+}
+
+
+
+
+
+this.Button03_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.Grid00.addrow();
+}
+]]></Script>
+  </Form>
+</FDL>

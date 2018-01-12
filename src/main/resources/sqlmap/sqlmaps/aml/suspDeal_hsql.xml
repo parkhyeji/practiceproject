@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+	<typeAlias alias="egovMap"
+		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	
+	<select id="aml.SuspDealDAO.loadCustCode" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT CUST_TYPE_CODE
+             , EMP_NAME
+             , REAL_NAME_NO
+             , JOB_NAME
+             , RA_RANK_CODE 
+          FROM AML_CUST_INFO
+         WHERE CUST_NO = #custNo#
+	</select>
+	
+	<select id="aml.SuspDealDAO.loadRuleInfo" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT RULE_ID
+     		 , CUST_TYPE_CODE
+      		 , WORK_TYPE_CODE
+      		 , RULE_APPLY_PEERIOD
+      		 , RULE_NAME
+      		 , RULE_DETAIL
+          FROM AML_RULE_INFO
+         WHERE RULE_ID IN (
+               SELECT MAX(T3.RULE_ID)
+                 FROM AML_CUST_INFO T1
+                    , AML_RULE_ALERT_RESULT T2
+                    , AML_RULE_ALERT_DETAIL T3
+                WHERE T1.CUST_NO = T2.CUST_NO
+                  AND T2.ALERT_GROUP_NO = T3.ALERT_GROUP_NO
+                  AND T1.CUST_NO = #custNo#
+      ) 
+	</select>
+	
+	<select id="aml.SuspDealDAO.loadCustInfo" parameterClass="java.util.HashMap" resultClass="egovMap">
+		SELECT DEAL_DATE
+    		 , ACC_NO
+     		 , WORK_TYPE_CODE
+     		 , DEAL_OFFICE_CODE
+     		 , DEAL_CHGED_ID
+     		 , DEAL_GOODS
+     		 , DEWI_TYPE_CODE
+     		 , DEAL_MOUNT
+  		  FROM AML_RULE_ALERT_DEAL_DETAIL
+ 		 WHERE ALERT_GROUP_NO 
+    		IN ( 
+         		SELECT MAX(T1.ALERT_GROUP_NO)
+           		  FROM AML_RULE_ALERT_DETAIL T1
+              	     , AML_RULE_ALERT_RESULT T2
+              	     , AML_CUST_INFO T3
+          		 WHERE T1.ALERT_GROUP_NO = T2.ALERT_GROUP_NO
+            	   AND T2.CUST_NO = T3.CUST_NO
+            	   AND T3.CUST_NO = #custNo#                
+ 				)
+	</select>
+</sqlMap>

@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="LEGAL_OFFICIAL_CHECK" classname="LEGAL_OFFICIAL_CHECK" left="0" top="0" width="520" height="400" titletext="New Form" onload="LEGAL_OFFICIAL_CHECK_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" text="법률관계자 정보 조회" left="8" top="8" height="50" style="background:cornflowerblue;color:white;align:center middle;font:bold 12 굴림;" right="7"/>
+        <Static id="sta_01" taborder="1" left="8" top="61" height="29" right="7" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Combo id="cmb_search1" taborder="2" left="37" top="65" height="19" innerdataset="@ds_official00" datacolumn="select" codecolumn="value" width="23.65%" style="itemheight:22;itemcolor:#333333ff;itemborder:1 solid transparent ;itempadding:0 3 0 6;color:#333333ff;font:9 굴림;" onitemchanged="cmb_search1_onitemchanged"/>
+        <Edit id="edt_legal_input" taborder="3" left="30.58%" top="65" height="19" enable="false" width="46.54%" style=":disabled {selectcolor:#333333ff;selectbackground:#ffffffff;border:1 solid #a8a8a8ff ;color:#505050ff;padding:0 5 0 5;font:9 굴림;}" onkeydown="edt_legal_input_onkeydown"/>
+        <Button id="btn_search" taborder="4" text="검색" left="77.5%" top="64" height="21" cssclass="btn_WFSA_Search" width="52" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 굴림;shadow:outer 0,0 0 gray;" onclick="btn_search_onclick"/>
+        <Static id="sta_12" taborder="5" text="법률관계자 목록" left="8" top="100" height="13" width="100" style="color:black;align:left top;font:bold 9 굴림;"/>
+        <Button id="btn_legal" taborder="6" text="신규" left="600" top="93" width="52" height="21" style="color:#333333ff;bordertype:round 3 3 ;font:9 Dotum;shadow:outer 0,0 0 gray;" visible="false" onclick="btn_legal_onclick"/>
+        <Grid id="grd_person" taborder="7" useinputpanel="false" left="8" top="117" right="7" autofittype="col" bottom="14" binddataset="ds_official" oncelldblclick="grd_person_oncelldblclick" style="background:#f4f4f4ff;border:2 solid #c8c8c8ff,0 none #c8c8c8ff,0 none #c8c8c8ff,0 none #c8c8c8ff;font:9 굴림;" autoupdatetype="none">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="92"/>
+                <Column size="114"/>
+                <Column size="56"/>
+                <Column size="65"/>
+                <Column size="110"/>
+                <Column size="82"/>
+              </Columns>
+              <Rows>
+                <Row size="25" band="head"/>
+                <Row size="20"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="법률관계자번호"/>
+                <Cell col="1" text="소속명"/>
+                <Cell col="2" text="직업"/>
+                <Cell col="3" text="이름"/>
+                <Cell col="4" text="이메일"/>
+                <Cell col="5" text="연락처"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:legalOfficialinfoRelaNo"/>
+                <Cell col="1" text="bind:legalOfficialinfoTeamname"/>
+                <Cell col="2" displaytype="combo" edittype="none" style="align:center;" text="bind:legalOfficialinfoRelaSep" combodataset="ds_officialType" combocodecol="codeNo" combodatacol="codeName" combodisplay="edit"/>
+                <Cell col="3" text="bind:legalOfficialinfoLyrName"/>
+                <Cell col="4" text="bind:legalOfficialinfoMail"/>
+                <Cell col="5" text="bind:legalOfficialinfoPhone" mask="expr:fn_masktel(currow)"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_officialType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_official" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="legalOfficialinfoRelaNo" type="STRING" size="256"/>
+          <Column id="legalOfficialinfoLyrPsw" type="STRING" size="256"/>
+          <Column id="legalOfficialinfoRelaSep" type="STRING" size="256"/>
+          <Column id="legalOfficialinfoTeamname" type="STRING" size="256"/>
+          <Column id="legalOfficialinfoLyrName" type="STRING" size="256"/>
+          <Column id="legalOfficialinfoMail" type="STRING" size="256"/>
+          <Column id="legalOfficialinfoPhone" type="STRING" size="256"/>
+          <Column id="legalOfficialinfoHdpn" type="STRING" size="256"/>
+          <Column id="legalOfficialinfoCityCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_official00" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="select" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="select">전체</Col>
+            <Col id="value"/>
+          </Row>
+          <Row>
+            <Col id="value">LEGAL_OFFICIALINFO_RELA_NO</Col>
+            <Col id="select">법률관계자번호</Col>
+          </Row>
+          <Row>
+            <Col id="value">LEGAL_OFFICIALINFO_TEAMNAME</Col>
+            <Col id="select">소속명</Col>
+          </Row>
+          <Row>
+            <Col id="select">이름</Col>
+            <Col id="value">LEGAL_OFFICIALINFO_LYR_NAME</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************************************
+* SYSTEM      : 넥사크로플랫폼 PackageB
+* BUSINESS    : 넥사크로플랫폼 PackageB
+* FILE NAME   : LEGAL_OFFICIAL_CHECK
+* PROGRAMMER  : BOK BADA
+* DATE        : 2017/10/25 ~ 2017/11/03
+* DESCRIPTION : SingleDetail
+*------------------------------------------------------------------
+* MODIFY DATE   PROGRAMMER			DESCRIPTION
+*------------------------------------------------------------------
+* 
+*------------------------------------------------------------------
+***********************************************************************************/
+
+/***********************************************************************************
+* Common Library
+***********************************************************************************/
+include "Lib::common.xjs";
+
+/***********************************************************************************
+* Global/Local Variable
+***********************************************************************************/
+
+var job = this.getOwnerFrame().job;
+
+/***********************************************************************************
+* Form Event
+***********************************************************************************/
+this.LEGAL_OFFICIAL_CHECK_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{	
+	this.ds_officialType.clearData();
+	//this.gf_classCodeListLoad("ds_officialType",  "ds_officialType",  "Y", "fnCallback", "O02"); //상단 캠퍼스구분 공통코드조회
+	//B. [전체] 콤보 dropDown 하면 ds_officialType data를 가져오는 함수. 삭제.
+	//B. lawsuit litigant_register에서 사용
+	
+	//gf_classCodeListLoad 기 능	:	전체 사유코드 리스트 검색
+	this.btn_search_onclick();	//B. read. 검색버튼 온클릭 함수를 페이지 온로드시, call.
+}
+
+
+/********************************************************************************
+ * Desc		: 검색버튼 ONCLICK EVENT
+ * Param	: 
+ * Return	: 
+ *******************************************************************************/
+this.btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	//trace("123--------------");
+	var search1= this.cmb_search1.value;	//B.서치1 == 콤보창
+    var search2= this.edt_legal_input.text;	//B.서치2 == 텍스트
+
+	var strSvcid="getLegalOfficials";
+	var strController="/lawsuit/getLegalOfficials.do";
+	
+	if(search1 == "000"){
+		search1 = "";
+	}
+
+	var strParam="selectedId="+"\""+search1+"\"";//소송관리번호
+	//B. var strParam="selectedId="+wrapQuote(search1); XPLATFORM 형식. 수정.
+
+	strParam +="selectedId1="+"\""+search2+"\"";
+	//B. strParam += " selectedId1=" +wrapQuote(search2); XPLATFORM 형식. 수정.
+		//trace("1---------1");
+
+	//trace(strParam);		
+	this.gfn_transaction(this,strSvcid,strController,"","ds_official=ds_output",strParam,"fnCallback");
+}
+
+
+/********************************************************************************
+ * Desc		: 그리드 바디 더블클릭시 EVENT ds_official no와 name값 전송 및 닫기
+ * Param	: 
+ * Return	: 
+ *******************************************************************************/
+this.grd_person_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var no = this.ds_official.getColumn(this.ds_official.rowposition, "legalOfficialinfoRelaNo");
+	var name = this.ds_official.getColumn(this.ds_official.rowposition, "legalOfficialinfoLyrName");
+
+	this.close("no="+no+"&name="+name);
+}
+
+
+/********************************************************************************
+ * Desc		: 검색창에서 엔터키 EVENT
+ * Param	: 
+ * Return	: 
+ *******************************************************************************/
+this.edt_legal_input_onkeydown = function(obj:Edit, e:nexacro.KeyEventInfo)
+{
+	if(e.keycode=="13"){	//B. 엔터키를 누르면
+		this.btn_search_onclick();	//B. 검색버튼 클릭됨
+	}
+}
+
+
+/********************************************************************************
+ * Desc		: callback함수
+ * Param	: 
+ * Return	: 
+ *******************************************************************************/
+this.fnCallback = function(svcid, errcd, errmsg)
+{
+	switch(svcid)
+	{
+		case "ds_officialType" :
+			trace(ds_officialType.saveXML());
+			this.cmb_search1.index = 0;
+			this.btn_search_onclick();
+		break;
+		case "getLegalOfficials" :
+			trace("job:"+job);
+			trace("gfn_IsNull(job):"+this.gfn_IsNull(job));
+			if(gfn_IsNull(job)==false){
+				this.ds_official.filter("legalOfficialinfoRelaSep=="+job);
+			}
+			//trace(ds_official.saveXML());
+		break;
+	}
+}
+
+
+/********************************************************************************
+ * Desc		: 콤보에서 변경된 값이 적용된 후 발생하는 이벤트
+ * Param	: 
+ * Return	: 
+ *******************************************************************************/
+//B. 콤보값이 널이면 입력받을 수없음
+this.cmb_search1_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+	if(e.postvalue==""){	
+	//B. postvalue : 이벤트 발생 후 컴포넌트가 가지는 value를 나타내는 속성
+		this.edt_legal_input.value = "";
+		this.edt_legal_input.set_enable(false);	
+		//B. enable : enable 속성을 false로 설정하면 화면에 표시는 하지만 포커스나 입력을 받을 수 없음
+	}else{
+		this.edt_legal_input.set_enable(true);
+		//B. edt_legal_input.enable = true; xplatform	
+	}
+}
+
+
+/*B************************************************************************************************
+ds_official : 신상정보. 그리드에 바인딩
+ds_officialType : ??
+ds_official00 : search combo-법률관계자 목록 column 전체 바인딩
+***************************************************************************************************/
+
+
+
+/********************************************************************************
+ * Desc		: 지역번호 함수
+ * Param	: 
+ * Return	: 
+ *******************************************************************************/ 
+//B. 다시 체크. litigant_register 페이지에서 필요 여기서는 필요없는듯.
+/*
+this.fn_masktel=function(row)	//추후 재코딩 필요(간소화)
+{
+	var telcode = this.ds_official.getColumn(row, "legalOfficialinfoPhone"); //연락처
+	var telsize = telcode.length; //연락번호 길이
+	telcode = telcode.substr(0,2); //지역코드 추출
+
+	if(telcode = "02"){ //지역코드가 서울일 경우
+		
+		if(telsize == "9"){
+			return '##-###-####';
+		}else{
+			return '##-####-####';
+		}
+		
+	}else{
+		
+		var areacode = telcode.subStr(0,3); //시외코드 , 휴대폰코드 추출
+		
+		//시외 , 휴대폰 코드 
+		switch(areacode){
+			
+			
+
+			case "032": //인천,부천
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "041": //충남
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "042": //대전	
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "043": //충북
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "044": //세종
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "051": //부산
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "052": // 울산
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "053": // 대구 , 경산
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "054": // 경북
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "055": // 경남
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "061": // 전남
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "062": // 광주
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "062": // 전북
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "064": // 제주
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "011": //SK
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "017": //SK
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "016": //KT
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "018": //KT
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "019": //LG
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "010": //통합
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+
+			case "070": //인터넷전화
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;
+			
+			default :
+				if(telsize == "10"){
+					return '###-###-####';
+				}else{
+					return '###-####-####';
+				}
+				break;		
+		}
+	}
+}
+*/
+
+
+/*
+B. (신규)버튼은 생성되있는데, 기능의 목적을 알 수 없음.
+this.btn_legal_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	
+}
+*/]]></Script>
+  </Form>
+</FDL>

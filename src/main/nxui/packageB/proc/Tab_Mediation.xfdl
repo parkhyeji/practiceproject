@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Tab_Mediation" classname="Tab_Mediation" left="0" top="0" width="1280" height="819" titletext="New Form" onload="Tab_Mediation_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static03" taborder="0" left="16" top="65" width="943" height="25" style="background:#f4f4f4ff;border:1 solid #c8c8c8ff ;align:center middle;"/>
+        <Static id="Static00" taborder="1" text="소송관리번호" left="14" top="65" width="110" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Button id="btn_sc" taborder="3" text="검색" onclick="btn_sc_onclick" left="273" top="67" width="52" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:midnightblue;"/>
+        <Static id="Static01" taborder="4" text="심급" left="329" top="65" width="110" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Button id="btn_reset" taborder="6" text="초기화" onclick="btn_reset_onclick" left="901" top="67" width="52" height="21" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:midnightblue;"/>
+        <Static id="Static02" taborder="7" text="소송기본사항" left="12" top="109" width="196" height="19" style="font:굴림,9,bold;"/>
+        <Static id="Static04" taborder="8" left="15" top="130" width="943" height="25" style="background:#f4f4f4ff;border:1 solid #c8c8c8ff ;align:center middle;"/>
+        <Static id="Static05" taborder="9" left="15" top="154" width="943" height="25" style="background:#f4f4f4ff;border:1 solid #c8c8c8ff ;align:center middle;"/>
+        <Static id="Static07" taborder="10" text="소송진행상태" left="14" top="130" width="110" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static06" taborder="11" text="신청사건번호" left="14" top="154" width="110" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Combo id="Combo01" taborder="12" innerdataset="ds_prgrCode" codecolumn="codeno" datacolumn="codenm" enable="false" left="128" top="133" width="145" height="19"/>
+        <Edit id="Edit01" taborder="13" maxlength="10" left="129" top="157" width="142" height="19" style="caretcolor:#c8c8c8ff;background:#f4f4f4ff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;font:굴림,9;"/>
+        <Static id="Static08" taborder="14" text="당사원피고구분" left="329" top="130" width="110" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static11" taborder="15" text="쟁점금액" left="329" top="154" width="110" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Combo id="de_sepCode" taborder="16" innerdataset="ds_sepCode" codecolumn="codeno" datacolumn="codenm" enable="false" left="443" top="132" width="145" height="19"/>
+        <Edit id="Edit02" taborder="17" maxlength="10" left="443" top="157" width="142" height="19" style="caretcolor:#c8c8c8ff;background:#f4f4f4ff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;font:굴림,9;"/>
+        <Static id="Static09" taborder="18" text="수행법원" left="648" top="130" width="110" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static12" taborder="19" text="상대담당자명" onclick="Static12_onclick" left="648" top="154" width="110" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Edit id="Edit03" taborder="20" maxlength="10" left="761" top="157" width="143" height="19" style="caretcolor:#c8c8c8ff;background:#f4f4f4ff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;font:굴림,9;"/>
+        <Combo id="Combo03" taborder="21" innerdataset="ds_cortCode" codecolumn="codeno" datacolumn="codenm" enable="false" left="761" top="132" width="145" height="19"/>
+        <Static id="Static10" taborder="22" text="원피고 목록" left="8" top="202" width="197" height="19" style="font:굴림,9,bold;"/>
+        <Grid id="Grid00" taborder="23" binddataset="ds_pladef" useinputpanel="false" autofittype="col" left="8" top="217" width="960" height="115">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="85"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="일련번호"/>
+                <Cell col="2" text="성명"/>
+                <Cell col="3" text="등록번호"/>
+                <Cell col="4" text="청구소가"/>
+                <Cell col="5" text="주요연락처번호"/>
+                <Cell col="6" text="추가연락처번호"/>
+                <Cell col="7" text="소송종결구분코드"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow + 1"/>
+                <Cell col="1" text="bind:pladefSeq"/>
+                <Cell col="2" text="bind:pladefName"/>
+                <Cell col="3" text="bind:pladefRegNo" mask="######-#######"/>
+                <Cell col="4" edittype="masknumber" style="align:right;" text="bind:pladefClamVol" mask="#,###"/>
+                <Cell col="5" style="align:right middle;" text="bind:pladefMainTel" mask="expr:pladefMainTel.length == &quot;9&quot;? &quot;##-###-####&quot; :pladefMainTel.length == &quot;11&quot;? &quot;###-####-####&quot; : (pladefMainTel.substr(0,2) == &quot;02&quot; &amp;&amp; pladefMainTel.length == &quot;10&quot;)? &quot;##-####-####&quot; : &quot;###-###-####&quot;"/>
+                <Cell col="6" style="align:right middle;" text="bind:pladefAddTel" mask="expr:pladefAddTel.length == &quot;9&quot;? &quot;##-###-####&quot; :pladefAddTel.length == &quot;11&quot;? &quot;###-####-####&quot; : (pladefAddTel.substr(0,2) == &quot;02&quot; &amp;&amp; pladefAddTel.length == &quot;10&quot;)? &quot;##-####-####&quot; : &quot;###-###-####&quot;"/>
+                <Cell col="7" text="bind:pladefLawConcSepcode"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static13" taborder="24" text="조정안 세부사항" left="8" top="342" width="197" height="19" style="font:굴림,9,bold;"/>
+        <Grid id="Grid01" taborder="25" binddataset="ds_mediation" useinputpanel="false" autofittype="col" left="11" top="363" width="272" height="134">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="44"/>
+                <Column size="108"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="조정안일련번호"/>
+                <Cell col="2" text="작성일자"/>
+                <Cell col="3" text="조정금액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow + 1"/>
+                <Cell col="1" text="bind:mediationSeq" mask="######-#######"/>
+                <Cell col="2" text="bind:mediationWritDate"/>
+                <Cell col="3" style="align:right;" text="bind:mediationChg" mask="#,###"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static24" taborder="26" left="427" top="363" width="538" height="27" style="background:#f4f4f4ff;border:1 solid #c8c8c8ff ;align:center middle;"/>
+        <Static id="Static14" taborder="27" left="427" top="389" width="538" height="61" style="background:#f4f4f4ff;border:1 solid #c8c8c8ff ;align:center middle;"/>
+        <Static id="Static15" taborder="28" left="427" top="445" width="538" height="52" style="background:#f4f4f4ff;border:1 solid #c8c8c8ff ;align:center middle;"/>
+        <Static id="Static17" taborder="29" text="작성일자" left="287" top="363" width="140" height="27" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static16" taborder="30" text="조정내용" onclick="Static16_onclick" left="287" top="387" width="140" height="63" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Static id="Static18" taborder="31" text="기타조정안참고사항" left="287" top="448" width="140" height="48" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <Calendar id="Calendar00" taborder="32" left="431" top="367" width="173" height="19" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;"/>
+        <Static id="Static19" taborder="33" text="조정금액" left="610" top="364" width="140" height="27" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:dotum,9,bold;"/>
+        <MaskEdit id="MaskEdit01" taborder="34" mask="#,###" clipmode="excludespace" left="754" top="367" width="154" height="19" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;align:right;"/>
+        <Static id="Static25" taborder="35" text="(원)" left="917" top="371" width="40" height="13"/>
+        <TextArea id="mediationCont" taborder="36" maxlength="1000" left="432" top="392" width="529" height="54"/>
+        <TextArea id="TextArea01" taborder="37" maxlength="1000" left="432" top="453" width="529" height="40"/>
+        <Static id="Static26" taborder="38" text="결재 진행 상태" left="12" top="515" width="196" height="19" style="font:굴림,9,bold;"/>
+        <Static id="Static27" taborder="39" left="11" top="533" width="105" height="20" style="background:#f4f4f4ff;border:1 solid #c8c8c8ff ;align:center middle;"/>
+        <Static id="Static28" taborder="40" left="116" top="533" width="105" height="20" style="background:#f4f4f4ff;border:1 solid #c8c8c8ff ;align:center middle;"/>
+        <Static id="Static29" taborder="41" left="221" top="533" width="105" height="20" style="background:#f4f4f4ff;border:1 solid #c8c8c8ff ;align:center middle;"/>
+        <Static id="Static30" taborder="42" left="11" top="552" width="105" height="20" style="border:1 solid #c8c8c8ff ;"/>
+        <Static id="Static31" taborder="43" left="116" top="552" width="105" height="20" style="border:1 solid #c8c8c8ff ;"/>
+        <Static id="Static32" taborder="44" left="221" top="552" width="105" height="20" style="border:1 solid #c8c8c8ff ;"/>
+        <Button id="btn_save" taborder="45" text="저장" onclick="btn_save_onclick" left="848" top="511" width="57" height="22" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:midnightblue;"/>
+        <Button id="btn_delete" taborder="46" text="삭제" onclick="btn_delete_onclick" left="910" top="511" width="57" height="22" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:midnightblue;"/>
+        <Static id="Static20" taborder="47" text="*" left="303" top="408" width="24" height="20" style="color:#ff0000ff;align:right;"/>
+        <ImageViewer id="img_titlebg" taborder="48" left="8" top="8" width="964" height="50" style="background:cornflowerblue;"/>
+        <Static id="sta_title" taborder="49" text="조정안 관리" left="26" top="18" width="168" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <Button id="btn_row" taborder="50" text="행추가" onclick="btn_row_onclick" left="785" top="511" width="57" height="22" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:midnightblue;"/>
+        <Edit id="lawsuitAdmNo" taborder="53" maxlength="10" left="128" top="68" width="143" height="19" style="caretcolor:#c8c8c8ff;background:#f4f4f4ff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;font:굴림,9;"/>
+        <Combo id="cbo_sim" taborder="54" innerdataset="@ds_sim" codecolumn="codeno" datacolumn="codenm" onitemchanged="cbo_sim_onitemchanged" left="443" top="68" width="145" height="19"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="lawsuitAdmNo" propid="value" datasetid="ds_lawsuit" columnid="lawsuitAdmNo"/>
+      <BindItem id="item2" compid="Combo01" propid="value" datasetid="ds_lawsuit" columnid="instAdmPrgrCode"/>
+      <BindItem id="item5" compid="Edit01" propid="value" datasetid="ds_lawsuit" columnid="instAdmCaseNo"/>
+      <BindItem id="item3" compid="de_sepCode" propid="value" datasetid="ds_lawsuit" columnid="pladefSepCode"/>
+      <BindItem id="item6" compid="Edit02" propid="value" datasetid="ds_lawsuit" columnid="instAdmIssuChg"/>
+      <BindItem id="item7" compid="Edit03" propid="value" datasetid="ds_lawsuit" columnid="instAdmCtpmgrName"/>
+      <BindItem id="item4" compid="Combo03" propid="value" datasetid="ds_lawsuit" columnid="instAdmCortCode"/>
+      <BindItem id="item8" compid="Calendar00" propid="value" datasetid="ds_mediation" columnid="mediationWritDate"/>
+      <BindItem id="item9" compid="MaskEdit01" propid="value" datasetid="ds_mediation" columnid="mediationChg"/>
+      <BindItem id="item10" compid="mediationCont" propid="value" datasetid="ds_mediation" columnid="mediationCont"/>
+      <BindItem id="item11" compid="TextArea01" propid="value" datasetid="ds_mediation" columnid="mediationRefPoin"/>
+      <BindItem id="item1" compid="cbo_sim" propid="value" datasetid="ds_lawsuit" columnid="instAdmCode"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_lawsuit">
+        <ColumnInfo>
+          <Column id="lawsuitAdmNo" type="STRING" size="256"/>
+          <Column id="instAdmCode" type="STRING" size="256"/>
+          <Column id="instAdmPrgrCode" type="STRING" size="256"/>
+          <Column id="pladefSepCode" type="STRING" size="256"/>
+          <Column id="instAdmCortCode" type="STRING" size="256"/>
+          <Column id="instAdmCaseNo" type="STRING" size="256"/>
+          <Column id="instAdmIssuChg" type="INT" size="256"/>
+          <Column id="instAdmCtpmgrName" type="STRING" size="256"/>
+          <Column id="pladefSeq" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_sim">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_prgrCode">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_sepCode">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_cortCode">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_pladef">
+        <ColumnInfo>
+          <Column id="pladefSepCode" type="STRING" size="256"/>
+          <Column id="pladefSeq" type="INT" size="256"/>
+          <Column id="pladefName" type="STRING" size="256"/>
+          <Column id="pladefRegNo" type="STRING" size="256"/>
+          <Column id="pladefClamVol" type="INT" size="256"/>
+          <Column id="pladefMainTel" type="STRING" size="256"/>
+          <Column id="pladefAddTel" type="STRING" size="256"/>
+          <Column id="pladefLawConcSepcode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_mediation">
+        <ColumnInfo>
+          <Column id="mediationSeq" type="INT" size="256"/>
+          <Column id="mediationWritDate" type="STRING" size="256"/>
+          <Column id="mediationChg" type="INT" size="256"/>
+          <Column id="mediationCont" type="STRING" size="2000"/>
+          <Column id="mediationRefPoin" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs"; //공통함수 호출
+	
+this.confirmStr = "";
+	
+//처음화면
+this.Tab_Mediation_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.gf_codeComListLoad("ds_sim",  "ds_sim",  "N", "", "", "fnCallback", "G01"); // 심급코드조회
+}
+
+//초기화 
+this.btn_reset_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.reload();
+}
+
+
+//소송관리번호 검색
+this.btn_sc_onclick=function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	
+	 var lawSearchNo = "";	//소송관리번호 검색값
+	 
+	 var nLeft = system.clientToScreenX(this, 10);
+	// trace(nLeft);
+	 var nTop = system.clientToScreenY(this, 10);
+	 
+	 var newChild = new ChildFrame;
+	 newChild.init("SearchNo"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "Lawsuit::LAWSUIT_ADM_NO.xfdl");
+	newChild.set_openalign("center middle");
+	newChild.set_dragmovetype("all");
+	newChild.showModal(this.getOwnerFrame()
+						, ""
+						, this
+						, "modal_callback");
+}
+
+//모달콜백
+this.modal_callback = function(strSvcid, variant)
+{
+	if(strSvcid == "SearchNo")
+	{
+		if(this.gfn_IsNull(variant)==false){
+			lawsrcrlt = variant.substr(0,10);	// 소송관리번호
+				if(variant.length == "13"){
+					instcdrlt = variant.substr(10,3);	//심급코드
+			}
+			this.getInstSearch(lawsrcrlt,instcdrlt);//소송
+			this.getMediationSearch(lawsrcrlt,instcdrlt);//원피고
+			this.getBottomSearch(lawsrcrlt,instcdrlt);//조정안
+		}else{
+			return false;
+		}
+	}
+}
+
+/********************************************************************************
+ * Desc		: 심급관리 조회
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.getInstSearch=function(sColumn1,sColumn2)
+{
+	//심급관리 조회
+	var strSvcid="InstanceSearch";
+	var strController="mediation/mediationSelect.do";
+	var strParam ="";
+	strParam+="lawsuitAdmNo="+"\""+sColumn1+"\"";	//소송관리번호
+	strParam+="instAdmCode="+"\""+sColumn2+"\"";	//심급코드	
+	this.gfn_transaction(this,strSvcid,strController,"","ds_lawsuit=ds_lawsuit",strParam,"fnCallback");
+}
+
+/********************************************************************************
+ * Desc		: 원피고 조회
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.getMediationSearch=function(sColumn1,sColumn2)
+{
+	var strSvcid="getMediationSearch";
+	var strController="pladef/pladefSelect.do";
+	var strParam ="";
+	strParam+="lawsuitAdmNo="+"\""+sColumn1+"\"";	//소송관리번호
+	strParam+="instAdmCode="+"\""+sColumn2+"\"";	//심급코드
+	this.gfn_transaction(this,strSvcid,strController,"","ds_pladef=ds_output",strParam,"fnCallback");
+}
+/********************************************************************************
+ * Desc		: 조정안 조회
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.getBottomSearch=function(sColumn1,sColumn2)
+{
+	var strSvcid="getBottomSearch";
+	var strController="bottom/bottomSelect.do";
+	var strParam ="";
+	strParam+="lawsuitAdmNo="+"\""+sColumn1+"\"";	//소송관리번호
+	strParam+="instAdmCode="+"\""+sColumn2+"\"";	//심급코드
+	this.gfn_transaction(this,strSvcid,strController,"","ds_mediation=ds_output",strParam,"fnCallback");
+}
+/*===============================================================================
+ * 5. User Function 관련 Script
+ *=============================================================================*
+/********************************************************************************
+ * Desc		: transaction 후 호출되는 콜백함수
+              소송관리 조회,신규,수정,삭제,결재
+ * Param	: 1.errcd  - Error Code
+			  2.errmsg - Error Msg
+			  3.svcid  - transaction id
+ * Return	: 없음
+ *******************************************************************************/ 
+this.fnCallback=function(strSvcid, errcd, errmsg)
+{	
+	switch(strSvcid)
+	{				
+			case "ds_sim": 
+			this.gf_codeComListLoad("ds_prgrCode",  "ds_prgrCode",   "N", "", "", "fnCallback", "G02"); // 소송진행상태조회
+			break;
+
+			
+			case "ds_prgrCode": 
+			this.gf_codeComListLoad("ds_sepCode",  "ds_sepCode",   "N", "", "", "fnCallback", "L01"); // 수행법원조회
+			break;
+	
+			case "ds_sepCode": 
+			this.gf_codeComListLoad("ds_cortCode",  "ds_cortCode",   "N", "", "", "fnCallback", "A01"); // 당사원피고조회
+			break;
+			
+			case "getBottomSearch":
+			//trace(this.ds_pladef.saveXML());
+			break;
+	}
+}
+
+
+//심급 콤보박스 변경시 조정안 변환
+this.cbo_sim_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+	lawsrcrlt = this.ds_lawsuit.getColumn(0,"lawsuitAdmNo"); 	//소송관리번호
+	instcdrlt = e.postvalue;							//심급코드
+	this.getBottomSearch(lawsrcrlt,instcdrlt);						//심급조회 - 준비서면목록
+	
+	this.cbo_sim.value = e.postvalue;
+}
+
+
+
+// 조정안 저장,수정
+this.btn_save_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+	var yn = confirm("저장하시겠습니까?");
+	
+	if(yn == true){
+	     if(this.gfn_IsNull(this.mediationCont.value)){
+			alert("조정내용은 필수 사항입니다.");
+			this.mediationCont.setFocus();
+		}
+		else{
+			var strSvcid = "pre_iwrSave";
+			var strController = "mediation/mediationSave.do";
+			
+			var strParam = "lawAdmNo=" + this.lawsuitAdmNo.value +" instCode=" + this.cbo_sim.value;
+			
+			alert(strParam);
+			
+			this.gfn_transaction(this
+							,strSvcid
+							,strController
+							,"ds_input=ds_mediation:U, ds_input2=ds_pladef"
+							,""
+							,strParam
+							,"fnCallback");
+		}
+	}
+}
+
+
+// 조정안 행삭제
+this.btn_delete_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	if(this.ds_mediation.getRowCount() <= 0){
+		alert("존재하지 않습니다.");
+	}
+	else{
+		var yn = confirm("삭제하시겠습니까?");
+		
+		if(yn == true){
+			var nRow = this.ds_mediation.rowposition;
+			
+			this.ds_mediation.deleteRow(nRow);
+		
+			var strSvcid = "pre_iwrDelect";
+			var strController = "mediation/mediationSave.do";
+			
+			var strParam = "";
+			
+			var strParam = "lawAdmNo=" + this.lawsuitAdmNo.value +" instCode=" + this.cbo_sim.value;
+			
+			
+			
+			this.gfn_transaction(this
+						,strSvcid
+						,strController
+						,"ds_input=ds_mediation:U"
+						,""
+						,strParam
+						,"fnCallback");
+		}
+	}
+}
+
+//조정안 행추가
+this.btn_row_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_mediation.addRow();
+}
+]]></Script>
+  </Form>
+</FDL>

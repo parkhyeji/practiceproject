@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="deposit_re" classname="deposit_re" left="0" top="0" width="1024" height="600" titletext="공탁관리" onload="deposit_re_onload">
+    <Layouts>
+      <Layout>
+        <Edit id="edt_depo_mgr_id" taborder="65" maxlength="10" enable="false" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;} display:false" position="absolute" left="155" width="143" top="256" height="19"/>
+        <ImageViewer id="img_titlebg" taborder="60" style="background:cornflowerblue;" position="absolute" left="0.88%" width="98.24%" top="8" height="50"/>
+        <Static id="sta_title" text="공탁관리" style="color:whitesmoke;align:left middle;font:굴림,12,bold;" position="absolute" left="26" width="168" top="18" height="29" taborder="59"/>
+        <ImageViewer id="img_view00" taborder="58" style="background:lavenderblush;" position="absolute" left="0.98%" width="98%" top="63" height="35"/>
+        <Static id="sta_01" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;" position="absolute" left="1.66%" width="96.88%" top="68" height="25" taborder="57"/>
+        <Static id="sta_no" text="공탁관리번호" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" onclick="sta_no_onclick" position="absolute" left="1.56%" width="12.8%" top="68" height="25" taborder="56"/>
+        <Edit id="edt_depo_adm_no" taborder="61" maxlength="10" enable="false" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" position="absolute" left="14.75%" width="17%" top="71" height="21"/>
+        <Static id="sta_03" text="공탁사항등록" style="color:black;align:left top;font:굴림,9,bold;" onclick="sta_03_onclick" position="absolute" left="21" width="197" top="114" height="19" taborder="55"/>
+        <ImageViewer id="img_view01" taborder="54" style="background:lavenderblush;" position="absolute" left="0.98%" width="97.95%" top="132" height="84"/>
+        <Static id="sta_00" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;" position="absolute" left="1.56%" width="96.88%" top="137" height="25" taborder="53"/>
+        <Static id="sta_04" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;" position="absolute" left="1.56%" width="96.88%" top="161" height="25" taborder="52"/>
+        <Static id="sta_05" text="관할법원" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="1.56%" width="12.79%" top="137" height="25" taborder="51"/>
+        <Static id="sta_07" text="강제집행일련번호" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="34.38%" width="13.67%" top="137" height="25" taborder="50"/>
+        <Static id="sta_08" text="대리인명" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="34.38%" width="13.67%" top="161" height="25" taborder="49"/>
+        <Combo id="edt_depo_juri_cort" taborder="1" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;font:굴림,9;" innerdataset="@ds_court" codecolumn="codeno" datacolumn="codeFull" displaynulltext="선택" position="absolute" left="14.65%" width="16.8%" top="140" height="19" onitemchanged="edt_depo_juri_cort_onitemchanged"/>
+        <Static id="sta_12" text="공탁금회수" style="color:black;align:left top;font:굴림,9,bold;" position="absolute" left="25" width="197" top="368" height="19" taborder="48"/>
+        <ImageViewer id="img_view02" taborder="47" style="background:lavenderblush;" position="absolute" left="0.98%" width="97.95%" top="386" height="154"/>
+        <Button id="btn_depo_search" taborder="62" text="검색" class="btn_WFSA_Search" position="absolute" left="32.03%" width="52" top="70" height="21" onclick="btn_depo_search_onclick" style="background:lightskyblue stretch 9,9 left top;color:#ffffffff;font:bold 9 Dotum;"/>
+        <Static id="sta_02" text="피공탁자" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="67.68%" width="12.79%" top="137" height="25" taborder="46"/>
+        <Static id="sta_06" text="공탁자" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="1.56%" width="12.79%" top="161" height="25" taborder="45"/>
+        <Edit id="edt_judge_name00" taborder="67" maxlength="10" enable="false" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" position="absolute" left="252" width="376" top="394" height="19"/>
+        <Static id="sta_10" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;" position="absolute" left="1.66%" width="96.88%" top="391" height="25" taborder="44"/>
+        <Static id="sta_11" text="공탁금회수일자" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="1.66%" width="12.7%" top="391" height="25" taborder="43"/>
+        <Static id="sta_09" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;" position="absolute" left="1.66%" width="96.88%" top="415" height="120" taborder="42"/>
+        <Static id="sta_13" text="공탁회수사유" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="1.66%" width="12.7%" top="415" height="120" taborder="41"/>
+        <TextArea id="txt_coll_rea" taborder="15" scrollbars="fixedvert" position="absolute" left="14.75%" width="83.11%" top="418" height="113" maxlength="120" ontextchanged="txt_coll_rea_ontextchanged" wordwrap="char" oneditclick="txt_coll_rea_oneditclick"/>
+        <Static id="sta_15" text="*" style="color:red;align:right top;font:돋움,9,bold;" position="absolute" left="34.77%" width="9" top="143" height="12" taborder="40"/>
+        <Edit id="edt_forc_exec_seq" taborder="2" maxlength="10" enable="true" style="align:center middle; :disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" oneditclick="edt_forc_exec_seq_oneditclick" inputtype="number" position="absolute" left="48.44%" width="16.8%" top="140" height="21"/>
+        <Static id="sta_16" text="*" style="color:red;align:right top;font:돋움,9,bold;" position="absolute" left="37.21%" width="9" top="167" height="12" taborder="39"/>
+        <Static id="sta_17" text="*" style="color:red;align:right top;font:돋움,9,bold;" position="absolute" left="70.12%" width="9" top="143" height="12" taborder="38"/>
+        <Static id="sta_18" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;" position="absolute" left="1.56%" width="96.88%" top="185" height="25" taborder="37"/>
+        <Static id="sta_19" text="보관부서" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="1.56%" width="12.79%" top="185" height="25" taborder="36"/>
+        <Static id="sta_20" text="공탁일자" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="34.38%" width="13.67%" top="185" height="25" taborder="35"/>
+        <Calendar id="cal_depo_Date" taborder="64" style="dayfont:9 굴림;align:center middle;font:9 굴림;" position="absolute" left="48.44%" width="16.8%" top="188" height="19"/>
+        <Static id="sta_21" text="*" style="color:red;align:right top;font:돋움,9,bold;" position="absolute" left="4.2%" width="9" top="143" height="12" taborder="34"/>
+        <Static id="sta_22" text="*" style="color:red;align:right top;font:돋움,9,bold;" position="absolute" left="4.69%" width="9" top="167" height="12" taborder="33"/>
+        <Static id="sta_23" text="*" style="color:red;align:right top;font:돋움,9,bold;" position="absolute" left="4.2%" width="9" top="191" height="12" taborder="32"/>
+        <Static id="sta_24" text="*" style="color:red;align:right top;font:돋움,9,bold;" position="absolute" left="37.21%" width="9" top="191" height="12" taborder="31"/>
+        <Static id="sta_25" text="공탁금액" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="67.68%" width="12.79%" top="161" height="25" taborder="30"/>
+        <Static id="sta_26" text="*" style="color:red;align:right top;font:돋움,9,bold;" position="absolute" left="70.12%" width="9" top="167" height="12" taborder="29"/>
+        <Static id="sta_27" text="공탁담당자" onclick="sta_03_onclick" style="color:black;align:left top;font:굴림,9,bold;" position="absolute" left="21" width="197" top="230" height="19" taborder="28"/>
+        <ImageViewer id="img_view03" taborder="27" style="background:lavenderblush;" position="absolute" left="0.98%" width="97.95%" top="248" height="35"/>
+        <Static id="sta_28" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;" position="absolute" left="1.66%" width="96.88%" top="253" height="25" taborder="26"/>
+        <Static id="sta_30" text="공탁담당자" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="1.66%" width="12.7%" top="253" height="25" taborder="25"/>
+        <Static id="sta_31" text="배정일자" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="34.67%" width="13.48%" top="253" height="25" taborder="22"/>
+        <Static id="sta_33" text="담당자부서" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="67.97%" width="12.7%" top="253" height="25" taborder="21"/>
+        <Button id="btn_char_search" taborder="9" text="검색" onclick="btn_char_search_onclick" position="absolute" left="27.93%" width="4.79%" top="255" height="21" style="background:lightskyblue stretch 9,9 left top;color:#ffffffff;font:bold 9 Dotum;"/>
+        <Edit id="edt_depo_mgr_name" taborder="24" maxlength="10" style="align:center middle; :disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" enable="false" readonly="false" position="absolute" left="14.75%" width="12.99%" top="256" height="21"/>
+        <Calendar id="cal_depo_asig_date" taborder="10" style="dayfont:9 굴림;align:center middle;font:9 굴림;" position="absolute" left="48.54%" width="16.8%" top="256" height="19"/>
+        <Static id="sta_29" text="공탁서불출" onclick="sta_03_onclick" style="color:black;align:left top;font:굴림,9,bold;" position="absolute" left="25" width="197" top="299" height="19" taborder="20"/>
+        <ImageViewer id="img_view04" taborder="19" style="background:lavenderblush;" position="absolute" left="0.98%" width="97.95%" top="317" height="35"/>
+        <Static id="sta_32" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;" position="absolute" left="1.66%" width="96.88%" top="322" height="25" taborder="18"/>
+        <Static id="sta_34" text="공탁불출일자" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="1.66%" width="12.7%" top="322" height="25" taborder="17"/>
+        <Edit id="edt_depu_name" taborder="23" maxlength="10" style="align:center middle; :disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" readonly="false" enable="false" position="absolute" left="48.44%" width="11.82%" top="164" height="21"/>
+        <Button id="btn_depu_search" taborder="5" text="검색" onclick="btn_depu_search_onclick" position="absolute" left="60.55%" width="4.59%" top="163" height="21" style="background:lightskyblue stretch 9,9 left top;color:#ffffffff;font:bold 9 Dotum;"/>
+        <Calendar id="cal_depo_rele_date" taborder="12" style="dayfont:9 굴림;align:center middle;font:9 굴림;" position="absolute" left="14.75%" width="16.02%" top="325" height="19"/>
+        <Calendar id="cal_chg_coll_date" taborder="13" style="dayfont:9 굴림;align:center middle;font:9 굴림;" position="absolute" left="14.75%" width="16.02%" top="394" height="19"/>
+        <Static id="sta_14" text="공탁회수금액" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" position="absolute" left="34.67%" width="13.48%" top="391" height="25" taborder="8"/>
+        <Static id="sta_notice" text="* 신규등록이 아닌경우 공탁관리번호를 검색해주세요." style="color:red;font:dotum,9,bold;" position="absolute" left="38.28%" width="370" top="73" height="17"/>
+        <Button id="btn_save" taborder="16" text="저장" onclick="btn_save_onclick" class="btn_WFSA_Search" position="absolute" left="87.21%" width="5.18%" top="551" height="24" style="background:lightskyblue stretch 9,9 left top;color:#ffffffff;font:bold 9 굴림;"/>
+        <Button id="btn_del" taborder="66" text="삭제" class="btn_WFSA_Search" position="absolute" left="93.07%" width="5.18%" top="551" height="24" onclick="btn_del_onclick" style="background:lightskyblue stretch 9,9 left top;color:#ffffffff;font:bold 9 굴림;"/>
+        <Button id="btn_reset" taborder="63" text="초기화" class="btn_WFSA_Search" position="absolute" left="92.19%" width="5.08%" top="70" height="21" onclick="btn_reset_onclick" style="background:lightskyblue stretch 9,9 left top;color:#ffffffff;font:bold 9 Dotum;"/>
+        <Edit id="edt_depo_oth_name" taborder="3" maxlength="10" style="align:center middle; :disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" position="absolute" left="80.86%" width="15.63%" top="140" height="21"/>
+        <MaskEdit id="edt_coll_chg" taborder="14" mask="###,###,###,###" position="absolute" left="48.54%" width="16.8%" top="394" height="21" style="align:center middle;"/>
+        <MaskEdit id="edt_depo_chg" taborder="6" mask="###,###,###,###" position="absolute" left="80.86%" width="15.63%" top="164" height="21" style="align:center middle;"/>
+        <Combo id="cb_depo_mgr_dept" taborder="7" index="-1" left="14.65%" top="188" width="16.8%" height="19" displaynulltext="선택" innerdataset="@ds_dept" datacolumn="codeFull" codecolumn="codeno"/>
+        <Combo id="cb_keep_dept_code" taborder="11" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;font:굴림,9;" innerdataset="@ds_dept" codecolumn="codeno" datacolumn="codeFull" displaynulltext="선택" position="absolute" left="80.86%" width="16.8%" top="256" height="19"/>
+        <Edit id="edt_depo_name" taborder="4" maxlength="10" left="14.65%" top="164" width="16.89%" height="21" style="align:center middle; :disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" enable="true"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_depo">
+        <ColumnInfo>
+          <Column id="depositDepoAdmNo" type="STRING" size="256"/>
+          <Column id="depositJuriCortCode" type="STRING" size="256"/>
+          <Column id="depositForcExecSeq" type="STRING" size="256"/>
+          <Column id="depositOthDepoName" type="STRING" size="256"/>
+          <Column id="depositDepoName" type="STRING" size="256"/>
+          <Column id="depositDepuName" type="STRING" size="256"/>
+          <Column id="depositDepoChg" type="STRING" size="256"/>
+          <Column id="depositKeepDeptCode" type="STRING" size="256"/>
+          <Column id="depositDepoDate" type="STRING" size="256"/>
+          <Column id="depositDepoReleDate" type="STRING" size="256"/>
+          <Column id="depositDepchgCollDate" type="STRING" size="256"/>
+          <Column id="depositDepoCollChg" type="STRING" size="256"/>
+          <Column id="depositDepoCollRea" type="STRING" size="256"/>
+          <Column id="depositmgrDepoAdmNo" type="STRING" size="256"/>
+          <Column id="depositmgrSeq" type="STRING" size="256"/>
+          <Column id="depositmgrId" type="STRING" size="256"/>
+          <Column id="depositmgrName" type="STRING" size="256"/>
+          <Column id="depositmgrDeptCode" type="STRING" size="256"/>
+          <Column id="depositmgrAsigDate" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dept">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_court">
+        <ColumnInfo>
+          <Column id="codeno" type="STRING" size="256"/>
+          <Column id="codenm" type="STRING" size="256"/>
+          <Column id="codeFull" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item4" compid="edt_depo_name" propid="value" datasetid="ds_depo" columnid="depositDepoName"/>
+      <BindItem id="item0" compid="edt_depo_adm_no" propid="value" datasetid="ds_depo" columnid="depositDepoAdmNo"/>
+      <BindItem id="item1" compid="edt_depo_juri_cort" propid="value" datasetid="ds_depo" columnid="depositJuriCortCode"/>
+      <BindItem id="item2" compid="edt_forc_exec_seq" propid="value" datasetid="ds_depo" columnid="depositForcExecSeq"/>
+      <BindItem id="item3" compid="edt_depo_oth_name" propid="value" datasetid="ds_depo" columnid="depositOthDepoName"/>
+      <BindItem id="item5" compid="edt_depu_name" propid="value" datasetid="ds_depo" columnid="depositDepuName"/>
+      <BindItem id="item6" compid="edt_depo_chg" propid="value" datasetid="ds_depo" columnid="depositDepoChg"/>
+      <BindItem id="item7" compid="cb_keep_dept_code" propid="value" datasetid="ds_depo" columnid="depositmgrDeptCode"/>
+      <BindItem id="item8" compid="cal_depo_Date" propid="value" datasetid="ds_depo" columnid="depositDepoDate"/>
+      <BindItem id="item9" compid="cal_depo_rele_date" propid="value" datasetid="ds_depo" columnid="depositDepoReleDate"/>
+      <BindItem id="item10" compid="cal_chg_coll_date" propid="value" datasetid="ds_depo" columnid="depositDepchgCollDate"/>
+      <BindItem id="item11" compid="edt_coll_chg" propid="value" datasetid="ds_depo" columnid="depositDepoCollChg"/>
+      <BindItem id="item12" compid="txt_coll_rea" propid="value" datasetid="ds_depo" columnid="depositDepoCollRea"/>
+      <BindItem id="item13" compid="edt_depo_mgr_name" propid="value" datasetid="ds_depo" columnid="depositmgrName"/>
+      <BindItem id="item14" compid="cal_depo_asig_date" propid="value" datasetid="ds_depo" columnid="depositmgrAsigDate"/>
+      <BindItem id="item15" compid="cb_depo_mgr_dept" propid="value" datasetid="ds_depo" columnid="depositKeepDeptCode"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[
+include "Lib::common.xjs";
+
+this.saveKey = "";
+
+var strMgr = new Array();
+
+
+this.deposit_re_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{	  
+	this.gf_codeComListLoad("dsComCode", "ds_dept", "N", "", "", "transaction_callback", "B01"); // 공통코드(부서)조회
+	
+	//this.gf_codeComListLoad("dsComCode2", "ds_court", "N", "", "", "this.transaction_callback", "A01"); // 공통코드(관할법원)조회
+	
+	this.ds_depo.addRow();
+	this.ds_depo.setColumn(0, "depositDepoDate", this.gfn_Today());
+}
+
+
+// 정보 초기화
+this.btn_reset_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_depo.clearData();
+	this.ds_court.clearData();
+	this.reload();
+	this.ds_depo.addRow();
+}
+
+// 공탁관리번호 모달창
+this.btn_depo_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	 var nLeft = system.clientToScreenX(this, 10);
+	 var nTop = system.clientToScreenY(this, 10);
+	 
+	 var newChild = new ChildFrame;
+	 newChild.init("Popup1"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "supp::popup_depo.xfdl");
+					
+	newChild.set_openalign("center middle");
+	newChild.set_dragmovetype("all");
+	
+	newChild.showModal(this.getOwnerFrame()//부모
+						, "" //파라미터값?
+						, this
+						, "modal_callback" //콜백함수
+						);
+    
+}
+
+// 담당자 조회 모달창
+this.btn_char_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	
+	 var nLeft = system.clientToScreenX(this, 10);
+	 var nTop = system.clientToScreenY(this, 10);
+	 
+	 var newChild = new ChildFrame;
+	 newChild.init("Popup2"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "supp::popup_mgr.xfdl");
+					
+	newChild.set_openalign("center middle");
+	newChild.set_dragmovetype("all");
+	
+	newChild.showModal(this.getOwnerFrame()
+						, ""
+						, this
+						, "modal_callback");
+}
+
+// 대리인명 조회 모달창
+this.btn_depu_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	 var nTop = system.clientToScreenY(this, 10);
+	 
+	 var newChild = new ChildFrame;
+	 newChild.init("Popup3"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "supp::popup_mgr.xfdl");
+					
+	newChild.set_openalign("center middle");
+	newChild.set_dragmovetype("all");
+	
+	newChild.showModal(this.getOwnerFrame()
+						, ""
+						, this
+						, "modal_callback");
+						
+
+}
+
+
+// 모달창 콜백
+this.modal_callback = function(strID, variant)
+{
+	if(strID == "Popup1")
+	{
+		if(this.gfn_IsNull(variant))
+		{
+			return;
+		}
+		this.modal_selectDepo(variant);
+	}
+	else if(strID == "Popup2")
+	{
+		if(this.gfn_IsNull(variant))
+		{
+			return;
+		}
+		this.modal_selectChar(variant);
+	}
+	else if(strID == "Popup3")
+	{
+		if(this.gfn_IsNull(variant))
+		{
+			return;
+		}
+		this.modal_selectMgr(variant);
+	}
+}
+
+
+// 트랜잭션 콜백
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	//trace("트랜잭션 콜백");
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		return;
+	}
+	
+	if(sSvcId == "deposit_re_selectDepoView")
+	{
+		this.alert("조회완료");
+	}else if(sSvcId == "dsComCode")
+	{
+		this.gf_codeComListLoad("dsComCode2", "ds_court", "N", "", "", "transaction_callback", "A01"); // 공통코드(관할법원)조회
+	}else if(sSvcId == "saveDepoList")
+	{
+		
+		var str = this.ds_depo.getColumn(this.ds_depo.rowposition, "depositDepoAdmNo");
+		
+		if(this.gfn_IsNull(str))
+		{
+			this.edt_depo_adm_no.set_value(this.saveKey);
+			this.modal_selectDepo(this.saveKey);
+			this.alert("저장 완료");
+		}else
+		{
+			this.edt_depo_adm_no.set_value(str);
+			this.modal_selectDepo(str);
+			this.alert("수정 완료");		
+		}
+		
+	}else if(sSvcId == "deleteDepoList")
+	{
+		this.alert("삭제 완료");
+		this.btn_reset_onclick();
+	}
+}
+
+// 공탁번호 지정 후 자동조회
+this.modal_selectDepo = function(variant)
+{
+	this.ds_search.clearData();
+	var rowIdx = this.ds_search.addRow();
+	
+	this.ds_search.setColumn(0, "searchKeyword", variant);
+	
+	this.gfn_transaction(this,
+						"selectDepoView",
+						"depo/Depo/selectDepoView.do",
+						"ds_search=ds_search",
+						"ds_depo=ds_output",
+						"",
+						"transaction_callback"
+						);
+	
+}
+
+// 공탁담당자 조회 후 값 지정
+this.modal_selectChar = function(variant)
+{
+	var arrRtn = variant.split("|");
+	this.ds_depo.setColumn(0, "depositmgrName", arrRtn[0]);
+	if(this.gfn_IsNull(arrRtn[1]))
+	{
+		this.cb_keep_dept_code.value = null;
+	}else
+	{
+		this.ds_depo.setColumn(0, "depositmgrDeptCode", arrRtn[1]);
+	}
+	this.ds_depo.setColumn(0, "depositmgrId", arrRtn[2]);
+	this.ds_depo.setColumn(0, "depositmgrAsigDate", this.gfn_Today());
+}
+
+// 대리인명 조회 후 값 지정
+this.modal_selectMgr = function(variant)
+{
+	var arrRtn = variant.split("|");
+	this.ds_depo.setColumn(0, "depositDepuName", arrRtn[0]);
+}
+
+// 공탁 저장 버튼 클릭
+this.btn_save_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	if(this.gfn_IsNull(this.edt_depo_juri_cort.value)){
+			this.alert("관할법원을 선택해주세요.");
+			this.edt_depo_juri_cort.dropdown();
+			return;
+		}
+		else if(this.gfn_IsNull(this.edt_forc_exec_seq.value)){
+			this.alert("강제집행일련번호를 입력해주세요.");
+			this.edt_forc_exec_seq.setFocus();
+			return;
+		}
+		else if(this.gfn_IsNull(this.edt_depo_oth_name.value)){
+			this.alert("피공탁자를 입력해주세요.");
+			this.edt_depo_oth_name.setFocus();
+			return;
+		}
+		else if(this.gfn_IsNull(this.edt_depo_name.value)){
+			this.alert("공탁자를 입력해주세요.");
+			this.edt_depo_name.setFocus();
+			return;
+		}
+		else if(this.gfn_IsNull(this.edt_depu_name.value)){
+			this.alert("대리인을 입력해주세요.");
+			this.btn_depu_search_onclick();
+			return;
+		}
+		else if(this.gfn_IsNull(this.edt_depo_chg.value)){
+			this.alert("공탁금액을 입력해주세요.");
+			this.edt_depo_chg.setFocus();
+			return;
+		}
+		else if(this.gfn_IsNull(this.cb_depo_mgr_dept.value)){
+			this.alert("보관부서를 선택해주세요.");
+			this.cb_depo_mgr_dept.dropdown();
+			return;
+		}
+		else if(this.gfn_IsNull(this.cal_depo_Date.value)){
+			this.alert("공탁일자를 입력해주세요.");
+			this.cal_depo_Date.setFocus();
+			return;
+		}
+
+	var yn = confirm("저장하시겠습니까?");
+	
+	if(yn == true)
+	{
+		this.depo_transaction("saveDepoList");
+	}else
+	{
+		return;
+	}
+}
+
+// 공탁 저장/수정/삭제 시 공통트랜잭션 호출하는 메서드
+this.depo_transaction = function(sSvcid)
+{
+	var strSvcid = sSvcid;
+	
+	trace(strSvcid);
+	
+	var strController = "depo/Depo/dbAccessDepo.do";
+	
+	this.gfn_transaction(this,
+						strSvcid,
+						strController,
+						"ds_input=ds_depo:U",
+						"ds_depo=ds_output",
+						"",
+						"transaction_callback"
+						);
+}
+
+// 삭제 버튼 처리
+this.btn_del_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+		var nRow = this.ds_depo.rowposition;
+		this.ds_depo.deleteRow(nRow);
+		this.depo_transaction("deleteDepoList");
+	}
+}
+
+
+// 텍스트에어리어 글자수 표시 - 모두 생략하는 걸로
+//this.txt_coll_rea_ontextchanged = function(obj:TextArea,  e:nexacro.TextChangedEventInfo)
+//{
+//	var strLength = this.txt_coll_rea.getLength();
+//	this.Static01.set_text(strLength);
+//}
+]]></Script>
+  </Form>
+</FDL>

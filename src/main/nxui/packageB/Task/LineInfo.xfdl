@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="lineInfo" classname="samplecrud" left="0" top="0" width="1024" height="768" titletext="샘플" onload="lineInfo_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static02" taborder="68" left="40" top="298" right="40" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <Static id="Static01" taborder="67" left="40" top="334" right="40" height="254" style="background:cornsilk;border:1 solid darkgray ;"/>
+        <Static id="Static00" taborder="66" left="40" top="54" right="40" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <Static id="str_01" taborder="8" text="결재서류" left="44" top="56" width="60" height="24" style="color:black;align:center middle;font:9 굴림;"/>
+        <Grid id="Grid_report" taborder="16" useinputpanel="false" left="40" top="90" right="40" height="200" binddataset="ds_report" oncellclick="GridReportonCellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="120"/>
+                <Column size="164"/>
+                <Column size="104"/>
+                <Column size="98"/>
+                <Column size="148"/>
+                <Column size="130"/>
+                <Column size="166"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="선택"/>
+                <Cell col="1" text="보고번호"/>
+                <Cell col="2" text="Alert 그룹번호"/>
+                <Cell col="3" text="보고일자"/>
+                <Cell col="4" text="등록일시"/>
+                <Cell col="5" text="작성자"/>
+                <Cell col="6" text="수정일"/>
+                <Cell col="7" text="수정자"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="checkbox" edittype="checkbox" text="bind:ch"/>
+                <Cell col="1" text="bind:reportNo"/>
+                <Cell col="2" text="expr:bind:alertGroupNo"/>
+                <Cell col="3" text="expr:bind:reportDate"/>
+                <Cell col="4" text="expr:bind:regiDt"/>
+                <Cell col="5" displaytype="combo" edittype="none" text="bind:regiId" combodataset="ds_emp" combocodecol="code" combodatacol="value"/>
+                <Cell col="6" text="expr:expr:bind:modiDt"/>
+                <Cell col="7" text="expr:expr:bind:modiId" combodataset="ds_emp" combocodecol="code" combodatacol="value"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_app" taborder="17" text="승인" onclick="btn_app_onclick" top="302" right="143" width="92" height="20" style="background:lightskyblue;border:1 solid #808080ff ;color:white;font:bold 9 Dotum;gradation:linear 0,0 #4b57feff 0,100 #1100f8ff;"/>
+        <Button id="btn_dis" taborder="19" text="반려" onclick="btn_dis_onclick" top="302" right="44" width="92" height="20" style="background:lightskyblue;border:1 solid #808080ff ;color:white;font:bold 9 Dotum;gradation:linear 0,0 #4b57feff 0,100 #1100f8ff;"/>
+        <Static id="str_02" taborder="5" text="검토 문서 - 간략" left="44" top="307" width="197" height="19" style="color:black;align:left top;font:9 굴림;"/>
+        <Button id="btn_search" taborder="25" text="조회" onclick="btn_search_onclick" top="58" height="20" width="92" style="background:lightskyblue;border:1 solid #808080ff ;color:white;" right="44"/>
+        <Combo id="cbo_appNo" taborder="26" left="851" top="424" height="24" innerdataset="@ds_state" codecolumn="code" datacolumn="value" onitemchanged="btn_search_onclick" readonly="true" style="background:#ffffffff;" width="125" index="-1"/>
+        <Static id="st_c1" taborder="35" text="보고번호" left="44" top="339" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Static id="st_c00" taborder="36" text="거래시작일" onclick="st_c00_onclick" left="384" top="366" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Static id="st_c02" taborder="37" text="원화금액" left="723" top="393" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Static id="st_c03" taborder="38" text="혐의사유" left="44" top="447" height="68" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Static id="st_c04" taborder="39" text="반려 사유/종합 의견" left="44" top="514" height="68" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Edit id="edt_reportNo" taborder="40" maxlength="10" left="172" top="340" height="24" readonly="true" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" width="125"/>
+        <Edit id="edt_dealStd" taborder="41" maxlength="10" left="512" top="368" height="24" readonly="true" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" width="125"/>
+        <Edit id="edt_wonMount" taborder="42" maxlength="10" left="851" top="396" height="24" readonly="true" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" width="125"/>
+        <Static id="st_c05" taborder="45" text="경고그룹번호" left="384" top="339" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Edit id="edt_alertGroupNo" taborder="46" maxlength="10" left="512" top="340" height="24" readonly="true" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" width="125"/>
+        <Static id="st_c06" taborder="47" text="작성자" left="723" top="339" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Edit id="edt_regiId" taborder="48" maxlength="10" left="851" top="340" height="24" readonly="true" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" width="125"/>
+        <Static id="st_c07" taborder="49" text="작성일" left="44" top="366" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Edit id="edt_regiDt" taborder="50" maxlength="10" left="172" top="368" height="24" readonly="true" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" width="125"/>
+        <Static id="st_c08" taborder="51" text="거래종료일" onclick="st_c00_onclick" left="723" top="366" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Edit id="edt_dealEdd" taborder="52" maxlength="10" left="851" top="368" height="24" readonly="true" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" width="125"/>
+        <Static id="st_c09" taborder="53" text="임금횟수" onclick="st_c00_onclick" left="44" top="393" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Edit id="edt_depoCount" taborder="54" maxlength="10" left="172" top="396" height="24" readonly="true" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" width="125"/>
+        <Static id="st_c10" taborder="55" text="출금횟수" onclick="st_c00_onclick" left="384" top="393" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Edit id="edt_withCount" taborder="56" maxlength="10" left="512" top="396" height="24" readonly="true" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" width="125"/>
+        <Static id="st_c11" taborder="57" text="본점 의심점수" left="44" top="420" height="28" style="background:azure;border:1 solid black ;align:center middle;" onclick="st_c11_onclick" width="125"/>
+        <Edit id="edt_headSuspScore" taborder="58" maxlength="10" left="172" top="424" height="24" readonly="true" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" width="125"/>
+        <Static id="st_c12" taborder="59" text="영업점 의심점수" left="384" top="420" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Edit id="edt_branchSuspScore" taborder="60" maxlength="10" left="512" top="424" height="24" readonly="true" style="background:#ffffffff;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" width="125"/>
+        <Static id="st_c13" taborder="61" text="상태" left="723" top="420" height="28" style="background:azure;border:1 solid black ;align:center middle;" width="125"/>
+        <Combo id="cbo_app" taborder="62" readonly="false" innerdataset="@ds_state" codecolumn="code" datacolumn="value" onitemchanged="btn_search_onclick" left="105" top="56" height="23" width="125"/>
+        <TextArea id="tex_oppi" taborder="63" left="172" top="516" right="48" height="64" oneditclick="tex_oppi_oneditclick" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;"/>
+        <Static id="sta_title00" taborder="64" onclick="sta_title_onclick" left="0%" top="0" right="0%" height="46" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Static id="Static04" taborder="65" text="결제관리" onclick="Static04_onclick" left="40" top="0" width="200" height="45" style="color:white;font:bold 17 돋움;"/>
+        <TextArea id="TextArea00" taborder="69" left="172" top="452" right="48" height="60"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_report">
+        <ColumnInfo>
+          <Column id="reportNo" type="STRING" size="25"/>
+          <Column id="dealStd" type="STRING" size="20"/>
+          <Column id="dealEdd" type="STRING" size="20"/>
+          <Column id="withCount" type="STRING" size="20"/>
+          <Column id="depoWonMount" type="STRING" size="20"/>
+          <Column id="depDollarMount" type="STRING" size="20"/>
+          <Column id="withDollarMount" type="STRING" size="20"/>
+          <Column id="depoCount" type="STRING" size="20"/>
+          <Column id="wonMount" type="STRING" size="20"/>
+          <Column id="suspReason" type="STRING" size="20"/>
+          <Column id="oppi" type="STRING" size="20"/>
+          <Column id="branchSuspScore" type="STRING" size="20"/>
+          <Column id="headSuspScore" type="STRING" size="20"/>
+          <Column id="relDocuMakeNo" type="STRING" size="256"/>
+          <Column id="etc" type="STRING" size="20"/>
+          <Column id="reportDate" type="STRING" size="20"/>
+          <Column id="alertGroupNo" type="STRING" size="20"/>
+          <Column id="reportDate" type="STRING" size="20"/>
+          <Column id="regiDt" type="STRING" size="20"/>
+          <Column id="regiId" type="STRING" size="20"/>
+          <Column id="modiDt" type="STRING" size="20"/>
+          <Column id="modiId" type="STRING" size="20"/>
+          <Column id="appNo" type="STRING" size="20"/>
+          <Column id="ch" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_state">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_emp">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_condition">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">0000</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_copy">
+        <ColumnInfo>
+          <Column id="oppi" type="STRING" size="20"/>
+          <Column id="alertGroupNo" type="STRING" size="20"/>
+          <Column id="appNo" type="STRING" size="20"/>
+          <Column id="ch" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="cbo_appNo" propid="value" datasetid="ds_report" columnid="appNo"/>
+      <BindItem id="item1" compid="edt_reportNo" propid="value" datasetid="ds_report" columnid="reportNo"/>
+      <BindItem id="item2" compid="edt_dealStd" propid="value" datasetid="ds_report" columnid="dealStd"/>
+      <BindItem id="item3" compid="edt_wonMount" propid="value" datasetid="ds_report" columnid="wonMount"/>
+      <BindItem id="item6" compid="edt_alertGroupNo" propid="value" datasetid="ds_report" columnid="alertGroupNo"/>
+      <BindItem id="item7" compid="edt_regiId" propid="value" datasetid="ds_report" columnid="regiId"/>
+      <BindItem id="item8" compid="edt_regiDt" propid="value" datasetid="ds_report" columnid="regiDt"/>
+      <BindItem id="item9" compid="edt_dealEdd" propid="value" datasetid="ds_report" columnid="dealEdd"/>
+      <BindItem id="item10" compid="edt_depoCount" propid="value" datasetid="ds_report" columnid="depoCount"/>
+      <BindItem id="item11" compid="edt_withCount" propid="value" datasetid="ds_report" columnid="withCount"/>
+      <BindItem id="item12" compid="edt_headSuspScore" propid="value" datasetid="ds_report" columnid="headSuspScore"/>
+      <BindItem id="item13" compid="edt_branchSuspScore" propid="value" datasetid="ds_report" columnid="branchSuspScore"/>
+      <BindItem id="item14" compid="cbo_app" propid="value" datasetid="ds_condition" columnid="code"/>
+      <BindItem id="item15" compid="tex_oppi" propid="value" datasetid="ds_report" columnid="oppi"/>
+      <BindItem id="item4" compid="TextArea00" propid="value" datasetid="ds_report" columnid="suspReason"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+// Onload function  
+this.lineInfo_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+
+
+	this.gfn_transaction(this
+					   , "reportState"
+					   , "LineInfo/state.do"
+					   , ""
+					   , "ds_state=ds_state"
+					   , ""   
+					   , "fnCallback");
+    
+    this.gfn_transaction(this
+					   , "empName"
+					   , "LineInfo/empName.do"
+					   , ""
+					   , "ds_emp=ds_emp"
+					   , ""   
+					   , "fnCallback");
+				
+}
+
+
+// callback function
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+		    case "reportState":
+			break;
+			case "empName":
+			break;
+			case "report":
+			break;
+			case "approval":
+				alert("승인 하였습니다.");
+				this.btn_search_onclick();
+			break;
+			case "disapproval":
+			    alert("반려 하였습니다.");
+			    this.btn_search_onclick();
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+
+	// setRowType를 사용하려면 해당 데이터셋의 옵션 중에서 updatecontrol를 false로 지정해야한다.
+	// Dataset.ROWTYPE_EMPTY 0 존재하지 않는 행의 상태
+	// Dataset.ROWTYPE_NORMAL 1 초기 행의 상태
+	// Dataset.ROWTYPE_INSERT 2 추가된 행의 상태
+	// Dataset.ROWTYPE_UPDATE 4 수정된 행의 상태
+	// Dataset.ROWTYPE_DELETE 8 삭제된 행의 상태
+	// Dataset.ROWTYPE_GROUP 16 그룹 정보 행의 상태
+	
+
+// 조회 버튼 
+this.btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var temp = application.gds_empInfo.getColumn(0, "empNo");
+	this.ds_condition.setColumn(0, "value", temp);
+	
+	this.gfn_transaction(this
+					   , "report"
+					   , "LineInfo/report.do"
+					   , "ds_condition=ds_condition"
+					   , "ds_report=ds_report"
+					   , ""
+					   , "fnCallback");
+}
+
+//getDatasetRow
+///this.GridReportonCellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+//{
+//   var nRow = this.Grid_report.getDatasetRow(0);
+   
+//   this.gfn_transaction(this
+//					   , "report"
+///					   , "LineInfo/showReport.do"
+//					   , "ds_report=ds_report"
+//					   , "ds_report=ds_report"
+//					   , ""
+//					   , "fnCallback");
+	
+//}
+
+
+
+
+
+// 트리거 중 UPDAT 를 꺼야함
+// 승인 버튼
+this.btn_app_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+    this.ds_copy.clearData();
+    
+    for( i = 0; i < this.ds_report.rowcount; i++){
+		if(this.ds_report.getColumn(i, "ch")=="1"){
+			if(this.ds_report.getColumn(i, "appNo") == "0001"){	   
+				    this.ds_copy.addRow();
+					var oppi         = this.ds_report.getColumn(i, "oppi");
+					var appNo        = this.ds_report.getColumn(i, "appNo");
+					var alertGroupNo = this.ds_report.getColumn(i, "alertGroupNo");
+					this.ds_copy.setColumn(i, "oppi", oppi);
+					this.ds_copy.setColumn(i, "appNo", appNo);
+					this.ds_copy.setColumn(i, "alertGroupNo", alertGroupNo);
+					//nCount ++;
+					break;
+			}else{
+				alert("대기중인 문서를 선택해주세요");
+				return;
+            }
+		}
+	}
+
+	
+	if(this.ds_copy.rowcount < 1){
+		alert("승인 대상 문서를 선택해주세요");
+		return;
+	}
+    
+	this.gfn_transaction(this
+					   , "approval"
+					   , "LineInfo/approval.do"
+					   , "ds_copy=ds_copy"
+					   , ""
+					   , ""
+					   , "fnCallback");
+}
+
+
+//반려 버튼
+this.btn_dis_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_copy.clearData();
+	//var nCount = 0;
+	for( i = 0; i < this.ds_report.rowcount; i++){
+		if(this.ds_report.getColumn(i, "ch")=="1"){
+			if(this.ds_report.getColumn(i, "appNo") == "0001"){	   
+				if( this.ds_report.getColumn(i, "oppi")!= null){
+				    this.ds_copy.addRow();
+					var oppi         = this.ds_report.getColumn(i, "oppi");
+					var appNo        = this.ds_report.getColumn(i, "appNo");
+					var alertGroupNo = this.ds_report.getColumn(i, "alertGroupNo");
+					this.ds_copy.setColumn(i, "oppi", oppi);
+					this.ds_copy.setColumn(i, "appNo", appNo);
+					this.ds_copy.setColumn(i, "alertGroupNo", alertGroupNo);
+					//nCount ++;
+					break;
+				}else{
+					alert("반려사유를 적어주세요");
+					return;
+				}
+			}else{
+				alert("대기중인 문서를 선택해주세요");
+				return;
+            }
+		}
+	}
+	
+	if(this.ds_copy.rowcount < 1){
+		alert("반려 대상 문서를 선택해주세요");
+		return;
+	}
+ 
+//    var nRowList     = this.ds_report.rowposition;
+    
+//    if(appNo!="0001"){
+//       alert("대기중인 문서를 선택해주세요");
+//       return;
+//    }
+//    if(!oppi){
+//       alert("반려사유를 적어주세요");
+//       return;
+//    }
+    
+	this.gfn_transaction(this
+					   , "disapproval"
+					   , "LineInfo/disapproval.do"
+					   , "ds_copy=ds_copy"
+					   , ""
+					   , ""
+					   , "fnCallback");
+}
+
+// 콤포넌트 상태 변경
+this.disableComponents = function(){
+    this.cbo_appNo.enable            = false;
+    this.edt_reportNo.enable         = false;
+    this.edt_alertGroupNo.enable     = false;
+    this.edt_regiId.enable           = false;
+    this.edt_regiDt.enable           = false;
+    this.edt_dealStd.enable          = false;
+    this.edt_dealEdd.enable          = false;
+    this.edt_depoCount.enable        = false;
+    this.edt_withCount.enable        = false;
+    this.edt_wonMount.enable         = false;
+    this.edt_headSuspScore.enable    = false;
+    this.edt_branchSuspScore.enable  = false;
+    this.edt_appNo.enable            = false;
+    this.edt_suspReason.enable       = false;
+    this.tex_oppi.enable             = false;
+}
+
+this.enableComponents = function(){
+    this.cbo_appNo.enable            = true;
+    this.edt_reportNo.enable         = true;
+    this.edt_alertGroupNo.enable     = true;
+    this.edt_regiId.enable           = true;
+    this.edt_regiDt.enable           = true;
+    this.edt_dealStd.enable          = true;
+    this.edt_dealEdd.enable          = true;
+    this.edt_depoCount.enable        = true;
+    this.edt_withCount.enable        = true;
+    this.edt_wonMount.enable         = true;
+    this.edt_headSuspScore.enable    = true;
+    this.edt_branchSuspScore.enable  = true;
+    this.edt_appNo.enable            = true;
+    this.edt_suspReason.enable       = true;
+    this.tex_oppi.enable             = true;
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

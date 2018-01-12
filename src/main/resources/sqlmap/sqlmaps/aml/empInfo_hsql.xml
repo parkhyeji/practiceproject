@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	
+	<select id="aml.EmpInfoDAO.EmpInfoList" resultClass="egovMap">
+		  SELECT EMP_NO
+               , EMP_NAME
+         	   , RESI_NO
+         	   , JOIN_DATE
+         	   , CEL_NO
+         	   , POSI_NAME
+         	   , RETIRE_DATE
+         	   , USE_YN
+         	   , 'S' AS FLAG
+            FROM AML_EMP_INFO 		 
+	</select>
+	
+	<update id="aml.EmpInfoDAO.empInfoUpdate" parameterClass="java.util.HashMap">
+		  UPDATE AML_EMP_INFO
+             SET EMP_NAME    = #empName#
+               , RESI_NO     = #resiNo#
+               , JOIN_DATE   = #joinDate#
+               , CEL_NO      = #celNo#
+               , USE_YN      = #useYn#
+               , RETIRE_DATE = #retireDate#
+               , POSI_NAME   = #posiName#
+           WHERE EMP_NO      = #empNo#
+	</update>
+	
+	<update id="aml.EmpInfoDAO.empJoinDateUpdate" parameterClass="java.util.HashMap">
+		  UPDATE AML_EMP_INFO
+		  	 SET JOIN_DATE = TO_CHAR(SYSDATE,'YYYYMMDD') 
+		  	   , USE_YN    = 'Y'
+		   WHERE EMP_NO    = #empNo#
+	</update>
+	
+	<update id="aml.EmpInfoDAO.empRetireDateUpdate" parameterClass="java.util.HashMap">
+		  UPDATE AML_EMP_INFO
+		  	 SET RETIRE_DATE = TO_CHAR(SYSDATE,'YYYYMMDD') 
+		  	   , USE_YN      = 'N'
+		   WHERE EMP_NO      = #empNo#
+	</update>
+	
+	<select id="aml.EmpInfoDAO.posiNameSearch" parameterClass="java.util.HashMap" resultClass="egovMap">
+		  SELECT EMP_NO
+               , EMP_NAME
+         	   , RESI_NO
+         	   , JOIN_DATE
+         	   , CEL_NO
+         	   , POSI_NAME
+         	   , RETIRE_DATE
+         	   , USE_YN
+         	   , 'S' AS FLAG
+            FROM AML_EMP_INFO
+            <isNotEqual property="value" compareValue="전체">
+            WHERE POSI_NAME = #value#
+            </isNotEqual>
+	</select>
+	
+</sqlMap>

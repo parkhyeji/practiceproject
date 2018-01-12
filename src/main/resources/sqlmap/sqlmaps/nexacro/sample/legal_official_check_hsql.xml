@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="lawsuit">
+
+	<typeAlias alias="egovMap"
+		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<!-- 법률관계자 조회 -->
+	<select id="lawsuit.Lawsuit_ListDAO.getLegalOfficials" resultClass="egovMap" parameterClass="java.util.HashMap">
+	<![CDATA[
+	SELECT LEGAL_OFFICIALINFO_RELA_NO
+		,LEGAL_OFFICIALINFO_LYR_PSW
+		,LEGAL_OFFICIALINFO_RELA_SEP
+		,LEGAL_OFFICIALINFO_TEAMNAME
+		,LEGAL_OFFICIALINFO_LYR_NAME
+		,LEGAL_OFFICIALINFO_MAIL
+		,LEGAL_OFFICIALINFO_PHONE
+		,LEGAL_OFFICIALINFO_HDPN
+		,LEGAL_OFFICIALINFO_CITY_CODE
+	FROM TAB_LEGAL_OFFICIALINFO
+    Where 1=1
+	]]>
+    <isNotNull>
+	    <isNotEmpty property="selectedId" prepend="AND">
+	    	<isNotEmpty property="selectedId1">
+			    <![CDATA[
+			    	$selectedId$ LIKE '%'||#selectedId1#||'%'
+			    ]]>
+			</isNotEmpty>
+	    </isNotEmpty>
+    </isNotNull>
+    <![CDATA[
+	    ORDER BY LEGAL_OFFICIALINFO_RELA_NO DESC
+	]]>
+	</select>
+</sqlMap>

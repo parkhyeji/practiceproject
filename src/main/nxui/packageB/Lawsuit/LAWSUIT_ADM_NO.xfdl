@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Pattern_01" classname="Work" inheritanceid="" position="absolute" titletext="SingleDetail" left="0" width="600" top="0" height="400" style="color:#333333ff;" onload="LAWSUIT_ADM_NO_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="5" text="소송관리번호 조회" left="8" top="8" right="9" height="50" visible="true" style="background:cornflowerblue;color:white;align:center middle;font:bold 12 굴림;"/>
+        <Static id="sta_01" taborder="0" left="8" top="60" right="10" height="29" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Edit id="edt_legal_input" taborder="2" maxlength="100" left="36%" top="65" width="39.67%" height="19" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" onkeydown="edt_legal_input_onkeydown"/>
+        <Button id="btn_search" taborder="3" text="검색" cssclass="btn_WFSA_Search" style="background:lightskyblue;border:0 none #999999ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 Dotum;opacity:100;shadow:outer 0,0 0 gray;" onclick="btn_search_onclick" left="76.33%" width="52" top="64" height="21"/>
+        <Combo id="cmb_search" taborder="1" left="72" top="65" height="19" index="0" text="전체" value="0" codecolumn="value" datacolumn="id" innerdataset="@ds_div_combo" style="itemheight:22;itemcolor:#333333ff;itemborder:1 solid #ffffffff transparent;itempadding:0 3 0 6;buttonsize:18;border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;color:#333333ff;font:9 굴림;" width="23.5%"/>
+        <Grid id="grd_Search" taborder="4" useinputpanel="false" left="8" top="104" right="10" autofittype="col" binddataset="ds_lawsuit_no" treeinitstatus="collapse,null" bottom="12" style="color:#000000ff;" oncelldblclick="grd_Search_oncelldblclick" onheadclick="grd_Search_onheadclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="104"/>
+                <Column size="57"/>
+                <Column size="131"/>
+                <Column size="80"/>
+                <Column size="107"/>
+                <Column size="103"/>
+              </Columns>
+              <Rows>
+                <Row size="25" band="head"/>
+                <Row size="20"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="소송관리번호"/>
+                <Cell col="1" text="심급"/>
+                <Cell col="2" text="심급명"/>
+                <Cell col="3" text="원피고구분"/>
+                <Cell col="4" text="원피고명"/>
+                <Cell col="5" text="소송담당자명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:lawsuitAdmNo"/>
+                <Cell col="1" text="bind:instAdmCode"/>
+                <Cell col="2" text="bind:instAdmName"/>
+                <Cell col="3" text="bind:lawsuitCpPladefSepCode"/>
+                <Cell col="4" text="bind:pladefName"/>
+                <Cell col="5" text="bind:insaName"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_lawsuit_no_cp" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="lawsuitAdmNo" type="STRING" size="256"/>
+          <Column id="instAdmCode" type="STRING" size="256"/>
+          <Column id="instAdmName" type="STRING" size="256"/>
+          <Column id="lawsuitCpPladefSepCode" type="STRING" size="256"/>
+          <Column id="pladefName" type="STRING" size="256"/>
+          <Column id="insaName" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_instanceType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_instanceType_cp" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_div_combo" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="id" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="id">전체</Col>
+            <Col id="value">0</Col>
+          </Row>
+          <Row>
+            <Col id="id">소제기의뢰번호</Col>
+            <Col id="value">1</Col>
+          </Row>
+          <Row>
+            <Col id="id">심급명</Col>
+            <Col id="value">2</Col>
+          </Row>
+          <Row>
+            <Col id="id">원피고명</Col>
+            <Col id="value">3</Col>
+          </Row>
+          <Row>
+            <Col id="id">소송담당자</Col>
+            <Col id="value">4</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_lawsuit_no" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="lawsuitAdmNo" type="STRING" size="256"/>
+          <Column id="instAdmCode" type="STRING" size="256"/>
+          <Column id="instAdmName" type="STRING" size="256"/>
+          <Column id="lawsuitCpPladefSepCode" type="STRING" size="256"/>
+          <Column id="pladefName" type="STRING" size="256"/>
+          <Column id="insaName" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind/>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+/*===============================================================================
+ * 1. Form 관련 Script
+ *=============================================================================*                  
+/********************************************************************************
+ * Event	: Form onload
+ * Desc		: Form의 모든 컴포넌트가 생성되고, 모든 Object가 Load 되었을 때에
+              발생하는 Event
+ *******************************************************************************/ 
+this.LAWSUIT_ADM_NO_onload = function (obj:Form, e:LoadEventInfo)
+{
+	//code_select(); 	// 공통코드 호출 [단 1회 호출추천]
+	
+	//comboSetup(); 	//  공통코드 콤보데이터에 맞게 분할
+	
+	this.edt_legal_input.setFocus();
+	
+	this.LawNoSearch();	//소송관리번호 조회
+	
+}
+
+
+/*===============================================================================
+ * 2. Dataset 관련 Script
+ *=============================================================================*/
+/********************************************************************************
+ * Desc		: Code 데이터 분할
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.comboSetup = function ()
+{
+	var str= 0;
+		
+	for(i=0;i<=ds_cmmCd.rowcount;i++) // 코드 세팅
+	{
+		//심급차수코드
+		if(ds_cmmCd.GetColumn(i,"classCode")=="G01" && ds_cmmCd.GetColumn(i,"useYn")=="Y"){
+			ds_instanceType.AddRow();
+			ds_instanceType.SetColumn(str,"codeNo", ds_cmmCd.GetColumn(i,"codeNo"));
+			ds_instanceType.SetColumn(str,"codeName", ds_cmmCd.GetColumn(i,"codeName"));
+			str++;
+		}
+			
+	}	
+}
+
+
+/********************************************************************************
+ * Desc		: 소송관리번호 조회
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.LawNoSearch = function () {
+    var search1= this.cmb_search.value;
+    var search2= this.edt_legal_input.text;
+				
+	var strSvcid="selectlawsuitadmnoServiceVO";
+	var strController="/lawsuit/selectlawsuitadmnoServiceVO.do";
+	var strParam="selectedId=" + nexacro.wrapQuote(search1);
+	strParam += " selectedId1=" + nexacro.wrapQuote(search2);
+	//trace(strParam);		
+	this.gfn_transaction(this,
+	strSvcid,
+	strController,
+	"ds_lawsuit_no=ds_lawsuit_no",
+	"ds_lawsuit_no=ds_output",
+	strParam,
+	"fnCallback");
+}
+
+
+
+/*===============================================================================
+ * 4. Component 관련 Script
+ *=============================================================================*/
+/********************************************************************************
+ * Event	: btn_search onclick
+ * Desc		:소송관리번호조회 버튼을 클릭했을 때 발생되는 Event
+ *******************************************************************************/
+this.btn_search_onclick = function (obj:Button,  e:ClickEventInfo)
+{
+
+	if(this.cmb_search.Value != 0) {
+		if(this.edt_legal_input.Text == ""){
+			alert("검색어를 입력하세요.");
+			this.edt_legal_input.Text='';
+			this.edt_legal_input.SetFocus();
+			return;
+		}
+	}else{
+		if(edt_legal_input.Text != ""){
+			alert("검색조건을 선택해주세요.");
+			return;
+		}
+	}
+	
+	this.LawNoSearch();
+	
+}
+
+
+/********************************************************************************
+ * Event	: Button_legal_input OnKeyDown
+ * Desc		: 엔터키를 입력했을 경우 발생되는 Event
+ *******************************************************************************/
+this.edt_legal_input_onkeydown = function (obj:Edit, e:KeyEventInfo)
+{
+	if(e.nChar==13){ 
+		this.btn_search_onclick();
+	}
+	
+}
+
+
+/*===============================================================================
+ * 5. User Function 관련 Script
+ *=============================================================================*
+/********************************************************************************
+ * Desc		: transaction 후 호출되는 콜백함수
+              소송관리 조회,신규,수정,삭제,결재
+ * Param	: 1.errcd  - Error Code
+			  2.errmsg - Error Msg
+			  3.svcid  - transaction id
+ * Return	: 없음
+ *******************************************************************************/ 
+this.fnCallback = function (svcid, errcd, errmsg)
+{
+	switch(svcid)
+	{
+		case "selectlawsuitadmnoServiceVO":
+			//trace(ds_lawsuit_no.saveXML());
+			//데이터 조회 에러 발생시
+			if(errcd != "0"){	
+			alert("데이터가 정상적으로 조회되지 않았습니다.\n"
+				+ "소송관리조회 에러내용: "+ errmsg);
+			return false;
+			}
+			else{
+        			}
+        			break;
+	}
+	
+}
+
+
+/*===============================================================================
+ * 3. Grid 관련 Script
+ *=============================================================================*/
+/********************************************************************************
+ * Event	: grd_Search_OnCellDblClick
+ * Desc		: 소송관리번호 목록을 클릭했을 때 발생되는 Event
+ *******************************************************************************/
+this.grd_Search_oncelldblclick = function (obj:Grid, e:GridClickEventInfo)
+{
+	this.close(this.grd_Search.getCellValue(e.row,0)+this.grd_Search.getCellValue(e.row,1));
+
+}
+
+/********************************************************************************
+ * Desc		: 헤더 정렬
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.grd_Search_onheadclick = function (obj:Grid, e:GridClickEventInfo)
+{
+	this.gfn_GridSort(this.grd_Search,this.grd_lawsuit_no,this.nCell,10);
+
+}
+
+/********************************************************************************
+ * Desc		: 화면 종료시 
+ * Param	: 없음
+ * Return	: 없음
+ *******************************************************************************/
+this.LAWSUIT_ADM_NO_onclose = function (obj:Form, e:CloseEventInfo)
+{
+	this.close();
+	
+}
+
+]]></Script>
+  </Form>
+</FDL>

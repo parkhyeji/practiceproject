@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+   <!-- <typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" /> -->
+   <typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+
+   <select id="aml.amlSampleDAO.loadCommonCodes" parameterClass="java.util.HashMap" resultClass="egovMap">   
+ 
+      SELECT CODE_NO   AS CODE
+          , CODE_NAME AS VALUE
+        FROM AML_COMMON_CODE_DETAIL
+       WHERE CLASS_CODE = #classCode#
+
+   </select>
+   
+<select id="aml.amlSampleDAO.searchStrList" parameterClass="java.util.HashMap" resultClass="egovMap">   
+ 	<![CDATA[
+      SELECT C.CUST_NO
+             , RADD.DEAL_DATE
+             , AD.ALERT_GROUP_NO
+             , AR.REL_RULE_COUNT
+             , C.EMP_NAME
+             , C.REAL_NAME_NO
+             , (SELECT CODE_NAME
+	              FROM AML_COMMON_CODE_DETAIL
+	             WHERE CLASS_CODE = 'R000'
+	               AND CODE_NO    = C.RA_RANK_CODE) RA_RANK_CODE
+             , (SELECT EMP_NAME
+                  FROM AML_EMP_INFO
+                 WHERE EMP_NO = AD.DIST_CHGED_ID ) DIST_CHGED_ID
+             , RADD.WORK_TYPE_CODE
+             , SUBSTR(AD.ALERT_GROUP_NO,12,3) AS RULE_ID
+             , RADD.DEAL_SERIAL_NO         
+          FROM AML_RULE_ALERT_RESULT AR
+             , AML_RULE_ALERT_DETAIL AD
+             , AML_CUST_INFO C
+             , AML_RULE_ALERT_DEAL_DETAIL RADD     
+             WHERE 1=1
+                 AND AD.ALERT_GROUP_NO   = AR.ALERT_GROUP_NO
+                 AND C.CUST_NO           = AD.CUST_NO
+                 AND AD.ALERT_GROUP_NO   = RADD.ALERT_GROUP_NO   
+                 AND AD.ALERT_GROUP_NO  NOT IN (SELECT ALERT_GROUP_NO FROM AML_STR_REPORT_MST)    
+         ]]>
+         <dynamic>
+          <isNotNull property="workType">
+                 AND RADD.WORK_TYPE_CODE = #workType#
+          </isNotNull>
+          <!-- 2.검색조건 선택 후 조회    AND  C.REGI_DT BETWEEN #stDate# AND #edDate#-->
+          <isNotNull property="stDate">
+              <![CDATA[ 
+              	AND RADD.DEAL_DATE >= #stDate# 
+              ]]>
+          </isNotNull>
+          <isNotNull property="edDate">
+              <![CDATA[ 
+              	AND RADD.DEAL_DATE <= #edDate#
+              ]]>
+          </isNotNull>
+       </dynamic>
+   </select>
+
+   <select id="aml.amlSampleDAO.searchRule" parameterClass="java.util.HashMap" resultClass="egovMap"> 
+      SELECT RULE_ID
+           , RULE_NAME
+           , WORK_TYPE_CODE
+           , RULE_DETAIL
+           , SUBSTR(REGI_DT,1,4) || '.' || SUBSTR(REGI_DT,5,2) || '.' || SUBSTR(REGI_DT,7,2) AS REGI_DT
+           , USE_YN
+           , RULE_APPLY_PEERIOD
+           , REMARK
+           , CUST_TYPE_CODE
+        FROM AML_RULE_INFO   
+             WHERE 1=1  
+            <isNotNull property="ruleId">
+                 AND RULE_ID = #ruleId#
+            </isNotNull>    
+   </select>
+    
+   <select id="aml.amlSampleDAO.searchCust" parameterClass="java.util.HashMap" resultClass="egovMap">   
+      SELECT EMP_NAME
+           , (SELECT CODE_NAME
+                FROM AML_COMMON_CODE_DETAIL
+               WHERE CLASS_CODE = 'A000'
+                 AND CODE_NO = A.REAL_NAME_NO_TYPE_CODE) REAL_NAME_NO_TYPE_CODE
+           , (SELECT CODE_NAME
+                FROM AML_COMMON_CODE_DETAIL
+               WHERE CLASS_CODE = 'R000'
+                 AND CODE_NO    = A.RA_RANK_CODE) RA_RANK_CODE
+           , SUBSTR(REAL_NAME_NO,1,6) || '-' || SUBSTR(REAL_NAME_NO,7,7) AS REAL_NAME_NO
+        FROM AML_CUST_INFO A
+       WHERE 1=1  
+         AND CUST_NO = #custNo#    
+   </select>
+      
+</sqlMap>

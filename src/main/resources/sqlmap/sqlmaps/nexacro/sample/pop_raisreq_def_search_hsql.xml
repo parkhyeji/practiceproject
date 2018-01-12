@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" />
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	
+	
+<select id="rais.raisDAO.getRaisreqDefSearch" parameterClass="java.util.HashMap" resultClass="egovMap">
+	<![CDATA[
+		SELECT 
+			ROWNUM, main.*
+		FROM
+			(
+			SELECT  
+				LAW_RAISREQ_NO
+				,LAW_RAISREQ_DEF_SEQ
+				,LAW_RAISREQ_DEF_REGNO
+				,LAW_RAISREQ_DEF_NAME
+				,LAW_RAISREQ_DEF_TEL
+				,LAW_RAISREQ_DEF_POS
+				,LAW_RAISREQ_DEF_ADDR
+				,LAW_RAISREQ_DEF_CLAMCHG
+			FROM 
+				TAB_LAW_RAISREQ_DEF
+			WHERE 
+				1=1
+			]]>	
+			<dynamic>
+			<isNotNull property="searchKeyword">
+			<isEqual property="searchCondition" compareValue="no" prepend="AND">
+				LAW_RAISREQ_NO LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			<isEqual property="searchCondition" compareValue="def_seq" prepend="AND">
+				LAW_RAISREQ_DEF_SEQ LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			<isEqual property="searchCondition" compareValue="def_regno" prepend="AND">
+				LAW_RAISREQ_DEF_REGNO LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			<isEqual property="searchCondition" compareValue="def_name" prepend="AND">
+				LAW_RAISREQ_DEF_NAME LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			<isEqual property="searchCondition" compareValue="def_tel" prepend="AND">
+				LAW_RAISREQ_DEF_TEL LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			<isEqual property="searchCondition" compareValue="def_pos" prepend="AND">
+				LAW_RAISREQ_DEF_POS LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			<isEqual property="searchCondition" compareValue="def_addr" prepend="AND">
+				LAW_RAISREQ_DEF_ADDR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			<isEqual property="searchCondition" compareValue="def_clamchg" prepend="AND">
+				LAW_RAISREQ_DEF_CLAMCHG LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			</isNotNull>
+			</dynamic>	
+		<![CDATA[
+			ORDER BY
+				LAW_RAISREQ_NO DESC
+			) main	
+		]]>	
+</select>
+</sqlMap>

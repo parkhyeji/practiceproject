@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="rais">
+	<typeAlias alias="raisVO" type="nexacro.sample.vo.RaisVO" />
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	
+	<!-- 소제기의뢰 검색 -->
+	<select id="rais.raisDAO.getRaisreqDefList" resultClass="egovMap"
+		parameterClass="java.util.HashMap">
+		<![CDATA[
+			SELECT 
+				rownum, main.*
+			FROM 	
+				(SELECT  
+					T1.LAW_RAISREQ_NO
+					,T2.INSA_NAME||'('||T1.LAW_RAISREQ_REQ_ID||')' AS LAW_RAISREQ_REQ_ID
+					,T1.LAW_RAISREQ_CLAS_CODE||'('||T3.CODE_NAME||')' AS LAW_RAISREQ_CLAS_CODE
+					,T1.LAW_RAISREQ_REA
+					,T1.LAW_RAISREQ_ETC_POIN
+					,T1.LAW_RAISREQ_REQ_DATE
+					,UPPER(T1.LAW_RAISREQ_REP_WTR) AS LAW_RAISREQ_REP_WTR
+					,UPPER(T1.LAW_RAISREQ_WTR) AS LAW_RAISREQ_WTR
+					,T1.LAW_RAISREQ_DALW_CONT
+					,T1.LAW_RAISREQ_EXPT_DATE	
+					,T1.LAW_RAISREQ_REP_CONT
+					,T1.LAW_RAISREQ_ETCREQ_POIN
+					,T1.LAW_RAISREQ_REP_DATE
+					,T1.LAW_RAISREQ_ISSU_POIN
+					,rownum
+					,count(T4.LAW_RAISREQ_DEF_SEQ)
+				FROM 
+					TAB_LAW_RAISREQ T1
+					,TAB_INSA T2
+					,CMM_CODE_DETAIL T3	
+					,TAB_LAW_RAISREQ_DEF T4				
+				WHERE 
+					T1.LAW_RAISREQ_REQ_ID = T2.INSA_SABUN
+					AND
+					T3.CLASS_CODE LIKE 'D01'
+					AND
+					T1.LAW_RAISREQ_NO = T4.LAW_RAISREQ_NO
+					AND 
+					T3.CODE_NO = T1.LAW_RAISREQ_CLAS_CODE		
+		]]>
+			<!-- 의뢰번호 -->
+			<isNotEmpty property="lawRaisreqNo" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_NO LIKE #lawRaisreqNo# || '%'
+				]]>
+			</isNotEmpty>
+			<!-- 소송제기분류 -->
+			<isNotEmpty property="lawRaisreqClasCode" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_CLAS_CODE LIKE #lawRaisreqClasCode# || '%'
+				]]>
+			</isNotEmpty>
+			<!-- 의뢰기간 -->
+			<isNotEmpty property="lawRaisreqReqDate1" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_REQ_DATE >= #lawRaisreqReqDate1#
+				]]>
+			</isNotEmpty>
+			<isNotEmpty property="lawRaisreqReqDate2" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_REQ_DATE <= #lawRaisreqReqDate2#
+				]]>
+			</isNotEmpty>
+			<!-- 회신여부 -->
+			<isNotEmpty property="lawRaisreqRepWtr" prepend="AND">
+				<![CDATA[
+					T1.LAW_RAISREQ_REP_WTR LIKE #lawRaisreqRepWtr# || '%'
+				]]>
+			</isNotEmpty>
+				ORDER BY 
+					T1.LAW_RAISREQ_REQ_DATE DESC, LAW_RAISREQ_CLAS_CODE
+				) main	
+	</select>
+	
+	<!-- 피고리스트 선택 -->
+	<select id="rais.raisDAO.getRaisreqDefSelectList" resultClass="egovMap"
+		parameterClass="java.lang.String">
+		<![CDATA[
+			SELECT  
+				LAW_RAISREQ_NO
+				,LAW_RAISREQ_DEF_SEQ
+				,LAW_RAISREQ_DEF_REGNO
+				,LAW_RAISREQ_DEF_NAME
+				,LAW_RAISREQ_DEF_TEL
+				,LAW_RAISREQ_DEF_POS
+				,LAW_RAISREQ_DEF_ADDR
+				,LAW_RAISREQ_DEF_CLAMCHG
+			FROM 
+				TAB_LAW_RAISREQ_DEF
+			WHERE 
+				LAW_RAISREQ_NO=#value#
+			AND
+				LAW_RAISREQ_DEF_SEQ>0
+		]]>
+	</select>
+	
+	<!-- 소제기의뢰 등록 -->
+	<insert id="rais.raisDAO.insertRaisreq" parameterClass="java.util.HashMap">
+		<selectKey keyProperty="lawRaisreqNo" resultClass="String">
+			SELECT
+				<![CDATA[/*+INDEX_DESC(TAB_LAW_RAISREQ, TAB_LAW_RAISREQ_PK) */]]>
+   				DECODE(
+					SUBSTR(
+						MAX(LAW_RAISREQ_NO)
+						,1
+						,8)
+					,TO_CHAR(SYSDATE,'YYYYMMDD')
+					,MAX(LAW_RAISREQ_NO) + 1
+					,TO_CHAR(SYSDATE,'YYYYMMDD') || '01')
+       			LAW_RAISREQ_NO
+  			FROM 
+				TAB_LAW_RAISREQ
+ 			WHERE 
+				ROWNUM = 1
+		</selectKey>		
+		
+		INSERT INTO 
+			TAB_LAW_RAISREQ
+			
+		(LAW_RAISREQ_NO
+		,LAW_RAISREQ_REQ_ID
+		,LAW_RAISREQ_CLAS_CODE
+		,LAW_RAISREQ_REA
+		,LAW_RAISREQ_ETC_POIN
+		,LAW_RAISREQ_REQ_DATE
+		,LAW_RAISREQ_REP_WTR
+		,LAW_RAISREQ_TEMP_SAVE_WTR)
+		
+		VALUES(							
+			#lawRaisreqNo,jdbcType=VARCHAR#
+			,#lawRaisreqReqId,jdbcType=VARCHAR#
+			,#lawRaisreqClasCode,jdbcType=VARCHAR#
+			,#lawRaisreqRea,jdbcType=VARCHAR#
+			,#lawRaisreqEtcPoin,jdbcType=VARCHAR#
+			,#lawRaisreqReqDate,jdbcType=VARCHAR#
+			,'N'
+			,'N'
+		)
+	</insert>
+	
+	<!-- 소제기의뢰 수정 -->
+	<update id="rais.raisDAO.updateRaisreq" parameterClass="java.util.HashMap">	
+		UPDATE	
+			TAB_LAW_RAISREQ
+		SET							
+			LAW_RAISREQ_CLAS_CODE = #lawRaisreqClasCode#
+			,LAW_RAISREQ_REQ_ID = #lawRaisreqReqId#
+			,LAW_RAISREQ_REA = #lawRaisreqRea#
+			,LAW_RAISREQ_ETC_POIN = #lawRaisreqEtcPoin#
+			,LAW_RAISREQ_REQ_DATE = #lawRaisreqReqDate#	
+			<!--  ,LAW_RAISREQ_TEMP_SAVE_WTR = #lawRaisreqTempSaveWtr#--> 
+		WHERE	
+			LAW_RAISREQ_NO=#lawRaisreqNo#				
+	</update>
+	
+	<!-- 소제기의뢰 삭제 -->
+	<delete id="rais.raisDAO.deleteRaisReq" parameterClass="java.lang.String">
+		DELETE FROM
+			TAB_LAW_RAISREQ
+		WHERE
+			LAW_RAISREQ_NO=#value#	
+	</delete>
+	
+	<!-- 피고등록 -->
+	<insert id="rais.raisDAO.insertDefAll" parameterClass="java.util.HashMap">	
+		INSERT INTO
+			TAB_LAW_RAISREQ_DEF
+			
+		(LAW_RAISREQ_NO				 
+		,LAW_RAISREQ_DEF_SEQ
+		,LAW_RAISREQ_DEF_REGNO	
+		,LAW_RAISREQ_DEF_NAME
+		,LAW_RAISREQ_DEF_TEL
+		,LAW_RAISREQ_DEF_POS
+		,LAW_RAISREQ_DEF_ADDR	
+		,LAW_RAISREQ_DEF_CLAMCHG)
+		
+		VALUES(	
+		<dynamic>
+		<isEmpty property="lawRaisreqNo">
+			(SELECT
+				Max(LAW_RAISREQ_NO)
+  			FROM 
+				TAB_LAW_RAISREQ)	
+			,
+			(SELECT 
+				DECODE(
+					COUNT(*)
+					,0
+					,'1'
+					,MAX(ABS(LAW_RAISREQ_DEF_SEQ))+1) 
+			 FROM 
+				TAB_LAW_RAISREQ_DEF 
+			 WHERE 
+				LAW_RAISREQ_NO=(SELECT Max(LAW_RAISREQ_NO) FROM TAB_LAW_RAISREQ)
+		</isEmpty>
+		<isNotEmpty property="lawRaisreqNo">
+			#lawRaisreqNo#
+			,
+			(SELECT 
+				DECODE(
+					COUNT(*)
+					,0
+					,'1'
+					,MAX(ABS(LAW_RAISREQ_DEF_SEQ))+1) 
+			 FROM 
+				TAB_LAW_RAISREQ_DEF 
+			 WHERE 
+				LAW_RAISREQ_NO=#lawRaisreqNo#)		
+		</isNotEmpty>
+		</dynamic>			
+				
+			,#lawRaisreqDefRegno,jdbcType=VARCHAR#
+			,#lawRaisreqDefName,jdbcType=VARCHAR#
+			,#lawRaisreqDefTel,jdbcType=VARCHAR#
+			,#lawRaisreqDefPos,jdbcType=VARCHAR#
+			,#lawRaisreqDefAddr,jdbcType=VARCHAR#
+			,#lawRaisreqDefClamchg,jdbcType=VARCHAR#)				
+	</insert>
+	
+	
+	
+	<!-- 피고수정 -->
+	<update id="rais.raisDAO.updateDefAll" parameterClass="java.util.HashMap">	
+		<![CDATA[			
+			UPDATE 
+				TAB_LAW_RAISREQ_DEF 
+			SET 
+				LAW_RAISREQ_DEF_REGNO=#lawRaisreqDefRegno#
+				,LAW_RAISREQ_DEF_NAME=#lawRaisreqDefName#
+				,LAW_RAISREQ_DEF_TEL=#lawRaisreqDefTel#
+				,LAW_RAISREQ_DEF_POS=#lawRaisreqDefPos#
+				,LAW_RAISREQ_DEF_ADDR=#lawRaisreqDefAddr#	
+				,LAW_RAISREQ_DEF_CLAMCHG=#lawRaisreqDefClamchg#
+			WHERE 
+			  	LAW_RAISREQ_NO=#lawRaisreqNo#
+            	AND 
+            	LAW_RAISREQ_DEF_SEQ=#lawRaisreqDefSeq#
+		]]>
+	</update>
+	
+	<!-- 특정 피고 삭제 -->
+	<delete id="rais.raisDAO.deleteDefOne" parameterClass="java.util.HashMap"> 
+	
+		DELETE FROM
+			TAB_LAW_RAISREQ_DEF
+		WHERE
+			LAW_RAISREQ_NO = #lawRaisreqNo#
+						AND
+			LAW_RAISREQ_DEF_SEQ = #lawRaisreqDefSeq#
+	</delete>
+	
+	<!-- 전체 피고 삭제 -->
+	<delete id="rais.raisDAO.deleteDefAll" parameterClass="java.lang.String">
+		<![CDATA[
+			DELETE FROM 
+				TAB_LAW_RAISREQ_DEF 
+			WHERE 
+				LAW_RAISREQ_NO = #value#
+		]]>
+	</delete>
+	
+	
+</sqlMap>

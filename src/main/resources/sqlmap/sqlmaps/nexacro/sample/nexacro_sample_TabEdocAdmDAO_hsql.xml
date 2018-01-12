@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TabEdocAdm">
+
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>    
+    <typeAlias  alias="tabEdocAdmVO" type="nexacro.sample.vo.TabEdocAdmVO"/> 
+    <typeAlias  alias="tabLawsuitVO" type="nexacro.sample.vo.TabLawsuitVO"/>                  
+    
+    <resultMap id="tabEdocAdm" class="tabEdocAdmVO">
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />                	    	
+        <result property="edocAdmSeq" column="EDOC_ADM_SEQ" />
+        <result property="edocAdmHozSepcode" column="EDOC_ADM_HOZ_SEPCODE" />
+        <result property="edocAdmHozNo" column="EDOC_ADM_HOZ_NO" />
+        <result property="edocAdmHozkindSepcode" column="EDOC_ADM_HOZKIND_SEPCODE" />  
+        <result property="edocAdmHozkindSepcode2" column="EDOC_ADM_HOZKIND_SEPCODE2" />        
+        <result property="edocAdmName" column="EDOC_ADM_NAME" />
+        <result property="edocAdmWritDate" column="EDOC_ADM_WRIT_DATE" />
+    </resultMap>
+    
+    <resultMap id="tabEdocaAdm" class="tabEdocAdmVO">
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />                	    	
+        <result property="edocAdmSeq" column="EDOC_ADM_SEQ" />
+        <result property="edocAdmHozSepcode" column="EDOC_ADM_HOZ_SEPCODE" />
+        <result property="edocAdmHozNo" column="EDOC_ADM_HOZ_NO" />
+        <result property="edocAdmHozkindSepcode" column="EDOC_ADM_HOZKIND_SEPCODE" />
+        <result property="edocAdmHozkindSepcode2" column="EDOC_ADM_HOZKIND_SEPCODE2" />
+        <result property="edocAdmName" column="EDOC_ADM_NAME" />
+        <result property="edocAdmWritDate" column="EDOC_ADM_WRIT_DATE" />
+    </resultMap>
+    
+    <resultMap id="tabLawsuit" class="tabLawsuitVO">
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />        
+        <result property="lawRaisreqNo" column="LAW_RAISREQ_NO" />
+    	<result property="lawsuitAplCortCode" column="LAWSUIT_APL_CORT_CODE" />
+    	<result property="lawsuitAplCaseCode" column="LAWSUIT_APL_CASE_CODE" />
+    	<result property="lawsuitCaseTyCode" column="LAWSUIT_CASE_TY_CODE" />
+    	<result property="lawsuitCpPladefSepcode" column="LAWSUIT_CP_PLADEF_SEPCODE" />
+    	<result property="lawsuitAsitParcWtr" column="LAWSUIT_ASIT_PARC_WTR" />
+    	<result property="lawsuitCtaWtr" column="LAWSUIT_CTA_WTR" />
+    	<result property="lawsuitCtaNo" column="LAWSUIT_CTA_NO" />
+    	<result property="lawsuitCtaCaseNo" column="LAWSUIT_CTA_CASE_NO" />
+    	<result property="lawsuitTempReqiDate" column="LAWSUIT_TEMP_REQI_DATE" />
+    	<result property="lawsuitRaisRea" column="LAWSUIT_RAIS_REA" />    	    	        
+    </resultMap>
+    
+    
+    <resultMap id="tabEdocAdmMap" class="java.util.HashMap">
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />                	    	
+        <result property="edocAdmSeq" column="EDOC_ADM_SEQ" />
+        <result property="edocAdmHozSepcode" column="EDOC_ADM_HOZ_SEPCODE" />
+        <result property="edocAdmHozNo" column="EDOC_ADM_HOZ_NO" />
+        <result property="edocAdmHozkindSepcode" column="EDOC_ADM_HOZKIND_SEPCODE" />
+        <result property="edocAdmName" column="EDOC_ADM_NAME" />
+        <result property="edocAdmWritDate" column="EDOC_ADM_WRIT_DATE" />
+    </resultMap>
+    
+    <resultMap id="tabLawsuitMap" class="java.util.HashMap">
+        <result property="lawsuitAdmNo" column="LAWSUIT_ADM_NO" />        
+        <result property="lawRaisreqNo" column="LAW_RAISREQ_NO" />
+    	<result property="lawsuitAplCortCode" column="LAWSUIT_APL_CORT_CODE" />
+    	<result property="lawsuitAplCaseCode" column="LAWSUIT_APL_CASE_CODE" />
+    	<result property="lawsuitCaseTyCode" column="LAWSUIT_CASE_TY_CODE" />
+    	<result property="lawsuitCpPladefSepcode" column="LAWSUIT_CP_PLADEF_SEPCODE" />
+    	<result property="lawsuitAsitParcWtr" column="LAWSUIT_ASIT_PARC_WTR" />
+    	<result property="lawsuitCtaWtr" column="LAWSUIT_CTA_WTR" />
+    	<result property="lawsuitCtaNo" column="LAWSUIT_CTA_NO" />
+    	<result property="lawsuitCtaCaseNo" column="LAWSUIT_CTA_CASE_NO" />
+    	<result property="lawsuitTempReqiDate" column="LAWSUIT_TEMP_REQI_DATE" />
+    	<result property="lawsuitRaisRea" column="LAWSUIT_RAIS_REA" />    	    	
+      
+    </resultMap>
+    
+    
+    	
+    <select id="tabEdocAdmDAO.selectTabLawsuitVOList" parameterClass="tabLawsuitVO" resultMap="tabLawsuit">
+            SELECT
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.LAW_RAISREQ_NO AS LAW_RAISREQ_NO, 
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='A01' AND CODE_NO =A.LAWSUIT_APL_CORT_CODE) AS LAWSUIT_APL_CORT_CODE, 
+                A.LAWSUIT_APL_CASE_CODE AS LAWSUIT_APL_CASE_CODE, 
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='A02' AND CODE_NO =A.LAWSUIT_CASE_TY_CODE) AS LAWSUIT_CASE_TY_CODE, 
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='H02' AND CODE_NO =A.LAWSUIT_CP_PLADEF_SEPCODE) AS LAWSUIT_CP_PLADEF_SEPCODE,
+                A.LAWSUIT_ASIT_PARC_WTR AS LAWSUIT_ASIT_PARC_WTR,
+                A.LAWSUIT_CTA_WTR AS LAWSUIT_CTA_WTR,
+                A.LAWSUIT_CTA_NO AS LAWSUIT_CTA_NO,
+                A.LAWSUIT_CTA_CASE_NO AS LAWSUIT_CTA_CASE_NO,
+                A.LAWSUIT_TEMP_REQI_DATE AS LAWSUIT_TEMP_REQI_DATE,
+                A.LAWSUIT_RAIS_REA AS LAWSUIT_RAIS_REA
+            FROM TAB_LAWSUIT A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="searchKeyword">                    
+                    AND    A.LAWSUIT_ADM_NO LIKE '%' || #searchKeyword# || '%'                                        
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    <select id="tabEdocAdmDAO.selectTabLawsuitMapList" parameterClass="tabLawsuitVO" resultMap="tabLawsuitMap">
+            SELECT
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.LAW_RAISREQ_NO AS LAW_RAISREQ_NO, 
+                A.LAWSUIT_APL_CORT_CODE AS LAWSUIT_APL_CORT_CODE, 
+                A.LAWSUIT_APL_CASE_CODE AS LAWSUIT_APL_CASE_CODE, 
+                A.LAWSUIT_CASE_TY_CODE AS LAWSUIT_CASE_TY_CODE, 
+                A.LAWSUIT_CP_PLADEF_SEPCODE AS LAWSUIT_CP_PLADEF_SEPCODE,
+                A.LAWSUIT_ASIT_PARC_WTR AS LAWSUIT_ASIT_PARC_WTR,
+                A.LAWSUIT_CTA_WTR AS LAWSUIT_CTA_WTR,
+                A.LAWSUIT_CTA_NO AS LAWSUIT_CTA_NO,
+                A.LAWSUIT_CTA_CASE_NO AS LAWSUIT_CTA_CASE_NO,
+                A.LAWSUIT_TEMP_REQI_DATE AS LAWSUIT_TEMP_REQI_DATE,
+                A.LAWSUIT_RAIS_REA AS LAWSUIT_RAIS_REA
+           FROM TAB_LAWSUIT A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull prepend=" AND " property="lawsuitAdmNo">
+                	LAWSUIT_ADM_NO LIKE '%' || #title# || '%'
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+ 	<select id="tabEdocAdmDAO.selectTabEdocAdmVOList" parameterClass="tabEdocAdmVO" resultMap="tabEdocAdm">
+            SELECT
+            	ROWNUM AS rnum,
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.EDOC_ADM_SEQ AS EDOC_ADM_SEQ, 
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='F02' AND CODE_NO =A.EDOC_ADM_HOZ_SEPCODE) AS EDOC_ADM_HOZ_SEPCODE, 
+                A.EDOC_ADM_HOZ_NO AS EDOC_ADM_HOZ_NO, 
+                A.EDOC_ADM_HOZKIND_SEPCODE AS EDOC_ADM_HOZKIND_SEPCODE, 
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='F02' AND CODE_NO =A.EDOC_ADM_HOZKIND_SEPCODE) AS EDOC_ADM_HOZKIND_SEPCODE2, 
+                A.EDOC_ADM_NAME AS EDOC_ADM_NAME,
+                A.EDOC_ADM_WRIT_DATE AS EDOC_ADM_WRIT_DATE
+            FROM TAB_EDOC_ADM A
+            WHERE 1=1
+            <dynamic>
+            	<isNotNull property="searchCondition">                   
+                     AND A.EDOC_ADM_HOZ_SEPCODE =#searchCondition#                                      
+                </isNotNull>
+                <isNotNull property="searchKeyword">                   
+                     AND A.LAWSUIT_ADM_NO = #searchKeyword#                                      
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    <select id="tabEdocAdmDAO.selectTabEdocAdm2VOList" parameterClass="tabEdocAdmVO" resultMap="tabEdocaAdm">
+            SELECT
+            	ROWNUM AS rnum,
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.EDOC_ADM_SEQ AS EDOC_ADM_SEQ, 
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='F02' AND CODE_NO =A.EDOC_ADM_HOZ_SEPCODE) AS EDOC_ADM_HOZ_SEPCODE, 
+                A.EDOC_ADM_HOZ_NO AS EDOC_ADM_HOZ_NO, 
+                A.EDOC_ADM_HOZKIND_SEPCODE AS EDOC_ADM_HOZKIND_SEPCODE, 
+                (SELECT CODE_NAME FROM CMM_CODE_DETAIL WHERE CLASS_CODE='F02' AND CODE_NO =A.EDOC_ADM_HOZKIND_SEPCODE) AS EDOC_ADM_HOZKIND_SEPCODE2, 
+                A.EDOC_ADM_NAME AS EDOC_ADM_NAME,
+                A.EDOC_ADM_WRIT_DATE AS EDOC_ADM_WRIT_DATE
+            FROM TAB_EDOC_ADM A
+            WHERE 1=1
+            <dynamic>
+            	<isNotNull property="searchCondition">                   
+                     AND A.EDOC_ADM_HOZ_SEPCODE =#searchCondition#                                      
+                </isNotNull>
+                <isNotNull property="searchKeyword">                   
+                     AND A.LAWSUIT_ADM_NO = #searchKeyword#                                      
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    <select id="tabEdocAdmDAO.selectTabEdocAdmMapList" parameterClass="tabEdocAdmVO" resultMap="tabEdocAdmMap">
+            SELECT
+                A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+                A.EDOC_ADM_SEQ AS EDOC_ADM_SEQ, 
+                A.EDOC_ADM_HOZ_SEPCODE AS EDOC_ADM_HOZ_SEPCODE, 
+                A.EDOC_ADM_HOZ_NO AS EDOC_ADM_HOZ_NO, 
+                A.EDOC_ADM_HOZKIND_SEPCODE AS EDOC_ADM_HOZKIND_SEPCODE, 
+                A.EDOC_ADM_NAME AS EDOC_ADM_NAME,
+                A.EDOC_ADM_WRIT_DATE AS EDOC_ADM_WRIT_DATE
+            FROM TAB_EDOC_ADM A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull prepend=" AND " property="edocAdmName">
+                	EDOC_ADM_NAME LIKE '%' || #title# || '%'
+                </isNotNull>
+            </dynamic>
+            
+    </select>
+    
+    <select id="tabEdocAdmDAO.selectTabEdocAdmCount" parameterClass="tabEdocAdmVO" resultClass="int">
+            SELECT
+                COUNT(*) as totalCount
+            FROM TAB_EDOC_ADM A
+            WHERE 1=1
+            <dynamic>
+                <isNotNull property="searchKeyword">
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="EDOC_ADM_HOZKIND_SEPCODE">
+                        EDOC_ADM_HOZKIND_SEPCODE LIKE '%' || #searchKeyword# || '%'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="EDOC_ADM_NAME">
+                        EDOC_ADM_NAME LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                </isNotNull>
+            </dynamic>
+    </select>
+    
+	<select id="tabEdocAdmDAO.selectTabEdocAdmPaging" parameterClass="tabEdocAdmVO" resultMap="tabEdocAdm">
+            SELECT * 
+            FROM ( select
+            		rownum rnum,
+	            	A.LAWSUIT_ADM_NO AS LAWSUIT_ADM_NO, 
+	                A.EDOC_ADM_SEQ AS EDOC_ADM_SEQ, 
+	                A.EDOC_ADM_HOZ_SEPCODE AS EDOC_ADM_HOZ_SEPCODE, 
+	                A.EDOC_ADM_HOZ_NO AS EDOC_ADM_HOZ_NO, 
+	                A.EDOC_ADM_HOZKIND_SEPCODE AS EDOC_ADM_HOZKIND_SEPCODE, 
+	                A.EDOC_ADM_NAME AS EDOC_ADM_NAME,
+	                A.EDOC_ADM_WRIT_DATE AS EDOC_ADM_WRIT_DATE
+	            FROM TAB_EDOC_ADM A
+                order by A.LAWSUIT_ADM_NO ASC ) 
+            WHERE 1=1 and rnum between #firstIndex# and #recordCountPerPage#
+            <isNotEmpty property="searchKeyword" prepend="AND">
+            <![CDATA[
+            EDOC_ADM_HOZKIND_SEPCODE LIKE '%'||#searchKeyword#||'%'
+            ]]> 
+            </isNotEmpty>
+            <isNotEmpty property="searchKeyword" prepend="OR">
+            <![CDATA[
+            EDOC_ADM_NAME LIKE  '%'||#searchKeyword#||'%'
+            ]]> 
+            </isNotEmpty>
+           <!--  <dynamic>
+                <isNotNull property="searchKeyword">
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="TITLE">
+                        TITLE LIKE '%' || #searchKeyword# || '%'
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="CONTENTS">
+                        CONTENTS LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                </isNotNull>
+            </dynamic>
+            ORDER BY A.REG_ID DESC
+            LIMIT #recordCountPerPage# OFFSET #firstIndex# -->
+    </select>
+    
+    <insert id="tabEdocAdmDAO.insertTabEdocAdmVO" parameterClass="tabEdocAdmVO">
+        <![CDATA[
+            INSERT INTO TAB_EDOC_ADM (
+            	LAWSUIT_ADM_NO, 
+	            EDOC_ADM_SEQ, 
+	            EDOC_ADM_HOZ_SEPCODE, 
+	            EDOC_ADM_HOZ_NO, 
+	            EDOC_ADM_HOZKIND_SEPCODE, 
+	            EDOC_ADM_NAME,
+	            EDOC_ADM_WRIT_DATE
+            ) VALUES (
+                #lawsuitAdmNo#, 
+	            (SELECT MAX(EDOC_ADM_SEQ)+1 FROM TAB_EDOC_ADM), 
+	            #edocAdmHozSepcode#, 
+	            #edocAdmHozNo#, 
+	            #edocAdmHozkindSepcode#, 
+	            #edocAdmName#,
+	            #edocAdmWritDate#
+            )
+        ]]>
+    </insert>
+    
+      <update id="tabEdocAdmDAO.updateTabEdocAdmVO" parameterClass="tabEdocAdmVO">
+        <![CDATA[
+            UPDATE TAB_EDOC_ADM 
+            SET EDOC_ADM_HOZ_SEPCODE=#edocAdmHozSepcode#
+                , EDOC_ADM_HOZ_NO=#edocAdmHozNo#
+                , EDOC_ADM_HOZKIND_SEPCODE=#edocAdmHozkindSepcode#
+                , EDOC_ADM_NAME=#edocAdmName#
+                , EDOC_ADM_WRIT_DATE=#edocAdmWritDate#
+            WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo# 
+            AND EDOC_ADM_SEQ=#edocAdmSeq#
+        ]]>
+    </update>
+    
+    <delete id="tabEdocAdmDAO.deleteTabEdocAdmVO" parameterClass="tabEdocAdmVO">
+        <![CDATA[
+            DELETE FROM TAB_EDOC_ADM 
+            WHERE LAWSUIT_ADM_NO=#lawsuitAdmNo# 
+            AND EDOC_ADM_SEQ=#edocAdmSeq#
+        ]]>
+    </delete>
+    
+</sqlMap>

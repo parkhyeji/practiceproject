@@ -1,0 +1,464 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Commoncodedetail" classname="Commoncodedetail" left="0" top="0" width="1024" height="586" titletext="New Form" onload="Commoncodedetail_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_00" taborder="46" left="40" top="90" right="40" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <ImageViewer id="img_01" taborder="23" left="40" top="54" right="40" height="28" style="background:gainsboro;border:1 solid darkgray ;"/>
+        <Combo id="Combo00" taborder="1" left="100" top="56" height="24" width="125" codecolumn="code" datacolumn="value" innerdataset="@class_code_dataset" onitemchanged="Combo00_onitemchanged"/>
+        <Button id="btn_search" taborder="4" text="검색" top="57" height="20" style="background:lightskyblue;border:1 solid #808080ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" onclick="btn_search_onclick" width="92" right="44"/>
+        <Grid id="grd_plaintiff" taborder="28" binddataset="common_detail_dataset" scrollbars="autovert" useinputpanel="false" autofittype="col" nodatatext="데이터가 없습니다." left="40" top="126" right="40" height="271">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="84"/>
+                <Column size="115"/>
+                <Column size="130"/>
+                <Column size="179"/>
+                <Column size="180"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell style="font:bold 9 dotum;" text="NO"/>
+                <Cell col="1" style="font:bold 9 dotum;" text="분류코드"/>
+                <Cell col="2" style="font:bold 9 dotum;" text="상세코드"/>
+                <Cell col="3" style="font:bold 9 dotum;" text="상세코드명"/>
+                <Cell col="4" style="font:bold 9 dotum;" text="사용여부" combodataset="ds_useYn" combocodecol="id" combodatacol="value"/>
+              </Band>
+              <Band id="body">
+                <Cell style="align:center;" expr="currow+1"/>
+                <Cell col="1" displaytype="combo" edittype="none" style="align:center;" text="bind:classCode" editlimit="30" combodataset="class_code_dataset" combocodecol="code" combodatacol="value"/>
+                <Cell col="2" displaytype="normal" edittype="none" style="align:center;" text="bind:codeNo" editlimit="15"/>
+                <Cell col="3" edittype="none" style="align:left;" text="bind:codeName" editlimit="11"/>
+                <Cell col="4" displaytype="normal" edittype="none" style="align:center;" text="bind:useYn" editlimit="11"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_mody01" taborder="29" text="수정비활성화" onclick="btn_mody01_onclick" visible="false" top="95" right="428" width="92" height="20" style="pusheddrawoffset:0 0;background:lightskyblue;border:1 solid #808080ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;shadow:outer 0,0 0 gray;"/>
+        <Button id="btn_delete" taborder="6" text="삭제" top="95" right="332" width="92" height="20" style="pusheddrawoffset:0 0;background:lightskyblue;border:1 solid #808080ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;shadow:outer 0,0 0 gray;" onclick="btn_delete_onclick" enable="true"/>
+        <Button id="btn_new" taborder="7" text="신규" top="95" right="236" width="92" height="20" style="background:lightskyblue;border:1 solid #808080ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" onclick="btn_new_onclick"/>
+        <Button id="btn_save" taborder="8" text="저장" top="94" right="140" width="92" height="20" style="background:lightskyblue;border:1 solid #808080ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" onclick="btn_save_onclick"/>
+        <Button id="btn_clear" taborder="9" text="초기화" top="94" right="44" width="92" height="20" style="background:lightskyblue;border:1 solid #808080ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" onclick="btn_clear_onclick"/>
+        <ImageViewer id="img_02" taborder="30" left="40" top="408" right="40" height="156" style="background:cornsilk;border:1 solid darkgray ;"/>
+        <Static id="sta_15" taborder="31" text="분류코드" onclick="sta_15_onclick" left="45" top="414" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <Static id="sta_16" taborder="32" text="상세코드명2" onclick="sta_16_onclick" left="45" top="441" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <Static id="sta_00" taborder="33" text="기타코드2" onclick="sta_16_onclick" left="45" top="468" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <Static id="sta_04" taborder="34" text="사용여부" onclick="sta_16_onclick" left="45" top="495" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <Static id="sta_07" taborder="35" text="수정일자" onclick="sta_16_onclick" left="45" top="522" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <MaskEdit id="MaskEdit00" taborder="21" type="string" mask="####-##-##" enable="false" left="172" top="524" width="125" height="24" style="align:left; :disabled {align:center;}"/>
+        <Edit id="Edit07" taborder="16" maxlength="10" enable="false" left="172" top="470" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Edit id="Edit03" taborder="13" maxlength="10" enable="false" left="172" top="443" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="sta_17" taborder="36" text="상세코드" onclick="sta_17_onclick" left="384" top="414" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <Static id="sta_18" taborder="37" text="코드영문명" onclick="sta_18_onclick" left="384" top="441" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <Static id="sta_02" taborder="38" text="상세코드설명" onclick="sta_18_onclick" left="384" top="468" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <Static id="sta_05" taborder="39" text="정렬순서" onclick="sta_18_onclick" left="384" top="495" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <Static id="sta_08" taborder="40" text="최종수정일자" onclick="sta_18_onclick" left="384" top="522" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <Edit id="Edit04" taborder="14" inputtype="english" maxlength="10" enable="false" left="512" top="443" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Edit id="Edit08" taborder="17" maxlength="10" enable="false" left="512" top="470" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Edit id="Edit11" taborder="19" inputtype="number" maxlength="10" enable="false" left="512" top="497" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <MaskEdit id="MaskEdit01" taborder="22" type="string" mask="####-##-##" enable="false" left="512" top="524" width="125" height="24" style="align:left; :disabled {align:center;}"/>
+        <Static id="sta_19" taborder="41" text="상세코드명" onclick="sta_19_onclick" left="724" top="414" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <Edit id="Edit02" taborder="12" maxlength="10" enable="false" left="852" top="416" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Edit id="Edit05" taborder="15" maxlength="10" enable="false" left="852" top="443" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="sta_20" taborder="42" text="기타코드1" onclick="sta_20_onclick" left="724" top="441" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <Static id="sta_06" taborder="43" text="등록일자" onclick="sta_06_onclick" left="724" top="468" width="125" height="28" style="background:azure;border:1 solid black ;color:#46463dff;align:center middle;font:9 Dotum;"/>
+        <MaskEdit id="Edit12" taborder="20" type="string" mask="####-##-##" enable="false" left="852" top="470" width="125" height="24" style="align:left; :disabled {align:center;}"/>
+        <Button id="btn_mody00" taborder="5" text="수정활성화" top="95" right="428" width="92" height="20" style="pusheddrawoffset:0 0;background:lightskyblue;border:1 solid #808080ff ;color:#ffffffff;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;shadow:outer 0,0 0 gray;" onclick="btn_mody00_onclick"/>
+        <Combo id="Combo02" taborder="10" left="172" top="416" width="125" height="24" codecolumn="code" datacolumn="value" innerdataset="@class_code_dataset" onitemchanged="Combo02_onitemchanged" enable="false" style=":disabled {align:center middle;}"/>
+        <Combo id="Combo01" taborder="18" displaynulltext="선택" onitemchanged="Combo01_onitemchanged" enable="false" left="172" top="497" width="125" height="24" index="-1" codecolumn="code" datacolumn="value" innerdataset="@comm_userYn" style=":disabled {align:center middle;}"/>
+        <Combo id="Combo03" taborder="2" innerdataset="@comm_class_code" codecolumn="code" datacolumn="value" left="368" top="56" height="24" width="125" onitemchanged="Combo03_onitemchanged"/>
+        <Edit id="Edit00" taborder="11" maxlength="10" enable="false" left="512" top="416" width="125" height="24" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" inputtype="number"/>
+        <Static id="sta_title" taborder="44" onclick="sta_title_onclick" left="0%" top="0" right="0%" height="46" style="background:cornflowerblue;color:whitesmoke;align:center middle;font:bold 12 굴림;"/>
+        <Static id="Static04" taborder="45" text="공통코드상세관리" left="40" top="0" width="200" height="45" style="color:white;font:bold 17 돋움;"/>
+        <Static id="Static00" taborder="47" text="*" left="7.03%" top="423" right="90.92%" height="11" style="color:red;"/>
+        <Static id="Static01" taborder="48" text="*" left="411" top="424" right="57.71%" height="11" style="color:red;"/>
+        <Static id="Static02" taborder="49" text="*" left="745" top="424" right="25.1%" height="11" style="color:red;"/>
+        <Static id="Static03" taborder="50" text="*" left="7.13%" top="505" right="90.82%" height="11" style="color:red;"/>
+        <Static id="Static05" taborder="51" text="분류코드" left="47" top="57" width="64" height="23"/>
+        <Static id="Static06" taborder="52" text="상세코드" left="318" top="58" width="64" height="23"/>
+        <Static id="Static08" taborder="54" text="공통코드상세리스트" left="44" top="94" width="116" height="23"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="common_detail_dataset" oncolumnchanged="common_detail_dataset_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="4"/>
+          <Column id="codeNo" type="STRING" size="4"/>
+          <Column id="codeName" type="STRING" size="255"/>
+          <Column id="codeName2" type="STRING" size="255"/>
+          <Column id="codeEngName" type="STRING" size="255"/>
+          <Column id="etcCode1" type="STRING" size="4"/>
+          <Column id="etcCode2" type="STRING" size="4"/>
+          <Column id="codeDesc" type="STRING" size="255"/>
+          <Column id="useYn" type="STRING" size="1"/>
+          <Column id="sortSeq" type="STRING" size="12"/>
+          <Column id="registDate" type="STRING" size="14"/>
+          <Column id="registId" type="STRING" size="20"/>
+          <Column id="updateTime" type="STRING" size="14"/>
+          <Column id="updateId" type="STRING" size="20"/>
+          <Column id="lastModyDate" type="STRING" size="14"/>
+          <Column id="higherClassCode" type="STRING" size="4"/>
+          <Column id="higherClassNo" type="STRING" size="4"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="comm_class_code">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="255"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="comm_userYn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="255"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="value">예</Col>
+          </Row>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="value">아니요</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="select_dataset">
+        <ColumnInfo>
+          <Column id="select_class_code" type="STRING" size="256"/>
+          <Column id="select_code_no" type="STRING" size="256"/>
+          <Column id="select_code_name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="class_code_dataset">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="value" type="STRING" size="255"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="common_master_dataset">
+        <ColumnInfo>
+          <Column id="classCode" type="STRING" size="4"/>
+          <Column id="className" type="STRING" size="255"/>
+          <Column id="useYN" type="STRING" size="1"/>
+          <Column id="mainTable" type="STRING" size="255"/>
+          <Column id="mainColumn" type="STRING" size="255"/>
+          <Column id="classDesc" type="STRING" size="255"/>
+          <Column id="registTime" type="STRING" size="14"/>
+          <Column id="registID" type="STRING" size="20"/>
+          <Column id="modifyTime" type="STRING" size="14"/>
+          <Column id="modifyID" type="STRING" size="20"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="gubuen">
+        <ColumnInfo>
+          <Column id="col" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="MaskEdit00" propid="value" datasetid="common_detail_dataset" columnid="updateTime"/>
+      <BindItem id="item1" compid="MaskEdit01" propid="value" datasetid="common_detail_dataset" columnid="lastModyDate"/>
+      <BindItem id="item2" compid="Combo00" propid="value" datasetid="select_dataset" columnid="select_class_code"/>
+      <BindItem id="item5" compid="Combo02" propid="value" datasetid="common_detail_dataset" columnid="classCode"/>
+      <BindItem id="item7" compid="Edit02" propid="value" datasetid="common_detail_dataset" columnid="codeName"/>
+      <BindItem id="item8" compid="Edit03" propid="value" datasetid="common_detail_dataset" columnid="codeName2"/>
+      <BindItem id="item9" compid="Edit04" propid="value" datasetid="common_detail_dataset" columnid="codeEngName"/>
+      <BindItem id="item10" compid="Edit05" propid="value" datasetid="common_detail_dataset" columnid="etcCode1"/>
+      <BindItem id="item11" compid="Edit07" propid="value" datasetid="common_detail_dataset" columnid="etcCode2"/>
+      <BindItem id="item12" compid="Edit08" propid="value" datasetid="common_detail_dataset" columnid="codeDesc"/>
+      <BindItem id="item14" compid="Combo01" propid="value" datasetid="common_detail_dataset" columnid="useYn"/>
+      <BindItem id="item15" compid="Edit11" propid="value" datasetid="common_detail_dataset" columnid="sortSeq"/>
+      <BindItem id="item16" compid="Edit12" propid="value" datasetid="common_detail_dataset" columnid="registDate"/>
+      <BindItem id="item3" compid="Combo03" propid="value" datasetid="select_dataset" columnid="select_code_no"/>
+      <BindItem id="item6" compid="Edit00" propid="value" datasetid="common_detail_dataset" columnid="codeNo"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+// 공통코드 호출
+this.Commoncodedetail_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+	var sDsIds  = "";
+		sDsIds += "class_code_dataset=class_code_dataset";
+		sDsIds += " comm_class_code=comm_class_code";
+
+	this.gfn_transaction(this
+					   , "commonCode"
+					   , "sysDetail/loadCommonCodesDetail.do"
+					   , ""
+					   , sDsIds
+					   , ""
+					   , "fnCallback");
+}
+
+
+// callback function
+this.fnCallback = function(sSvcId, nErrorCode, sErrorMsg){
+	if(nErrorCode < 0){
+		this.alert("통신에 실패하였습니다.\n잠시 후 다시 시도해주세요.\n" + sSvcId + " : " + sErrorMsg);
+		return;
+	}else{
+		switch(sSvcId){
+			case "commonCode":
+			this.class_code_dataset.insertRow(0);
+			this.class_code_dataset.setColumn(0, "code", "0000");
+			this.class_code_dataset.setColumn(0, "value", "전체");
+			this.Combo00.set_index(0);
+			
+			this.comm_class_code.insertRow(0);
+			this.comm_class_code.setColumn(0, "code", "0000");
+			this.comm_class_code.setColumn(0, "value", "전체");
+			this.Combo03.set_index(0);
+			break;
+			case "searchCust":
+			break;
+			case "saveList":
+				this.btn_search_onclick();
+			break;
+			case "gubuen":
+			this.comm_class_code.insertRow(0);
+			this.comm_class_code.setColumn(0, "code", "0000");
+			this.comm_class_code.setColumn(0, "value", "전체");
+			this.Combo03.set_index(0);
+			break;
+			case "deleteList":
+			break;
+			default:
+			break;
+		}
+	}
+}
+
+// 검색 버튼
+this.btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+	this.gfn_transaction(this
+					   , "searchCust"
+					   , "sysDetail/read.do"
+					   , "select_dataset=select_dataset"
+					   , "common_detail_dataset=common_detail_dataset"
+					   , ""
+					   , "fnCallback");
+}
+
+
+// 편집창 활성화
+this.enable_edit = function(){
+	this.Combo02.set_enable("false");
+	this.Edit02.set_enable("false");
+	this.Edit00.set_enable("false");
+	this.Edit03.set_enable("true");
+	this.Edit04.set_enable("true");
+	this.Edit05.set_enable("true");
+	this.Edit07.set_enable("true");
+	this.Edit08.set_enable("true");	
+	this.Edit11.set_enable("true");
+	this.Combo01.set_enable("true");	
+	this.Edit03.setFocus();
+}
+
+// 편집창 비활성화
+this.enable_nonEdit = function(){
+	this.Combo01.set_enable("false");
+	this.Combo02.set_enable("false");
+	this.Edit00.set_enable("false");
+	this.Edit02.set_enable("false");
+	this.Edit03.set_enable("false");
+	this.Edit04.set_enable("false");
+	this.Edit05.set_enable("false");
+	this.Edit07.set_enable("false");
+	this.Edit08.set_enable("false");	
+	this.Edit11.set_enable("false");
+}
+
+// 수정활성화
+this.btn_mody00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){	
+	this.enable_edit();	
+	obj.set_visible("false");
+	this.btn_mody01.set_visible("true");
+}
+
+// 수정 비활성화 버튼
+this.btn_mody01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+	this.enable_nonEdit();
+	obj.set_visible("false");
+	this.btn_mody00.set_visible("true");
+}
+
+// 삭제 버튼
+this.btn_delete_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+	
+	var confirmStr = this.confirm("삭제하시겠습니까?");
+	
+	
+	
+	if(confirmStr == true){
+		//var nDelPos  = obj.rowposition;
+		//var nRowType = obj.getRowType(nDelPos);
+		
+		/*
+		if(nRowType != 2){ 
+			this.common_detail_dataset.setRowType(nDelPos, Dataset.ROWTYPE_UPDATE);
+		}
+		*/
+		
+		
+		this.gfn_transaction(this
+					   , "deleteList"
+					   , "sysDetail/deleteList.do"
+					   , "common_detail_dataset=common_detail_dataset"
+					   , ""
+					   , ""
+					   , "fnCallback");	
+					   
+		
+		
+		
+		/*
+		var nDelPos  = this.common_detail_dataset.rowposition;
+		var nRowType = this.common_detail_dataset.getRowType(nDelPos);
+		
+		switch(nRowType){
+		case 1:
+			this.common_detail_dataset.setRowType(nDelPos, Dataset.ROWTYPE_DELETE);
+		break;
+		default:
+		break;
+		}
+		*/
+	}	
+		//this.common_detail_dataset.deleteRow(this.common_detail_dataset.rowposition);
+	
+		//this.code_transaction("deleteCode");
+}
+
+
+// 삭제 버튼
+/*
+this.btn_delete_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+
+	this.gfn_transaction(this
+					   , "deleteList"
+					   , "sysDetail/delete.do"
+					   , "common_detail_dataset=common_detail_dataset:D"
+					   , ""
+					   , ""
+					   , "fnCallback");
+
+	
+	var nDelPos  = this.common_detail_dataset.rowposition;
+	var nRowType = this.common_detail_dataset.getRowType(nDelPos);
+	trace(nRowType)
+*/
+	/*
+	if(nRowType != 0){
+		this.common_detail_dataset.setRowType(nDelPos, Dataset.ROWTYPE_DELETE);
+	}
+	*/		
+	
+	/*
+	if(nRowType){
+		this.common_detail_dataset.setRowType(nDelPos, Dataset.ROWTYPE_DELETE);
+	}
+	*/
+	
+	/*
+	switch(nRowType){
+		case 1:
+			this.common_detail_dataset.setRowType(nDelPos, Dataset.ROWTYPE_DELETE);
+			this.enable_nonEdit();
+		break;
+		default:
+		break;
+	}
+}
+	*/	
+
+
+
+// 신규
+this.btn_new_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+	this.common_detail_dataset.addRow();
+	var nDelPos  = this.common_detail_dataset.rowposition;
+	var nRowType = this.common_detail_dataset.getRowType(nDelPos);
+	
+	this.common_detail_dataset.setRowType(nDelPos, Dataset.ROWTYPE_INSERT);
+	
+	this.Edit02.set_enable("true");
+	this.Edit03.set_enable("true");
+	this.Edit04.set_enable("true");
+	this.Edit05.set_enable("true");
+	this.Edit07.set_enable("true");
+	this.Edit08.set_enable("true");
+	this.Edit00.set_enable("true");
+	this.Edit11.set_enable("true");
+	this.Combo01.set_enable("true");
+	this.Combo02.set_enable("true");
+	this.Edit00.setFocus();
+}
+
+// 저장
+this.btn_save_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+	this.gfn_transaction(this
+					   , "saveList"
+					   , "sysDetail/saveList.do"
+					   , "common_detail_dataset=common_detail_dataset:U"
+					   , ""
+					   , ""
+					   , "fnCallback");
+}
+
+
+// 값이 변경되었을 때(수정)
+this.common_detail_dataset_oncolumnchanged = function(obj:Dataset, e:nexacro.DSColChangeEventInfo){	
+
+	var nDelPos  = obj.rowposition;
+	var nRowType = obj.getRowType(nDelPos);
+
+	if(nRowType != 2){ 
+		this.common_detail_dataset.setRowType(nDelPos, Dataset.ROWTYPE_UPDATE);
+	}
+}
+
+
+
+
+// 초기화
+this.btn_clear_onclick = function(obj:Button,  e:nexacro.ClickEventInfo){
+
+	this.reload();
+}
+
+
+// 분류 코드 (상위 셀렉트 -> 하위 셀렉트 변경)
+this.Combo00_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo){
+	var nRow = this.Combo00.index;	
+	var varCol = this.class_code_dataset.getColumn(nRow,"code");		// master의 classCode 컬럼을 가져옴
+	var bSucc = this.gubuen.setColumn(0,"col",varCol);					// gubuen에 셋팅
+	trace(nRow);
+
+	this.gfn_transaction(this
+					   , "gubuen"
+					   , "sysDetail/selectOption.do"
+					   , "gubuen=gubuen"								// gubuen 데이터셋 input
+					   , "comm_class_code=comm_class_code"				// detail(code, value) dataset으로 output
+					   , ""
+					   , "fnCallback");	
+}]]></Script>
+  </Form>
+</FDL>
